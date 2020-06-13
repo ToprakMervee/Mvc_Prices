@@ -1,0 +1,333 @@
+﻿
+@{
+    ViewBag.Title = "Offers";
+}
+
+
+<h2>Offerte</h2>
+<div class="widget">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 10px;">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive" style="margin: 5px;">
+                <table class="table table-striped table-bordered" id="ajaxdata">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Offer revision history modal-->
+<div class="modal fade bd-example-modal-lg" id="offerRevHistoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="expModTitle">Offer History</b>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1 class="alert-title text-center bg-danger" id="thereIsNoRev"></h1>
+                <hr />
+                <div id="revisionMas">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Cancel</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Offer revision history modal-->
+
+<!--Offer revision history detail modal-->
+<div class="modal fade bd-example-modal-lg"  id="revHistoryDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="revHistoryDetTitle">Offer History-</b>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="revisionDet">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <b>In Totale: </b>
+                <span style="border: 1px solid silver"><b id="revDetQnt">23</b> pz.  </span>
+                <span style="border: 1px solid silver"><b id="revDetAmn">222</b> €</span>
+                <hr/>
+                <button type="button"  id="returnToThis" class="btn btn-primary btn-xs">Return To This</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Offer revision history detail modal-->
+<!--revision history handlebar table-->
+<script id="revHandlebar" type="text/x-handlebars-template">
+    <table class="table table-hover table-striped table-bordered content-container">
+        <thead>
+            <tr>
+                <th>#Id</th>
+                <th>Reference No</th>
+                <th>Exp.1</th>
+                <th>Exp.2</th>
+                <th>Date</th>
+                <th>#</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this}}
+            <tr>
+                <td>{{ID}}</td>
+                <td><b>{{ReferenceNo}} - {{rownumber RevisionId}}</b> </td>H
+                <td>{{Exp1}}</td>
+                <td>{{Exp2}}</td>
+                <td>{{convDate Date}}</td>
+                <td><a href="javascript:revisionDetails({{@@index}})"> <b>{{rownumber RevisionId}}. Revision</b> - Details</a></td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</script>
+<!--rev history detail rows-->
+<script id="revHandlebarDet" type="text/x-handlebars-template">
+    <table class="table table-hover table-striped table-bordered content-container">
+        <thead>
+            <tr>
+                <td bgcolor="orange" width="30" align="center"><font size="2" color="black" face="verdana">Pos.</font></td>
+                <td bgcolor="orange" align="center" width="150"><font size="2" color="black" face="Verdana" style="">Tipologia</font></td>
+                <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Descrizione</font></td>
+                <td bgcolor="orange" align="center" width="75"><font size="2" color="black" face="Verdana">Colore</font></td>
+                <td bgcolor="silver" align="center" width="75"><font size="2" color="black" face="Verdana">Prezzo</font></td>
+                <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>
+                <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Numero</font></td>
+                <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Importo</font></td>
+             
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this}}
+            <tr class="detailRows">
+                <td style="vertical-align: middle;"><font size="2" color="black" face="tahoma">  {{rownumber @@index}}.</font></td>
+                <td style="vertical-align: middle;" align="center"><font size="2" color="black" face="tahoma"><img  src="/Content/img/{{PicUrl}}" &bnsp=""></font></td>
+                <td style="vertical-align: middle;">
+                    <font size="3" color="maroon" face="verdana">{{Width}} x {{Height}} mm </font><br>
+                    <font size="1">
+                        (telaio pieno a "L" senz'aletta)<br />
+                        <font size="2" color="black" face="tahoma">
+                            <b><font color="black">{{ProductName}}</font></b><font color="black"><br>Soglia bassa in alluminio</font><br><font color="navy"> apertura a {{Direction}} (DX)</font><br><font size="2">
+                                {{System}}<br><font size="1">
+                                    {{Color}} in massa<br>guarnizione grigia
+                                    <font size="1">
+                                        <br />
+                                        {{#each Glass}}
+                                        <b>{{Description}}</b>
+                                        <br />
+                                        {{/each}}
+                                        valore k : 1.1 <br />
+                                        canalina a bordo caldo
+                                    </font>
+                                </font>
+                            </font>
+                        </font>
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center">
+
+                    <img src="/Content/img/{{ColorUrl}}" width="80" height="70" style="border: 1px solid silver">
+                </td>
+                <td style="vertical-align: middle;" align="center"><font class="price" size="2" id="price_{{@@index}}" )" color="black" face="tahoma">{{Price}}</font> € </td>
+                <td style="vertical-align: middle;" align="center">
+                    <font size="2" color="black" face="tahoma">
+                        {{ArmType}}
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center">
+                    <font size="2" color="black" face="tahoma">
+                       {{Quantity}} - pcs
+
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center"><font size="2" class="amount" id="amount_{{@@index}}" color="black" face="tahoma">  {{{multiplicate Quantity Price}}} </font> €</td>
+             
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+
+</script>
+
+<script type="text/javascript">
+
+    var revisionData;
+    var revisionDetData;
+
+    function getOffers(id,refno) {
+        $.ajax({
+            type: "POST",
+            url: "/Order/GetRevisions/",
+            data: {refno:refno},
+            success: function (data) {
+                revisionData = data;
+                CreateRevTable(revisionData);
+                if (revisionData.length === 0) {
+                    $("#thereIsNoRev").text("There is no revision for this offer.");
+                } else {
+                    $("#thereIsNoRev").text("");
+                }
+              
+            }
+        });
+        $("#offerRevHistoryModal").modal("show");
+    }
+    
+    function revisionDetails(id) {
+
+        var refno = revisionData[id].ID;
+        $.ajax({
+            type: "POST",
+            url: "/Order/GetRevisionDets/",
+            data: {refno:refno},
+            success: function (data) {
+                revisionDetData = data;
+                CreateRevDetTable(revisionDetData);
+                $("#revHistoryDetTitle").text(revisionData[id].ReferenceNo + " - Details");
+                var sumQ = 0;
+                var sumA = 0;
+                $.each(revisionDetData, function(index, value) {
+                    sumQ += value.Quantity;
+                    sumA += value.Quantity*value.Price;
+                });
+                $("#revDetQnt").text(sumQ);
+                $("#revDetAmn").text(sumA);
+                $("#revHistoryDetailModal").modal("show");
+            }
+        });
+    }
+
+
+
+    //REVISION MAS HTML
+    function CreateRevTable(data) {
+        var rawTemplate = document.getElementById("revHandlebar").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+
+        var offerDetails = $("#revisionMas");
+        offerDetails.html(ourGeneratedHtml);
+    }
+
+    //REVISION DET HTML
+    function CreateRevDetTable(data) {
+        var rawTemplate = document.getElementById("revHandlebarDet").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+
+        var offerDetails = $("#revisionDet");
+        offerDetails.html(ourGeneratedHtml);
+    }
+
+
+    //active offers datatable
+    $(document).ready(function () {
+        $("#returnToThis").on("click", function () {
+            var refno = revisionDetData[0].MasId;
+            Swal.fire(
+                {
+                    title: 'Are you sure?',
+                    text: "You will return to this revision.",
+                    type: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Return!'
+                }
+            ).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Order/ReturnToRevision/",
+                        data: {refno:refno},
+                        success: function (data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                type: 'success',
+                                title: 'The order returned to offer.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            setTimeout(function() {
+                                window.location.replace("/Order/OfferDetail/"+data.id);
+                            }, 1000);
+                           
+                        }
+                    });
+                } else {
+                    window.location.reload();
+                }
+            });
+          
+        });
+
+
+        $('#ajaxdata').dataTable({
+            "ajax": {
+                "url": '@Url.Action("GetOffers","Order")',
+                dataSrc:""
+            },
+            "columns": [
+                {
+                    "data": null,
+                    "title":"#",
+                    "render": function ( data, type, full, meta ) {
+                        return "<a href=\"/Order/OfferDetail/"+full.ID+"\" >"+full.ReferenceNo+" - <b>Current Details</b></a>";
+                    }
+                },
+                {
+                    "data": null,
+                    "title":"Revisions",
+                    "render": function ( data, type, full, meta ) {
+                        return "<a href=\"#\" onclick=getOffers("+full.ID+",\""+full.ReferenceNo+"\")>"+full.ReferenceNo+" - Revision History</a>";
+                    }
+                },
+                {
+                    "data": "Exp1",
+                    "title": "Expl. 1"
+                }, {
+                    "data": "Exp2",
+                    "title": "Expl. 2"
+                },
+                {
+                    "data": null,
+                    "title":"Date",
+                    "render": function (data, type, full, meta) {
+                        var date=new Date(parseInt(full.Date.substr(6)));
+                        return date.toLocaleDateString()+" - "+date.toLocaleTimeString();
+                    }
+                }
+            ]
+        });
+    });
+
+    function wprowadzaniedx() {
+
+    }
+</script>

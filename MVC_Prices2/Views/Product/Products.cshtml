@@ -1,0 +1,45 @@
+﻿@model List<MVC_Prices2.Models.Product>
+@{
+    ViewBag.Title = "Products";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Products</h2>
+    </div>
+    <div class="col-md-2 text-right">
+        <a style="margin-top: 10px;" class="btn btn-info btn-xs" href="#" onclick="newproduct()"><i class="zmdi zmdi-plus zmdi-hc-lg"></i> New Product</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="widget col-md-12">
+       
+     
+</div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#ajaxproducts').dataTable({
+            "ajax": { url: "/Product/GetProducts" },
+"columns": [
+{ "data": "ProductName","title":"Product Name" },
+{ "data": "ProductDetail" ,"title":"Product Detail"},
+{ "data": "MinWidth" ,"title":"Min Width"},
+{ "data": "MaxWidth" ,"title":"Max Width"},
+]
+});
+    });
+
+    function newproduct() {
+        alert("worked");
+        }
+    function productedit(id) {
+        alert("worked"+" edit "+id);
+        }
+    function productdelete(id) {
+        alert("worked"+" delete "+id);
+    }
+</script>

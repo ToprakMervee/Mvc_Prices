@@ -1,0 +1,363 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+    <link rel="shortcut icon" sizes="196x196" href="~/Resources/assets/images/favicon.ico">
+    <title>@ViewBag.Title - Price App</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
+    <!-- build:css ../assets/css/app.min.css -->
+    <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/perfect-scrollbar/css/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/core.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/app.css">
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <link href="~/Content/Datatable.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- endbuild -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+    <script src="~/Resources/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
+    <script>Breakpoints();</script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+    <link href="~/Resources/libs/bower/switchery/dist/switchery.min.css" rel="stylesheet" />
+    <link href="~/Resources/libs/bower/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <script src="~/Resources/libs/bower/switchery/dist/switchery.min.js"></script>
+    <script src="~/Resources/libs/bower/jquery/dist/jquery.js"></script>
+    <script src="~/Resources/libs/bower/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/Resources/libs/bower/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+    <script src="~/Resources/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <script src="~/Resources/libs/bower/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="~/Resources/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+</head>
+
+<body class="menubar-top menubar-light theme-primary">
+    <!--============= start main area -->
+    <!-- APP NAVBAR ==========-->
+
+    <nav id="app-navbar" class="navbar navbar-inverse navbar-fixed-top primary">
+
+        <!-- navbar header -->
+        <div class="navbar-header">
+            <button type="button" id="menubar-toggle-btn" class="navbar-toggle visible-xs-inline-block navbar-toggle-left hamburger hamburger--collapse js-hamburger">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+            </button>
+
+            <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="zmdi zmdi-hc-lg zmdi-more"></span>
+            </button>
+
+            <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="zmdi zmdi-hc-lg zmdi-search"></span>
+            </button>
+
+            <a href="/Home/" class="navbar-brand">
+
+                <i class="zmdi zmdi-home zmdi-hc-lg"> </i>
+                <span class="brand-name">  Leroy Merlin & Proline</span>
+            </a>
+        </div><!-- .navbar-header -->
+
+        <div class="navbar-container container-fluid">
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <ul class="nav navbar-toolbar navbar-toolbar-left navbar-left">
+                    <li class="hidden-float hidden-menubar-top">
+                        <a href="javascript:void(0)" role="button" id="menubar-fold-btn" class="hamburger hamburger--arrowalt is-active js-hamburger">
+                            <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <h5 class="page-title hidden-menubar-top">Dashboard</h5>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div><!-- navbar-container -->
+    </nav>
+    <!--========== END app navbar -->
+    <!-- APP ASIDE ==========-->
+    <aside id="menubar" class="menubar light">
+
+        <div class="app-user">
+
+            <div class="media">
+                <div class="media-left">
+                    <div class="avatar avatar-md avatar-circle">
+                        <a href="javascript:void(0)"><img class="img-responsive" src="~/Content/img/user.jpg" alt="avatar" /></a>
+
+                    </div><!-- .avatar -->
+                </div>
+                <div class="media-body">
+                    <div class="foldable">
+                        <h5><a href="javascript:void(0)" class="username">@User.Identity.Name</a></h5>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <small>Web Developer</small>
+                                    <span class="caret">@User.Identity.GetUserId();</span>
+                                </a>
+                                <ul class="dropdown-menu animated flipInY">
+                                    <li>
+                                        <a class="text-color" href="@Url.Action("Index", "UserInfoUpdate")">
+                                            <span class="m-r-xs"><i class="zmdi zmdi-account"></i></span>
+                                            <span>@User.Identity.Name</span>
+                                        </a>
+                                    </li>
+                                    @*<li>
+                                            <a class="text-color" href="profile.html">
+                                                <span class="m-r-xs"><i class="fa fa-user"></i></span>
+                                                <span>Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="text-color" href="settings.html">
+                                                <span class="m-r-xs"><i class="fa fa-gear"></i></span>
+                                                <span>Settings</span>
+                                            </a>
+                                        </li>*@
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a class="text-color" href="@Url.Action("Logout", "Account")">
+                                            <span class="m-r-xs"><i class="fa fa-power-off"></i></span>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div><!-- .media-body -->
+            </div><!-- .media -->
+        </div><!-- .app-user -->
+        <div class="app-user">
+            <div class="media">
+                <div class="media-left">
+
+                </div>
+
+            </div><!-- .media -->
+        </div><!-- .app-user -->
+        <div class="app-user">
+            <div class="media">
+                <div class="media-left">
+
+                    
+                    <ul class="app-menu">
+
+                        <li>
+                            <a href="@Url.Action("Index", "Basket")">
+                                <i class="menu-icon zmdi zmdi-shopping-basket zmdi-hc-lg"></i>
+                                <span class="menu-text">Carello</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div><!-- .media -->
+        </div><!-- .app-user -->
+
+        <div class="menubar-scroll">
+            <div class="menubar-scroll-inner">
+                <ul class="app-menu">
+                    <li>
+                        <a href="/Home/">
+                            <i class="menu-icon zmdi zmdi-home zmdi-hc-lg"></i>
+                            <span class="menu-text">La scella della finestra</span>
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="has-submenu">
+                        <a class="submenu-toggle" href="javascript:void(0)">
+                            <i class="menu-icon zmdi zmdi-album zmdi-hc-lg"></i>
+                            <span class="menu-text">Record</span>
+                            <span class="label label-warning menu-label"></span>
+                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                        </a>
+                        <ul class="submenu">
+
+                            <li> <a href="@Url.Action("Offers", "Order")">Offerte</a></li>
+                            <li> <a href="@Url.Action("Orders", "Order")">Ordini</a></li>
+                        </ul>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (!User.IsInRole("User"))
+                        {
+                            <li class="has-submenu">
+                                <a class="submenu-toggle" href="javascript:void(0)">
+                                    <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
+                                    <span class="menu-text">Amministrazione</span>
+                                    <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li> <a href="@Url.Action("Index", "Store")">Negozi</a></li>
+                                    <li>  <a href="@Url.Action("Index", "Users")">Utenti</a></li>
+                                    <li class="has-submenu">
+                                        <a class="submenu-toggle" href="javascript:void(0)">
+                                            <i class="menu-icon zmdi zmdi-chart zmdi-hc-lg"></i>
+                                            <span class="menu-text">Charts</span>
+                                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                                        </a>
+                                        <ul class="submenu">
+                                            <li><a href="@Url.Action("Index","Charts")">Pie Chart</a></li>
+                                            <li> <a href="@Url.Action("StoreChart", "Charts")">Store Charts</a></li>
+                                            <li>  <a href="@Url.Action("Index", "Users")">Utenti</a></li>
+
+
+
+
+                                        </ul>
+                                    </li>
+
+
+
+                                </ul>
+                            </li>
+                        }
+                        
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("ProlineAdmin") && !User.IsInRole("User"))
+                        {
+                            @*<li>
+                    <a href="/Price/Index/">
+                        <i class="menu-icon zmdi zmdi-money zmdi-hc-lg"></i>
+                        <span class="menu-text">Prezzi</span>
+
+                    </a>
+
+                </li>*@
+                            <li class="has-submenu">
+                                <a class="submenu-toggle" href="javascript:void(0)">
+                                    <i class="menu-icon zmdi zmdi-money zmdi-hc-lg"></i>
+                                    <span class="menu-text">Prezzi</span>
+                                    <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li> <a href="@Url.Action("Index", "Price")">Matrisler</a></li>
+                                    <li> <a href="@Url.Action("GetLedges", "Price")">Profiller</a></li>
+
+
+
+                                </ul>
+                            </li>
+
+                        }
+                    }
+
+
+
+                </ul><!-- .app-menu -->
+            </div><!-- .menubar-scroll-inner -->
+        </div><!-- .menubar-scroll -->
+    </aside>
+    <!--========== END app aside -->
+    <!-- navbar search -->
+    <div id="navbar-search" class="navbar-search collapse">
+        <div class="navbar-search-inner">
+            <form action="#">
+                <span class="search-icon"><i class="fa fa-search"></i></span>
+                <input class="search-field" type="search" placeholder="search..." />
+            </form>
+            <button type="button" class="search-close" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+        <div class="navbar-search-backdrop" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false"></div>
+    </div><!-- .navbar-search -->
+    <!-- APP MAIN ==========-->
+    <main id="app-main" class="app-main">
+        @RenderBody()
+
+    </main>
+    <!--========== END app main -->
+    <!-- APP CUSTOMIZER -->
+    <div id="app-customizer" class="app-customizer noprint">
+        <a href="javascript:void(0)"
+           class="app-customizer-toggle theme-color"
+           data-toggle="class"
+           data-class="open"
+           data-active="false"
+           data-target="#app-customizer">
+            <i class="fa fa-gear"></i>
+        </a>
+        <div class="customizer-tabs">
+            <!-- tabs list -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#menubar-customizer" aria-controls="menubar-customizer" role="tab" data-toggle="tab">Menubar</a></li>
+                <li role="presentation"><a href="#navbar-customizer" aria-controls="navbar-customizer" role="tab" data-toggle="tab">Navbar</a></li>
+            </ul><!-- .nav-tabs -->
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane in active fade" id="menubar-customizer">
+                    <div class="hidden-menubar-top hidden-float">
+                        <div class="m-b-0">
+                            <label for="menubar-fold-switch">Fold Menubar</label>
+                            <div class="pull-right">
+                                <input id="menubar-fold-switch" type="checkbox" data-switchery data-size="small" />
+                            </div>
+                        </div>
+                        <hr class="m-h-md">
+                    </div>
+                    <div class="radio radio-default m-b-md">
+                        <input type="radio" id="menubar-light-theme" name="menubar-theme" data-toggle="menubar-theme" data-theme="light">
+                        <label for="menubar-light-theme">Light</label>
+                    </div>
+
+                    <div class="radio radio-inverse m-b-md">
+                        <input type="radio" id="menubar-dark-theme" name="menubar-theme" data-toggle="menubar-theme" data-theme="dark">
+                        <label for="menubar-dark-theme">Dark</label>
+                    </div>
+                </div><!-- .tab-pane -->
+                <div role="tabpanel" class="tab-pane fade" id="navbar-customizer">
+                    <!-- This Section is populated Automatically By javascript -->
+                </div><!-- .tab-pane -->
+            </div>
+        </div><!-- .customizer-taps -->
+        <hr class="m-0">
+        <div class="customizer-reset">
+            <button id="customizer-reset-btn" class="btn btn-block btn-outline btn-primary">Reset</button>
+        </div>
+    </div><!-- #app-customizer -->
+    <!-- SIDE PANEL -->
+    <!-- /#side-panel -->
+    <!-- build:js ../assets/js/core.min.js -->
+
+    <script src="~/Resources/libs/bower/PACE/pace.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js ../assets/js/app.min.js -->
+    <script src="~/Resources/libs/bower/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="~/Resources/assets/js/library.js"></script>
+    <script src="~/Resources/assets/js/plugins.js"></script>
+    <script src="~/Resources/assets/js/app.js"></script>
+
+    <!-- endbuild -->
+    <script src="~/Resources/libs/bower/moment/moment.js"></script>
+    <script src="~/Resources/libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="~/Resources/assets/js/fullcalendar.js"></script>
+    <script src="~/Scripts/handlebars.min.js"></script>
+    <script src="~/Scripts/canvas.js?v=1.4"></script>
+</body>
+</html>

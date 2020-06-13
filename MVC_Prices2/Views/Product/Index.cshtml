@@ -1,0 +1,529 @@
+﻿@using MVC_Prices2.Models
+@using Newtonsoft.Json
+@model MVC_Prices2.Models.Product
+@{
+    ViewBag.Title = "Product Details";
+}
+
+
+
+
+@if (Model == null)
+{
+    <div class="widget col-md-12 widget" style="height: 750px">
+        <div class="alert alert-danger topmargin text-center"><strong>Errore!</strong> Nessun prodotto selezionato !</div>
+    </div>
+}
+else
+{
+
+
+
+    <div class="row">
+        <div class="col-md-12 widget">
+
+
+
+            <!-- Preloader -->
+            <div id="preloader">
+                <div id="image"></div>
+            </div>
+            <!-- /Preloader -->
+
+
+
+
+            <center>
+                <form name="form1">
+
+
+                    <table width="100%" border="0" style="margin-top: 10px;">
+                        <tbody>
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+
+
+                                    <font face="Verdana" style="font-size: 13px; color: orangered;">
+                                        <b>@Model.ProductName.ToUpper()</b>
+                                    </font>
+                                    <input id="direction" type="checkbox" @if (Model.IsWingFixed) { @Html.Raw("disabled") } checked data-toggle="toggle" data-size="mini" data-on=" Destra" data-off=" Sinistra " data-onstyle="success" data-offstyle="info">
+                                    <input type="hidden" name="strona" value="2" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="50"></td>
+
+                                <td align="center">
+                                    <br />
+
+                                    <b>Sistema:</b>
+
+                                    <select name="system" id="system" onchange="Hesap();">
+                                        <option value="0" selected="">Pro 7006 ®</option>
+                                        <option value="2">Pro 7006 ® 2</option>
+                                        <option value="1">Pro 8106 ® 1</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td align="right">
+                                    <font face="Verdana" style="font-size: 13px; color: blue;">
+                                        <b></b> <input type="hidden" name="wzmocnienie" onclick="imptotale();">
+                                    </font>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <font face="verdana" size="2">
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td valign="middle">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td valign="bottom">
+                                        <div>
+                                            <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                        </div>
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
+                                                <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                            </div>
+                                            <br /><br /><br />
+                                            <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
+                                                Pellicola simil-legno/colore in massa<br>
+                                                <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
+                                            </p>
+                                        </font>
+                                    </td>
+
+                                    <td>
+                                        <canvas id="mojCanvas" width="250" height="290"></canvas>
+
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td class="pull-right">
+
+
+
+
+
+                                        <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
+
+                                            <b>Colore:</b>
+                                            <select name="kolorprofili" onchange="Hesap();">
+                                                <option value="0" selected="">bianco</option>
+                                                <option value="0">laminate bianco</option>
+                                                <option value="1">golden oak</option>
+                                                <option value="2">noce</option>
+                                                <option value="3">mogano</option>
+                                                <option value="4">winchester</option>
+                                                <option value="8">verde muschio</option>
+                                            </select>
+                                        </font>
+                                    </td>
+
+                                    <td align="center" valign="middle">
+                                        <div style="margin-left: 25px;" class="col-sm-7 col-md-7">
+                                            <input id="en" name="szer" placeholder="Larghezza" type="text" value="@Model.DefWidth" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Larghezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                        </div>
+                                        <br />
+                                        <br />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="" valign="bottom">
+
+                                        <font face="Verdana" style="padding-left: 142px; font-size: 12px;">
+
+                                            <b>Maniglia:</b>
+
+                                            <input id="armfixed" type="checkbox"
+                                                   @if (Model.IsArmFixed) { @Html.Raw("disabled") }
+                                                   checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
+
+                                        </font>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" valign="bottom">
+
+                                        <font face="Verdana" style="padding-left: 122px; font-size: 12px; display: none;" id="armbuttons">
+                                            <br />
+                                            <div style="padding-left: 160px; " class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-primary active" id="up">
+                                                    <input type="radio" name="armoptions" value="Up" id="up" autocomplete="off"><i class="zmdi zmdi-upload"></i> Su
+                                                </label>
+                                                <label class="btn btn-primary" id="down">
+                                                    <input type="radio" name="armoptions" value="Down" id="down" autocomplete="off" checked><i class="zmdi zmdi-download"></i> Giu
+                                                </label>
+
+                                            </div>
+                                            <select id="armcm" style="height: 35px;">
+                                                @for (int i = 1; i <= 10; i++)
+                                                {
+                                                    <option value="@i">
+                                                        <b> @i</b>
+                                                    </option>
+                                                }
+                                            </select> - CM
+
+                                        </font>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="pull-right" valign="bottom">
+
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <br />
+                                            <b>Vetro;</b> <table>
+                                                @foreach (var el in (List<Glass>)ViewData["Glass"])
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @el.Description
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <td>
+                                                        valore k: 1.1
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <select style="display: none;" name="konfiguracja" onchange="imptotale();">
+                                                <option value="0">basso emissivo</option>
+                                                <option value="1" selected="">stratificato 1 lato</option>
+                                                <option value="2">stratificato 2 lati</option>
+                                            </select>
+
+                                        </font>
+
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td align="right">
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <!-- Tipo: -->
+                                            <select style="display: none;" name="kolorszkla" onchange="imptotale();">
+                                                <option value="0" selected="">doppio, trasparente</option>
+                                                <option value="1">doppio, satinato</option>
+                                                <option value="2">doppio, stampato C</option>
+                                                <option value="3">triplo, trasparente</option>
+                                                <option value="4">triplo, satinato</option>
+                                                <option value="5">triplo, stampato C</option>
+                                            </select>
+
+                                        </font>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            <br>
+                                            <b>Numero pezzi:</b>
+
+                                            <select name="ilosc" onchange="Hesap();">
+                                                <option value="0" selected="">
+                                                    0
+                                                </option>
+                                                <option value="1">
+                                                    1
+                                                </option>
+                                                <option value="2">
+                                                    2
+                                                </option>
+                                                <option value="3">
+                                                    3
+                                                </option>
+                                                <option value="4">
+                                                    4
+                                                </option>
+                                                <option value="5">
+                                                    5
+                                                </option>
+                                                <option value="6">
+                                                    6
+                                                </option>
+                                                <option value="7">
+                                                    7
+                                                </option>
+                                                <option value="8">
+                                                    8
+                                                </option>
+                                                <option value="9">
+                                                    9
+                                                </option>
+                                                <option value="10">
+                                                    10
+                                                </option>
+                                            </select>
+
+
+
+                                        </font>
+
+
+
+
+                                        <font face="Verdana" style="font-size: 12px;">
+                                            Importo:
+                                            <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
+                                            
+
+
+                                        </font>
+
+
+
+
+                                        &nbsp; &nbsp; &nbsp;
+                                        <a id="addtobasket" class="btn btn-success"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Aggiungi al preventivo</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                    </font>
+                </form>
+            </center>
+
+        </div>
+    </div>
+
+    <!-- Creates the bootstrap modal where the image will appear -->
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sezione Profilo <b id="sezProfile"></b></h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="imagepreview" style="width: 100%; ">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight}));
+        var fiyatlar;
+        var profilFiyat;
+        
+        function GetDatas()
+        {
+
+            $.ajax({
+                type: 'GET',
+                url: '/Product/Datas',
+                dataType: "JSON",
+                data: { id:@Model.Id},
+                success: function (data) {
+                    
+                    fiyatlar = data;
+
+                }
+
+            });
+            $.ajax({
+                type: 'GET',
+                url: '/Product/Ledges',
+                dataType: "JSON",
+
+                success: function (data) {
+                    
+                    profilFiyat = data;
+
+                }
+
+            });
+
+        }
+        function Hesap()
+        {
+            imptotale();
+            var miktar = $("select[name='ilosc'] option:selected").text();
+            var renk = $("select[name='kolorprofili'] option:selected").text();
+            var fiyat = 0;
+            var tutar = 0;
+            var matrixHeight = 0;
+            var matrixWidth = 0;
+            var factorPrice = 0;
+            var en = document.getElementById("en").value;
+            var boy = document.getElementById("boy").value;
+            var profil = document.getElementById("system").value;
+
+            for (var i = 0; i < fiyatlar["length"]; i++)
+            {
+                if (renk == "bianco")
+                {
+                if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false)
+                {
+                        fiyat = fiyatlar[i].Prices;
+                        matrixHeight = fiyatlar[i].Height;
+                        matrixWidth = fiyatlar[i].Width;
+                }
+                for (var k = 0; k < profilFiyat["length"]; k++) 
+                {
+                    if (profil == 2 && profilFiyat[k].PicValue == profil)
+                    {
+                        factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
+                    }
+                    else if (profil == 0)
+                    {
+                        factorPrice = fiyat;
+                    }
+                    //    Pro 8106 ® 1 için hesaplama yapılacak alan
+                    //else if (profil == 0)
+                    //{
+                    //    factorPrice = fiyat;
+                    //}
+
+                }
+                }
+                else
+                {
+                if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true)
+                {
+                        fiyat = fiyatlar[i].Prices;
+                        matrixHeight = fiyatlar[i].Height;
+                        matrixWidth = fiyatlar[i].Width;
+                }
+                for (var k = 0; k < profilFiyat["length"]; k++)
+                {
+                    if (profil == 2 && profilFiyat[k].PicValue == profil)
+                    {
+                        factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) *  2 * profilFiyat[k].ColoredPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
+                    }
+                    else if (profil == 0)
+                    {
+                        factorPrice = fiyat;
+                    }
+                    //    Pro 8106 ® 1 için hesaplama yapılacak alan
+                    // else if (profil == 1)
+                    //{
+                    //    factorPrice = fiyat;
+                    //}
+                }
+                }
+            }
+            factorPrice = Math.ceil(factorPrice);
+            tutar = factorPrice * miktar;
+            
+            document.getElementById('cenaokna').innerHTML = tutar;
+            
+            
+        }
+        function controlLimits() {
+            alert("works fine");
+        }
+
+        $("#kesit").on("click", function() {
+            $('#imagepreview').attr('src', $('#kesit').attr('src')); // here asign the image to the modal when the user click the enlarge link
+            var system = $("select[name='system'] option:selected").text();
+            $('#sezProfile').text(" - "+system);
+            $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+        });
+        $(document).ready(function () {
+            GetDatas();
+            $('#armfixed').on('change', function() {
+                var armdirection = $('#armfixed').is(':checked');
+
+                if (armdirection) {
+                    $('#armbuttons').hide();
+
+                } else {
+                    $('#armbuttons').show();
+                }
+            });
+            
+        });
+        
+        
+        function ArmUpDown() {
+
+
+            var armdirect = $('input[name=armoptions]:checked').val();
+            var armdistance = 2;
+        }
+
+        $("#system").on("click",changeProfile);
+        function changeProfile() {
+
+
+
+            var profiles = new Array('/Content/img/PRO7006.png', "/Content/img/PRO8106_1.png", "/Content/img/PRO7006-2_1.png");
+
+
+            document.getElementById('kesit').src = profiles[document.form1.system.value];
+
+
+
+        }
+    </script>
+    if (Model.Id == 1)
+    {
+        @Html.Partial("_1");
+    }
+    else if (Model.Id == 3)
+    {
+        @Html.Partial("_3");
+    }
+    else if (Model.Id == 4)
+    {
+        @Html.Partial("_4");
+    }
+    else if (Model.Id == 5)
+    {
+        @Html.Partial("_5");
+    }
+    else if (Model.Id == 6)
+    {
+        @Html.Partial("_6");
+    }
+    else if (Model.Id == 7)
+    {
+        @Html.Partial("_7");
+    }
+    else if (Model.Id == 9)
+    {
+        @Html.Partial("_9");
+    }
+    else if (Model.Id == 10)
+    {
+        @Html.Partial("_10");
+    }
+    else if (Model.Id == 11)
+    {
+        @Html.Partial("_11");
+    }
+    else
+    {
+        @Html.Partial("_2");
+    }
+}

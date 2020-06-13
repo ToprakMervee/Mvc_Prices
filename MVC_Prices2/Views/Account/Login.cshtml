@@ -1,0 +1,74 @@
+﻿@model MVC_Prices2.Models.LoginModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Price App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+    <link rel="shortcut icon" sizes="196x196" href="~/Resources/assets/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/core.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/misc-pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+</head>
+<body class="simple-page">
+
+    <div class="simple-page-wrap">
+        <div class="simple-page-logo animated swing">
+            <a href="../Home">
+
+                @*<img width="60" height="60" src="~/Content/img/leroymerllogo.png" />   & <img width="45" height="45" src="~/Resources/assets/images/Proline_Logo_Header1.png" class="brand-icon" height="30" />*@
+               Serramenti
+            </a>
+        </div><!-- logo -->
+        <div class="simple-page-form animated flipInY" id="login-form">
+            <h4 class="form-title m-b-xl text-center">Sign In With Your Infinity Account</h4>
+           
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" ,id="sign-in-email",placeholder="User Name"} })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                
+                </div>
+
+                <div class="form-group">
+                 
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",id="sign-in-password",placeholder="Password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group m-b-xl">
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="keep_me_logged_in" />
+                        <label for="keep_me_logged_in">Keep me signed in</label>
+                    </div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "danger" })
+              
+                <input type="submit" class="btn btn-primary" value="Login">
+            }
+        </div><!-- #login-form -->
+
+        <div class="simple-page-footer">
+            <p><a href="/Account/ForgotPass">FORGOT YOUR PASSWORD ?</a></p>
+         
+        </div><!-- .simple-page-footer -->
+
+
+    </div><!-- .simple-page-wrap -->
+</body>
+</html>

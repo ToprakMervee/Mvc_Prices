@@ -1,0 +1,69 @@
+﻿@using System.Security.Cryptography.X509Certificates
+@model MVC_Prices2.Models.ResetModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Price App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+    <link rel="shortcut icon" sizes="196x196" href="~/Resources/assets/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/core.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/misc-pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+</head>
+<body class="simple-page">
+<div id="back-to-home">
+    <a href="/" class="btn btn-outline btn-default"><i class="fa fa-home animated zoomIn"></i></a>
+</div>
+    <div class="simple-page-wrap">
+        <div class="simple-page-logo animated swing">
+            <a href="../Home">
+
+                @*<img width="60" height="60" src="~/Content/img/leroymerllogo.png" />   & <img width="45" height="45" src="~/Resources/assets/images/Proline_Logo_Header1.png" class="brand-icon" height="30" />*@
+                Serramenti
+            </a>
+        </div><!-- logo -->
+        <div class="simple-page-form animated flipInY" id="login-form">
+            <h4 class="form-title m-b-xl text-center">Please Create a New Password.</h4>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "sign-in-password", placeholder = "Password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+             
+                <div class="form-group">
+                  
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "sign-in-password", placeholder = "Password Confirmation" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "danger" })
+
+                <input type="submit" class="btn btn-primary" value="Reset">
+            }
+        </div><!-- #login-form -->
+
+        <div class="simple-page-footer">
+        
+        </div><!-- .simple-page-footer -->
+
+
+    </div><!-- .simple-page-wrap -->
+</body>
+</html>

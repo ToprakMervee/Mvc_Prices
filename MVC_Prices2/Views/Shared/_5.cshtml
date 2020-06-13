@@ -1,0 +1,847 @@
+﻿
+
+<script type="text/javascript">
+
+function changes () {
+
+
+
+    var okleiny01 = new Array('/Content/img/probkabianco.jpg', "/Content/img/probkadab.jpg", "/Content/img/probkanoce1.jpg", "/Content/img/probkamogano.jpg", "/Content/img/probkairish.jpg", "/Content/img/probkaavoriopellicolato.jpg", "/Content/img/probkaavorio.jpg", "/Content/img/probkaweiss1.jpg", "/Content/img/verde1.jpg", "/Content/img/probkarosso.jpg");
+
+document.getElementById('probka').src = okleiny01[document.form1.kolorprofili.value];
+
+
+}
+
+
+
+
+
+
+
+function wprowadzaniesx () {
+
+
+changes ();
+
+var skala;
+
+
+
+
+var szerokosc0 = (document.form1.szer.value);
+var wysokosc0 = (document.form1.wys.value);
+var pole0 = szerokosc0 * wysokosc0;
+
+
+
+skala = (Math.round(szerokosc0 / 250)) * 1.1;
+
+
+
+
+var szerokosc = (document.form1.szer.value)/skala;
+var wysokosc = ((document.form1.wys.value)/skala);
+var pole = szerokosc * wysokosc;
+
+var canvas = document.getElementById("mojCanvas");
+var mojObiekt = canvas.getContext('2d');
+
+ var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+        gradient.addColorStop(0,"lightgray");
+        gradient.addColorStop(0.5,"#CCCCCC");
+        gradient.addColorStop(1,"gray");
+
+
+
+var startx = (canvas.width - szerokosc)/2;
+var starty = (canvas.height - wysokosc)/2;
+
+
+
+var r1 = 25 / skala;
+var r2 = 50 / skala;
+
+
+
+var an01 = 60;
+var an001 = an01/skala;
+
+var fv01 = 20;
+var fv001 = fv01/skala;
+
+var t01 = 40;
+var t001 = t01/skala;
+
+var t02 = 55;
+var t002 = 55/skala;
+
+var mo01 = 10;
+var mo001 = mo01/skala;
+
+var mo02 = 20;
+var mo002 = mo02/skala;
+
+
+
+
+var polowax = (canvas.width)/2;
+
+var poloway = (canvas.height)/2;
+
+
+
+var srodek = polowax + poloway;
+
+var gornylx = polowax - (szerokosc/2);
+var gornyly = poloway - (wysokosc/2);
+
+var prawysrx = polowax + (szerokosc/2);
+
+var prawysry = poloway;
+
+
+var dolnylx = gornylx;
+var dolnyly = poloway + (wysokosc/2);
+
+
+
+var srodekgx = polowax;
+var srodekgy = gornyly;
+
+var dolnypx = polowax + (szerokosc/2);
+var dolnypy = dolnyly;
+
+
+canvas.width = canvas.width;
+
+
+
+
+
+
+mojObiekt.fillStyle = gradient;
+mojObiekt.strokeStyle = "gray";
+
+mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+mojObiekt.clearRect((startx+8),(starty+8),(szerokosc-16),(wysokosc-16));
+
+    //rysujemy obramowanie drugiego kwadratu
+mojObiekt.strokeRect((startx+20),(starty+20),(szerokosc-40),(wysokosc-40));
+
+//rysujemy obramowanie drugiego kwadratu
+mojObiekt.strokeRect((startx+23),(starty+23),(szerokosc-46),(wysokosc-46));
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((gornylx+23),(gornyly+23)); //
+mojObiekt.lineTo((prawysrx-23),(prawysry));
+mojObiekt.lineTo((dolnylx+23),(dolnyly - 23));
+mojObiekt.lineTo(srodekgx,srodekgy + 23);
+mojObiekt.lineTo(((dolnypx-23)),(dolnypy)-23);
+mojObiekt.stroke();
+
+
+
+}
+
+
+
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var skala;
+
+
+
+
+function wprowadzaniedx () {
+
+
+changes ();
+
+
+var skala;
+
+
+
+
+var szerokosc0 = (document.form1.szer.value);
+var wysokosc0 = (document.form1.wys.value);
+var pole0 = szerokosc0 * wysokosc0;
+
+
+
+skala = (Math.round(szerokosc0 / 250)) * 1.1;
+
+
+
+
+
+var szerokosc;
+var wysokosc;
+
+var szerokosc0;
+var wysokosc0;
+
+
+var lmin = productLimits.MinWidth;
+var lmax = productLimits.MaxWidth;
+
+var hmin =  productLimits.MinHeight;
+var hmax =  productLimits.MaxHeight;
+
+
+
+var szerokosc0 = (document.form1.szer.value);
+var wysokosc0 = (document.form1.wys.value);
+var pole0 = szerokosc0 * wysokosc0;
+
+
+
+
+
+
+var r1 = 25 / skala;
+var r2 = 50 / skala;
+
+
+
+var an01 = 60;
+var an001 = an01/skala;
+
+var fv01 = 20;
+var fv001 = fv01/skala;
+
+var t01 = 40;
+var t001 = t01/skala;
+
+var t02 = 55;
+var t002 = 55/skala;
+
+var mo01 = 10;
+var mo001 = mo01/skala;
+
+var mo02 = 20;
+var mo002 = mo02/skala;
+
+
+
+
+
+
+
+var szerokosc1 = (szerokosc0)/skala;
+var wysokosc1 = ((wysokosc0)/skala);
+var pole1 = szerokosc1 * wysokosc1;
+
+
+
+
+
+
+
+if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+
+
+{
+
+
+var szerokosc = szerokosc1;
+var wysokosc = wysokosc1;
+var pole = szerokosc * wysokosc;
+
+var largsk = (szerokosc - (2*t001) - mo001 - mo002)/3;
+
+
+var wypelnienie = new Array("rgb(255,255,255)" , "rgb(178,95,33)", "rgb(110,73,18)" , "rgb(113,47,37)" , "rgb(199,141,77)" , "rgb(253,237,214)" , "rgb(233,219,190)" , "rgb(255,255,255)" , "rgb(0,62,35)" , "rgb(125,19,23)");
+var kolorokna = wypelnienie[document.form1.kolorprofili.value];
+
+
+
+var canvas = document.getElementById("mojCanvas");
+var mojObiekt = canvas.getContext('2d');
+
+ var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+        gradient.addColorStop(0, kolorokna);
+
+        gradient.addColorStop(0.5, kolorokna);
+        gradient.addColorStop(1, kolorokna);
+
+
+var startx = (canvas.width - szerokosc)/2;
+var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+var polowax = (canvas.width)/2;
+
+var poloway = (canvas.height)/2;
+
+
+
+var srodek = polowax + poloway;
+
+var gornylx = polowax - (szerokosc/2);
+var gornyly = poloway - (wysokosc/2);
+
+
+var gpx = polowax + (szerokosc/2) - 21;
+var gpy = poloway - (wysokosc/2) + 21;
+
+
+var lsrx = polowax - (szerokosc/2) + 21;
+var lsry = poloway;
+
+
+var prawysrx = polowax + (szerokosc/2);
+
+var prawysry = poloway;
+
+
+var dpx = gpx;
+var dpy = poloway + (wysokosc/2) - 21;
+
+
+var dolnylx = gornylx;
+var dolnyly = poloway + (wysokosc/2);
+
+
+
+var gsrx = polowax;
+var gsry = gornyly + 22;
+
+var dolnypx = polowax + (szerokosc/2);
+var dolnypy = dolnyly;
+
+var dlx = lsrx;
+var dly = dpy;
+
+
+var glx = startx + 21;
+var gly = starty + 21;
+
+
+var pskgsrx = polowax + ((szerokosc/2 - 8)/2);
+
+
+
+// współrzędne punktów dla linii r-u I skrzydło
+
+
+var lg1x = startx + t001 + an001 + fv001;
+var lg1y = starty + t001 + an001 + fv001;
+
+var gs1x = startx + t001 + (largsk/2);
+var gs1y = starty + t001 + an001 + fv001;
+
+
+var s1x = startx + largsk - 2 * fv001;
+var s1y = poloway;
+
+var ld1x = startx + t001 + an001 + fv001;
+var ld1y = starty + wysokosc1 - t001 - an001 - fv001;
+
+
+var pd1x = startx + largsk + t001 - an001 - fv001;
+var pd1y = starty + wysokosc1 - t001 - an001 - fv001;
+
+
+// współrzędne punktów dla linii r-u II skrzydło
+
+
+var lg2x = startx + t001 + largsk + mo002 + an001 + fv001;
+var lg2y = starty + t001 + an001 + fv001;
+
+var s2x = startx + t001 + 2*largsk + mo002 - an001 - fv001;
+var s2y = poloway;
+
+var ld2x = startx + t001 + largsk + mo002 + an001 + fv001;
+var ld2y = starty + wysokosc1 - t001 - an001 - fv001;
+
+
+// współrzędne punktów dla linii r-u III skrzydło
+
+
+
+
+
+
+var gs3x = startx + t001 + 2*largsk + mo001 + mo002 + (largsk/2)
+var gs3y = starty + t001 + an001 + fv001;
+
+var pg3x = startx + szerokosc1 - t001 - an001 - fv001;
+var pg3y = starty + t001 + an001 + fv001;
+
+var s3x = startx + t001 + 2*largsk + mo002 + mo001 + an001 + fv001;
+var s3y = poloway;
+
+var ld3x = startx + szerokosc1 - t001 + an001 + fv001 - largsk;
+var ld3y = starty + wysokosc1 - t001 - an001 - fv001;
+
+
+var pd3x = startx + szerokosc1 - t001 - an001 - fv001;
+var pd3y = starty + wysokosc1 - t001 - an001 - fv001;
+
+
+
+
+
+
+
+
+
+
+
+
+
+canvas.width = canvas.width;
+
+
+
+
+
+
+
+
+mojObiekt.fillStyle = gradient;
+mojObiekt.strokeStyle = "gray";
+
+
+
+
+
+
+if ((document.form1.system.value == 1) || (document.form1.system.value == 4))
+
+{
+
+mojObiekt.fillRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc + (2 * r1)));
+
+mojObiekt.strokeRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc+ (2 * r1)));
+}
+
+if ((document.form1.system.value == 2) || (document.form1.system.value == 5)|| (document.form1.system.value == 7))
+
+{
+
+mojObiekt.fillRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc + (2 * r2)));
+
+mojObiekt.strokeRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc+ (2 * r2)));
+}
+
+
+
+if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || (document.form1.system.value == 6))
+
+
+
+
+
+{
+
+mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+}
+
+
+mojObiekt.fillRect((startx + t001),(starty + t001),(largsk),(wysokosc - 2*t001));
+
+mojObiekt.strokeRect((startx + t001),(starty + t001),(largsk),(wysokosc - 2*t001));
+
+// mojObiekt.fillRect((startx + 7),(starty + 7),(szerokosc/2 - 8),(wysokosc - 14));
+
+// mojObiekt.strokeRect((startx + 7),(starty + 7),(szerokosc/2 - 8),(wysokosc - 14));
+
+mojObiekt.fillRect((startx + (szerokosc/3 + mo002)),(starty + t001),(largsk),(wysokosc - 2 * t001));
+
+mojObiekt.strokeRect((startx + (szerokosc/3 + mo002)),(starty + t001),(largsk),(wysokosc - 2 * t001));
+
+
+// mojObiekt.fillRect((startx + (szerokosc/2 + 1)),(starty+7),(szerokosc/2 - 8),(wysokosc - 14));
+
+// mojObiekt.strokeRect((startx + (szerokosc/2 + 1)),(starty+7),(szerokosc/2 - 8),(wysokosc - 14));
+
+// trzecie skrzydło
+mojObiekt.fillRect((startx + ((largsk)*2 +  t001 + mo001 + mo002)),(starty + t001), largsk,(wysokosc - 2 * t001));
+
+mojObiekt.strokeRect((startx + ((largsk)*2 + t001 + mo001 + mo002)),(starty + t001), largsk ,(wysokosc - 2 * t001));
+
+
+
+if (document.form1.konfiguracja.value == 0)
+
+{mojObiekt.fillStyle = "lightblue";}
+
+else
+
+
+{mojObiekt.fillStyle = "cornflowerblue";}
+
+
+// pierwsze skrzydlo
+mojObiekt.strokeRect((startx+an001+t001),(starty+an001+t001),(largsk - 2*an001),(wysokosc-2*t001-2*an001));
+
+//rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo
+// mojObiekt.clearRect((startx+an001+t001+fv001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+//szyba - pierwsze skrzydlo
+mojObiekt.fillRect((startx+an001+t001+fv001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+
+//listwa - pierwsze skrzydlo
+ mojObiekt.strokeRect((startx+an001+t001+fv001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+
+
+
+
+
+
+    // drugie skrzydlo
+mojObiekt.strokeRect((startx + t001 + largsk + mo002 + an001),(starty+t001+an001),(largsk - 2*an001),(wysokosc-2*t001-2*an001));
+
+
+
+
+//szyba - drugie skrzydlo
+mojObiekt.fillRect((startx+t001+largsk+mo002+an001+fv001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+//listwa - drugie skrzydlo
+mojObiekt.strokeRect((startx+t001+largsk+mo002+an001+fv001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+
+    // trzecie skrzydlo
+mojObiekt.strokeRect((startx + t001 + 2*largsk + mo002 + an001 + mo001),(starty+t001+an001),(largsk - 2*an001),(wysokosc-2*t001-2*an001));
+
+
+
+
+//szyba - trzecie skrzydlo
+mojObiekt.fillRect((startx+t001+2*largsk+mo002+an001+fv001+mo001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+//listwa - trzecie skrzydlo
+mojObiekt.strokeRect((startx+t001+2*largsk+mo002+an001+fv001+mo001),(starty+an001+t001+fv001),(largsk-2*fv001-2*an001),(wysokosc-2*fv001-2*t001-2*an001));
+
+
+
+
+
+
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((lg1x),(lg1y));
+mojObiekt.lineTo(s1x, s1y);
+mojObiekt.lineTo((ld1x),(ld1y));
+ mojObiekt.lineTo(gs1x , gs1y);
+mojObiekt.lineTo((pd1x),pd1y);
+ mojObiekt.stroke();
+
+
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((lg2x),(lg2y));
+mojObiekt.lineTo(s2x, s1y);
+mojObiekt.lineTo((ld2x),(ld2y));
+
+mojObiekt.stroke();
+
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((pg3x),(pg3y));
+mojObiekt.lineTo(s3x, s3y);
+mojObiekt.lineTo((pd3x),(pd3y));
+ mojObiekt.lineTo(gs3x , gs3y);
+mojObiekt.lineTo((ld3x),ld3y);
+ mojObiekt.stroke();
+
+
+
+
+// mojObiekt.beginPath();
+// mojObiekt.moveTo((glx),(gly)); //rysowanie zaczynamy od punktów 35,10 - tam więc // przesuwamy // nasze piórko
+// mojObiekt.lineTo((ld1x),(ld1y));
+
+// mojObiekt.lineTo(dlx,dly);
+// mojObiekt.stroke();
+
+
+
+
+
+
+
+
+
+} else { Swal.fire({
+        type: 'error',
+        title: 'l\'input deve rientrare in questi intervalli.',
+        text: 'Altezza: ' +
+            productLimits.MinHeight +
+            '-' +
+            productLimits.MaxHeight +
+            '; Larghezza: ' +
+            productLimits.MinWidth +
+            '-' +
+            productLimits.MaxWidth,
+        footer: '<a href="mailto:export@@prolinepvc.com">Puoi contattare qui.</a>'
+    }).then((result) => {
+        if (result.value) {
+            window.location.reload();
+        }
+    });
+
+}}
+
+
+
+</script>
+
+
+
+<script language="Javascript">
+
+function imptotale()	{
+
+
+var aletta;
+var larg1;
+var larg2;
+var alt1;
+var alt2;
+var larg11;
+var alt11;
+var indexszerokosci;
+var indexwysokosci;
+var cenaokna;
+var cena999;
+var doplatazakolor = new Array (1.03 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.4 , 1.4 , 1.4);
+var powierzchnia;
+var doplatazawklad = new Array (0 , 303 ,  356 , 33);
+var doplatazakolorszkla = new Array (0 , 377 , 250 , 193 , 533 , 463);
+var systemprofili = new Array (0.03 , 0.03 , 0.03 , 0.03 , 0.03 , 0.03 , 0.03 , 0.03);
+var cenaprogu = 50;
+var sogliabassa;
+
+
+if (document.form1.system.value == 1) { aletta = 70 }
+
+else if (document.form1.system.value == 2) { aletta = 130 }
+
+else { aletta = 0 }
+
+
+
+
+wprowadzaniedx();
+
+
+
+
+
+var cennik1sk=new Array(17);
+
+
+cennik1sk[0] = new Array(0 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500 , 2600 , 2700 , 2800 , 2900 , 3000 , 3100 , 3200 , 3300 , 3400 , 3500);
+
+cennik1sk[1] = new Array(500 , 739 , 739 , 739 , 739 , 755 , 774 , 792 , 807 , 829 , 844 , 860 , 877 , 987 , 1003 , 1022 , 1039 , 1053 , 1071 , 1089 , 1103 , 1120);
+
+cennik1sk[2] = new Array(600 , 739 , 739 , 739 , 739 , 755 , 774 , 792 , 807 , 829 , 844 , 860 , 877 , 987 , 1003 , 1022 , 1039 , 1053 , 1071 , 1089 , 1103 , 1120);
+
+cennik1sk[3] = new Array(700 , 739 , 739 , 739 , 739 , 755 , 774 , 792 , 807 , 829 , 844 , 860 , 877 , 987 , 1003 , 1022 , 1039 , 1053 , 1071 ,	1089 , 1103 , 1120);
+
+cennik1sk[4] = new Array(800 , 792 , 792 , 792 , 792 , 811 , 830 , 849 , 866 , 884 , 901 , 919 , 936 , 1049 , 1066 , 1085 , 1102 , 1120 , 1138 , 1156 , 1174 , 1191);
+
+cennik1sk[5] = new Array(900 , 840 , 840 , 840 , 840 , 858 , 882 , 901 , 919 , 934 , 954 , 972 , 992 , 1106 , 1123 , 1144 , 1164 , 1181 , 1203 , 1221 , 1239 , 1260);
+
+cennik1sk[6] = new Array(1000 , 917 , 917 , 917 , 917 , 938 , 958 , 980 , 1003 , 1009 , 1028 , 1049 , 1071 , 1183 , 1205 , 1228 , 1245 , 1267 ,	1289 , 1307 , 1328 , 1350);
+
+cennik1sk[7] = new Array(1100 , 954 , 954 , 954 , 954 , 977 , 999 , 1024 , 1046 , 1059 , 1082 ,	1105 , 1127 , 1243 , 1264 , 1287 , 1309 , 1330 , 1352 , 1374 , 1396 , 1418);
+
+cennik1sk[8] = new Array(1200 , 1015 , 1015 , 1015 , 1015 , 1043 , 1065 , 1090 , 1113 , 1115 , 1135 , 1159 , 1182 , 1300 , 1323 , 1346 , 1370 ,	1393 , 1416 , 1440 , 1463 , 1486);
+
+cennik1sk[9] = new Array(1300 , 1067 , 1067 , 1067 , 1067 , 1091 , 1117 , 1142 , 1163 ,	1168 , 1189 , 1213 , 1237 , 1357 , 1383 , 1405 , 1431 , 1457 , 1480 , 1505 , 1531 , 1554);
+
+cennik1sk[10] = new Array(1400 , 1118 ,	1118 , 1118 , 1118 , 1144 , 1171 , 1199 , 1220 , 1226 ,	1246 , 1271 , 1298 , 1417 , 1444 , 1470 , 1496 , 1522 ,	1548 , 1574 , 1601 , 1626);
+
+cennik1sk[11] = new Array(1500 , 1166 ,	1166 , 1166 , 1166 , 1192 , 1220 , 1250 , 1272 , 1278 ,	1301 , 1327 , 1355 , 1477 , 1504 , 1531 , 1560 , 1586 ,	1613 , 1642 , 1668 , 1695);
+
+cennik1sk[12] = new Array(1600 , 1214 , 1214 , 1214 , 1214 , 1244 , 1272 , 1305 , 1327 , 1332 ,	1356 , 1386 , 1413 , 1536 , 1567 , 1594 , 1622 , 1653 , 1680 , 1709 , 1739 , 1767);
+
+cennik1sk[13] = new Array(1700 , 1266 ,	1266 , 1266 , 1266 , 1296 , 1327 , 1359 , 1379 , 1390 ,	1408 , 1439 , 1469 , 1593 , 1623 , 1654 , 1683 , 1714 , 1744 , 1774 , 1804 , 1835);
+
+cennik1sk[14] = new Array(1800 , 1338 , 1338 , 1338 , 1338 , 1371 , 1404 , 1437 , 1448 , 1468 , 1477 , 1512 , 1542 , 1666 , 1701 , 1731 , 1761 , 1795 , 1825 , 1860 , 1889 , 1920);
+
+cennik1sk[15] = new Array(1900 , 1386 , 1386 , 1386 , 1386 , 1421 , 1455 , 1488 , 1524 , 1555 ,	1591 , 1624 , 1658 , 1721 , 1785 , 1837 , 1872 , 1903 , 1938 , 1972 , 10000 , 10000);
+
+cennik1sk[16] = new Array(2000 , 1434 , 1434 , 1434 , 1434 , 1471 , 1506 , 1539 , 1600 , 1642 ,	1705 , 1736 , 1774 , 1776 , 1869 , 1943 , 1983 , 2011 , 2051 , 2084 , 10000 , 10000);
+
+
+
+
+var cennik2sk=new Array(15);
+
+
+cennik2sk[0] = new Array(0 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500 , 2600 , 2700 , 2800 , 2900 , 3000 , 3100 , 3200 , 3300);
+
+cennik2sk[1] = new Array(500 , 397.04 , 408.95 , 413.41 , 417.80 , 422.28 , 426.68 , 431.11 , 435.54 , 441.14 , 445.57 , 449.99 , 458.13 , 462.59 , 467.01 , 477.05 , 481.47 , 485.90 , 490.35 , 494.78);
+
+cennik2sk[2] = new Array(600 , 408.95 , 421.22 , 425.81 , 430.33 , 434.95 , 439.48 , 444.04 , 448.60 , 454.37 , 458.94 , 463.49 , 471.88 , 476.47 , 481.02 , 491.36 , 495.92 , 500.48 , 505.06 , 509.62);
+
+cennik2sk[3] = new Array(700 , 419.01 , 431.58 , 436.13 , 440.69 , 445.25 , 449.81 , 454.38 , 458.96 , 464.71 , 469.29 , 473.80 , 482.21 , 486.82 , 491.35 , 501.67 , 506.25 , 510.86 , 515.37 , 519.95);
+
+cennik2sk[4] = new Array(800 , 428.46 , 441.31 , 445.90 , 450.46 , 455.02 , 459.58 , 464.19 , 468.70 , 474.47 , 479.01 , 483.59 , 491.99 , 496.56 , 501.14 , 511.84 , 517.64 , 523.49 , 531.28 , 539.26);
+
+cennik2sk[5] = new Array(900 , 438.15 ,	451.29 , 455.85 , 460.43 , 464.94 , 469.56 , 474.09 , 478.67 , 484.40 ,	488.98 , 494.22 , 503.94 , 510.29 , 518.76 , 533.26 , 542.00 , 550.67 , 559.40 , 568.09);
+
+cennik2sk[6] = new Array(1000 , 452.98 , 466.57 , 471.19 , 475.70 , 480.31 , 484.84 , 489.43 , 494.62 ,	501.94 , 508.42 , 517.42 , 530.69 , 540.05 , 549.44 , 564.63 , 574.01 , 583.42 , 592.88 , 602.24);
+
+cennik2sk[7] = new Array(1100 , 467.41 , 481.43 , 485.99 , 490.57 , 495.14 , 500.71 , 507.08 , 514.15 ,	525.37 , 535.51 , 545.56 , 559.44 , 569.60 , 579.62 , 595.53 , 605.59 ,	615.77 , 625.80 , 635.95);
+
+cennik2sk[8] = new Array(1200 , 477.97 , 492.31 , 496.89 , 501.91 , 508.55 , 515.27 , 525.36 , 536.21 ,	548.15 , 558.98 , 569.71 , 584.31 , 595.09 , 605.91 , 622.41 , 633.29 ,	644.09 , 654.86 , 665.53);
+
+cennik2sk[9] = new Array(1300 , 487.63 , 502.25 , 508.24 , 515.09 , 522.83 , 534.30 , 545.77 , 557.27 , 569.98 , 581.50 , 593.00 , 608.24 , 619.79 , 631.21 , 648.46 , 659.92 , 671.37 , 682.89 , 694.44);
+
+cennik2sk[10] = new Array(1400 , 500.98 , 516.01 , 523.09 , 531.73 , 543.80 , 556.12 , 568.20 ,	580.43 , 593.82 , 605.94 , 618.20 , 634.13 , 646.41 , 658.49 , 676.48 ,	688.64 , 700.78 , 713.08 , 725.19);
+
+cennik2sk[11] = new Array(1500 , 513.23 , 528.63 , 537.19 , 550.01 , 562.97 , 575.78 , 588.72 ,	601.54 , 615.70 , 628.43 , 641.35 , 658.00 , 670.94 , 683.79 , 702.46 , 715.33 , 728.29 , 741.11 , 753.95);
+
+cennik2sk[12] = new Array(1600 , 529.15 , 545.03 , 558.02 , 571.60 , 585.12 , 598.75 , 612.25 ,	625.82 , 640.55 , 654.16 , 667.70 , 685.15 , 698.69 , 712.39 , 731.65 ,	745.25 , 758.79 , 772.33 , 785.93);
+
+cennik2sk[13] = new Array(1700 , 545.04 , 561.40 , 575.69 , 589.89 , 604.19 , 618.50 , 632.76 ,	647.00 , 662.48 , 676.72 , 691.01 , 709.08 , 723.37 , 737.62 , 757.68 , 771.91 , 786.22 , 800.41 , 814.76);
+
+cennik2sk[14] = new Array(1800 , 571.30 , 588.44 , 603.40 , 618.38 , 633.24 , 648.26 , 663.19 ,	678.22 , 694.28 , 709.33 , 724.24 , 743.08 , 758.01 , 773.03 , 793.74 ,	808.65 , 823.61 , 838.53 , 853.56);
+
+cennik2sk[15] = new Array(1900 , 587.72 , 605.35 , 621.07 , 636.74 , 652.42 , 668.00 , 683.72 ,	699.32 , 716.18 , 731.78 , 747.51 , 766.96 , 782.60 , 798.23 , 819.68 , 835.40 , 851.06 , 866.68 , 882.37);
+
+cennik2sk[16] = new Array(2000 , 609.51 , 627.79 , 644.09 , 660.51 , 676.87 , 693.16 , 709.52 ,	725.90 , 743.40 , 759.84 , 776.09 , 796.33 , 812.68 , 829.00 , 851.22 ,	867.52 , 883.98 , 900.20 , 1000.00);
+
+
+
+
+
+larg11 = document.form1.szer.value;
+
+
+larg1 = Math.ceil(larg11) + aletta;
+
+
+
+larg2 = Math.ceil(larg1/100)*100;
+
+alt11 = document.form1.wys.value;
+
+alt1 =  Math.ceil(alt11) + aletta;
+
+alt2 = Math.ceil(alt1/100)*100;
+
+
+// supervetro = ((larg11 - 2*105 - 2*61) * (alt11 - 2*105))/1000000;
+
+if (document.form1.system.value == 0) { supervetro = ((larg11 - 2*105 - 2*87) * (alt11 - 2*105))/1000000; }
+
+else { supervetro = ((larg11 - 2*94 - 2*61) * (alt11 - 2*94))/1000000; }
+
+
+
+
+
+
+if ((larg1 >= 1500 && larg1 <= 3300 ) && (alt1 >= 500 && alt1 <= 2000 ))
+
+
+{
+
+
+
+for (var n = 1 ; n < 20 ; n++)
+
+{
+
+
+if (cennik1sk[0][n]==larg2) {
+
+
+indexszerokosci = n;
+break;
+}
+
+}
+
+
+
+for (var m = 0 ; m < 18 ; m++)
+
+{
+
+
+if (cennik1sk[m][0]==alt2) {
+
+
+
+indexwysokosci = m;
+break;
+}
+
+}
+
+
+
+powierzchnia = (larg1/1000)*(alt1/1000);
+
+
+
+
+if ((document.form1.system.value == 1) || (document.form1.system.value == 2) || (document.form1.system.value == 4) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
+
+{
+cenaokna = (((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value]) + ((cennik1sk[indexwysokosci][indexszerokosci]) * systemprofili[document.form1.system.value]) + (powierzchnia * doplatazawklad[document.form1.konfiguracja.value]) + (powierzchnia * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1;
+
+cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+
+}
+
+
+else
+
+{
+
+cenaokna = (((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value]) + ((cennik1sk[indexwysokosci][indexszerokosci]) * systemprofili[document.form1.system.value]) + (powierzchnia * doplatazawklad[document.form1.konfiguracja.value]) + (powierzchnia * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1;
+
+cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+
+}
+
+//if (cena999 > 9999) { alert("Prezzo non trovato"); self.location.href="3sksym.html";}
+
+//else {
+
+
+
+//document.form1.dodatki.value = Math.round(cenaokna) * (document.form1.ilosc.value);
+//document.getElementById('cenaokna').innerHTML = Math.round(cenaokna) * (document.form1.ilosc.value);
+
+
+//}
+
+}
+
+}
+
+</script>

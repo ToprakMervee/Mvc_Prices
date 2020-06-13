@@ -1,0 +1,1210 @@
+﻿
+
+<script type="text/javascript">
+
+
+    function changes () {
+
+
+
+        var okleiny01 = new Array('/Content/img/probkabianco.jpg', "/Content/img/probkadab.jpg", "/Content/img/probkanoce1.jpg", "/Content/img/probkamogano.jpg", "/Content/img/probkairish.jpg", "/Content/img/probkaavoriopellicolato.jpg", "/Content/img/probkaavorio.jpg", "/Content/img/probkaweiss1.jpg", "/Content/img/verde1.jpg", "/Content/img/probkarosso.jpg");
+
+        document.getElementById('probka').src = okleiny01[document.form1.kolorprofili.value];
+
+
+    }
+  
+
+    function wprowadzaniesx () {
+
+        korekta();
+
+
+        changes ();
+
+
+        var szerokosc;
+        var wysokosc;
+
+        var szerokosc0;
+        var wysokosc0;
+
+
+       
+      
+        var lmin = productLimits.MinWidth;
+        var lmax = productLimits.MaxWidth;
+
+        var hmin =  productLimits.MinHeight;
+        var hmax =  productLimits.MaxHeight;
+        var skala;
+
+
+        var szerokosc0 = (document.form1.szer.value);
+        var wysokosc0 = (document.form1.wys.value);
+        var pole0 = szerokosc0 * wysokosc0;
+
+
+
+
+
+
+
+
+        if (szerokosc0 > 1100 || wysokosc0 > 1300)
+
+        { skala = 9; }
+
+
+
+        else { skala = 6.5; }
+
+
+
+        var a = 35 / skala;
+        var b = 95 / skala;
+        var c = 112 / skala;
+
+        var r1 = 25 / skala;
+        var r2 = 50 / skala;
+
+
+        var szerokosc1 = (szerokosc0)/skala;
+        var wysokosc1 = ((wysokosc0)/skala);
+        var pole1 = szerokosc1 * wysokosc1;
+
+
+        if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+
+
+        {
+
+
+            var szerokosc = szerokosc1;
+            var wysokosc = wysokosc1;
+            var pole = szerokosc * wysokosc;
+
+
+
+
+            var wypelnienie = new Array("rgb(255,255,255)" , "rgb(178,95,33)", "rgb(110,73,18)" , "rgb(113,47,37)" , "rgb(199,141,77)" , "rgb(253,237,214)" , "rgb(233,219,190)" , "rgb(255,255,255)" , "rgb(0,62,35)" , "rgb(125,19,23)");
+            var kolorokna = wypelnienie[document.form1.kolorprofili.value];
+
+
+
+            var canvas = document.getElementById("mojCanvas");
+            var mojObiekt = canvas.getContext('2d');
+
+            var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+            gradient.addColorStop(0, kolorokna);
+
+            gradient.addColorStop(0.5, kolorokna);
+            gradient.addColorStop(1, kolorokna);
+
+
+
+
+            var startx = (canvas.width - szerokosc)/2;
+            var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+            var polowax = (canvas.width)/2;
+
+            var poloway = (canvas.height)/2;
+
+
+
+            var srodek = polowax + poloway;
+
+            var gornylx = polowax - (szerokosc/2);
+            var gornyly = poloway - (wysokosc/2);
+
+
+            var gpx = polowax + (szerokosc/2) - c;
+            var gpy = poloway - (wysokosc/2) + c;
+
+
+            var lsrx = polowax - (szerokosc/2) + c;
+            var lsry = poloway;
+
+
+            var prawysrx = polowax + (szerokosc/2);
+
+            var prawysry = poloway;
+
+
+            var dpx = gpx;
+            var dpy = poloway + (wysokosc/2) - c;
+
+
+            var dolnylx = gornylx;
+            var dolnyly = poloway + (wysokosc/2);
+
+
+
+            var gsrx = polowax;
+            var gsry = gornyly + c;
+
+            var dolnypx = polowax + (szerokosc/2);
+            var dolnypy = dolnyly;
+
+            var dlx = lsrx;
+            var dly = dpy;
+
+            canvas.width = canvas.width;
+
+
+
+
+
+
+
+            mojObiekt.fillStyle = gradient;
+            mojObiekt.strokeStyle = "gray";
+
+
+
+            if ((document.form1.system.value == 1) || (document.form1.system.value == 4))
+
+            {
+
+                mojObiekt.fillRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc + (2 * r1)));
+
+                mojObiekt.strokeRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc+ (2 * r1)));
+            }
+
+            if ((document.form1.system.value == 2) || (document.form1.system.value == 5))
+
+            {
+
+                mojObiekt.fillRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc + (2 * r2)));
+
+                mojObiekt.strokeRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc+ (2 * r2)));
+            }
+
+
+
+            if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || (document.form1.system.value == 6) || (document.form1.system.value == 7))
+
+
+
+
+
+            {
+
+                mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+                mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+            }
+
+            mojObiekt.fillRect((startx + a),(starty + a),(szerokosc - 2*a),(wysokosc - 2*a));
+
+            mojObiekt.strokeRect((startx + a),(starty + a),(szerokosc - 2*a),(wysokosc - 2*a));
+
+            //rysujemy obramowanie drugiego kwadratu
+            mojObiekt.strokeRect((startx + b),(starty + b),(szerokosc - 2*b),(wysokosc - 2*b));
+
+//rysujemy obramowanie drugiego kwadratu
+            mojObiekt.strokeRect((startx + c),(starty + c),(szerokosc - 2*c),(wysokosc - 2*c));
+
+
+            if (document.form1.konfiguracja.value == 0)
+
+            {mojObiekt.fillStyle = "lightblue";}
+
+            else
+
+
+            {mojObiekt.fillStyle = "cornflowerblue";}
+
+            mojObiekt.fillRect((startx + c + 0.5),(starty + c + 1),(szerokosc - 2*c - 1.5),(wysokosc - 2*c - 2.3));
+
+
+            mojObiekt.beginPath();
+            mojObiekt.moveTo((startx + c),(starty + c)); //rysowanie zaczynamy od punktów 35,10 - tam więc przesuwamy nasze piórko
+            mojObiekt.lineTo((prawysrx - c),(prawysry));
+            mojObiekt.lineTo((dlx),(dly));
+            mojObiekt.lineTo(gsrx , gsry);
+            mojObiekt.lineTo(dpx,dpy);
+            mojObiekt.stroke();
+
+
+
+
+        } else {  Swal.fire({
+                type: 'error',
+                title: 'l\'input deve rientrare in questi intervalli.',
+                text: 'Altezza: ' +
+                    productLimits.MinHeight +
+                    '-' +
+                    productLimits.MaxHeight +
+                    '; Larghezza: ' +
+                    productLimits.MinWidth +
+                    '-' +
+                    productLimits.MaxWidth,
+                footer: '<a href="mailto:export@@prolinepvc.com">Puoi contattare qui.</a>'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.reload();
+                }
+            });
+
+        }}
+
+
+
+
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    var skala;
+
+
+
+
+    function wprowadzaniedx () {
+
+        korekta();
+
+
+        changes ();
+
+
+        var szerokosc;
+        var wysokosc;
+
+        var szerokosc0;
+        var wysokosc0;
+
+
+        var lmin = productLimits.MinWidth;
+        var lmax = productLimits.MaxWidth;
+
+        var hmin =  productLimits.MinHeight;
+        var hmax =  productLimits.MaxHeight;
+
+        var skala;
+
+
+        var szerokosc0 = (document.form1.szer.value);
+        var wysokosc0 = (document.form1.wys.value);
+        var pole0 = szerokosc0 * wysokosc0;
+
+
+
+
+
+
+
+
+        if (szerokosc0 > 1100 || wysokosc0 > 1300)
+
+        { skala = 9; }
+
+
+
+        else { skala = 6.5; }
+
+
+
+        var a = 35 / skala;
+        var b = 45 / skala;
+        var c = 65 / skala;
+
+        var r1 = 25 / skala;
+        var r2 = 50 / skala;
+
+
+
+        var szerokosc1 = (szerokosc0)/skala;
+        var wysokosc1 = ((wysokosc0)/skala);
+        var pole1 = szerokosc1 * wysokosc1;
+
+
+        if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+
+
+        {
+
+
+            var szerokosc = szerokosc1;
+            var wysokosc = wysokosc1;
+            var pole = szerokosc * wysokosc;
+
+
+
+
+            var wypelnienie = new Array("rgb(255,255,255)" , "rgb(178,95,33)", "rgb(110,73,18)" , "rgb(113,47,37)" , "rgb(199,141,77)" , "rgb(253,237,214)" , "rgb(233,219,190)" , "rgb(255,255,255)" , "rgb(0,62,35)" , "rgb(125,19,23)");
+            var kolorokna = wypelnienie[document.form1.kolorprofili.value];
+
+
+
+            var canvas = document.getElementById("mojCanvas");
+            var mojObiekt = canvas.getContext('2d');
+
+            var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+            gradient.addColorStop(0, kolorokna);
+
+            gradient.addColorStop(0.5, kolorokna);
+            gradient.addColorStop(1, kolorokna);
+
+
+
+
+            var startx = (canvas.width - szerokosc)/2;
+            var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+            var polowax = (canvas.width)/2;
+
+            var poloway = (canvas.height)/2;
+
+
+
+            var srodek = polowax + poloway;
+
+            var gornylx = polowax - (szerokosc/2);
+            var gornyly = poloway - (wysokosc/2);
+
+
+            var gpx = polowax + (szerokosc/2) - c;
+            var gpy = poloway - (wysokosc/2) + c;
+
+
+            var lsrx = polowax - (szerokosc/2) + c;
+            var lsry = poloway;
+
+
+            var prawysrx = polowax + (szerokosc/2);
+
+            var prawysry = poloway;
+
+
+            var dpx = gpx;
+            var dpy = poloway + (wysokosc/2) - c;
+
+
+            var dolnylx = gornylx;
+            var dolnyly = poloway + (wysokosc/2);
+
+
+
+            var gsrx = polowax;
+            var gsry = gornyly + c;
+
+            var dolnypx = polowax + (szerokosc/2);
+            var dolnypy = dolnyly;
+
+            var dlx = lsrx;
+            var dly = dpy;
+
+            canvas.width = canvas.width;
+
+
+
+
+
+
+
+            mojObiekt.fillStyle = gradient;
+            mojObiekt.strokeStyle = "gray";
+
+            if ((document.form1.system.value == 1) || (document.form1.system.value == 4))
+
+            {
+
+                mojObiekt.fillRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc + (2 * r1)));
+
+                mojObiekt.strokeRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc+ (2 * r1)));
+            }
+
+            if ((document.form1.system.value == 2) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
+
+            {
+
+                mojObiekt.fillRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc + (2 * r2)));
+
+                mojObiekt.strokeRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc+ (2 * r2)));
+            }
+
+
+
+            if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || (document.form1.system.value == 6) )
+
+
+
+
+
+            {
+
+                mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+                mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+            }
+
+
+// mojObiekt.fillRect((startx + a),(starty + a),(szerokosc - 2*a),(wysokosc - 2*a));
+
+// usuwa skrzydło mojObiekt.strokeRect((startx + a),(starty + a),(szerokosc - 2*a),(wysokosc - 2*a));
+
+            //dół listwy przyszybowej
+            mojObiekt.strokeRect((startx + b),(starty + b),(szerokosc - 2*b),(wysokosc - 2*b));
+
+//góra listwy przyszybowej
+            mojObiekt.strokeRect((startx + c),(starty + c),(szerokosc - 2*c),(wysokosc - 2*c));
+
+
+            if (document.form1.konfiguracja.value == 0)
+
+            {mojObiekt.fillStyle = "lightblue";}
+
+            else
+
+
+            {mojObiekt.fillStyle = "cornflowerblue";}
+
+            mojObiekt.fillRect((startx + c + 0.5),(starty + c + 1),(szerokosc - 2*c - 1.5),(wysokosc - 2*c - 2.3));
+
+
+// mojObiekt.beginPath();
+// mojObiekt.moveTo((gpx),(gpy));
+// mojObiekt.lineTo((lsrx),(lsry));
+// mojObiekt.lineTo((dpx),(dpy));
+// mojObiekt.lineTo(gsrx , gsry);
+// mojObiekt.lineTo(dlx,dly);
+// mojObiekt.stroke();
+
+
+
+            mojObiekt.beginPath();
+            mojObiekt.moveTo((polowax - 20),(poloway));
+            mojObiekt.lineTo((polowax + 20),(poloway));
+//mojObiekt.lineTo((dpx),(dpy));
+//mojObiekt.lineTo(gsrx , gsry);
+//mojObiekt.lineTo(dlx,dly);
+            mojObiekt.stroke();
+
+            mojObiekt.beginPath();
+            mojObiekt.moveTo((polowax),(poloway-10));
+            mojObiekt.lineTo((polowax),(poloway+10));
+//mojObiekt.lineTo((dpx),(dpy));
+//mojObiekt.lineTo(gsrx , gsry);
+//mojObiekt.lineTo(dlx,dly);
+            mojObiekt.stroke();
+
+
+
+
+
+        } else {
+            Swal.fire({
+                type: 'error',
+                title: 'l\'input deve rientrare in questi intervalli.',
+                text: 'Altezza: ' +
+                    productLimits.MinHeight +
+                    '-' +
+                    productLimits.MaxHeight +
+                    '; Larghezza: ' +
+                    productLimits.MinWidth +
+                    '-' +
+                    productLimits.MaxWidth,
+                footer: '<a href="mailto:export@@prolinepvc.com">Puoi contattare qui.</a>'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.reload();
+                }
+            });
+
+        }
+    }
+
+
+
+</script>
+
+
+
+<script language="Javascript">
+
+    function imptotale()	{
+
+
+        var aletta;
+        var larg1;
+        var larg2;
+        var alt1;
+        var alt2;
+        var larg11;
+        var alt11;
+        var indexszerokosci;
+        var indexwysokosci;
+        var cenaokna;
+        var cena999;
+        var doplatazakolor = new Array (1, 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38);
+        var powierzchnia;
+        var doplatazawklad = new Array (0 , 230 , 327);
+        var doplatazakolorszkla = new Array (0 , 377 , 250 , 193 , 533 , 463);
+        var systemprofili = new Array (1 , 1 , 1 , 1 , 1 , 1 , 1.05 , 1.05);
+        var aletta35bianco = 5.40;
+        var aletta35colore = 6;
+        var aletta58bianco = 7.5;
+        var aletta58colore = 9.5;
+        var obwod;
+        var telaiorestauro;
+        var minussatinato;
+        var supervetro;
+
+
+
+
+        if (document.form1.system.value == 1) { aletta = 70 }
+
+        else if (document.form1.system.value == 2) { aletta = 130 }
+
+        else { aletta = 0 }
+
+
+
+        if(document.form1.strona.value == 1)
+        {
+            wprowadzaniesx();
+        }
+        else
+        {
+            wprowadzaniedx();
+        }
+
+
+
+        var cennik1skmsstal=new Array(15);
+
+
+        cennik1skmsstal[0] = new Array(0 , 500 , 600,  700 , 800 , 900 , 1000 , 1100 , 1200 , 1300 , 1400 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500 , 2600 , 2700 , 2800 , 2900 , 3000);
+
+        cennik1skmsstal[1] = new Array(500 , 82.82 , 84.75 , 86.32 , 87.95 , 89.55 , 91.15 , 93.05 , 97.46 , 101.82 , 106.24 , 110.62 ,	115.31 , 119.69 , 124,10 , 128.46 , 132.87 , 137.56 , 141.94 , 146.33 ,	150.74 , 155.10 , 159.82 , 164.20 , 168.58 , 172.97 , 177.38);
+
+
+        cennik1skmsstal[2] = new Array(600 , 84.75 , 86.32 , 87.95 , 89.55 , 91.15 , 96.53 , 101.64 , 106.69 , 111.80 ,	116.89 , 122.27 , 127.35 , 132.46 , 137.51 , 142.61 , 148,00 , 153.08 , 158.16 , 163.27 , 168.32 , 173.74 , 178.81 , 183.89 , 188.98 , 194.08 ,	199.44);
+
+
+        cennik1skmsstal[3] = new Array(700 , 86.32 , 87.95 , 89.55 , 92.54 , 98.62 , 104.42 , 110.17 , 115.98 , 121.76 , 127.84 , 133.61 , 139.42 , 145.16 , 150.97 , 157.04 , 162.82 ,	168.60 , 174.40 , 180.16 , 186.26 , 192.04 , 197.81 , 203.59 , 209.39 , 233.45 , 239,25);
+
+
+        cennik1skmsstal[4] = new Array(800 , 87.95 , 89.55 , 92.54 , 99.32 , 105.82 , 112.26 , 118.76 ,	125.24 , 132.01 , 138.49 , 144.98 , 151.43 , 157.93 , 164.70 , 171.17 , 177.65 , 184.15 , 190.60 , 197.40 , 203.87 , 210.34 , 234.82 , 241.31 ,	248.06 , 254.56	, 261.03);
+
+
+        cennik1skmsstal[5] = new Array(900 , 89.55 , 91.15 , 98.62 , 105.82 , 112.96 , 120.16 ,	127.33 , 134.80 , 141.97 , 149.16 , 156.30 , 163.49 , 170.96 , 178.13 , 185.30 , 192.50 , 199.64 , 207.14 , 232.31 , 239.48 , 246.65 , 253.84 , 261.29 , 268.48 , 275.65 , 282.82);
+
+
+        cennik1skmsstal[6] = new Array(1000 , 91.15 , 96.53 , 104.42 , 112.26 ,	120.16 , 128.02 , 136.19 , 144.05 , 151.94 , 159.78 , 167.67 , 175.84 , 183.70 , 191.57 , 199.46 , 207.30 , 233.50 , 241.36 , 249.22 , 257.09 , 264.98 , 273.12 , 281.01 , 288.87 , 296.74 , 304.60);
+
+
+        cennik1skmsstal[7] = new Array(1100 , 93.05 , 101.64 , 110.17 ,	118.76 , 127.33 , 136.19 , 144,75 , 153.34 , 161.87 , 170.45 , 179.32 , 187.88 , 196.44 , 205.03 , 231.56 , 240.46 , 249.01 , 257.57 , 266.14 , 274.72 , 283.56 , 292.15 , 300.70 , 1000 ,  1000 , 1000);
+
+
+        cennik1skmsstal[8] = new Array(1200 , 97.46 , 106.69 , 115.98 , 125.24 , 134.80 , 144.05 , 153.34 , 162.56 , 171.85 , 181.40 , 190.66 , 199.92 , 227.20 , 236.44 , 246.02 , 255.28 , 264.53 , 273.79 , 283.07 , 292.61 , 301.89 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1skmsstal[9] = new Array(1300 , 101.82 , 111.80 ,	121.76 , 132.01 , 141.97 , 151.94 , 161.87 , 171.85 , 182.10 , 192.05 ,	202.01 , 229.99 , 239.92 , 250.20 , 260.15 , 270.10 , 280.06 , 290.03 , 300.26 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1skmsstal[10] = new Array(1400 , 106.24 , 116.89 , 127.84 , 138.49 , 149.16 , 159.78 , 170.45 , 181.40 , 192.05 ,	202.70 , 231.38 , 242.00 , 252.98 , 263.63 , 274.28 , 284.93 , 295.60 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 ,  1000 , 1000 , 1000);
+
+
+        cennik1skmsstal[11] = new Array(1500 , 110.62 , 122.27 , 133.61 , 144.98 , 156.30 , 167.67 , 179.32 , 190.66 , 202.01 ,	231.38 , 242.70 , 254.38 , 265.72 , 277.06 , 288.41 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1skmsstal[12] = new Array(1600 , 115.31 , 127.35 , 139.42 , 151.43 , 163.49 , 175.84 , 187.88 , 199.92 , 229.99 ,	242.00 , 254.38 , 266.41 , 278.45 , 290.50 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1skmsstal[13] = new Array(1700 , 119.69 ,	132.46 , 145.16 , 157.93 , 170.96 , 183.70 , 196.44 , 227.20 , 239.92 , 252.98 , 265.72 , 278.45 , 291.19 , 1000 , 1000 , 1000 , 1000 ,	1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1skmsstal[14] = new Array(1800 , 124.10 , 137.51 , 150.97 , 164.70 , 178.13 , 191.57 , 205.03 , 236.44 , 250.20 ,	263.63 , 277.06 , 290.50 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1skmsstal[15] = new Array(1900 , 128.46 , 142.61 , 157.04 , 171.17 , 185.30 , 199.46 , 231.56 , 246.02 , 260.15 ,	274.28 , 288.41 , 302.56 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1skmsstal[16] = new Array(2000 , 132.87
+            , 148.00 , 162.82 , 177.65 , 192.50 , 207.30 , 240.46 , 255.28 , 270.10 , 284.93 , 299.78
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx nowa tabela dla okna typu fest xxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+        var listino01= new Array(20);
+
+        listino01[0] = new Array(0 , 500 , 600,  700 , 800 , 900 , 1000 , 1100 , 1200 , 1300 , 1400 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500 , 2600 , 2700 , 2800 , 2900 , 3000);
+
+        listino01[1] = new Array(500 , 150 , 150 , 162 , 174 , 187 , 199 , 211 , 224 , 236 , 249 , 261 , 274 , 287 , 289 , 301 , 313 , 325 , 337 , 350 , 362 , 374 , 386 , 398 , 411 , 423 , 435);
+
+        listino01[2] = new Array(600 , 150 , 150 , 162 , 174 , 187 , 199 , 211 , 224 , 236 , 249 , 261 , 274 , 287 , 289 , 301 , 313 , 325 , 337 , 350 , 362 , 374 , 386 , 398 , 411 , 423 , 435);
+
+
+        listino01[3] = new Array(700 , 162 , 162 , 175 , 189 , 203 , 218 , 231 , 245 , 259 , 273 , 287 , 291 , 304 , 317 , 330 , 344, 357 , 370 , 383 , 396 , 410 , 423 , 436 , 449 , 462 , 476);
+
+
+        listino01[4] = new Array(800 , 174 , 174 , 189 , 204 , 221 , 235 , 251 , 265 , 282 , 287 , 301 , 316 , 331 , 346 , 360 , 374 , 388 , 402 , 417 , 431 , 445 , 459 , 473 , 488 , 502 , 516);
+
+
+        listino01[5] = new Array(900 , 187 , 187 , 203 , 221 , 238 , 254 , 270 , 287 , 293 , 309 , 325 , 342 , 358 , 374 , 390 , 406, 423 , 439 , 455 , 471 , 488 , 504 , 520 , 536 , 553 , 569);
+
+
+        listino01[6] = new Array(1000 , 199 , 199 , 218	 , 235 , 254 , 272 , 290 , 297 , 315 , 332 , 350 , 368 , 385 , 402 , 420, 437 , 454 , 471 , 489 , 506 , 523 , 540 , 558 , 575 , 592 , 609);
+
+
+        listino01[7] = new Array(1100 , 211 , 211 , 231 , 251 , 270 , 290 , 299 , 317 , 336 , 356 , 374 , 393 , 413 , 432
+            , 1000 ,  1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000, 1000 , 1000);
+
+
+
+        listino01[8] = new Array(1200 , 224 , 224 , 245 , 265 , 287 , 297 , 317 , 338 , 359 , 379 , 399 , 420 , 440 , 460
+
+            , 1000 ,  1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000, 1000 , 1000);
+
+
+        listino01[9] = new Array(1300 , 236 , 236 , 259 , 282 , 293 , 315 , 336 , 359 , 380 , 401 , 424	 , 445 , 466 , 489
+            , 1000 ,  1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000, 1000 , 1000);
+
+
+        listino01[10] = new Array(1400 , 249 , 249 , 273 , 287 , 309 , 332 , 356 , 379 , 401 , 425 , 448 , 470 , 494 , 517
+            , 1000 ,  1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000, 1000 , 1000);
+
+
+        listino01[11] = new Array(1500 , 261 , 261 , 287 , 301 , 325 , 350 , 374 , 399 , 424 , 448 , 472 , 497 , 521 , 546
+            , 1000 ,  1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000, 1000 , 1000);
+
+        listino01[12] = new Array(1600 , 274 , 274 , 291 , 316 , 342 , 368 , 393 , 420 , 445 , 470 , 497 , 522 , 549 , 574
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        listino01[13] = new Array(1700 , 287 , 287 , 304 , 331 , 358 , 385 , 413 , 440 , 466 , 494 , 521 , 549 , 575 , 1000
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        listino01[14] = new Array(1800 , 289 , 289 , 317 , 346 , 374 , 402 , 432 , 460 , 489 , 517 , 546 , 574
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        listino01[15] = new Array(1900 , 301 , 301 , 330 , 361 , 390 , 421 , 450 , 481 , 510 , 539 , 570 , 1000
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        listino01[16] = new Array(2000 , 313 , 313 , 345 , 376 , 406 , 438 , 469 , 501 , 531 , 563 , 1000 , 1000
+
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        listino01[17] = new Array(2100 , 325 , 325 , 358 , 390 , 423 , 455 , 488 , 521 , 554 , 586 , 1000 , 1000
+
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        listino01[18] = new Array(2200 , 337 , 337 , 371 , 405 , 439 , 473 , 507 , 541 , 575 , 1000 , 1000 , 1000
+
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        listino01[19] = new Array(2300 , 350 , 350 , 385 , 420 , 455 , 491 , 526 , 562 , 1000 , 1000 , 1000 , 1000
+
+            , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+        var cennik1restauro=new Array(16);
+
+
+        cennik1restauro[0] = new Array(0 , 500 , 600,  700 , 800 , 900 , 1000 , 1100 , 1200 , 1300 , 1400 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500 , 2600 , 2700 , 2800 , 2900 , 3000);
+
+        cennik1restauro[1] = new Array(500 , 132.83 , 135.95 , 139.13 , 142.30 , 145.45 , 148.60 , 151.74 , 154.91 , 158.09 , 161.21 , 164.38 , 167.95 , 173.21 , 178.38 , 183.54 , 188.76 , 193.90 , 199.16 , 204.31 , 209.52 , 214.66 , 219.85 , 225.09 , 230.25 , 235.48 , 240.61);
+
+
+        cennik1restauro[2] = new Array(600 ,
+            135.95 ,
+            139.13 ,
+            142.30 ,
+            145.45 ,
+            148.60 ,
+            151.74 ,
+            154.91 ,
+            158.09 ,
+            163.16 ,
+            169.04 ,
+            174.91 ,
+            180.87 ,
+            186.73 ,
+            192.59 ,
+            198.50 ,
+            204.34 ,
+            210.30 ,
+            216.14 ,
+            222.05 ,
+            227.88 ,
+            233.77 ,
+            239.71 ,
+            245.56 ,
+            251.48 ,
+            257.32 ,
+            263.20);
+
+
+        cennik1restauro[3] = new Array(700 ,
+            139.13 ,
+            142.30 ,
+            145.45 ,
+            148.60 ,
+            151.74 ,
+            154.91 ,
+            160.80 ,
+            167.34 ,
+            173.92 ,
+            180.48 ,
+            187.13 ,
+            193.69 ,
+            200.24 ,
+            206.86 ,
+            213.39 ,
+            220.04 ,
+            226.58 ,
+            233.18 ,
+            239.71 ,
+            246.30 ,
+            252.93 ,
+            259.48 ,
+            266.10 ,
+            272.63 ,
+            297.21 ,
+            303.83);
+
+
+        cennik1restauro[4] = new Array(800 ,
+            142.30 ,
+            145.45 ,
+            148.60 ,
+            151.74 ,
+            155.61 ,
+            162.89 ,
+            170.12 ,
+            177.40 ,
+            184.66 ,
+            192.01 ,
+            199.26 ,
+            206.51 ,
+            213.82 ,
+            221.05 ,
+            228.40 ,
+            235.63 ,
+            242.93 ,
+            250.15 ,
+            257.44 ,
+            264.76 ,
+            272.01 ,
+            297.32 ,
+            304.55 ,
+            311.83 ,
+            319.15 ,
+            326.43);
+
+
+        cennik1restauro[5] = new Array(900 ,
+            145.45 ,
+            148.60 ,
+            151.74 ,
+            155.61 ,
+            163.58 ,
+            171.52 ,
+            179.48 ,
+            187.44 ,
+            195.49 ,
+            203.44 ,
+            211.38 ,
+            219.38 ,
+            227.31 ,
+            235.36 ,
+            243.28 ,
+            251.28 ,
+            259.20 ,
+            267.18 ,
+            293.20 ,
+            301.15 ,
+            309.16 ,
+            317.08 ,
+            325.05 ,
+            333.07 ,
+            341.05 ,
+            349.00);
+
+
+        cennik1restauro[6] = new Array(1000 ,
+            148.60 ,
+            151.74 ,
+            154.91 ,
+            162.89 ,
+            171.52 ,
+            180.18 ,
+            188.83 ,
+            197.57 ,
+            206.22 ,
+            214.86 ,
+            223.56 ,
+            232.18 ,
+            240.92 ,
+            249.55 ,
+            258.24 ,
+            266.86 ,
+            293.53 ,
+            302.25 ,
+            310.89 ,
+            319.60 ,
+            328.21 ,
+            336.88 ,
+            345.59 ,
+            354.27 ,
+            362.92 ,
+            371.57);
+
+
+        cennik1restauro[7] = new Array(1100 ,
+            151.74 ,
+            154.91 ,
+            160.80 ,
+            170.12 ,
+            179.48 ,
+            188.83 ,
+            198.27 ,
+            207.61 ,
+            216.95 ,
+            226.34 ,
+            235.66 ,
+            245.10 ,
+            254.42 ,
+            263.81 ,
+            291.12 ,
+            300.49 ,
+            309.91 ,
+            319.24 ,
+            328.64 ,
+            337.96 ,
+            347.32 ,
+            356.73 ,
+            366.10 , 1000 ,  1000 , 1000);
+
+
+        cennik1restauro[8] = new Array(1200 ,
+            154.91 ,
+            158.09 ,
+            167.34 ,
+            177.40 ,
+            187.44 ,
+            197.57 ,
+            207.61 ,
+            217.64 ,
+            227.74 ,
+            237.75 ,
+            247.88 ,
+            257.90 ,
+            285.98 ,
+            295.99 ,
+            306.06 ,
+            316.17 ,
+            326.20 ,
+            336.30 ,
+            346.31 ,
+            356.37 ,
+            366.47, 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1restauro[9] = new Array(1300 ,
+            158.09 ,
+            163.16 ,
+            173.92 ,
+            184.66 ,
+            195.49 ,
+            206.22 ,
+            216.95 ,
+            227.74 ,
+            238.45 ,
+            249.28 ,
+            259.99 ,
+            288.77 ,
+            299.47 ,
+            310.24 ,
+            321.04 ,
+            331.77 ,
+            342.56 ,
+            353.27 ,
+            364.03 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1restauro[10] = new Array(1400 ,
+            161.21 ,
+            169.04 ,
+            180.48 ,
+            192.01 ,
+            203.44 ,
+            214.86 ,
+            226.34 ,
+            237.75 ,
+            249.28 ,
+            260.68 ,
+            290.16 ,
+            301.56 ,
+            313.02 ,
+            324.52 ,
+            335.95 ,
+            347.44 ,
+            358.84 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 ,  1000 , 1000 , 1000);
+
+
+        cennik1restauro[11] = new Array(1500 ,
+            164.38 ,
+            174.91 ,
+            187.13 ,
+            199.26 ,
+            211.38 ,
+            223.56 ,
+            235.66 ,
+            247.88 ,
+            259.99 ,
+            290.16 ,
+            302.26 ,
+            314.41 ,
+            326.61 ,
+            338.73 ,
+            350.92 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1restauro[12] = new Array(1600 ,
+            167.95 ,
+            180.87 ,
+            193.69 ,
+            206.51 ,
+            219.38 ,
+            232.18 ,
+            245.10 ,
+            257.90 ,
+            288.77 ,
+            301.56 ,
+            314.41 ,
+            327.31 ,
+            340.12 ,
+            353.00 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1restauro[13] = new Array(1700 ,
+            173.21 ,
+            186.73 ,
+            200.24 ,
+            213.82 ,
+            227.31 ,
+            240.92 ,
+            254.42 ,
+            285.98 ,
+            299.47 ,
+            313.02 ,
+            326.61 ,
+            340.12 ,
+            353.70 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1restauro[14] = new Array(1800 ,
+            178.38 ,
+            192.59 ,
+            206.86 ,
+            221.05 ,
+            235.36 ,
+            249.55 ,
+            263.81 ,
+            295.99 ,
+            310.24 ,
+            324.52 ,
+            338.73 ,
+            353.00, 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+        cennik1restauro[15] = new Array(1900 ,
+            183.54 ,
+            198.50 ,
+            213.39 ,
+            228.40 ,
+            243.28 ,
+            258.24 ,
+            291.12 ,
+            306.06 ,
+            321.04 ,
+            335.95 ,
+            350.92 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        cennik1restauro[16] = new Array(2000 ,
+            188.76 ,
+            204.34 ,
+            220.04 ,
+            235.63 ,
+            251.28 ,
+            266.86 ,
+            300.49 ,
+            316,17 ,
+            331.77 ,
+            347,44 ,
+            1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000 , 1000);
+
+
+        larg11 = document.form1.szer.value;
+
+
+        larg1 = Math.ceil(larg11) + aletta;
+
+
+
+        larg2 = Math.ceil(larg1/100)*100;
+
+        alt11 = document.form1.wys.value;
+
+        alt1 =  Math.ceil(alt11) + aletta;
+
+        alt2 = Math.ceil(alt1/100)*100;
+
+
+        if (document.form1.system.value == 0) { supervetro = ((larg11 - 2*105) * (alt11 - 2*105))/1000000; }
+
+        else { supervetro = ((larg11 - 2*94) * (alt11 - 2*94))/1000000; }
+
+
+
+
+
+
+
+        if ((larg1 >= 500 && larg1 <= 3300 ) && (alt1 >= 500 && alt1 <= 2000))
+
+
+        {
+
+
+
+            for (var n = 1 ; n < 27 ; n++)
+
+            {
+
+
+                if (listino01[0][n]==larg2) {
+
+
+                    indexszerokosci = n;
+                    break;
+                }
+
+            }
+
+
+
+            for (var m = 0 ; m < 17 ; m++)
+
+            {
+
+
+                if (listino01[m][0]==alt2) {
+
+
+
+                    indexwysokosci = m;
+                    break;
+                }
+
+            }
+
+
+
+            powierzchnia = (larg1/1000)*(alt1/1000);
+            obwod = 2*((larg1/1000)+(alt1/1000));
+
+
+
+            if ((document.form1.konfiguracja.value == 1) && (document.form1.kolorszkla.value == 2))
+
+            { minussatinato = 9.8; }
+
+            else { minussatinato = 0; }
+
+
+
+
+
+
+
+            if ((document.form1.system.value == 1) || (document.form1.system.value == 2) || (document.form1.system.value == 4) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
+
+            {
+
+                cenaokna = (1.00 * ((listino01[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 2;
+
+                cena999 = (listino01[indexwysokosci][indexszerokosci]);
+
+            }
+
+            else
+
+            {
+
+                cenaokna = (1.00 * ((listino01[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 2;
+
+
+                cena999 = (listino01[indexwysokosci][indexszerokosci]);
+
+
+            }
+
+
+
+
+
+            //if (cenaokna > 999) { alert("Prezzo non trovato"); self.location.href="fisso.html";}
+
+            //else {
+
+            //    document.getElementById('cenaokna').innerHTML = Math.round(cenaokna * (document.form1.ilosc.value));
+                //document.form1.dodatki.value = Math.round(cenaokna * (document.form1.ilosc.value) );
+            //}
+
+
+
+        }
+
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+    function korekta()	{
+
+
+
+
+
+    }
+
+
+
+
+
+
+</script>
+
+

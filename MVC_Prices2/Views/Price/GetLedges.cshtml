@@ -1,0 +1,79 @@
+﻿@using Newtonsoft.Json
+@model MVC_Prices2.Models.LedgesViewModel
+@{
+    ViewBag.Title = "GetLedges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 widget">
+        <div id="preloader">
+            <div id="image"></div>
+        </div>
+        <center>
+            <form method="post" name="form1">
+                <h1> Pervaz Fiyat Çarpanları</h1>
+
+                <table width="100%" border="0" style="margin-top: 10px;">
+                    <tbody>
+                        @using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "tempContainer" }))
+                        {
+                            <tr>
+                                <td width="100"></td>
+                                <td align="center">
+                                    <br />
+                                    <b>Sistem / Renk-Fiyat Çarpanı : </b>
+
+                                    @Html.DropDownListFor(m => m.system, (List<SelectListItem>)ViewBag.vls, new { onchange = "imptotale();" })
+                                    <br />
+                                    <br />
+                                    <b>Beyaz Birim Fiyat :</b>
+                                    @Html.TextBoxFor(m => m.colorlessPriceFactor, new { @required = "" })
+                                    <br />
+                                    <br />
+                                    <b>Renkli Birim Fiyat :</b>
+                                    @Html.TextBoxFor(m => m.coloredPriceFactor, new { @required = "" })
+                                    <br />
+                                    <br />
+                                    <button class="btn-lg btn-primary" type="submit">Fiyat Faktörü Güncelle</button>
+                                </td>
+                                <td valign="top">
+                                    <div>
+                                        <img id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <font face="Verdana" style="font-size: 13px; color: blue;">
+                                        <b></b> <input type="hidden" name="wzmocnienie" onclick="imptotale();">
+                                    </font>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </center>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#system").on("click",changeProfile);
+        function changeProfile() {
+
+
+
+            var profiles = new Array('/Content/img/PRO7006.png', "/Content/img/PRO8106_1.png", "/Content/img/PRO7006-2_1.png");
+
+
+            document.getElementById('kesit').src = profiles[document.form1.system.value];
+
+
+
+        }
+</script>

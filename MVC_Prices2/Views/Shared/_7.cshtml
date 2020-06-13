@@ -1,0 +1,1003 @@
+﻿
+
+<script type="text/javascript">
+
+function changes () {
+
+
+
+    var okleiny01 = new Array('/Content/img/probkabianco.jpg', "/Content/img/probkadab.jpg", "/Content/img/probkanoce1.jpg", "/Content/img/probkamogano.jpg", "/Content/img/probkairish.jpg", "/Content/img/probkaavoriopellicolato.jpg", "/Content/img/probkaavorio.jpg", "/Content/img/probkaweiss1.jpg", "/Content/img/verde1.jpg", "/Content/img/probkarosso.jpg");
+
+document.getElementById('probka').src = okleiny01[document.form1.kolorprofili.value];
+
+
+if(document.form1.kolorprofili.value=="6") { document.form1.system.value = 0 ; }
+
+
+}
+
+
+
+
+
+
+
+function wprowadzaniesx () {
+
+
+changes ();
+
+
+
+var szerokosc = (document.form1.szer.value)/6.5;
+var wysokosc = ((document.form1.wys.value)/6.5);
+var pole = szerokosc * wysokosc;
+
+var canvas = document.getElementById("mojCanvas");
+var mojObiekt = canvas.getContext('2d');
+
+ var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+        gradient.addColorStop(0,"lightgray");
+        gradient.addColorStop(0.5,"#CCCCCC");
+        gradient.addColorStop(1,"gray");
+
+
+
+var startx = (canvas.width - szerokosc)/2;
+var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+var polowax = (canvas.width)/2;
+
+var poloway = (canvas.height)/2;
+
+
+
+var srodek = polowax + poloway;
+
+var gornylx = polowax - (szerokosc/2);
+var gornyly = poloway - (wysokosc/2);
+
+var prawysrx = polowax + (szerokosc/2);
+
+var prawysry = poloway;
+
+
+var dolnylx = gornylx;
+var dolnyly = poloway + (wysokosc/2);
+
+
+
+var srodekgx = polowax;
+var srodekgy = gornyly;
+
+var dolnypx = polowax + (szerokosc/2);
+var dolnypy = dolnyly;
+
+
+canvas.width = canvas.width;
+
+
+
+
+
+
+mojObiekt.fillStyle = gradient;
+mojObiekt.strokeStyle = "gray";
+
+mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+mojObiekt.clearRect((startx+8),(starty+8),(szerokosc-16),(wysokosc-16));
+
+    //rysujemy obramowanie drugiego kwadratu
+mojObiekt.strokeRect((startx+20),(starty+20),(szerokosc-40),(wysokosc-40));
+
+//rysujemy obramowanie drugiego kwadratu
+mojObiekt.strokeRect((startx+23),(starty+23),(szerokosc-46),(wysokosc-46));
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((gornylx+23),(gornyly+23)); //
+mojObiekt.lineTo((prawysrx-23),(prawysry));
+mojObiekt.lineTo((dolnylx+23),(dolnyly - 23));
+mojObiekt.lineTo(srodekgx,srodekgy + 23);
+mojObiekt.lineTo(((dolnypx-23)),(dolnypy)-23);
+mojObiekt.stroke();
+
+
+
+}
+
+
+
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var skala;
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function wprowadzaniedx() {
+
+
+changes ();
+
+
+
+var szerokosc;
+var wysokosc;
+
+var szerokosc0;
+var wysokosc0;
+
+
+var lmin = productLimits.MinWidth;
+var lmax = productLimits.MaxWidth;
+
+var hmin =  productLimits.MinHeight;
+var hmax =  productLimits.MaxHeight;
+
+var skala;
+
+
+var szerokosc0 = (document.form1.szer.value);
+var wysokosc0 = (document.form1.wys.value);
+var pole0 = szerokosc0 * wysokosc0;
+
+
+
+if (szerokosc0 > 1400 || wysokosc0 > 1600)
+
+{ skala = 9; }
+
+
+
+else { skala = 6.5; }
+
+
+var szerokosc1 = (szerokosc0)/skala;
+var wysokosc1 = ((wysokosc0)/skala);
+var pole1 = szerokosc1 * wysokosc1;
+
+
+if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+
+
+{
+
+
+var szerokosc = szerokosc1;
+var wysokosc = wysokosc1;
+var pole = szerokosc * wysokosc;
+
+
+
+
+var wypelnienie = new Array("rgb(255,255,255)" , "rgb(178,95,33)", "rgb(110,73,18)" , "rgb(113,47,37)" , "rgb(199,141,77)" , "rgb(253,237,214)" , "rgb(233,219,190)" , "rgb(255,255,255)" , "rgb(0,62,35)" , "rgb(125,19,23)");
+var kolorokna = wypelnienie[document.form1.kolorprofili.value];
+
+
+
+var canvas = document.getElementById("mojCanvas");
+var mojObiekt = canvas.getContext('2d');
+
+ var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+        gradient.addColorStop(0, kolorokna);
+
+        gradient.addColorStop(0.5, kolorokna);
+        gradient.addColorStop(1, kolorokna);
+
+
+var startx = (canvas.width - szerokosc)/2;
+var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+var polowax = (canvas.width)/2;
+
+var poloway = (canvas.height)/2;
+
+
+
+var srodek = polowax + poloway;
+
+var gornylx = polowax - (szerokosc/2);
+var gornyly = poloway - (wysokosc/2);
+
+
+var gpx = polowax + (szerokosc/2) - 16;
+var gpy = poloway - (wysokosc/2) + 16;
+
+
+var lsrx = polowax - (szerokosc/2) + 16;
+var lsry = poloway;
+
+
+var prawysrx = polowax + (szerokosc/2);
+
+var prawysry = poloway;
+
+
+var dpx = gpx;
+var dpy = poloway + (wysokosc/2) - 14;
+
+
+var dolnylx = gornylx;
+var dolnyly = poloway + (wysokosc/2);
+
+
+
+var gsrx = polowax;
+var gsry = gornyly + 16;
+
+var dolnypx = polowax + (szerokosc/2);
+var dolnypy = dolnyly;
+
+var dlx = lsrx;
+var dly = dpy;
+
+
+var glx = startx + 16;
+var gly = starty + 16;
+
+
+var pskgsrx = polowax + ((szerokosc/2 - 4)/2);
+
+
+var r1 = 50 / skala;
+var r2 = 25 / skala;
+
+
+canvas.width = canvas.width;
+
+
+
+
+
+
+
+
+mojObiekt.fillStyle = gradient;
+mojObiekt.strokeStyle = "gray";
+
+
+
+
+
+
+if ((document.form1.system.value == 1) || (document.form1.system.value == 4))
+
+
+{
+
+
+
+mojObiekt.fillRect((startx - r2),(starty - r2),(szerokosc + 2*r2),(wysokosc + r2));
+
+mojObiekt.strokeRect((startx - r2),(starty - r2),(szerokosc + 2*r2),(wysokosc + r2));
+
+
+
+}
+
+
+if ((document.form1.system.value == 2) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
+
+
+
+{
+
+mojObiekt.fillRect((startx - r1),(starty - r1),(szerokosc + 2*r1),(wysokosc + r1));
+
+mojObiekt.strokeRect((startx - r1),(starty - r1),(szerokosc + 2*r1),(wysokosc + r1));
+
+}
+
+
+
+
+if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || (document.form1.system.value == 6))
+
+
+
+{
+
+mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+
+}
+
+mojObiekt.fillRect((startx + 4.5),(starty + 4.5),(szerokosc/2 - 8),(wysokosc - 10));
+
+
+
+
+
+mojObiekt.strokeRect((startx + 4.5),(starty + 4.5),(szerokosc/2 - 5.5),(wysokosc-7));
+
+
+ mojObiekt.fillRect((startx + (szerokosc/2 + 1)),(starty+7),(szerokosc/2 - 8),(wysokosc-13-(1000/skala)));
+
+
+ mojObiekt.strokeRect((startx + (szerokosc/2 + 1.0)),(starty+4.5),(szerokosc/2 - 6),(wysokosc-7));
+
+
+
+
+
+
+
+ mojObiekt.strokeRect((startx+15),(starty+7+wysokosc-(1000/skala)),(szerokosc/2-27.5),((1000/skala)-21));
+
+
+
+
+
+ mojObiekt.strokeRect((startx+13),(starty+5+wysokosc-(1000/skala)),(szerokosc/2-23),((1000/skala)-17));
+
+
+
+mojObiekt.fillStyle = "cornflowerblue";
+
+
+
+//
+mojObiekt.fillRect((startx+16),(starty+7.5+wysokosc-(1000/skala)),(szerokosc/2-28.5),((1000/skala)-22.5));
+
+
+    //rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo zewn listwa
+mojObiekt.strokeRect((startx+13),(starty+13),(szerokosc/2 - 23),(wysokosc-13-(1000/skala)));
+
+
+if (document.form1.konfiguracja.value == 3)
+
+{mojObiekt.fillStyle = "lightblue";}
+
+else
+
+
+{mojObiekt.fillStyle = "cornflowerblue";}
+
+
+
+
+
+
+
+ mojObiekt.fillRect((startx+16),(starty+16),(szerokosc/2-29),(wysokosc-19-(1000/skala)));
+
+
+
+
+ mojObiekt.strokeRect((startx+15),(starty+15),(szerokosc/2-27.5),(wysokosc-17-(1000/skala)));
+
+
+
+
+ mojObiekt.strokeRect((polowax + 12.3),(starty+15),(szerokosc/2 - 28.5),(wysokosc-17-(1000/skala)));
+
+
+
+ mojObiekt.fillRect((polowax + 12.6),(starty+16.1),(szerokosc/2 - 29),(wysokosc-18.4-(1000/skala)));
+
+
+
+
+
+
+ mojObiekt.strokeRect((polowax + 10),(starty+13),(szerokosc/2 - 24),(wysokosc-13-(1000/skala)));
+
+
+
+ mojObiekt.strokeRect((polowax + 10), (starty+5+wysokosc-(1000/skala)),(szerokosc/2 - 24),((1000/skala)-17));
+
+
+
+
+
+ mojObiekt.strokeRect((polowax + 12.2),(starty+7+wysokosc-(1000/skala)),(szerokosc/2-28),((1000/skala)-21));
+
+
+
+
+mojObiekt.fillStyle = "cornflowerblue";
+
+mojObiekt.fillRect((polowax + 12.2),(starty+7.5+wysokosc-(1000/skala)),(szerokosc/2-29),((1000/skala)-22.5));
+
+
+
+
+
+ mojObiekt.beginPath();
+mojObiekt.moveTo((gpx),(gpy)); //rysowanie zaczynamy od punktów 35,10 - tam więc // przesuwamy  //nasze piórko
+mojObiekt.lineTo((polowax + 13),(lsry));
+mojObiekt.lineTo((dpx),(dpy));
+mojObiekt.lineTo(pskgsrx , gsry);
+mojObiekt.lineTo((polowax + 13),dly);
+mojObiekt.stroke();
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((glx),(gly)); //rysowanie zaczynamy od punktów 35,10 - tam więc // przesuwamy // //nasze piórko
+mojObiekt.lineTo((polowax - 13),(lsry));
+
+mojObiekt.lineTo(dlx,dly);
+mojObiekt.stroke();
+
+
+
+if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || (document.form1.system.value == 6) || (document.form1.system.value == 7))
+
+{
+mojObiekt.strokeRect((startx),(starty+wysokosc-1),(szerokosc),(1));
+
+}
+
+else {mojObiekt.strokeRect((startx + 4.5),(starty+wysokosc-1),(szerokosc - 9),(1));}
+
+
+
+
+
+} else {
+    Swal.fire({
+        type: 'error',
+        title: 'l\'input deve rientrare in questi intervalli.',
+        text: 'Altezza: ' +
+            productLimits.MinHeight +
+            '-' +
+            productLimits.MaxHeight +
+            '; Larghezza: ' +
+            productLimits.MinWidth +
+            '-' +
+            productLimits.MaxWidth,
+        footer: '<a href="mailto:export@@prolinepvc.com">Puoi contattare qui.</a>'
+    }).then((result) => {
+        if (result.value) {
+            window.location.reload();
+        }
+    });
+
+
+
+}
+
+}
+
+
+
+
+function wprowadzaniedx2 () {
+
+
+changes ();
+
+
+
+var szerokosc;
+var wysokosc;
+
+var szerokosc0;
+var wysokosc0;
+
+
+
+      
+var lmin = productLimits.MinWidth;
+var lmax = productLimits.MaxWidth;
+
+var hmin =  productLimits.MinHeight;
+var hmax =  productLimits.MaxHeight;
+
+var skala;
+
+
+var szerokosc0 = (document.form1.szer.value);
+var wysokosc0 = (document.form1.wys.value);
+var pole0 = szerokosc0 * wysokosc0;
+
+
+
+if (szerokosc0 > 1400 || wysokosc0 > 1600)
+
+{ skala = 9; }
+
+
+
+else { skala = 6.5; }
+
+
+var szerokosc1 = (szerokosc0)/skala;
+var wysokosc1 = ((wysokosc0)/skala);
+var pole1 = szerokosc1 * wysokosc1;
+
+
+if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+
+
+{
+
+
+var szerokosc = szerokosc1;
+var wysokosc = wysokosc1;
+var pole = szerokosc * wysokosc;
+
+
+
+
+var wypelnienie = new Array("rgb(255,255,255)" , "rgb(178,95,33)", "rgb(110,73,18)" , "rgb(113,47,37)" , "rgb(199,141,77)" , "rgb(253,237,214)" , "rgb(233,219,190)" , "rgb(255,255,255)" , "rgb(0,62,35)" , "rgb(125,19,23)");
+var kolorokna = wypelnienie[document.form1.kolorprofili.value];
+
+
+
+var canvas = document.getElementById("mojCanvas");
+var mojObiekt = canvas.getContext('2d');
+
+ var gradient = mojObiekt.createLinearGradient(0,0,150,150);
+        gradient.addColorStop(0, kolorokna);
+
+        gradient.addColorStop(0.5, kolorokna);
+        gradient.addColorStop(1, kolorokna);
+
+
+var startx = (canvas.width - szerokosc)/2;
+var starty = (canvas.height - wysokosc)/2;
+
+
+
+
+
+
+
+var polowax = (canvas.width)/2;
+
+var poloway = (canvas.height)/2;
+
+
+
+var srodek = polowax + poloway;
+
+var gornylx = polowax - (szerokosc/2);
+var gornyly = poloway - (wysokosc/2);
+
+
+var gpx = polowax + (szerokosc/2) - 16;
+var gpy = poloway - (wysokosc/2) + 16;
+
+
+var lsrx = polowax - (szerokosc/2) + 16;
+var lsry = poloway;
+
+
+var prawysrx = polowax + (szerokosc/2);
+
+var prawysry = poloway;
+
+
+var dpx = gpx;
+var dpy = poloway + (wysokosc/2) - 14;
+
+
+var dolnylx = gornylx;
+var dolnyly = poloway + (wysokosc/2);
+
+
+
+var gsrx = polowax;
+var gsry = gornyly + 16;
+
+var dolnypx = polowax + (szerokosc/2);
+var dolnypy = dolnyly;
+
+var dlx = lsrx;
+var dly = dpy;
+
+
+var glx = startx + 16;
+var gly = starty + 16;
+
+
+var pskgsrx = polowax + ((szerokosc/2 - 4)/2);
+
+
+canvas.width = canvas.width;
+
+
+
+
+
+
+
+
+mojObiekt.fillStyle = gradient;
+mojObiekt.strokeStyle = "gray";
+
+mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+
+mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+
+
+mojObiekt.fillRect((startx + 4.5),(starty + 4.5),(szerokosc/2 - 8),(wysokosc - 10));
+
+
+
+mojObiekt.strokeRect((startx + 4.5),(starty + 4.5),(szerokosc/2 - 5.5),(wysokosc-7));
+
+
+ mojObiekt.fillRect((startx + (szerokosc/2 + 1)),(starty+7),(szerokosc/2 - 8),(wysokosc-13-(1000/skala)));
+
+
+ mojObiekt.strokeRect((startx + (szerokosc/2 + 1.0)),(starty+4.5),(szerokosc/2 - 6),(wysokosc-7));
+
+
+
+
+
+
+
+ mojObiekt.strokeRect((startx+15),(starty+7+wysokosc-(1000/skala)),(szerokosc/2-27.5),((1000/skala)-21));
+
+
+
+ mojObiekt.strokeRect((startx+13),(starty+5+wysokosc-(1000/skala)),(szerokosc/2-23),((1000/skala)-17));
+
+
+
+mojObiekt.fillStyle = "cornflowerblue";
+
+
+
+
+mojObiekt.fillRect((startx+16),(starty+8+wysokosc-(1000/skala)),(szerokosc/2-29),((1000/skala)-23));
+
+
+
+
+mojObiekt.strokeRect((startx+13),(starty+13),(szerokosc/2 - 23),(wysokosc-13-(1000/skala)));
+
+
+
+
+ mojObiekt.fillRect((startx+16),(starty+16.4),(szerokosc/2-29),(wysokosc-19-(1000/skala)));
+
+
+
+
+ mojObiekt.strokeRect((startx+15),(starty+15),(szerokosc/2-27.5),(wysokosc-17-(1000/skala)));
+
+
+
+
+ mojObiekt.strokeRect((polowax + 12.7),(starty+15),(szerokosc/2 - 28.5),(wysokosc-17-(1000/skala)));
+
+
+
+ mojObiekt.fillRect((polowax + 12.2),(starty+15),(szerokosc/2 - 28.5),(wysokosc-17-(1000/skala)));
+
+
+
+
+
+
+ mojObiekt.strokeRect((polowax + 10),(starty+13),(szerokosc/2 - 24),(wysokosc-13-(1000/skala)));
+
+
+
+ mojObiekt.strokeRect((polowax + 10), (starty+5+wysokosc-(1000/skala)),(szerokosc/2 - 24),((1000/skala)-17));
+
+
+
+ mojObiekt.strokeRect((polowax + 12.2),(starty+7+wysokosc-(1000/skala)),(szerokosc/2-28),((1000/skala)-21));
+
+
+
+
+mojObiekt.fillStyle = "cornflowerblue";
+
+mojObiekt.fillRect((polowax + 12.2),(starty+7+wysokosc-(1000/skala)),(szerokosc/2-28.5),((1000/skala)-21));
+
+
+
+
+
+ mojObiekt.beginPath();
+mojObiekt.moveTo((gpx),(gpy)); //rysowanie zaczynamy od punktów 35,10 - tam więc // przesuwamy  //nasze piórko
+mojObiekt.lineTo((polowax + 13),(lsry));
+mojObiekt.lineTo((dpx),(dpy));
+mojObiekt.lineTo(pskgsrx , gsry);
+mojObiekt.lineTo((polowax + 13),dly);
+mojObiekt.stroke();
+
+mojObiekt.beginPath();
+mojObiekt.moveTo((glx),(gly)); //rysowanie zaczynamy od punktów 35,10 - tam więc // przesuwamy // //nasze piórko
+mojObiekt.lineTo((polowax - 13),(lsry));
+
+mojObiekt.lineTo(dlx,dly);
+mojObiekt.stroke();
+
+
+
+mojObiekt.strokeRect((startx),(starty+wysokosc-1),(szerokosc),(1));
+
+
+
+
+
+} else {alert("Ci dispiace, misura fuori listino.");
+
+
+self.location.href="portafinestra4000.html";
+
+}
+
+}
+
+
+
+
+
+
+</script>
+
+
+
+<script language="Javascript">
+
+function imptotale()	{
+
+
+var aletta;
+var larg1;
+var larg2;
+var alt1;
+var alt2;
+var larg11;
+var alt11;
+var indexszerokosci;
+var indexwysokosci;
+var cenaokna;
+var doplatazakolor = new Array (1.0 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.4 , 1.4);
+var powierzchnia;
+var powierzchnia1000;
+var doplatazawklad1;
+var vetrosopra = new Array (0 , 300 , 356 , 300);
+var vetrosotto = new Array (0 , 300 , 356 , 356);
+var powierzchniasopra;
+var powierzchniasotto;
+
+
+
+var doplatazawklad = new Array (0 , 0 , 0 , 0);
+
+
+
+var doplatazakolorszkla = new Array (0 , 377 , 250 , 193 , 533 , 463);
+var systemprofili = new Array (1 , 1 , 1 , 1 , 1 , 1 , 1.12 , 1.12);
+var cenaprogu = 50;
+var sogliabassa;
+var supervetro;
+
+
+
+if (document.form1.system.value == 1) { aletta = 70 }
+
+else if (document.form1.system.value == 2) { aletta = 130 }
+
+else { aletta = 0 }
+
+
+
+if((document.form1.konfiguracja.value=="1") || (document.form1.konfiguracja.value=="2")) {
+
+wprowadzaniedx();
+
+}
+
+else {
+wprowadzaniedx();
+}
+
+
+var cennik1sk=new Array(10);
+
+cennik1sk[0] = new Array(0 , 900 , 1000 , 1100 , 1200 , 1300 , 1400 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000 , 2100 , 2200 , 2300 , 2400 , 2500);
+
+cennik1sk[1] = new Array(1900 , 999 , 1036 , 1074 , 1111 , 1148	, 1187 , 1262 , 1277 , 1314 , 1349 , 1385 , 1420);
+
+
+cennik1sk[2] = new Array(2000 , 1030 , 1067 , 1111 , 1148 , 1186 , 1229 , 1300 , 1313 , 1355 , 1390 , 1432 , 1467);
+
+
+cennik1sk[3] = new Array(2100 , 1069 , 1107 , 1149 , 1193 , 1230 , 1274 , 1344 , 1362 , 1402 , 1439 , 1479 , 1521);
+
+
+cennik1sk[4] = new Array(2200 , 1100 , 1144 , 1181 , 1225 , 1268 , 1311 , 1388 , 1402 ,	1444 , 1484 , 1521 , 1562);
+
+
+cennik1sk[5] = new Array(2300 , 1122 , 1165 , 1230 , 1274 , 1318 , 1360 , 1437 , 1449 ,	1496 , 1537 , 10000 , 10000);
+
+
+cennik1sk[6] = new Array(2400 , 1143 , 1187 , 1271 , 1315 , 1361 , 1405 , 1452 , 10000 , 10000 , 10000 , 10000 , 10000);
+
+
+cennik1sk[7] = new Array(2500 , 1153 , 1197 , 1309 , 1354 , 1402 , 1447 , 1496 , 10000 , 10000 , 10000 , 10000 , 10000);
+
+
+cennik1sk[8] = new Array(2600 , 1187 , 1197 , 1348 , 1395 , 1444 , 1491 , 1540 , 10000 , 10000 , 10000 , 10000 , 10000);
+
+cennik1sk[9] = new Array(2700 , 1223 , 1233 , 1389 , 1437 , 1487 , 1535 , 1587 , 10000 , 10000 , 10000 , 10000 , 10000);
+
+
+
+
+var cennik1sk2=new Array(9);
+
+
+cennik1sk2[0] = new Array(0 , 900 , 1000 , 1100 , 1200 , 1300 , 1400 , 1500 , 1600 , 1700 , 1800 , 1900 , 2000);
+
+cennik1sk2[1] = new Array(1900 , 526.03 , 526.03 , 538.13 , 550.51 , 558.82 , 571.23 , 584.40 , 596.91 , 609.27 , 621.81 , 643.83 , 661.88);
+
+cennik1sk2[2] = new Array(2000 , 536.83 , 536.83 , 549.17 , 561.80 , 573.76 , 586.75 , 600.25 , 613.22 , 626.02 , 641.35 , 666.87 , 685.75);
+
+
+cennik1sk2[3] = new Array(2100 , 546.15 , 546.15 , 558.71 , 571.56 , 584.91 , 598.27 , 612.25 , 625.49 , 640.05 , 659.65 , 686.01 , 705.60);
+
+cennik1sk2[4] = new Array(2200 , 556.45 , 556.45 , 569.24 , 582.34 , 596.07 , 609.87 , 624.12 , 637.94 , 657.56 , 677.98 , 705.11 , 725.59);
+
+
+cennik1sk2[5] = new Array(2300 , 571.20 , 571.20 , 584.33 , 597.77 , 611.96 , 626.18 , 641.02 , 658.70 , 679.93 , 701.16 , 729.16 , 1000);
+
+
+cennik1sk2[6] = new Array(2400 , 581.47 , 581.47 , 594.84 , 608.52 , 623.12 , 637.76 , 653.36 , 675.41 , 697.43 , 719.52 , 1000 , 1000);
+
+
+cennik1sk2[7] = new Array(2500 , 598.91 , 598.91 , 612.68 , 626.78 , 641.82 , 656.90 , 672.96 , 695.67 , 718.35 , 741.11 , 1000 , 1000);
+
+
+
+cennik1sk2[8] = new Array(2600 , 616.88 , 616.88 , 631.06 , 645.58 , 661.07 , 676.60 , 693.15 , 716.54 , 739.90 , 763.34 , 1000 , 1000);
+
+
+
+
+larg11 = document.form1.szer.value;
+
+
+larg1 = Math.ceil(larg11) + aletta;
+
+
+
+larg2 = Math.ceil(larg1/100)*100;
+
+alt11 = document.form1.wys.value;
+
+alt1 =  Math.ceil(alt11) + aletta;
+
+alt2 = Math.ceil(alt1/100)*100;
+
+
+if (document.form1.system.value == 0) { supervetro = ((larg11 - 2*105) * (alt11 - 2*105))/1000000; }
+
+else { supervetro = ((larg11 - 2*94) * (alt11 - 2*94))/1000000; }
+
+
+
+
+
+
+if ((larg1 >= 900 && larg1 <= 2400 ) && (alt1 >= 1900 && alt1 <= 2600 ))
+
+
+{
+
+
+
+for (var n = 1 ; n < 17 ; n++)
+
+{
+
+
+if (cennik1sk[0][n]==larg2) {
+
+
+indexszerokosci = n;
+break;
+}
+
+}
+
+
+
+for (var m = 0 ; m < 10 ; m++)
+
+{
+
+
+if (cennik1sk[m][0]==alt2) {
+
+
+
+indexwysokosci = m;
+break;
+}
+
+}
+
+sogliabassa = (cenaprogu * (larg1/1000));
+
+powierzchnia = (larg1/1000)*(alt1/1000);
+
+powierzchnia1000 = (((larg11 - 2*105)*(900))/1000000);
+
+powierzchniasotto  = (((larg11 - 2*105)*(900))/1000000);
+
+powierzchniasopra  = (((larg11 - 2*105)*(alt11 - 1130))/1000000);
+
+
+if (document.form1.konfiguracja.value == 1) { doplatazawklad1 = 17; } else { doplatazawklad1 = 0;}
+
+
+
+
+
+
+
+
+if ((document.form1.system.value == 1) || (document.form1.system.value == 2) || (document.form1.system.value == 4) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
+
+{
+
+
+
+
+cenaokna = (1.00 * ((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (powierzchniasopra * vetrosopra[document.form1.konfiguracja.value]) + (powierzchniasotto * vetrosotto[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + ((larg11/1000)*cenaprogu) + 0;
+
+cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+
+}
+
+else {
+
+
+
+
+
+
+cenaokna = (1.00 * ((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (powierzchniasopra * vetrosopra[document.form1.konfiguracja.value]) + (powierzchniasotto * vetrosotto[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + ((larg11/1000)*cenaprogu) + 0;
+
+cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+
+}
+
+
+
+
+//if (cena999 > 9999) { alert("Prezzo non trovato"); self.location.href="portafinestra4000.html";}
+
+//else {
+
+
+//document.getElementById('cenaokna').innerHTML = Math.round(cenaokna * (document.form1.ilosc.value));
+//document.form1.dodatki.value = Math.round(cenaokna * (document.form1.ilosc.value) );
+//}
+
+}
+
+}
+
+</script>

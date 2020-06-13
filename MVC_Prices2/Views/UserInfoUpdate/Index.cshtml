@@ -1,0 +1,90 @@
+﻿@model MVC_Prices2.Models.InfoUpdateModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Price App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+    <link rel="shortcut icon" sizes="196x196" href="~/Resources/assets/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/core.css">
+    <link rel="stylesheet" href="~/Resources/assets/css/misc-pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+</head>
+<body class="simple-page">
+
+    <div class="simple-page-wrap">
+        <div class="simple-page-logo animated swing">
+            <a href="../Home">
+
+                @*<img width="60" height="60" src="~/Content/img/leroymerllogo.png" />   & <img width="45" height="45" src="~/Resources/assets/images/Proline_Logo_Header1.png" class="brand-icon" height="30" />*@
+                Serramenti
+            </a>
+        </div><!-- logo -->
+        <div class="simple-page-form animated flipInY" id="login-form">
+            <h4 class="form-title m-b-xl text-center">Bilgilerimi Güncelle</h4>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.EditorFor(model => model.fullName, new { htmlAttributes = new { @class = "form-control", id = "sign-in-email", placeholder = Model.fullName } })
+                    @Html.ValidationMessageFor(model => model.fullName, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", id = "sign-in-email", placeholder = Model.userName } })
+                    @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", type = "tel", id = "sign-in-email", pattern = "[0-9]{5} [0-9]{7}", placeholder = "09999 1234567" } })
+                    @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(model => model.eMail, new { htmlAttributes = new { @class = "form-control", id = "sign-in-email", placeholder = Model.eMail } })
+                    @Html.ValidationMessageFor(model => model.eMail, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+
+                    @Html.EditorFor(model => model.oldPassword, new { htmlAttributes = new { @class = "form-control", type = "password", id = "sign-in-password", placeholder = "Old Password" } })
+                    @Html.ValidationMessageFor(model => model.newPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+
+                    @Html.EditorFor(model => model.newPassword, new { htmlAttributes = new { @class = "form-control", type = "password", id = "sign-in-password", placeholder = "New Password" } })
+                    @Html.ValidationMessageFor(model => model.newPassword, "", new { @class = "text-danger" })
+                </div>
+
+
+                @Html.ValidationSummary(true, "", new { @class = "danger" })
+
+                <input type="submit" class="btn btn-primary" value="Güncelle">
+            }
+        </div><!-- #login-form -->
+        <div class="simple-page-footer">
+            <p><a href="/Home/Index">Ana Sayfaya Dön</a></p>
+
+        </div><!-- .simple-page-footer -->
+
+
+
+    </div><!-- .simple-page-wrap -->
+</body>
+</html>

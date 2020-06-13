@@ -1,0 +1,360 @@
+﻿@*@using MVC_Prices2.Models*@
+@using Newtonsoft.Json
+@model MVC_Prices2.Models.PriceMatrixModel
+@{
+    ViewBag.Title = "Product Details";
+}
+
+
+
+
+@if (Model == null)
+{
+    <div class="widget col-md-12 widget" style="height: 750px">
+        <div class="alert alert-danger topmargin text-center"><strong>Errore!</strong> Nessun prodotto selezionato !</div>
+    </div>
+}
+else
+{
+
+
+
+    <div class="row">
+        <div class="col-md-12 widget">
+            <div id="preloader">
+                <div id="image"></div>
+            </div>
+            <center>
+                <form name="form1">
+                    
+                        <table width="100%" border="0" style="margin-top: 10px;">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                   
+                        <font face="verdana" size="2">
+                            <table border="0">
+                                <tbody>
+                                    @*<tr>
+                            <td valign="top">
+                                <div>
+                                    <img id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <canvas id="mojCanvas" width="250" height="230"></canvas>
+
+                            </td>
+                        </tr>*@
+
+                                    <tr align="center" valign="middle">
+
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+                                                <div class="widget p-lg">
+                                                    <h2 class="m-b-lg">
+                                                        Beyaz Fiyat Matrisi (€)
+
+                                                    </h2>
+                                                    <table class="colorless table table-hover table-striped table-bordered content-container">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="white">Boy/En</th>
+                                                                @for (int i = Model.MinWidth; i <= Model.MaxWidth; i += 100)
+                                                                {
+                                                                    <th class="w50">@i</th>
+
+                                                                }
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @for (int k = Model.MinHeight; k <= Model.MaxHeight; k += 100)
+                                                            {
+                                                                <tr>
+                                                                    <th scope="row">@k</th>
+
+                                                                    @for (int j = Model.MinWidth; j <= Model.MaxWidth; j += 100)
+                                                                    {
+                                                                        <th>
+
+                                                                            @if (Model.priceListWhite.Count != 0)
+                                                                            {
+                                                                                foreach (var item in Model.priceListWhite)
+                                                                                {
+                                                                                    if (item.Height == k && item.Width == j)
+                                                                                    {
+                                                                                        <input type="text" name="@k" class="@j" id="@item.Product.Id" value=@item.Prices size="5" />
+
+                                                                                    }
+
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input type="text" name="@k" class="@j" id="@Model.productID" value="0" size="5" />
+                                                                            }
+                                                                        </th>
+                                                                    }
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+
+                                                    </table>
+                                                    <br />
+                                                    <br />
+                                                    <a id="colorlessButton" class="btn btn primary">Değişiklikleri Kaydet</a>
+                                                    <h2 class="m-b-lg">
+                                                        Renkli Fiyat Matrisi (€)
+
+                                                    </h2>
+                                                    <table style="margin-top:20px" class="colored table table-hover table-striped table-bordered content-container">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="row">Boy/En</th>
+                                                                @for (int i = Model.MinWidth; i <= Model.MaxWidth; i += 100)
+                                                                {
+                                                                    <th class="w50">@i</th>
+
+                                                                }
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @for (int k = Model.MinHeight; k <= Model.MaxHeight; k += 100)
+                                                            {
+                                                                <tr>
+                                                                    <th scope="row">@k</th>
+
+                                                                    @for (int j = Model.MinWidth; j <= Model.MaxWidth; j += 100)
+                                                                    {
+                                                                        <th>
+                                                                            @if (Model.priceListColored.Count != 0)
+                                                                            {
+                                                                                foreach (var item in Model.priceListColored)
+                                                                                {
+                                                                                    if (item.Height == k && item.Width == j)
+                                                                                    {
+                                                                                        <input type="text" name="@k" class="@j" id="@item.Product.Id" value=@item.Prices size="5" />
+                                                                                    }
+
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input type="text" name="@k" class="@j" id="@Model.productID" value="0" size="5" />
+                                                                            }
+                                                                        </th>
+                                                                    }
+
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+
+                                                    </table>
+                                                    <br />
+                                                    <br />
+                                                    <a id="coloredButton" class="btn btn primary">Değişiklikleri Kaydet</a>
+                                                </div><!-- .widget -->
+                                            </div><!-- END column -->
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </font>
+                    </form>
+            </center>
+        </div>
+    </div>
+    <!-- Creates the bootstrap modal where the image will appear -->
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sezione Profilo <b id="sezProfile"></b></h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="imagepreview" style="width: 100%; ">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        
+        
+        $(document).ready(function () {
+        
+            $("#colorlessButton").click(function () {
+                var prices = { en: 0, boy: 0, fiyat: 0, productID: 0,renk: 0 };
+            var listPrices = [prices];
+
+            $('.colorless').find('input').each(function () {
+
+                var prices2 = jQuery.extend(true, {}, listPrices[0]);
+                prices2.fiyat = $(this).val();
+                prices2.en = $(this).attr("class");
+                prices2.boy = $(this).attr("name");
+                prices2.productID = $(this).attr("id");
+                listPrices.push(prices2);
+            });
+            
+            sendData(listPrices);
+            });
+            
+        });
+
+        $(document).ready(function () {
+        
+            
+            $("#coloredButton").click(function () {
+                
+            var prices = { en: 0, boy: 0, fiyat: 0, productID: 0,renk: 1 };
+            var listPrices = [prices];
+            $('.colored').find('input').each(function () {
+
+                var prices2 = jQuery.extend(true, {}, listPrices[0]);
+                prices2.fiyat = $(this).val();
+                prices2.en = $(this).attr("class");
+                prices2.boy = $(this).attr("name");
+                prices2.productID = $(this).attr("id");
+                listPrices.push(prices2);
+            });
+                
+                
+            sendData(listPrices);
+            });
+        });
+        
+        
+
+        var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight}));
+        function controlLimits() {
+            alert("works fine");
+        }
+
+        $("#kesit").on("click", function() {
+            $('#imagepreview').attr('src', $('#kesit').attr('src')); // here asign the image to the modal when the user click the enlarge link
+            var system = $("select[name='system'] option:selected").text();
+            $('#sezProfile').text(" - "+system);
+            $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+        });
+        $(document).ready(function () {
+
+            $('#armfixed').on('change', function() {
+                var armdirection = $('#armfixed').is(':checked');
+
+                if (armdirection) {
+                    $('#armbuttons').hide();
+
+                } else {
+                    $('#armbuttons').show();
+                }
+            });
+
+        });
+        
+
+        function ArmUpDown() {
+
+
+            var armdirect = $('input[name=armoptions]:checked').val();
+            var armdistance = 2;
+        }
+
+        $("#system").on("click",changeProfile);
+        function changeProfile() {
+
+
+
+            var profiles = new Array('/Content/img/PRO7006.png', "/Content/img/PRO8106_1.png", "/Content/img/PRO7006-2_1.png");
+
+
+            document.getElementById('kesit').src = profiles[document.form1.system.value];
+
+
+
+        }
+        
+        function sendData(listPrices) {//update the offer and keep the revision track
+              
+             $.ajax({
+            
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: "POST",
+            url: "/Price/PriceMatrix/",
+            data: JSON.stringify(listPrices),
+                 success: function (data) {
+                window.location.reload();
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Changes have been saved.',
+                    showConfirmButton: false,
+                    timer: 1500
+                    
+                })
+               
+                setTimeout(function () {
+
+                }, 1000);
+
+
+
+
+            }
+             });
+            
+    }
+    </script>
+    @*if (Model.Id == 1)
+        {
+            @Html.Partial("_1");
+        }
+        else if (Model.Id == 3)
+        {
+            @Html.Partial("_3");
+        }
+        else if (Model.Id == 4)
+        {
+            @Html.Partial("_4");
+        }
+        else if (Model.Id == 5)
+        {
+            @Html.Partial("_5");
+        }
+        else if (Model.Id == 6)
+        {
+            @Html.Partial("_6");
+        }
+        else if (Model.Id == 7)
+        {
+            @Html.Partial("_7");
+        }
+        else if (Model.Id == 9)
+        {
+            @Html.Partial("_9");
+        }
+        else if (Model.Id == 10)
+        {
+            @Html.Partial("_10");
+        }
+        else if (Model.Id == 11)
+        {
+            @Html.Partial("_11");
+        }
+        else
+        {
+            @Html.Partial("_2");
+        }*@
+}
+

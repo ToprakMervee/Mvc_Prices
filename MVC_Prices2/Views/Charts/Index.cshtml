@@ -1,0 +1,104 @@
+﻿@model List<MVC_Prices2.Models.ChartModel>
+@{
+    ViewBag.Title = "Charts";
+}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<h3>Charts</h3>
+
+
+@*<div class="row">
+        <div class="col-md-12 text-center ">
+            <div class="widget row no-gutter p-x-auto">
+
+            </div>
+        </div>
+    </div>*@
+<div class="row">
+    
+            <div class="col-md-12 widget productdet" style="height: 950px;">
+                @*<div style="height: 100px;">
+                <h3 id="productdetail"></h3>
+                <b id="productsubdetail"></b><br />
+            </div>
+            <div style="height: 150px; margin-bottom: 20px;">
+                <img style="margin-left: 20px" width="200" src="~/Content/img/leroymerllogo.png" />
+                <img src="~/Content/img/Proline.png" width="200" style="margin-left: 20px" />
+            </div>*@
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p  class="highcharts-description">
+
+                    </p>
+                </figure>
+
+            </div>
+        
+        
+    
+</div>
+
+<script type="text/javascript">
+    function wprowadzaniedx() {
+
+    }
+    var info;
+    var myarray = [];
+    
+    $(document).ready(function () {
+        
+        $.ajax({
+            type: 'GET',
+            url: '/Charts/Infos',
+            dataType: "JSON",
+            
+            success: function (data) {
+               info = data;
+
+                if (info.length > 0) {
+                     
+                    $(info).each(function (index, element) {
+                        myarray.push(
+                            {
+                                "name": element.storeName,
+                                "y": element.storeMoney,
+                                "z": element.storeOrder
+                            });
+                        });
+                }
+                ChartData();
+            }
+
+        });
+        function ChartData() {
+            Highcharts.chart('container', {
+            chart: {
+            type: 'variablepie'
+            },
+            title: {
+            text: 'Mağazalara Göre Sipariş Pay Pasta Grafiği'
+            },
+            tooltip: {
+            headerFormat: '',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
+            'Sipariş Tutarı (€): <b>{point.y}</b><br/>' +
+            'Sipariş Adedi (pz.): <b>{point.z}</b><br/>'
+            },
+            series: [{
+            minPointSize: 10,
+            innerSize: '20%',
+            zMin: 0,
+            name: 'Total Money - Total Order',
+            data: myarray
+                
+            }]
+        });
+        }
+        
+    });
+    
+</script>

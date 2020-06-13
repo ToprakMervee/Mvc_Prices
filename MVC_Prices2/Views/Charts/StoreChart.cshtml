@@ -1,0 +1,182 @@
+﻿@model MVC_Prices2.Models.StoreModel
+@{
+    ViewBag.Title = "Store Charts";
+}
+    <head>
+        @*<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>*@
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+        @Html.DropDownListFor(m => m.StoreName, (List<SelectListItem>)ViewBag.vls, new { @class = "btn-primary form-control", onchange = "chartShow();" })
+
+    </head>
+    <body>
+        <div class="row">
+
+
+            <div class="col-md-12 text-center ">
+                <div class="widget row no-gutter p-x-auto">
+                    
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                        @*<p class="highcharts-description">
+                            Grafikte görünen tutarlar, asıl tutarların
+                            yüze bölünmüş (1%) halini göstermektedir.
+                        </p>*@
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </body>
+<script type="text/javascript">
+    
+    var myTotalOffer = [];
+    var myTotalOrder = [];
+    var myOfferMoney = [];
+    var myOrderMoney = [];
+    $(document).ready(function () {
+        
+        chartShow();
+    });
+    
+    function chartShow() {
+        var storeName = $("select[name='StoreName'] option:selected").text();
+        var info;
+        
+        $.ajax({
+                type: 'GET',
+                url: '/Charts/ChartDatas',
+                dataType: "JSON",
+                data: { sName:storeName},
+            success: function (data) {
+                info = data;
+                if (info && info.length) {
+                    myTotalOffer.splice(0, myTotalOffer.length);
+                    myTotalOrder.splice(0, myTotalOrder.length);
+                    myOfferMoney.splice(0, myOfferMoney.length);
+                    myOrderMoney.splice(0, myOrderMoney.length);
+                    $(info).each(function (index, element) {
+                        
+                            myTotalOffer.push(
+                                element.totalOffer
+                        );
+                        
+                        myTotalOrder.push(
+                                element.totalOrder
+                        );
+                        myOfferMoney.push(
+                                element.offerMoney
+                        );
+                        myOrderMoney.push(
+                                element.orderMoney
+                            );
+                        });
+                }
+
+                ReadyChart();
+                }
+
+            });
+    }
+    function wprowadzaniedx() {
+
+    }
+    function ReadyChart() {
+        Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Mağaza İstatistikleri'
+        },
+        xAxis: {
+            categories: [
+                
+                'Gennaio',
+                'Febbraio',
+                'Marzo',
+                'Aprile',
+                'Maggio',
+                'Giugno',
+                'Luglio',
+                'Agosto',
+                'Settembre',
+                'Ottobre',
+                'Novembre',
+                'Dicembre'
+            ]
+        },
+        yAxis: [{
+            min: 0,
+            max:250,
+            title: {
+                text: 'Miktar'
+            }
+        }, {
+            title: {
+                text: 'Tutar (€)'
+            },
+            opposite: true
+        }],
+        legend: {
+            shadow: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Teklif Sayısı',
+            color: 'rgba(165,170,217,1)',
+            data: myTotalOffer,
+            tooltip: {
+                
+                valueSuffix: ' Pz.'
+            },
+            pointPadding: 0.3,
+            pointPlacement: -0.2
+        }, {
+            name: 'Sipariş Sayısı',
+                color: 'rgba(126,86,134,.9)',
+                data: myTotalOrder,
+            tooltip: {
+                valuePrefix: 'Pz.'
+                
+            },
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }, {
+            name: 'Teklif Tutarı',
+                color: 'rgba(248,161,63,1)',
+                data: myOfferMoney,
+            tooltip: {
+                
+                valueSuffix: ' €'
+            },
+            pointPadding: 0.3,
+            pointPlacement: 0.2,
+            yAxis: 1
+        }, {
+            name: 'Sipariş Tutarı',
+                color: 'rgba(186,60,61,.9)',
+                data: myOrderMoney,
+            tooltip: {
+                valuePrefix: '€'
+                
+            },
+            pointPadding: 0.4,
+            pointPlacement: 0.2,
+            yAxis: 1
+        }]
+    });
+    }
+    
+</script>

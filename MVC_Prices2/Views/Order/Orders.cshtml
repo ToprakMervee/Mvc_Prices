@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "Ordinare";
+
+}
+
+
+<div class="col-md-12 ">
+    <div id="alert" class="alert alert-danger text-center  bg-danger hide" style="margin-top: 25%;">
+        <strong>There is no order. To add order please create an offer first and then confirm it.</strong>
+    </div>
+</div>
+
+<div id="orderMas" class="col-md-12 ">
+
+</div>
+<!--order detail modal-->
+<div class="modal fade bd-example-modal-lg" id="revHistoryDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="revHistoryDetTitle">Offer History-</b>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="orderDet">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <b>In Totale: </b>
+                <span style="border: 1px solid silver"><b id="revDetQnt">23</b> pz.  </span>
+                <span style="border: 1px solid silver"><b id="revDetAmn">222</b> €</span>
+                <hr />
+               
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Order mas handler script-->
+<script id="orderTableHandler" type="text/x-handlebars-template">
+    <h3>Ordinare</h3>
+    <table class="table table-hover table-striped table-bordered content-container widget">
+        <thead>        <th class="w50">#Reference No</th>
+        <th>Exp.1</th>
+        <th>Exp.2</th>
+        <th>Order Date</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+
+
+            {{#each this}}
+
+            <tr>
+                <td class="w50 text-center"><a href="#" onclick="detailModal({{@@index}})">#{{ReferenceNo}}</a></td>
+                <td>{{Exp1}}</td>
+                <td>{{Exp2}}</td>
+                <td class="text-center">{{convDate OrderDate}}</td>
+                <td class="text-center w400">
+                    <div class="countDown">
+
+                    </div>
+                    <div>
+                        <button onclick="Delete({{ID}})" class="btn btn-sm btn-danger btn-outline remove-btn">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                        <a href="#" onclick="ReturnToOffer({{ID}})" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Return To Offer</a>
+                    </div>
+                </td>
+            </tr>
+
+            {{/each}}
+
+        </tbody>
+
+    </table>
+    <span style="padding-left:35%;">For more info you can get contact from <a href="mailto:export@prolinepvc.com">here</a></span>
+
+</script>
+
+<!--order detail handler-->
+<script id="orderDetHandler" type="text/x-handlebars-template">
+    <table class="table table-hover table-striped table-bordered content-container">
+        <thead>
+            <tr>
+                <td bgcolor="orange" width="30" align="center"><font size="2" color="black" face="verdana">Pos.</font></td>
+                <td bgcolor="orange" align="center" width="150"><font size="2" color="black" face="Verdana" style="">Tipologia</font></td>
+                <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Descrizione</font></td>
+                <td bgcolor="orange" align="center" width="75"><font size="2" color="black" face="Verdana">Colore</font></td>
+                <td bgcolor="silver" align="center" width="75"><font size="2" color="black" face="Verdana">Prezzo</font></td>
+                <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>
+                <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Numero</font></td>
+                <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Importo</font></td>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this}}
+            <tr class="detailRows">
+                <td style="vertical-align: middle;"><font size="2" color="black" face="tahoma">  {{rownumber @@index}}.</font></td>
+                <td style="vertical-align: middle;" align="center"><font size="2" color="black" face="tahoma"><img src="/Content/img/{{PicUrl}}" &bnsp=""></font></td>
+                <td style="vertical-align: middle;">
+                    <font size="3" color="maroon" face="verdana">{{Width}} x {{Height}} mm </font><br>
+                    <font size="1">
+                        (telaio pieno a "L" senz'aletta)<br />
+                        <font size="2" color="black" face="tahoma">
+                            <b><font color="black">{{ProductName}}</font></b><font color="black"><br>Soglia bassa in alluminio</font><br><font color="navy"> apertura a {{Direction}} (DX)</font><br><font size="2">
+                                {{System}}<br><font size="1">
+                                    {{Color}} in massa<br>guarnizione grigia
+                                    <font size="1">
+                                        <br />
+                                        {{#each Glass}}
+                                        <b>{{Description}}</b>
+                                        <br />
+                                        {{/each}}
+                                        valore k : 1.1 <br />
+                                        canalina a bordo caldo
+                                    </font>
+                                </font>
+                            </font>
+                        </font>
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center">
+
+                    <img src="/Content/img/{{ColorUrl}}" width="80" height="70" style="border: 1px solid silver">
+                </td>
+                <td style="vertical-align: middle;" align="center"><font class="price" size="2" id="price_{{@@index}}" )" color="black" face="tahoma">{{Price}}</font> € </td>
+                <td style="vertical-align: middle;" align="center">
+                    <font size="2" color="black" face="tahoma">
+                        {{ArmType}}
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center">
+                    <font size="2" color="black" face="tahoma">
+                        {{Quantity}} - pcs
+
+                    </font>
+                </td>
+                <td style="vertical-align: middle;" align="center"><font size="2" class="amount" id="amount_{{@@index}}" color="black" face="tahoma">  {{{multiplicate Quantity Price}}} </font> €</td>
+
+            </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+
+</script>
+
+<script>
+    var orderData;
+    var orderDetData;
+   
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetOrders/",
+            success: function (data) {
+                orderData = data;
+                if (orderData.length===0) {
+                    $("#alert").removeClass("hide");
+                } else {
+                    CreateRevTable(orderData);
+                }
+            }
+        });
+    });
+
+    //REVISION MAS HTML
+    function CreateRevTable(data) {
+        var rawTemplate = document.getElementById("orderTableHandler").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+
+        var offerDetails = $("#orderMas");
+        offerDetails.html(ourGeneratedHtml);
+    }
+
+    //REVISION DET HTML
+    function CreateRevDetTable(data) {
+        var rawTemplate = document.getElementById("orderDetHandler").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+
+        var offerDetails = $("#orderDet");
+        offerDetails.html(ourGeneratedHtml);
+    }
+    function detailModal(id) {
+        CreateRevDetTable(orderData[id].OrderDet);
+        $("#revHistoryDetailModal").modal("show");
+    }
+
+    function ReturnToOffer(id) {
+
+        
+        Swal.fire(
+            {
+                title: 'Are you sure?',
+                text: "This order will turn into offer",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Return!'
+            }
+        ).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Order/ReturnToOffer/",
+                    data: {id:id},
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'The order returned to offer.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            window.location.replace("/Order/Offers/");
+                        }, 1000); 
+                       
+                    }
+                });
+            } else {
+                window.location.reload();
+            }
+        });
+    }
+    function Delete(id) {
+        Swal.fire(
+            {
+                title: 'Are you sure?',
+                text: "This order will be deleted!",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Delete!'
+            }
+        ).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Order/DeleteOrder/",
+                    data: {id:id},
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'The order has been deleted.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        setTimeout(function() {
+                            window.location.replace("/Order/Orders/");
+                        }, 1000);     
+                       
+                    }
+                });
+            } else {
+                window.location.reload();
+            }
+        });
+    }
+    function wprowadzaniedx() {
+
+    }
+</script>

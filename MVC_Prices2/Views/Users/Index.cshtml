@@ -1,0 +1,309 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using MVC_Prices2.Identity
+@using MVC_Prices2.Models
+@model IEnumerable<MVC_Prices2.Identity.AppUser>
+
+@{
+    ViewBag.Title = "Users";
+    int index = 0;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="m-b-lg">
+            User List
+
+            <a href="#" onclick="AddNewModal()" class="btn btn-outline btn-primary btn-xs pull-right" > <i class="fa fa-plus"></i>Add New</a>
+
+        </h4>
+    </div><!-- END column -->
+    <div class="col-md-12">
+        <div class="widget p-lg">
+
+            @if (!Model.Any())
+            {
+
+                <div class="alert alert-info text-center">
+                    <p>There is no any users. To add user please  <a href="#" onclick="AddNewModal()">click here.</a></p>
+                </div>
+            }
+            else
+            {
+
+
+
+                <table class="table table-hover table-striped table-bordered content-container">
+                    <thead>
+                    <th class="w50">#Store id</th>
+                    <th>User Name</th>
+                    <th>FullName</th>
+                    <th>E-Mail</th>
+                    <th>Active</th>
+                
+                    <th>Action</th>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var el in Model)
+                        {
+
+
+                            <tr>
+                                <td class="w50 text-center" id="@Html.Raw("store_"+index)"><a href="#">@el.StoreId</a></td>
+                                <td id="@Html.Raw("name_"+index)">@el.UserName <input type="hidden" value="@el.Id" id="@Html.Raw("id_"+index)" /></td>
+                                <td id="@Html.Raw("fullname_"+index)">@el.FullName</td>
+                                <td class="text-center" id="@Html.Raw("email_"+index)">@el.Email</td>
+                                <td class="text-center w100">
+                                    <input data-url="@Url.Action("ActiveSetter","Users")"
+                                           class="isActive"
+                                           type="checkbox"
+                                           data-switchery
+                                           data-color="#10c469"
+                                           @(el.IsActive ? "checked" : "") />
+                                </td>
+                                @*<td id="@Html.Raw("role_"+index)">@el.Role</td>*@
+                                <td class="text-center w400">
+                                    <button onclick="Delete(@el.Id)" class="btn btn-sm btn-danger btn-outline remove-btn">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                    <a href="#" onclick="EditModal(@index)" id="editclick" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Edit</a>
+
+                                </td>
+                            </tr>
+                            @(index++)
+                        }
+
+                    </tbody>
+
+                </table>
+
+            }
+
+        </div><!-- .widget -->
+    </div><!-- END column -->
+</div>
+
+
+<!--Modal Alanı başlangıç-->
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="modtitle">Add New User</b>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input class="form-control" placeholder="User Name" id="user_name" value="">
+                    <input type="hidden" class="form-control" placeholder="User Name" id="user_id" value="">
+
+                    <small id="error_username" class="pull-right input-form-error"></small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input class="form-control" placeholder="Full Name" id="full_name" value="">
+
+                    <small id="error_fullname" class="pull-right input-form-error"> </small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input class="form-control" type="email" placeholder="E-mail" id="email" value="">
+
+                    <small id="error_email" class="pull-right input-form-error"></small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Store</label>
+                    <select id="storeid" class="form-control">
+                        @foreach (var el in (List<Store>)ViewData["Stores"])
+                        {
+                            <option value="@el.Id">@el.StoreName</option>
+                        }
+                    </select>
+
+                    <small id="error_store" class="pull-right input-form-error"></small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="role" class="form-control">
+                        @foreach (var el in (List<IdentityRole>)ViewData["Roles"])
+                        {
+                            <option value="@el.Name">@el.Name</option>
+                        }
+                    </select>
+
+                    <small id="error_store" class="pull-right input-form-error"></small>
+
+                </div>
+
+
+                <div id="password_" class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" placeholder="Password" id="password">
+
+                    <small id="error_password" class="pull-right input-form-error"> </small>
+
+                </div>
+
+                <div id="re_password_" class="form-group">
+                    <label>Re-Password</label>
+                    <input class="form-control" type="password" placeholder="Password Again" id="re_password">
+
+                    <small id="error_repassword" class="pull-right input-form-error"> </small>
+
+                </div>
+                <div id="save_button">
+                    <button type="button" onclick="AddNewUser()" class="btn btn-primary btn-md btn-outline">Save</button>
+                    <a href="#" data-dismiss="modal" class="btn btn-md btn-danger btn-outline">Cancel</a>
+                </div>
+                <div id="edit_button">
+                    <button type="button" onclick="EditUser()" class="btn btn-primary btn-md btn-outline">Edit</button>
+                    <a href="#" data-dismiss="modal" class="btn btn-md btn-danger btn-outline">Cancel</a>
+                </div>
+
+            </div><!-- .widget-body -->
+        </div><!-- .widget -->
+    </div><!-- END column -->
+</div>
+
+<script type="text/javascript">
+
+    function AddNewModal() {
+        $("#full_name").val("");
+        $("#user_name").val("");
+        $("#email").val("");
+        $("#storeid").val("");
+        $("#role").val("");
+        $("#password_").show();
+        $("#re_password_").show();
+        $("#modtitle").text("Add New User");
+        $("#save_button").show();
+        $("#edit_button").hide();
+
+
+        $('#exampleModalCenter').modal('show');
+
+    }
+    function EditModal(id) {
+
+
+        var txtname = $("#name_" + id).text();
+        $("#user_name").val(txtname);
+        var txtfullname = $("#fullname_" + id).text();
+        $("#full_name").val(txtfullname);
+        var txtemail = $("#email_" + id).text();
+        $("#email").val(txtemail);
+        var txtstore = $("#store_" + id).text();
+        $("#storeid").val(txtstore);
+        var txtrole = $("#role_" + id).text();
+        $("#role").val(txtrole);
+        $("#password_").hide();
+        $("#re_password_").hide();
+        $("#modtitle").text("Edit User");
+        var userid = $("#id_" + id).val();
+        $("#user_id").val(userid);
+        $("#save_button").hide();
+        $("#edit_button").show();
+        $('#exampleModalCenter').modal('show');
+
+    }
+
+    function AddNewUser() {
+
+        var username = $("#user_name").val();
+        var full_name = $("#full_name").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var st = $("#storeid").val();
+        var role = $("#role").val();
+       
+        var data = {
+            UserName: username,
+            FullName: full_name,
+            Email: email,
+            PassWord: password,
+            StoreId: st,
+            Role:role
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Users/Add/",
+            data: data,
+            success: function (data) {
+                Swal.fire(
+                    'Success',
+                    'Added successfully.',
+                    'success'
+                ).then((result) => {
+                    if (result.value) {
+                        window.location.reload();
+                    }
+                });
+
+            }
+        });
+
+        $('#exampleModalCenter').modal('hide');
+    }
+
+
+
+    function EditUser() {
+
+        var username = $("#user_name").val();
+        var userid = $("#user_id").val();
+        var full_name = $("#full_name").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var st = $("#storeid").val();
+        var role = $("#role").val();
+       
+        var data = {
+            UserName: username,
+            FullName: full_name,
+            Email: email,
+            PassWord: password,
+            StoreId: st,
+            Role: role,
+            UserId:userid
+
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Users/Edit/",
+            data: data,
+            success: function (data) {
+              
+
+            }
+        });
+
+        $('#exampleModalCenter').modal('hide');
+    }
+
+
+
+
+    function Edit(id) {
+
+        $('#exampleModalCenter').modal('show');
+    }
+
+    function Delete(id) {
+
+    }
+</script>

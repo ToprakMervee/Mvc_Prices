@@ -1,0 +1,215 @@
+﻿@model List<MVC_Prices2.Models.Store>
+@{
+    ViewBag.Title = "Stores";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="m-b-lg">
+            Store List
+
+            <a href="#" onclick="AddNewStore()" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i>Add New</a>
+
+        </h4>
+    </div><!-- END column -->
+    <div class="col-md-12">
+        <div class="widget p-lg">
+
+            @if (!Model.Any())
+            {
+
+                <div class="alert alert-info text-center">
+                    <p>There is no stores. To add store please  <a href="#" onclick="AddNewStore()">click here.</a></p>
+                </div>
+            }
+            else
+            {
+
+
+
+
+
+
+                <table class="table table-hover table-striped table-bordered content-container">
+                    <thead>
+                    <th class="w50">#Store Code</th>
+                    <th>Store Name</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>Action</th>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var el in Model)
+                        {
+
+
+                            <tr>
+                                <td class="w50 text-center">#@el.StoreCode</td>
+                                <td>@el.StoreName</td>
+                                <td>@el.City</td>
+                                <td class="text-center">@el.Adress</td>
+                                <td class="text-center w100">
+                                    <input data-url="@Url.Action("ActiveSetter","Users")"
+                                           class="isActive"
+                                           type="checkbox"
+                                           data-switchery
+                                           data-color="#10c469"
+                                           @(el.isActive ? "checked" : "") />
+                                </td>
+                                <td class="text-center w400">
+                                    <button onclick="Delete(@el.Id)" class="btn btn-sm btn-danger btn-outline remove-btn">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                    <a href="#" onclick="Edit(@el.Id)" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Edit</a>
+
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            }
+
+        </div><!-- .widget -->
+    </div><!-- END column -->
+</div>
+
+
+<!--Modal Alanı başlangıç-->
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="modtitle">Add New User</b>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Store Code</label>
+                    <input class="form-control" placeholder="Store Code must be unique!" id="storecode" value="">
+
+                    <small id="error_storecode" class="pull-right input-form-error"></small>
+                </div>
+
+                <div class="form-group">
+                    <label>Store Name</label>
+                    <input class="form-control" placeholder="Store Name" id="storename" value="">
+
+                    <small id="error_storename" class="pull-right input-form-error"></small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>City</label>
+                    <input class="form-control" placeholder="City" id="city" value="">
+
+                    <small id="error_city" class="pull-right input-form-error"> </small>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <input class="form-control" type="email" placeholder="Address" id="address" value="">
+
+                    <small id="error_address" class="pull-right input-form-error"></small>
+
+                </div>
+
+
+
+               
+
+                <button type="button" onclick="SaveNewStore()" class="btn btn-primary btn-md btn-outline">Save</button>
+                <a href="#" data-dismiss="modal" class="btn btn-md btn-danger btn-outline">Cancel</a>
+
+            </div><!-- .widget-body -->
+        </div><!-- .widget -->
+    </div><!-- END column -->
+</div>
+
+<script type="text/javascript">
+    function AddNewStore() {
+
+        $('#exampleModalCenter').modal('show');
+}
+    function SaveNewStore() {
+
+        $('#exampleModalCenter').modal('show');
+
+        var storename = $("#storename").val();
+        var city = $("#city").val();
+        var address = $("#address").val();
+        var storecode = $("#storecode").val();
+       
+        var data = {
+            StoreName: storename,
+            City: city,
+            Adress: address,
+           StoreCode:storecode
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Store/Add/",
+            data: data,
+            success: function (data) {
+                Swal.fire(
+                    'Success',
+                    'Added successfully.',
+                    'success'
+                ).then((result) => {
+                    if (result.value) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+        $('#exampleModalCenter').modal('hide');
+    }
+
+
+    function Edit(id) {
+
+        $('#exampleModalCenter').modal('show');
+    }
+
+    function Delete(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Store/Delete/" + id,
+            data: id,
+            dataType:"json",
+            traditional: true,
+            success: function (data) {
+                if (data.success) {
+                    Swal.fire(
+                        'Success',
+                        'Deleted successfully.',
+                        'success'
+                    ).then((result) => {
+                        if (result.value) {
+                            window.location.reload();
+                        }
+                    });
+                } else {
+                    Swal.fire(
+                        'Delete Failed!',
+                        data.acresult+ ' You Must release the users first.',
+                        'error'
+                    )
+                    
+                }
+               
+            }
+        });
+    }
+</script>
