@@ -11,7 +11,7 @@
     <title>@ViewBag.Title - Price App</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link al="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
     <!-- build:css ../assets/css/app.min.css -->
     <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
@@ -202,8 +202,8 @@
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (!User.IsInRole("User"))
-                        {
+                        //if (!User.IsInRole("User"))
+                        //{
                             <li class="has-submenu">
                                 <a class="submenu-toggle" href="javascript:void(0)">
                                     <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
@@ -234,13 +234,13 @@
 
                                 </ul>
                             </li>
-                        }
+                        //}
                         
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.IsInRole("ProlineAdmin") && !User.IsInRole("User"))
-                        {
+                        //if (User.IsInRole("ProlineAdmin") && !User.IsInRole("User"))
+                        //{
                             @*<li>
                     <a href="/Price/Index/">
                         <i class="menu-icon zmdi zmdi-money zmdi-hc-lg"></i>
@@ -264,7 +264,7 @@
                                 </ul>
                             </li>
 
-                        }
+                       // }
                     }
 
 
