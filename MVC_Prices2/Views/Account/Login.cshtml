@@ -33,14 +33,14 @@
             </a>
         </div><!-- logo -->
         <div class="simple-page-form animated flipInY" id="login-form">
-            <h4 class="form-title m-b-xl text-center">Sign In With Your Infinity Account</h4>
+            <h4 class="form-title m-b-xl text-center">Accedi con il tuo account</h4>
            
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-group">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" ,id="sign-in-email",placeholder="User Name"} })
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" ,id="sign-in-email",placeholder="Nome utente"} })
                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                 
                 </div>
@@ -54,7 +54,7 @@
                 <div class="form-group m-b-xl">
                     <div class="checkbox checkbox-primary">
                         <input type="checkbox" id="keep_me_logged_in" />
-                        <label for="keep_me_logged_in">Keep me signed in</label>
+                        <label for="keep_me_logged_in">Mantieni l'accesso</label>
                     </div>
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "danger" })
@@ -64,7 +64,7 @@
         </div><!-- #login-form -->
 
         <div class="simple-page-footer">
-            <p><a href="/Account/ForgotPass">FORGOT YOUR PASSWORD ?</a></p>
+            <p><a href="/Account/ForgotPass">DIMENTICATO LA PASSWORD?</a></p>
          
         </div><!-- .simple-page-footer -->
 

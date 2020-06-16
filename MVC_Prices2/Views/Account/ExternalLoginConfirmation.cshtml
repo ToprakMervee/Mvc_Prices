@@ -12,11 +12,10 @@
     <h4>Association Form</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="text-info">
-        You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
-        Please enter a user name for this site below and click the Register button to finish
-        logging in.
-    </p>
+<p class="text-info">
+    Ti sei autenticato con successo con <strong>@ViewBag.LoginProvider</strong>.
+    Inserisci un nome utente per questo sito di seguito e fai clic su Registrati per accedere.
+</p>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

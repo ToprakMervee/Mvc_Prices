@@ -36,7 +36,7 @@
             </a>
         </div><!-- logo -->
         <div class="simple-page-form animated flipInY" id="login-form">
-            <h4 class="form-title m-b-xl text-center">Please Create a New Password.</h4>
+            <h4 class="form-title m-b-xl text-center">Crea una nuova password.</h4>
 
             @using (Html.BeginForm())
             {
@@ -49,13 +49,13 @@
              
                 <div class="form-group">
                   
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "sign-in-password", placeholder = "Password Confirmation" } })
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "sign-in-password", placeholder = "Conferma password" } })
                     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
 
                 @Html.ValidationSummary(true, "", new { @class = "danger" })
 
-                <input type="submit" class="btn btn-primary" value="Reset">
+                <input type="submit" class="btn btn-primary" value="Ripristina">
             }
         </div><!-- #login-form -->
 
