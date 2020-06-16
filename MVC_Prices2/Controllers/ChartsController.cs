@@ -69,46 +69,88 @@ namespace MVC_Prices2.Controllers
         public JsonResult ChartDatas(string sName)
         {
 
-            PriceDataModel2 db = new PriceDataModel2();
-            List<ChartDataModel> chartModelList = new List<ChartDataModel>();
-            var store = db.Stores.FirstOrDefault(p => p.StoreName == sName && p.isActive==true);
-            var orders = db.OfferMas.Where(p => p.Store.Id == store.Id );
-            var offers = db.OfferDet.ToList();
-            for(int i = 1;i<=12;i++)
+            try
             {
-                ChartDataModel chartData = new ChartDataModel();
-                foreach(var ord in orders)
+                PriceDataModel2 db = new PriceDataModel2();
+                List<ChartDataModel> chartModelList = new List<ChartDataModel>();
+                var store = db.Stores.FirstOrDefault(p => p.StoreName == sName && p.isActive == true);
+                var orders = db.OfferDet.Where(p => (p.OfferMas.Status == 2 || p.OfferMas.Status == 1) && p.OfferMas.Store.Id == store.Id).ToList();
+                List<object> data = new List<object>();
+                data.Add(new object[] { "Aylar", "Teklif Tutar", "Sipariş Tutar" });
+                for (int i = 1; i < 13; i++)
                 {
-                    if(ord.Status == 2&&ord.OrderDate.Value.Month==i&&ord.OrderDate.Value.Year==2020 )
+                    decimal orderSum=0;
+                    decimal offerSum = 0;
+                    if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2))
                     {
-                        chartData.totalOrder += 1;
-                        foreach(var of in offers)
-                        {
-                            if(of.BasketMas_ID==ord.ID)
-                            {
-                                chartData.orderMoney = chartData.orderMoney + (of.Quantity * of.Price);
-                            }
-                        }
+                         orderSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2)
+                            .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
                     }
-                    if ( ord.Status !=0 && ord.Date.Month == i &&ord.Date.Year==2020)
+                    else
                     {
-                        chartData.totalOffer += 1;
-                        foreach (var of in offers)
-                        {
-                            if (of.BasketMas_ID == ord.ID)
-                            {
-                                chartData.offerMoney = chartData.offerMoney + (of.Quantity * of.Price);
-                            }
-                        }
+                        orderSum = 0;
                     }
-                    
+
+                    if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1))
+                    {
+                        offerSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1)
+                            .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
+                    }
+                    else
+                    {
+                        offerSum = 0;
+                    }
                 }
-                chartModelList.Add(chartData);
+
+                return Json(data, JsonRequestBehavior.AllowGet);
+
             }
-
-            return Json(chartModelList, JsonRequestBehavior.AllowGet);
-
-
+            catch (Exception e)
+            {
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
+           
         }
+
+
+
+        
+            
+        //    for(int i = 1;i<=12;i++)
+        //    {
+        //        ChartDataModel chartData = new ChartDataModel();
+        //        foreach(var ord in orders)
+        //        {
+        //            if(ord.Status == 2&&ord.OrderDate.Value.Month==i&&ord.OrderDate.Value.Year==2020 )
+        //            {
+        //                chartData.totalOrder += 1;
+        //                foreach(var of in offers)
+        //                {
+        //                    if(of.BasketMas_ID==ord.ID)
+        //                    {
+        //                        chartData.orderMoney = chartData.orderMoney + (of.Quantity * of.Price);
+        //                    }
+        //                }
+        //            }
+        //            if ( ord.Status !=0 && ord.Date.Month == i &&ord.Date.Year==2020)
+        //            {
+        //                chartData.totalOffer += 1;
+        //                foreach (var of in offers)
+        //                {
+        //                    if (of.BasketMas_ID == ord.ID)
+        //                    {
+        //                        chartData.offerMoney = chartData.offerMoney + (of.Quantity * of.Price);
+        //                    }
+        //                }
+        //            }
+                    
+        //        }
+        //        chartModelList.Add(chartData);
+        //    }
+
+        //    return Json(chartModelList, JsonRequestBehavior.AllowGet);
+
+
+        //}
     }
 }
