@@ -56,10 +56,10 @@
             using (Html.BeginForm("ForgetBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently remembered for two factor:
-                    <input type="submit" value="Forget Browser" class="btn btn-default" />
-                </p>
+    <p>
+        Il browser è attualmente ricordato per due fattori:
+        <input type="submit" value="Forget Browser" class="btn btn-default" />
+    </p>
             }
         }
         else
@@ -67,10 +67,10 @@
             using (Html.BeginForm("RememberBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
             {
                 @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently not remembered for two factor:
-                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
-                </p>
+    <p>
+        Il browser è attualmente ricordato per due fattori:
+        <input type="submit" value="Remember Browser" class="btn btn-default" />
+    </p>
             }
         }
     </div>
