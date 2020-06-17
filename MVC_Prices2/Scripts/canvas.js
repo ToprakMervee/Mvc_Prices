@@ -70,7 +70,7 @@ $('#addtobasket').on("click", function () {
         var url = window.location.pathname;
         var productid = url.substring(url.lastIndexOf('/') + 1);
         var quantity = document.form1.ilosc.value;
-        ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
         var price = $('#cenaokna').text();
         ///////////////////////////////////////////////////////////////////
         var color = $("select[name='kolorprofili'] option:selected").text();
@@ -85,19 +85,19 @@ $('#addtobasket').on("click", function () {
         var armtype = "";
         var armcm = "";
         if (isarmdfixed) {
-            armtype = "Standardo";
+            armtype = "Standard";
 
         } else {
             armdirection = $('input[name=armoptions]:checked').val();
             armcm = $("#armcm").val() + " CM";
-            armtype = "Specialo - " + armdirection+ " " + armcm;
+            armtype = "speciale - " + armdirection+ " " + armcm;
         }
         //document.form1.ilosc.value = 0
         var product = {
             ProductId: productid,
             Quantity: quantity,
             //////////////////////////////
-            Price: price / quantity,
+            Price: price,
             
             /////////////////////////////////////////////////
             ColorName: color,
@@ -114,7 +114,7 @@ $('#addtobasket').on("click", function () {
             url: "/Product/Index",
             data: product,
             success: function (data) {
-
+                document.form1.ilosc.value = 0;
                 Swal.fire(
                     'Success',
                     'Aggiunto.',
