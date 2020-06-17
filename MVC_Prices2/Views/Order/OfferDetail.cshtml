@@ -38,9 +38,9 @@
                 success: function (data) {
                     if (data.success) {
                         Swal.fire(
-                            'Success',
-                            'Offered successfully.',
-                            'success'
+                            'Successo',
+                            'Offerto con successo.',
+                            'successo'
                         ).then((result) => {
                             if (result.value) {
                                 $("#offerExpsModal").modal("hide");
@@ -49,8 +49,8 @@
                         });
                     } else {
                         Swal.fire(
-                            'Offering Failed!',
-                            ' Please try again later.',
+                            'Offerta fallita!',
+                            ' Riprova più tardi.',
                             'error'
                         )
 
@@ -201,7 +201,7 @@ else
                     </tr>
                     <tr>
                         <td>
-                            <label for="modalquantity">   Numero Pezzi</label>
+                            <label for="modalquantity">Numero Pezzi</label>
                         </td>
                         <td>
                             
@@ -243,7 +243,7 @@ else
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-xs" onclick="basketAddNew()">Add New</button>
+                <button type="button" class="btn btn-secondary btn-xs" onclick="basketAddNew()">Aggiungi</button>
                 <button type="button" class="btn btn-primary  btn-xs" onclick="basketSaveChanges()">Save Changes</button>
             </div>
         </div>
@@ -255,7 +255,7 @@ else
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <b class="modal-title" id="expmodtitle">Offer Explanations</b>
+                <b class="modal-title" id="expmodtitle">Spiegazioni sull'offerta</b>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -266,23 +266,23 @@ else
                     <tr>
                         <td>
                             <input type="hidden" id="modalReference" value="" />
-                            <label for="modalExp1">Explanation 1</label>
-                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Explanation 1" />
+                            <label for="modalExp1">Spiegazioni 1</label>
+                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazioni 1" />
 
                         </td>
                     </tr>
                     <tr>
                         <td>
 
-                            <label for="modalExp1">Explanation 2</label>
-                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Explanation 2" />
+                            <label for="modalExp1">Spiegazioni 2</label>
+                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazioni 2" />
 
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Annulla</button>
                 <button type="button" class="btn btn-primary  btn-xs" onclick="ToOffer2()">Offrire</button>
             </div>
         </div>
@@ -378,8 +378,8 @@ else
     function delOffer(id) {
         Swal.fire(
             {
-                title: 'Are you sure?',
-                text: "You won't be able to revert this! All the offer will be deleted!",
+                title: 'Sei sicuro?',
+                text: "Non sarai in grado di ripristinare questo! Tutta l'offerta verrà cancellata!",
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -396,7 +396,7 @@ else
                         Swal.fire({
                             position: 'top-end',
                             type: 'success',
-                            title: 'The offer has been deleted.',
+                            title: 'L\'offerta è stata eliminata.',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -525,7 +525,7 @@ else
     function setButton() {
 
         var orderButton = $('#toOrder');
-        $("#isChangedWarning").text("There are changes unsaved. If you refresh the page, changes will be undone!");
+        $("#isChangedWarning").text("Ci sono cambiamenti non salvati. Se aggiorni la pagina, le modifiche verranno annullate!");
         isChanged = true;
         orderButton.prop('value', 'Save Changes');
     }
@@ -578,7 +578,7 @@ else
                 Swal.fire({
                     position: 'top-end',
                     type: 'success',
-                    title: 'Changes have been saved.',
+                    title: 'I cambiamenti sono stati salvati.',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -607,7 +607,7 @@ else
                 Swal.fire({
                     position: 'top-end',
                     type: 'success',
-                    title: 'The offer converted to order.',
+                    title: 'L\'offerta è stata convertita in ordine.',
                     showConfirmButton: false,
                     timer: 1500
                 })

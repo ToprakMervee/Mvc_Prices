@@ -3,17 +3,17 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Role</h2>
+    <h2>Crea ruolo</h2>
 <hr />
 
 @Html.ValidationSummary()
 @using (Html.BeginForm())
 {
     <div class="form-group">
-        <label>Name</label>
+        <label>Nome</label>
         <input name="name" value="@Model" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Crea</button>
 }
 
 

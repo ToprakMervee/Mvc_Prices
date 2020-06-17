@@ -6,25 +6,25 @@
     <h4 class="m-b-lg">
      
 
-        <a href="@Url.Action("Create")" class="btn  btn-success btn-xs pull-right"> <i class="fa fa-plus"></i>Add New</a>
+        <a href="@Url.Action("Create")" class="btn  btn-success btn-xs pull-right"> <i class="fa fa-plus"></i>Aggiungi nuovo</a>
 
     </h4>
 </div><!-- END column -->
 <div class="panel panel-primary">
     <div class="panel-heading">
-        Roles
+        Ruolo
     </div>
     <table class="table table-striped">
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th>Nome</th>
             <th></th>
         </tr>
 
         @if (Model.Count() == 0)
         {
             <tr>
-                <td colspan="3">There is no role!</td>
+                <td colspan="3">Non c’e’ un ruolo!</td>
             </tr>
         }
         else
@@ -39,7 +39,7 @@
                         {
                             @Html.ActionLink("Güncelle", "Edit", new { id = role.Id }, new { @class = "btn btn-primary btn-sm" })
 
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Annulla</button>
                         }
                     </td>
                 </tr>

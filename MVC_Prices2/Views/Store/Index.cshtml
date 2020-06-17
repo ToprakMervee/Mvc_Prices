@@ -7,9 +7,9 @@
 <div class="row">
     <div class="col-md-12">
         <h4 class="m-b-lg">
-            Store List
+            Negozi
 
-            <a href="#" onclick="AddNewStore()" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i>Add New</a>
+            <a href="#" onclick="AddNewStore()" class="btn btn-outline btn-primary btn-xs pull-right"> <i class="fa fa-plus"></i>Aggiungi</a>
 
         </h4>
     </div><!-- END column -->
@@ -20,7 +20,7 @@
             {
 
                 <div class="alert alert-info text-center">
-                    <p>There is no stores. To add store please  <a href="#" onclick="AddNewStore()">click here.</a></p>
+                    <p>Non ci sono negozi. Aggiungere negozio per favore  <a href="#" onclick="AddNewStore()">Clicca qui.</a></p>
                 </div>
             }
             else
@@ -34,11 +34,11 @@
                 <table class="table table-hover table-striped table-bordered content-container">
                     <thead>
                     <th class="w50">#Store Code</th>
-                    <th>Store Name</th>
-                    <th>City</th>
-                    <th>Address</th>
-                    <th>State</th>
-                    <th>Action</th>
+                    <th>Nome di negozio</th>
+                    <th>Citta’</th>
+                    <th>Indirizzo</th>
+                    <th>Stato</th>
+                    <th>Azione</th>
                     </thead>
                     <tbody>
 
@@ -94,31 +94,31 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Store Code</label>
+                    <label>Negozi Code</label>
                     <input class="form-control" placeholder="Store Code must be unique!" id="storecode" value="">
 
                     <small id="error_storecode" class="pull-right input-form-error"></small>
                 </div>
 
                 <div class="form-group">
-                    <label>Store Name</label>
-                    <input class="form-control" placeholder="Store Name" id="storename" value="">
+                    <label>Nome di negozio</label>
+                    <input class="form-control" placeholder="Nome di negozio" id="storename" value="">
 
                     <small id="error_storename" class="pull-right input-form-error"></small>
 
                 </div>
 
                 <div class="form-group">
-                    <label>City</label>
-                    <input class="form-control" placeholder="City" id="city" value="">
+                    <label>Citta’</label>
+                    <input class="form-control" placeholder="Citta’" id="city" value="">
 
                     <small id="error_city" class="pull-right input-form-error"> </small>
 
                 </div>
 
                 <div class="form-group">
-                    <label>Address</label>
-                    <input class="form-control" type="email" placeholder="Address" id="address" value="">
+                    <label>Indirizzo</label>
+                    <input class="form-control" type="email" placeholder="Indirizzo" id="address" value="">
 
                     <small id="error_address" class="pull-right input-form-error"></small>
 
@@ -128,8 +128,8 @@
 
                
 
-                <button type="button" onclick="SaveNewStore()" class="btn btn-primary btn-md btn-outline">Save</button>
-                <a href="#" data-dismiss="modal" class="btn btn-md btn-danger btn-outline">Cancel</a>
+                <button type="button" onclick="SaveNewStore()" class="btn btn-primary btn-md btn-outline">Salva</button>
+                <a href="#" data-dismiss="modal" class="btn btn-md btn-danger btn-outline">Annula</a>
 
             </div><!-- .widget-body -->
         </div><!-- .widget -->
@@ -162,9 +162,9 @@
             data: data,
             success: function (data) {
                 Swal.fire(
-                    'Success',
-                    'Added successfully.',
-                    'success'
+                    'Successo',
+                    'Salvato con successo.',
+                    'successo'
                 ).then((result) => {
                     if (result.value) {
                         window.location.reload();
@@ -192,9 +192,9 @@
             success: function (data) {
                 if (data.success) {
                     Swal.fire(
-                        'Success',
-                        'Deleted successfully.',
-                        'success'
+                        'Successo',
+                        'Annullato con successo.',
+                        'successo'
                     ).then((result) => {
                         if (result.value) {
                             window.location.reload();
@@ -202,7 +202,7 @@
                     });
                 } else {
                     Swal.fire(
-                        'Delete Failed!',
+                        'Non riuscito annullare!',
                         data.acresult+ ' You Must release the users first.',
                         'error'
                     )

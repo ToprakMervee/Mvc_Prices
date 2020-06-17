@@ -38,9 +38,9 @@
                 success: function (data) {
                     if (data.success) {
                         Swal.fire(
-                            'Success',
-                            'Offered successfully.',
-                            'success'
+                            'Successo',
+                            'Offerto con successo.',
+                            'successo'
                         ).then((result) => {
                             if (result.value) {
                                 $("#offerExpsModal").modal("hide");
@@ -49,8 +49,8 @@
                         });
                     } else {
                         Swal.fire(
-                            'Offering Failed!',
-                            ' Please try again later.',
+                            'Offerta fallita!',
+                            'Riprova più tardi.',
                             'error'
                         )
 
@@ -298,8 +298,8 @@ else
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-xs" onclick="basketAddNew()">Add New</button>
-                <button type="button" class="btn btn-primary  btn-xs" onclick="basketSaveChanges()">Save Changes</button>
+                <button type="button" class="btn btn-secondary btn-xs" onclick="basketAddNew()">Aggiungi</button>
+                <button type="button" class="btn btn-primary  btn-xs" onclick="basketSaveChanges()">Salvare le modifiche</button>
             </div>
         </div>
     </div>
@@ -310,7 +310,7 @@ else
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <b class="modal-title" id="expmodtitle">Offer Explanations</b>
+                <b class="modal-title" id="expmodtitle">Spiegazioni sull'offerta</b>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -321,23 +321,23 @@ else
                     <tr>
                         <td>
                             <input type="hidden" id="modalReference" value="" />
-                            <label for="modalExp1">Explanation 1</label>
-                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Explanation 1" />
+                            <label for="modalExp1">Spiegazione 1</label>
+                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 1" />
                           
                         </td>
                     </tr>
                     <tr>
                         <td>
                            
-                            <label for="modalExp1">Explanation 2</label>
-                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Explanation 2" />
+                            <label for="modalExp1">Spiegazione 2</label>
+                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 2" />
 
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button"  data-dismiss="modal" class="btn btn-danger btn-xs" >Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger btn-xs">Annulla</button>
                 <button type="button" class="btn btn-primary  btn-xs" onclick="ToOffer2()">Offrire</button>
             </div>
         </div>
@@ -386,9 +386,9 @@ else
             data: {id:id},
             success: function (data) {
                 Swal.fire(
-                    'Success',
-                    'Deleted successfully.',
-                    'success'
+                    'Successo',
+                    'Annullato con successo.',
+                    'successo'
                 ).then((result) => {
                     if (result.value) {
                         window.location.reload();
