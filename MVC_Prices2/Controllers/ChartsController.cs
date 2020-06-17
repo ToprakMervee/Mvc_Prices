@@ -74,32 +74,36 @@ namespace MVC_Prices2.Controllers
                 PriceDataModel2 db = new PriceDataModel2();
                 List<ChartDataModel> chartModelList = new List<ChartDataModel>();
                 var store = db.Stores.FirstOrDefault(p => p.StoreName == sName && p.isActive == true);
-                var orders = db.OfferDet.Where(p => (p.OfferMas.Status == 2 || p.OfferMas.Status == 1) && p.OfferMas.Store.Id == store.Id).ToList();
+                var orders = db.OfferDet
+                        .Select(a=>new OfferDet
+                        {
+                            Price = a.Price,
+                            Quantity = a.Quantity
+                        })
+                        .Where(p => (p.OfferMas.Status == 2 || p.OfferMas.Status == 1) && p.OfferMas.Store.Id == store.Id).ToList();
+                   
+                
                 List<object> data = new List<object>();
+
+
                 data.Add(new object[] { "Aylar", "Teklif Tutar", "Sipariş Tutar" });
                 for (int i = 1; i < 13; i++)
                 {
                     decimal orderSum=0;
-                    decimal offerSum = 0;
-                    if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2))
+                    decimal offerSum =0;
+                    var abc = orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2);
+                    if (abc)
                     {
                          orderSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2)
                             .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
                     }
-                    else
-                    {
-                        orderSum = 0;
-                    }
-
+                  
                     if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1))
                     {
                         offerSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1)
                             .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
                     }
-                    else
-                    {
-                        offerSum = 0;
-                    }
+                  data.Add(new object[] {i,offerSum,orderSum});
                 }
 
                 return Json(data, JsonRequestBehavior.AllowGet);
