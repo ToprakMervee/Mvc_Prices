@@ -1,6 +1,7 @@
 ﻿using MVC_Prices2.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,26 +13,26 @@ namespace MVC_Prices2.Controllers
         // GET: Charts
         public ActionResult Index()
         {
-            
+
             return View();
         }
         public JsonResult Infos()
         {
             PriceDataModel2 db = new PriceDataModel2();
             List<ChartModel> chartModels = new List<ChartModel>();
-            var stores = db.Stores.Where(p=>p.isActive==true).ToList();
+            var stores = db.Stores.Where(p => p.isActive == true).ToList();
             var money = db.OfferDet.ToList();
             var orders = db.OfferMas.ToList();
-            
-            
-            foreach(var item in stores)
+
+
+            foreach (var item in stores)
             {
                 ChartModel chart = new ChartModel();
                 chart.storeName = item.StoreName;
-                
-                foreach(var ord in orders)
+
+                foreach (var ord in orders)
                 {
-                    if (ord.Store.Id == item.Id && ord.IsActive == true && ord.Status == 2) 
+                    if (ord.Store.Id == item.Id && ord.IsActive == true && ord.Status == 2)
                     {
                         chart.storeOrder += 1;
                         foreach (var mon in money)
@@ -40,12 +41,12 @@ namespace MVC_Prices2.Controllers
                                 chart.storeMoney = chart.storeMoney + (mon.Price * mon.Quantity);
                         }
                     }
-                        
+
                 }
                 chartModels.Add(chart);
-                
+
             }
-            
+
             return Json(chartModels, JsonRequestBehavior.AllowGet);
 
         }
@@ -53,8 +54,8 @@ namespace MVC_Prices2.Controllers
         public ActionResult StoreChart()
         {
             PriceDataModel2 db = new PriceDataModel2();
-            StoreModel storeModel = new StoreModel(); 
-            var stores = db.Stores.Where(p=>p.isActive==true).ToList();
+            StoreModel storeModel = new StoreModel();
+            var stores = db.Stores.Where(p => p.isActive == true).ToList();
             List<SelectListItem> values = (from i in stores.ToList()
                                            select new SelectListItem
                                            {
@@ -74,52 +75,53 @@ namespace MVC_Prices2.Controllers
                 PriceDataModel2 db = new PriceDataModel2();
                 List<ChartDataModel> chartModelList = new List<ChartDataModel>();
                 var store = db.Stores.FirstOrDefault(p => p.StoreName == sName && p.isActive == true);
-                var orders = db.OfferDet
-                        .Select(a=>new OfferDet
-                        {
-                            Price = a.Price,
-                            Quantity = a.Quantity
-                        })
-                        .Where(p => (p.OfferMas.Status == 2 || p.OfferMas.Status == 1) && p.OfferMas.Store.Id == store.Id).ToList();
-                   
-                
+                var orders = db.OfferDet 
+                        
+                        .Where(p => (p.OfferMas.Status == 2 || p.OfferMas.Status == 1) && p.OfferMas.Store.Id == store.Id)
+                        .Include(e=>e.OfferMas)
+                        .ToList();
+
+
                 List<object> data = new List<object>();
 
 
                 data.Add(new object[] { "Aylar", "Teklif Tutar", "Sipariş Tutar" });
                 for (int i = 1; i < 13; i++)
                 {
-                    decimal orderSum=0;
-                    decimal offerSum =0;
-                    var abc = orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2);
-                    if (abc)
+                    decimal orderSum = 0;
+                    decimal offerSum = 0;
+                    var abc = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2).ToList();
+                    if (abc != null)
                     {
-                         orderSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2)
-                            .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
-                    }
-                  
-                    if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1))
-                    {
-                        offerSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1)
-                            .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
-                    }
-                  data.Add(new object[] {i,offerSum,orderSum});
-                }
+                        if (abc.Count != 0)
+                        {
+                            orderSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 2)
+                               .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
+                        }
 
+                        if (orders.Any(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1))
+                        {
+                            offerSum = orders.Where(a => a.OfferMas.Date.Month == i && a.OfferMas.Status == 1)
+                                .Select(a => a.Price * a.Quantity).DefaultIfEmpty(0).Sum();
+                        }
+                        data.Add(new object[] { i, offerSum, orderSum });
+                    }
+                }
                 return Json(data, JsonRequestBehavior.AllowGet);
+
 
             }
             catch (Exception e)
             {
                 return Json(e.Message, JsonRequestBehavior.AllowGet);
             }
-           
+
         }
 
 
 
-        
-            
+
+
         //    for(int i = 1;i<=12;i++)
         //    {
         //        ChartDataModel chartData = new ChartDataModel();
@@ -147,7 +149,7 @@ namespace MVC_Prices2.Controllers
         //                    }
         //                }
         //            }
-                    
+
         //        }
         //        chartModelList.Add(chartData);
         //    }

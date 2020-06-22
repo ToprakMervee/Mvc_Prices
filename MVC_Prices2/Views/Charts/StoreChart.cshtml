@@ -9,8 +9,7 @@
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-        @Html.DropDownListFor(m => m.StoreName, (List<SelectListItem>)ViewBag.vls, new { @class = "btn-primary form-control", onchange = "chartShow();" })
+        @Html.DropDownListFor(m => m.StoreName, (List<SelectListItem>)ViewBag.vls, new { @class = "btn-primary form-control", onchange = "" })
 
     </head>
     <body>
@@ -21,8 +20,7 @@
                 <div class="widget row no-gutter p-x-auto">
                     
                     <figure class="highcharts-figure">
-                        <div id="container"></div>
-                        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+                        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
                     </figure>
                 </div>
             </div>
@@ -44,12 +42,8 @@
     //    var info;
 
     //);
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.load('current', {
-        'packages': ['geochart'],
-       
-        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-    });
+    google.charts.load('current', {'packages':['bar']});
+
     google.charts.setOnLoadCallback(
         function() {
             drawChart();
@@ -77,7 +71,8 @@
                         subtitle: 'Sales, Expenses, and Profit: 2014-2017',
                     }
                 };
-                var chart = new google.visualization.Bar(document.getElementById('piechart_3d'));
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
                 chart.draw(data, google.charts.Bar.convertOptions(options));
             },
             failure: function (r) {
