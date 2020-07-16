@@ -71,7 +71,7 @@ $('#addtobasket').on("click", function () {
         var productid = url.substring(url.lastIndexOf('/') + 1);
         var quantity = document.form1.ilosc.value;
         ///////////////////////////////////////////////////////////////////
-        var price = $('#cenaokna').text();
+        var price = document.form1.dodatki.value;
         ///////////////////////////////////////////////////////////////////
         var color = $("select[name='kolorprofili'] option:selected").text();
         var system = $("select[name='system'] option:selected").text();
@@ -115,6 +115,8 @@ $('#addtobasket').on("click", function () {
             data: product,
             success: function (data) {
                 document.form1.ilosc.value = 0;
+                document.form1.dodatki.value = 0;
+                document.getElementById('cenaokna').innerHTML = "0";
                 Swal.fire(
                     'Success',
                     'Aggiunto.',

@@ -351,7 +351,7 @@ else
                 }
 
             });
-          
+
 
         }
         function Hesap(refresh=0)
@@ -359,14 +359,12 @@ else
             imptotale();
             if (refresh == 1) {
                 GetDatas();
-                console.log("getdatas");
 
             } else {
                 Hesap2();
-                console.log("hesap2");
 
             }
-            
+
         }
         function Hesap2() {
             var miktar = $("select[name='ilosc'] option:selected").text();
@@ -384,29 +382,25 @@ else
                 if (renk === "bianco") {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
                         fiyat = fiyatlar[i].Prices;
-                        matrixHeight = fiyatlar[i].Height;
-                        matrixWidth = fiyatlar[i].Width;
-                        console.log(fiyat + " € " + matrixHeight + " x " + matrixWidth);
-
+                        factorPrice = Number(fiyat);
+                        break;
                     }
-                    factorPrice = Number(fiyat);
+
 
                 }
                 else {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true) {
                         fiyat = fiyatlar[i].Prices;
-                        matrixHeight = fiyatlar[i].Height;
-                        matrixWidth = fiyatlar[i].Width;
                     }
 
                 }
                 factorPrice = Number(fiyat);
 
         }
-            
+
             factorPrice = Math.ceil(factorPrice);
             tutar = factorPrice * miktar;
-            console.log(factorPrice);
+            document.form1.dodatki.value = factorPrice;
             document.getElementById('cenaokna').innerHTML = tutar;
 
 

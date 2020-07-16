@@ -49,7 +49,7 @@ namespace MVC_Prices2.Controllers
                         Date = x.OfferMas.Date,
                         Glass = x.Product.Glass,
                         ArmType = x.ArmType,
-                        MasId=x.BasketMas_ID
+                        MasId = x.BasketMas_ID
 
                     }).ToList();
 
@@ -57,7 +57,7 @@ namespace MVC_Prices2.Controllers
             }
         }
 
-       
+
         public ActionResult GetProduct(int id = 0)
         {
             using (PriceDataModel2 db = new PriceDataModel2())
@@ -155,7 +155,7 @@ namespace MVC_Prices2.Controllers
 
             return Json(new { success = true });
         }
-      
+
         [HttpPost]
         public ActionResult UpdateBasket(OfferDet offer)
         {
@@ -165,31 +165,29 @@ namespace MVC_Prices2.Controllers
             {
                 var offerdet = db.OfferDet.FirstOrDefault(x => x.ID == offer.ID);
                 if (offerdet == null) return Json(new { success = false });
-                offerdet.ColorName = offer.ColorName ;
+                offerdet.ColorName = offer.ColorName;
                 offerdet.Height = offer.Height;
                 offerdet.Width = offer.Width;
-                offerdet.System = offer.System ;
+                offerdet.System = offer.System;
                 offerdet.Quantity = offer.Quantity;
                 offerdet.ProductId = db.OfferDet.FirstOrDefault(a => a.ID == offer.ID).ProductId;
-                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "1" : "2");
-                bool colorName = offerdet.ColorName== "bianco" ?false:true;
-                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil==systemId && p.Color == colorName ).ToList();
+                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "2" : "1");
+                bool colorName = offerdet.ColorName == "bianco" ? false : true;
+                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil == systemId && p.Color == colorName).ToList();
 
                 if (!priceMatrix.Any())
                 {
                     offerdet.Price = 0;
                 }
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
-                            {
-                                offerdet.Price = item.Prices;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                //////////////////3. profil çeşidi fiyat hesap alanı
-
-            
+                foreach (var item in priceMatrix)
+                {
+                    if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
+                    {
+                        offerdet.Price = item.Prices;
+                        offerdet.Price = Math.Ceiling(offerdet.Price);
+                        break;
+                    }
+                }
                 db.SaveChanges();
             }
             return Json(new { success = true });
@@ -203,7 +201,7 @@ namespace MVC_Prices2.Controllers
             using (PriceDataModel2 db = new PriceDataModel2())
             {
                 OfferDet offerdet = db.OfferDet.FirstOrDefault(x => x.ID == offer.ID);
-                
+
                 if (offerdet == null) return Json(new { success = false });
                 offerdet.ColorName = offer.ColorName;
                 offerdet.Height = offer.Height;
@@ -216,14 +214,14 @@ namespace MVC_Prices2.Controllers
                 var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil == systemId && p.Color == colorName).ToList();
 
                 foreach (var item in priceMatrix)
-                        {
-                            if(offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
-                            {
-                                offerdet.Price = item.Prices;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        } //////////////////3. profil çeşidi fiyat hesap alanı
-                
+                {
+                    if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
+                    {
+                        offerdet.Price = item.Prices;
+                        offerdet.Price = Math.Ceiling(offerdet.Price);
+                    }
+                } //////////////////3. profil çeşidi fiyat hesap alanı
+
 
 
                 db.OfferDet.Add(offerdet);
@@ -233,6 +231,6 @@ namespace MVC_Prices2.Controllers
             return Json(new { success = true });
         }
 
-       
+
     }
 }

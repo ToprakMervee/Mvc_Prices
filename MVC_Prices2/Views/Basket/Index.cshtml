@@ -17,9 +17,9 @@
         function ToOffer(reference) {
             $("#modalReference").val(reference);
             $("#offerExpsModal").modal("show");
-            
+
         }
-        
+
 
         function ToOffer2() {
 
@@ -29,7 +29,7 @@
             var expData = {
                 Reference: reference,
                 Exp1: exp1,
-                Exp2:exp2
+                Exp2: exp2
             };
             $.ajax({
                 type: "POST",
@@ -40,7 +40,7 @@
                         Swal.fire(
                             'Successo',
                             'Offerto con successo.',
-                            'successo'
+                            'success'
                         ).then((result) => {
                             if (result.value) {
                                 $("#offerExpsModal").modal("hide");
@@ -97,7 +97,7 @@
                             <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Importo</font></td>
                             <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Azione </font><i class="btn btn-primary btn-xs zmdi zmdi-close" onclick="delproduct(-1)"></i></td>
                         </tr>
-                        @foreach (var el in Model.OrderBy(a=> a.ID))
+                        @foreach (var el in Model.OrderBy(a => a.ID))
                         {
 
 
@@ -140,24 +140,24 @@
                                 <td align="center">
                                     <font size="2" color="black" face="tahoma">
 
-                                        <select class="quantity" id="@Html.Raw("quantity_"+el.ID)" onchange="zmiana(@Html.Raw(el.ID))">
-                                            @for (int ei = 1; ei <= 10; ei++)
-                                            {
-                                                <option @if (ei == (int)el.Quantity) { @Html.Raw(selected) ; }
-                                                        value="@ei">
-                                                    @ei
-                                                </option>
-                                            }
-                                        </select> &nbsp;
-                                    </font>
-                                </td>
-                                <td align="center"><font size="2" class="amount" id="@Html.Raw("amount_"+el.ID)" color="black" face="tahoma"> @((int)el.Price * (int)el.Quantity) </font> €</td>
-                                <td align="center">
-                                    <i class="btn btn-danger btn-xs zmdi zmdi-close" onclick="delproduct(@el.ID)"></i>
-                                    <i class="btn btn-info btn-xs zmdi zmdi-edit" type="button" onclick="edproduct(@el.ID)"></i>
-                                </td>
-                            </tr>
-                        }
+                                        @*<select class="quantity" id="@Html.Raw("quantity_"+el.ID)" onchange="zmiana(@Html.Raw(el.ID))">
+                                                @for (int ei = 1; ei <= 10; ei++)
+                                                {
+                                                    <option @if (ei == (int)el.Quantity) { @Html.Raw(selected) ; }
+                                                            value="@ei">
+                                                        @ei
+                                                    </option>
+                                                }
+                                            </select>*@ @Html.Raw(el.Quantity) pz.&nbsp;
+                                        </font>
+                                    </td>
+                                    <td align="center"><font size="2" class="amount" id="@Html.Raw("amount_"+el.ID)" color="black" face="tahoma"> @((int)el.Price * (int)el.Quantity) </font> €</td>
+                                    <td align="center">
+                                        <i class="btn btn-danger btn-xs zmdi zmdi-close" onclick="delproduct(@el.ID)"></i>
+                                        <i class="btn btn-info btn-xs zmdi zmdi-edit" type="button" onclick="edproduct(@el.ID)"></i>
+                                    </td>
+                                </tr>
+                            }
                         <tr>
                             <td bgcolor="orange" align="right" colspan="7"><font size="2" color="black" face="Verdana">In totale: &nbsp;</font></td>
                             <td align="center" bgcolor="orange"><font size="2" color="black" face="verdana"><input type="text" size="1" value="@((int)Model.Sum(z=> z.Quantity))" id="topquantity" disabled>&nbsp;  pz.</font></td>
@@ -323,12 +323,12 @@ else
                             <input type="hidden" id="modalReference" value="" />
                             <label for="modalExp1">Spiegazione 1</label>
                             <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 1" />
-                          
+
                         </td>
                     </tr>
                     <tr>
                         <td>
-                           
+
                             <label for="modalExp1">Spiegazione 2</label>
                             <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 2" />
 
@@ -383,12 +383,12 @@ else
         $.ajax({
             type: "POST",
             url: "/Basket/DelProduct/" + id,
-            data: {id:id},
+            data: { id: id },
             success: function (data) {
                 Swal.fire(
                     'Successo',
                     'Annullato con successo.',
-                    'successo'
+                    'success'
                 ).then((result) => {
                     if (result.value) {
                         window.location.reload();
