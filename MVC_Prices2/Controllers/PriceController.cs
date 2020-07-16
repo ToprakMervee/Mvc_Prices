@@ -30,7 +30,7 @@ namespace MVC_Prices2.Controllers
                 matrix.MinHeight = product.MinHeight;
                 matrix.MinWidth = product.MinWidth;
                 matrix.productID = product.Id;
-                var activityControl = db.Prices.Where(p => p.Activity == true && p.Product.Id == id).FirstOrDefault();
+                var activityControl = db.Prices.FirstOrDefault(p => p.Activity && p.Product.Id == id);
                 if(activityControl==null)
                 {
                     return View(matrix);

@@ -151,7 +151,7 @@ namespace MVC_Prices.Controllers
         public JsonResult Ledges()
         {
             PriceDataModel2 db = new PriceDataModel2();
-            var ledges = db.Ledges.Where(p => p.Activity == true);
+            var ledges = db.Ledges.Where(p => p.Activity == true).ToList();
             return Json(ledges, JsonRequestBehavior.AllowGet);
         }
     }

@@ -287,7 +287,7 @@ else
                                         <font face="Verdana" style="font-size: 12px;">
                                             Importo:
                                             <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
-                                            
+
 
 
                                         </font>
@@ -334,7 +334,7 @@ else
         var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight}));
         var fiyatlar;
         var profilFiyat;
-        
+
         function GetDatas()
         {
 
@@ -344,7 +344,7 @@ else
                 dataType: "JSON",
                 data: { id:@Model.Id},
                 success: function (data) {
-                    
+
                     fiyatlar = data;
 
                 }
@@ -356,7 +356,7 @@ else
                 dataType: "JSON",
 
                 success: function (data) {
-                    
+
                     profilFiyat = data;
 
                 }
@@ -380,64 +380,66 @@ else
 
             for (var i = 0; i < fiyatlar["length"]; i++)
             {
-                if (renk == "bianco")
+                if (renk === "bianco")
                 {
-                if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false)
-                {
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false)
+                    {
                         fiyat = fiyatlar[i].Prices;
-                        matrixHeight = fiyatlar[i].Height;
+                            matrixHeight = fiyatlar[i].Height;
                         matrixWidth = fiyatlar[i].Width;
-                }
-                for (var k = 0; k < profilFiyat["length"]; k++) 
-                {
-                    if (profil == 2 && profilFiyat[k].PicValue == profil)
-                    {
-                        factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
-                    }
-                    else if (profil == 0)
-                    {
-                        factorPrice = fiyat;
-                    }
-                    //    Pro 8106 ® 1 için hesaplama yapılacak alan
-                    //else if (profil == 0)
-                    //{
-                    //    factorPrice = fiyat;
-                    //}
+                        console.log(fiyat + " € " + matrixHeight + " x " + matrixWidth);
 
-                }
+                    }
+                    for (var k = 0; k < profilFiyat["length"]; k++)
+                    {
+                        if (profil == 2 && profilFiyat[k].PicValue == profil)
+                        {
+                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
+                        }
+                        else if (profil == 0)
+                        {
+                            factorPrice = fiyat;
+                        }
+                        //    Pro 8106 ® 1 için hesaplama yapılacak alan
+                        else if (profil == 1)
+                        {
+                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-8106 için
+                        }
+
+                    }
                 }
                 else
                 {
-                if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true)
-                {
-                        fiyat = fiyatlar[i].Prices;
-                        matrixHeight = fiyatlar[i].Height;
-                        matrixWidth = fiyatlar[i].Width;
-                }
-                for (var k = 0; k < profilFiyat["length"]; k++)
-                {
-                    if (profil == 2 && profilFiyat[k].PicValue == profil)
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true)
                     {
-                        factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) *  2 * profilFiyat[k].ColoredPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
+                            fiyat = fiyatlar[i].Prices;
+                            matrixHeight = fiyatlar[i].Height;
+                            matrixWidth = fiyatlar[i].Width;
                     }
-                    else if (profil == 0)
+                    for (var k = 0; k < profilFiyat["length"]; k++)
                     {
-                        factorPrice = fiyat;
+                        if (profil == 2 && profilFiyat[k].PicValue == profil)
+                        {
+                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) *  2 * profilFiyat[k].ColoredPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
+                        }
+                        else if (profil == 0)
+                        {
+                            factorPrice = fiyat;
+                        }
+                        //    Pro 8106 ® 1 için hesaplama yapılacak alan
+                        // else if (profil == 1)
+                        //{
+                        //    factorPrice = fiyat;
+                        //}
                     }
-                    //    Pro 8106 ® 1 için hesaplama yapılacak alan
-                    // else if (profil == 1)
-                    //{
-                    //    factorPrice = fiyat;
-                    //}
-                }
                 }
             }
             factorPrice = Math.ceil(factorPrice);
             tutar = factorPrice * miktar;
-            
+
             document.getElementById('cenaokna').innerHTML = tutar;
-            
-            
+
+
         }
         function controlLimits() {
             alert("works fine");
@@ -461,10 +463,10 @@ else
                     $('#armbuttons').show();
                 }
             });
-            
+
         });
-        
-        
+
+
         function ArmUpDown() {
 
 
