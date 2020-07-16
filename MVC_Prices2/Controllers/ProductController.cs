@@ -137,12 +137,12 @@ namespace MVC_Prices.Controllers
                 return View(prices);
             }
         }
-        public JsonResult Datas(int? id = 0)
+        public JsonResult Datas(int? id = 0,int system=0)
         {
 
             PriceDataModel2 db = new PriceDataModel2();
 
-            var prices = db.Prices.Where(p => p.ProductId == id && p.Activity == true).ToList();
+            var prices = db.Prices.Where(p => p.ProductId == id && p.Activity == true && p.Profil==system).ToList();
             
             return Json(prices, JsonRequestBehavior.AllowGet);
 

@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace MVC_Prices2.Controllers
 {
@@ -18,13 +19,13 @@ namespace MVC_Prices2.Controllers
             return View();
         }
 
-        public ActionResult PriceMatrix(int? id = 0)
+        public ActionResult PriceMatrix(int? id = 0,int? system = 0)
         {
             using (PriceDataModel2 db = new PriceDataModel2())
             {
                 
                 PriceMatrixModel matrix = new PriceMatrixModel();
-                var product = db.Products.FirstOrDefault(a => a.Id == id);              
+                var product = db.Products.FirstOrDefault(a => a.Id == id );              
                 matrix.MaxHeight = product.MaxHeight;
                 matrix.MaxWidth = product.MaxWidth;
                 matrix.MinHeight = product.MinHeight;
@@ -37,8 +38,8 @@ namespace MVC_Prices2.Controllers
                 }
                 else
                 {
-                    matrix.priceListWhite = db.Prices.Where(p => p.Activity == true && p.Product.Id == id && p.Color==false).ToList();
-                    matrix.priceListColored = db.Prices.Where(p => p.Activity == true && p.Product.Id == id && p.Color == true).ToList();
+                    matrix.priceListWhite = db.Prices.Where(p => p.Activity == true && p.Product.Id == id && p.Color==false && p.Profil==system).ToList();
+                    matrix.priceListColored = db.Prices.Where(p => p.Activity == true && p.Product.Id == id && p.Color == true && p.Profil == system).ToList();
                 }
                 
                 return View(matrix);
@@ -80,82 +81,83 @@ namespace MVC_Prices2.Controllers
             
         }
 
-        public ActionResult GetLedges ()
-        {
-            using (PriceDataModel2 db = new PriceDataModel2())
-            {
-                LedgesViewModel ledgesModel = new LedgesViewModel();
-                var ledge = db.Ledges.Where(p => p.Activity == true).ToList();
+        //public ActionResult GetLedges ()
+        //{
+        //    using (PriceDataModel2 db = new PriceDataModel2())
+        //    {
+        //        LedgesViewModel ledgesModel = new LedgesViewModel();
+        //        var ledge = db.Ledges.Where(p => p.Activity == true).ToList();
 
-                List<SelectListItem> values = (from i in ledge.ToList()
+        //        List<SelectListItem> values = (from i in ledge.ToList()
 
-                                               select new SelectListItem
-                                               {
+        //                                       select new SelectListItem
+        //                                       {
 
-                                                   Text = i.Model + "/" + i.Colorless + "-" + i.ColorlessPriceFactor + "€/" + i.Colored + "-" + i.ColoredPriceFactor + "€",
-                                                   Value = i.PicValue
+        //                                           Text = i.Model + "/" + i.Colorless + "-" + i.ColorlessPriceFactor + "€/" + i.Colored + "-" + i.ColoredPriceFactor + "€",
+        //                                           Value = i.PicValue
 
-                                               }
-                                               ).ToList();
-                ViewBag.vls = values;
-                return View(ledgesModel);
-            }
-        }
-        [HttpPost]
-        [ActionName("GetLedges")]
-        public ActionResult GetLedgesPost(LedgesViewModel viewModel)
-        {
-            using (PriceDataModel2 db = new PriceDataModel2())
-            {
-                if (viewModel.coloredPriceFactor !=0 || viewModel.colorlessPriceFactor!=0)
-                {
-                    Ledge ledge = db.Ledges.Where(p => p.Activity == true && p.PicValue == viewModel.system).FirstOrDefault();
-                    Ledge newLedgePrice = new Ledge();
-                    if (viewModel.colorlessPriceFactor != 0 &&viewModel.coloredPriceFactor==0)
-                    {
-                        newLedgePrice.Activity = ledge.Activity;
-                        newLedgePrice.Colored = ledge.Colored;
-                        newLedgePrice.ColoredPriceFactor = ledge.ColoredPriceFactor;
-                        newLedgePrice.Colorless = ledge.Colorless;
-                        newLedgePrice.ColorlessPriceFactor = viewModel.colorlessPriceFactor;
-                        newLedgePrice.Model = ledge.Model;
-                        newLedgePrice.PicValue = ledge.PicValue;
-                        db.Ledges.Add(newLedgePrice);
-                        db.SaveChanges();
-                    }
-                    if (viewModel.coloredPriceFactor != 0 && viewModel.colorlessPriceFactor == 0)
-                    {
-                        newLedgePrice.Activity = ledge.Activity;
-                        newLedgePrice.Colored = ledge.Colored;
-                        newLedgePrice.ColoredPriceFactor = viewModel.coloredPriceFactor;
-                        newLedgePrice.Colorless = ledge.Colorless;
-                        newLedgePrice.ColorlessPriceFactor = ledge.ColorlessPriceFactor;
-                        newLedgePrice.Model = ledge.Model;
-                        newLedgePrice.PicValue = ledge.PicValue;
-                        db.Ledges.Add(newLedgePrice);
-                        db.SaveChanges();
-                    }
-                    if(viewModel.coloredPriceFactor != 0 && viewModel.colorlessPriceFactor != 0)
-                    {
-                        newLedgePrice.Activity = ledge.Activity;
-                        newLedgePrice.Colored = ledge.Colored;
-                        newLedgePrice.ColoredPriceFactor = viewModel.coloredPriceFactor;
-                        newLedgePrice.Colorless = ledge.Colorless;
-                        newLedgePrice.ColorlessPriceFactor = viewModel.colorlessPriceFactor;
-                        newLedgePrice.Model = ledge.Model;
-                        newLedgePrice.PicValue = ledge.PicValue;
-                        db.Ledges.Add(newLedgePrice);
-                        db.SaveChanges();
-                    }
+        //                                       }
+        //                                       ).ToList();
+        //        ViewBag.vls = values;
+        //        return View(ledgesModel);
+        //    }
+        //}
+        //[HttpPost]
+        //[ActionName("GetLedges")]
+        //public ActionResult GetLedgesPost(LedgesViewModel viewModel)
+        //{
+        //    using (PriceDataModel2 db = new PriceDataModel2())
+        //    {
+        //        if (viewModel.coloredPriceFactor !=0 || viewModel.colorlessPriceFactor!=0)
+        //        {
+        //            Ledge ledge = db.Ledges.Where(p => p.Activity == true && p.PicValue == viewModel.system).FirstOrDefault();
+        //            Ledge newLedgePrice = new Ledge();
+        //            if (viewModel.colorlessPriceFactor != 0 &&viewModel.coloredPriceFactor==0)
+        //            {
+        //                newLedgePrice.Activity = ledge.Activity;
+        //                newLedgePrice.Colored = ledge.Colored;
+        //                newLedgePrice.ColoredPriceFactor = ledge.ColoredPriceFactor;
+        //                newLedgePrice.Colorless = ledge.Colorless;
+        //                newLedgePrice.ColorlessPriceFactor = viewModel.colorlessPriceFactor;
+        //                newLedgePrice.Model = ledge.Model;
+        //                newLedgePrice.PicValue = ledge.PicValue;
+        //                db.Ledges.Add(newLedgePrice);
+        //                db.SaveChanges();
+        //            }
+        //            if (viewModel.coloredPriceFactor != 0 && viewModel.colorlessPriceFactor == 0)
+        //            {
+        //                newLedgePrice.Activity = ledge.Activity;
+        //                newLedgePrice.Colored = ledge.Colored;
+        //                newLedgePrice.ColoredPriceFactor = viewModel.coloredPriceFactor;
+        //                newLedgePrice.Colorless = ledge.Colorless;
+        //                newLedgePrice.ColorlessPriceFactor = ledge.ColorlessPriceFactor;
+        //                newLedgePrice.Model = ledge.Model;
+        //                newLedgePrice.PicValue = ledge.PicValue;
+        //                db.Ledges.Add(newLedgePrice);
+        //                db.SaveChanges();
+        //            }
+        //            if(viewModel.coloredPriceFactor != 0 && viewModel.colorlessPriceFactor != 0)
+        //            {
+        //                newLedgePrice.Activity = ledge.Activity;
+        //                newLedgePrice.Colored = ledge.Colored;
+        //                newLedgePrice.ColoredPriceFactor = viewModel.coloredPriceFactor;
+        //                newLedgePrice.Colorless = ledge.Colorless;
+        //                newLedgePrice.ColorlessPriceFactor = viewModel.colorlessPriceFactor;
+        //                newLedgePrice.Model = ledge.Model;
+        //                newLedgePrice.PicValue = ledge.PicValue;
+        //                db.Ledges.Add(newLedgePrice);
+        //                db.SaveChanges();
+        //            }
 
-                    ledge.Activity = false;
-                    db.Entry(ledge).State = EntityState.Modified;
-                    db.SaveChanges();
+        //            ledge.Activity = false;
+        //            db.Entry(ledge).State = EntityState.Modified;
+        //            db.SaveChanges();
 
                     
-                }
-                return RedirectToAction("GetLedges", "Price");
-            }
+        //        }
+        //        return RedirectToAction("GetLedges", "Price");
+        //    }
         }
     }
-}
+
+  

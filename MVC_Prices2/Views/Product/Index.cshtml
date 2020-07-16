@@ -61,7 +61,7 @@ else
 
                                     <b>Sistema:</b>
 
-                                    <select name="system" id="system" onchange="Hesap();">
+                                    <select name="system" id="system" onchange="Hesap(1);">
                                         <option value="0" selected="">Pro 7006 ®</option>
                                         <option value="2">Pro 7006 ® 2</option>
                                         <option value="1">Pro 8106 ® 1</option>
@@ -333,40 +333,42 @@ else
     <script type="text/javascript">
         var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight}));
         var fiyatlar;
-        var profilFiyat;
+
 
         function GetDatas()
         {
-
+            var profil = document.getElementById("system").value;
             $.ajax({
                 type: 'GET',
                 url: '/Product/Datas',
                 dataType: "JSON",
-                data: { id:@Model.Id},
+                data: { id:@Model.Id, system: profil},
                 success: function (data) {
 
                     fiyatlar = data;
+                    Hesap2();
 
                 }
 
             });
-            $.ajax({
-                type: 'GET',
-                url: '/Product/Ledges',
-                dataType: "JSON",
-
-                success: function (data) {
-
-                    profilFiyat = data;
-
-                }
-
-            });
+          
 
         }
-        function Hesap()
+        function Hesap(refresh=0)
         {
             imptotale();
+            if (refresh == 1) {
+                GetDatas();
+                console.log("getdatas");
+
+            } else {
+                Hesap2();
+                console.log("hesap2");
+
+            }
+            
+        }
+        function Hesap2() {
             var miktar = $("select[name='ilosc'] option:selected").text();
             var renk = $("select[name='kolorprofili'] option:selected").text();
             var fiyat = 0;
@@ -378,65 +380,33 @@ else
             var boy = document.getElementById("boy").value;
             var profil = document.getElementById("system").value;
 
-            for (var i = 0; i < fiyatlar["length"]; i++)
-            {
-                if (renk === "bianco")
-                {
-                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false)
-                    {
+            for (var i = 0; i < fiyatlar["length"]; i++) {
+                if (renk === "bianco") {
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
                         fiyat = fiyatlar[i].Prices;
-                            matrixHeight = fiyatlar[i].Height;
+                        matrixHeight = fiyatlar[i].Height;
                         matrixWidth = fiyatlar[i].Width;
                         console.log(fiyat + " € " + matrixHeight + " x " + matrixWidth);
 
                     }
-                    for (var k = 0; k < profilFiyat["length"]; k++)
-                    {
-                        if (profil == 2 && profilFiyat[k].PicValue == profil)
-                        {
-                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
-                        }
-                        else if (profil == 0)
-                        {
-                            factorPrice = fiyat;
-                        }
-                        //    Pro 8106 ® 1 için hesaplama yapılacak alan
-                        else if (profil == 1)
-                        {
-                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) * 2 * profilFiyat[k].ColorlessPriceFactor / 1000;//Formül ile hesaplanan alan Pro-8106 için
-                        }
+                    factorPrice = Number(fiyat);
 
-                    }
                 }
-                else
-                {
-                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true)
-                    {
-                            fiyat = fiyatlar[i].Prices;
-                            matrixHeight = fiyatlar[i].Height;
-                            matrixWidth = fiyatlar[i].Width;
+                else {
+                    if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true) {
+                        fiyat = fiyatlar[i].Prices;
+                        matrixHeight = fiyatlar[i].Height;
+                        matrixWidth = fiyatlar[i].Width;
                     }
-                    for (var k = 0; k < profilFiyat["length"]; k++)
-                    {
-                        if (profil == 2 && profilFiyat[k].PicValue == profil)
-                        {
-                            factorPrice = Number(fiyat) + (Number(matrixHeight) + Number(matrixWidth)) *  2 * profilFiyat[k].ColoredPriceFactor / 1000;//Formül ile hesaplanan alan Pro-7006-2 için
-                        }
-                        else if (profil == 0)
-                        {
-                            factorPrice = fiyat;
-                        }
-                        //    Pro 8106 ® 1 için hesaplama yapılacak alan
-                        // else if (profil == 1)
-                        //{
-                        //    factorPrice = fiyat;
-                        //}
-                    }
+
                 }
-            }
+                factorPrice = Number(fiyat);
+
+        }
+            
             factorPrice = Math.ceil(factorPrice);
             tutar = factorPrice * miktar;
-
+            console.log(factorPrice);
             document.getElementById('cenaokna').innerHTML = tutar;
 
 

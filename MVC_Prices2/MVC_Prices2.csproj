@@ -182,10 +182,18 @@
     <Compile Include="Migrations2\202003031143586_tablePriceUpdate.Designer.cs">
       <DependentUpon>202003031143586_tablePriceUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations2\202007160908213_profil.cs" />
+    <Compile Include="Migrations2\202007160908213_profil.Designer.cs">
+      <DependentUpon>202007160908213_profil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations2\Configuration.cs" />
     <Compile Include="Migrations\202003051343243_sdwqs.cs" />
     <Compile Include="Migrations\202003051343243_sdwqs.Designer.cs">
       <DependentUpon>202003051343243_sdwqs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007160921427_profil.cs" />
+    <Compile Include="Migrations\202007160921427_profil.Designer.cs">
+      <DependentUpon>202007160921427_profil.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
@@ -1787,8 +1795,14 @@
     <EmbeddedResource Include="Migrations2\202003031143586_tablePriceUpdate.resx">
       <DependentUpon>202003031143586_tablePriceUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations2\202007160908213_profil.resx">
+      <DependentUpon>202007160908213_profil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003051343243_sdwqs.resx">
       <DependentUpon>202003051343243_sdwqs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007160921427_profil.resx">
+      <DependentUpon>202007160921427_profil.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -1844,5 +1858,12 @@
     </ItemGroup>
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-</Target>
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
 </Project>

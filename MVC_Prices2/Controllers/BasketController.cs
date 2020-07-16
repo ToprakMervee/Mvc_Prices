@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Services.Protocols;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVC_Prices2.Identity;
@@ -164,71 +165,31 @@ namespace MVC_Prices2.Controllers
             {
                 var offerdet = db.OfferDet.FirstOrDefault(x => x.ID == offer.ID);
                 if (offerdet == null) return Json(new { success = false });
-                offerdet.ColorName = offer.ColorName;
+                offerdet.ColorName = offer.ColorName ;
                 offerdet.Height = offer.Height;
                 offerdet.Width = offer.Width;
-                offerdet.System = offer.System;
+                offerdet.System = offer.System ;
                 offerdet.Quantity = offer.Quantity;
+                offerdet.ProductId = db.OfferDet.FirstOrDefault(a => a.ID == offer.ID).ProductId;
+                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "1" : "2");
+                bool colorName = offerdet.ColorName== "bianco" ?false:true;
+                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil==systemId && p.Color == colorName ).ToList();
 
-                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true).ToList();
-                if (offerdet.ColorName == "bianco")
+                if (!priceMatrix.Any())
                 {
-                    if (offerdet.System == "Pro 7006 ®")
-                    {
+                    offerdet.Price = 0;
+                }
                         foreach (var item in priceMatrix)
                         {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == false)
+                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
                             {
                                 offerdet.Price = item.Prices;
                                 offerdet.Price = Math.Ceiling(offerdet.Price);
                             }
                         }
-                    }
-                    if (offerdet.System == "Pro 7006 ® 2")
-                    {
-                        var profilFactor = db.Ledges.Where(p => p.Model == offerdet.System && p.Activity == true).Select(p => p.ColorlessPriceFactor).FirstOrDefault();
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == false)
-                            {
-                                var x = (item.Width + item.Height) * 2 * profilFactor / 1000;
-                                offerdet.Price = item.Prices + x;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    //////////////////3. profil çeşidi fiyat hesap alanı
-                }
+                //////////////////3. profil çeşidi fiyat hesap alanı
 
-                else
-                {
-                    if (offerdet.System == "Pro 7006 ®")
-                    {
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == true)
-                            {
-                                offerdet.Price = item.Prices;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    if (offerdet.System == "Pro 7006 ® 2")
-                    {
-                        var profilFactor = db.Ledges.Where(p => p.Model == offerdet.System && p.Activity == true).Select(p => p.ColoredPriceFactor).FirstOrDefault();
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == true)
-                            {
-                                var x = (item.Width + item.Height) * 2 * profilFactor / 1000;
-                                offerdet.Price = item.Prices + x;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    //////////////////3. profil çeşidi fiyat hesap alanı
-                }
-
+            
                 db.SaveChanges();
             }
             return Json(new { success = true });
@@ -249,64 +210,20 @@ namespace MVC_Prices2.Controllers
                 offerdet.Width = offer.Width;
                 offerdet.System = offer.System;
                 offerdet.Quantity = offer.Quantity;
-                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId &&p.Activity == true).ToList();
-                if (offerdet.ColorName=="bianco")
-                {
-                    if(offerdet.System== "Pro 7006 ®")
-                    {
-                        foreach(var item in priceMatrix)
-                        {
-                            if(offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == false)
-                            {
-                                offerdet.Price = item.Prices;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    if (offerdet.System== "Pro 7006 ® 2") 
-                    {
-                        var profilFactor = db.Ledges.Where(p => p.Model == offerdet.System && p.Activity == true).Select(p=>p.ColorlessPriceFactor).FirstOrDefault();
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == false)
-                            {
-                                var x = (item.Width + item.Height) * 2 * profilFactor / 1000;
-                                offerdet.Price = item.Prices + x;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    //////////////////3. profil çeşidi fiyat hesap alanı
-                }
+                offerdet.ProductId = db.OfferDet.FirstOrDefault(a => a.ID == offer.ID).ProductId;
+                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "1" : "2");
+                bool colorName = offerdet.ColorName == "bianco" ? false : true;
+                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil == systemId && p.Color == colorName).ToList();
 
-                else
-                {
-                    if (offerdet.System == "Pro 7006 ®")
-                    {
-                        foreach (var item in priceMatrix)
+                foreach (var item in priceMatrix)
                         {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == true)
+                            if(offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == colorName)
                             {
                                 offerdet.Price = item.Prices;
                                 offerdet.Price = Math.Ceiling(offerdet.Price);
                             }
-                        }
-                    }
-                    if (offerdet.System == "Pro 7006 ® 2")
-                    {
-                        var profilFactor = db.Ledges.Where(p => p.Model == offerdet.System && p.Activity == true).Select(p => p.ColoredPriceFactor).FirstOrDefault();
-                        foreach (var item in priceMatrix)
-                        {
-                            if (offerdet.Width > item.Width - 100 && offerdet.Width <= item.Width && offerdet.Height > item.Height - 100 && offerdet.Height <= item.Height && item.Color == true)
-                            {
-                                var x =(item.Width + item.Height) * 2  * profilFactor / 1000;
-                                offerdet.Price = item.Prices + x;
-                                offerdet.Price = Math.Ceiling(offerdet.Price);
-                            }
-                        }
-                    }
-                    //////////////////3. profil çeşidi fiyat hesap alanı
-                }
+                        } //////////////////3. profil çeşidi fiyat hesap alanı
+                
 
 
                 db.OfferDet.Add(offerdet);

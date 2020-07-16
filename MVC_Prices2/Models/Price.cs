@@ -17,6 +17,7 @@ namespace MVC_Prices2.Models
         public decimal Prices { get; set; }
         public bool Color { get; set; }
         public bool Activity { get; set; }
+        public int Profil { get; set; }
         public Product Product { get; set; }
 
     }
