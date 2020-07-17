@@ -13,6 +13,7 @@ namespace MVC_Prices2.ViewModels
         public string Exp1 { get; set; }
         public string Exp2 { get; set; }
         public double RemainSeconds { get; set; }
+        public bool DateDiff { get; set; }
         public DateTime Date { get; set; }
         public DateTime? OrderDate { get; set; }
         public List<OrderDetViewModel> OrderDet { get; set; }

@@ -163,7 +163,7 @@
 
                         <li>
                             <a href="@Url.Action("Index", "Basket")">
-                                <i class="menu-icon zmdi zmdi-shopping-basket zmdi-hc-lg"></i>
+                                <i class="menu-icon zmdi zmdi-shopping-basket zmdi-hc-lg"><span id="badgecount" class="badge" style="background-color: lightblue; border-color: blue"></span></i>
                                 <span class="menu-text">Carello</span>
                             </a>
                         </li>
@@ -355,6 +355,18 @@
     <script src="~/Resources/libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="~/Resources/assets/js/fullcalendar.js"></script>
     <script src="~/Scripts/handlebars.min.js"></script>
-    <script src="~/Scripts/canvas.js?v=1.7"></script>
+<script src="~/Scripts/canvas.js?v=1.7"></script>
+<script type="text/javascript">
+    $.ajax({
+        type: "GET",
+        url: "/Basket/CountBasket/",
+        datatype: "Json",
+        contentType: "application/json; charset=utf-8",
+        success: function (t) {
+            
+            $("#badgecount").text(t);
+        }
+    });
+</script>
 </body>
 </html>

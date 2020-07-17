@@ -57,6 +57,16 @@ namespace MVC_Prices2.Controllers
             }
         }
 
+        public ActionResult CountBasket()
+        {
+            var user = User.Identity.GetUserId();
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+                int list = db.OfferDet.Where(a => a.OfferMas.User == user && a.OfferMas.Status == 0).ToList().Count();
+                return Json(list,JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         public ActionResult GetProduct(int id = 0)
         {

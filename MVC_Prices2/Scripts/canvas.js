@@ -114,6 +114,8 @@ $('#addtobasket').on("click", function () {
             url: "/Product/Index",
             data: product,
             success: function (data) {
+                var x = parseInt($("#badgecount").text()) + 1;
+                document.getElementById('bagdecount').text(x);
                 document.form1.ilosc.value = 0;
                 document.form1.dodatki.value = 0;
                 document.getElementById('cenaokna').innerHTML = "0";
@@ -125,11 +127,12 @@ $('#addtobasket').on("click", function () {
                     if (result.value) {
 
                     }
-                })
+                });
 
 
             }
         });
+
     }
 
 });

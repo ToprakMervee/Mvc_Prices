@@ -46,7 +46,8 @@
 <script id="orderTableHandler" type="text/x-handlebars-template">
     <h3>Ordinare</h3>
     <table class="table table-hover table-striped table-bordered content-container widget">
-        <thead>        <th class="w50">#Reference No</th>
+        <thead>
+        <th class="w50">#Reference No</th>
         <th>Exp.1</th>
         <th>Exp.2</th>
         <th>Data ordine</th>
@@ -66,12 +67,23 @@
                     <div class="countDown">
 
                     </div>
+                    {{#if DateDiff}}
+
                     <div>
                         <button onclick="Delete({{ID}})" class="btn btn-sm btn-danger btn-outline remove-btn">
                             <i class="fa fa-trash"></i> Delete
                         </button>
                         <a href="#" onclick="ReturnToOffer({{ID}})" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Ritorna all'offerta</a>
                     </div>
+                    {{else}}
+                <div>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
+                        siparişleştirildi
+                    </span>
+                </div>
+                    {{/if}}
+
+
                 </td>
             </tr>
 
@@ -81,7 +93,6 @@
 
     </table>
     <span style="padding-left:35%;">Per maggiori informazioni puoi contattare da  <a href="mailto:export@prolinepvc.com">qui</a></span>
-
 </script>
 
 <!--order detail handler-->
@@ -172,7 +183,7 @@
             }
         });
     });
-
+   
     //REVISION MAS HTML
     function CreateRevTable(data) {
         var rawTemplate = document.getElementById("orderTableHandler").innerHTML;

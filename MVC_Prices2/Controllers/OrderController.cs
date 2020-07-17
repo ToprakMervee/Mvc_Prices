@@ -308,10 +308,9 @@ namespace MVC_Prices2.Controllers
         }
         [NonAction]
         public double GetDayDiff(DateTime dt)
-        {
-            dt=dt.AddDays(1);
-            var seconds = Math.Abs((dt - DateTime.Now).TotalSeconds);
-            seconds=Math.Round(seconds);
+        { 
+            
+            var seconds = Math.Abs((DateTime.Now-dt).Days);
             return seconds;
         }
         public JsonResult GetOrders()
@@ -358,6 +357,7 @@ namespace MVC_Prices2.Controllers
             foreach (var el in orders)
             {
                 el.RemainSeconds = GetDayDiff(el.OrderDate.Value);
+                el.DateDiff = el.RemainSeconds < 1;
             }
             return Json(orders, JsonRequestBehavior.AllowGet);
         }
