@@ -171,9 +171,9 @@ namespace MVC_Prices2.Controllers
                 offerdet.System = offer.System;
                 offerdet.Quantity = offer.Quantity;
                 offerdet.ProductId = db.OfferDet.FirstOrDefault(a => a.ID == offer.ID).ProductId;
-                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "2" : "1");
-                bool colorName = offerdet.ColorName == "bianco" ? false : true;
-                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil == systemId && p.Color == colorName).ToList();
+                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 2" ? "2" : "1");
+                bool colorName = offerdet.ColorName != "bianco";
+                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity && p.Profil == systemId && p.Color == colorName).ToList();
 
                 if (!priceMatrix.Any())
                 {
@@ -209,9 +209,9 @@ namespace MVC_Prices2.Controllers
                 offerdet.System = offer.System;
                 offerdet.Quantity = offer.Quantity;
                 offerdet.ProductId = db.OfferDet.FirstOrDefault(a => a.ID == offer.ID).ProductId;
-                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 1" ? "1" : "2");
-                bool colorName = offerdet.ColorName == "bianco" ? false : true;
-                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity == true && p.Profil == systemId && p.Color == colorName).ToList();
+                int systemId = Convert.ToInt32(offerdet.System == "Pro 7006 ®" ? "0" : offer.System == "Pro 7006 ® 2" ? "2" : "1");
+                bool colorName = offerdet.ColorName != "bianco";
+                var priceMatrix = db.Prices.Where(p => p.ProductId == offerdet.ProductId && p.Activity && p.Profil == systemId && p.Color == colorName).ToList();
 
                 foreach (var item in priceMatrix)
                 {

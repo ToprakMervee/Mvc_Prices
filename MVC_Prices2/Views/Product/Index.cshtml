@@ -382,6 +382,7 @@ else
                 if (renk === "bianco") {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
                         fiyat = fiyatlar[i].Prices;
+                        console.log(fiyatlar[i].Id);
                         factorPrice = Number(fiyat);
                         break;
                     }
@@ -391,6 +392,8 @@ else
                 else {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true) {
                         fiyat = fiyatlar[i].Prices;
+                        console.log(fiyatlar[i].Id);
+
                     }
 
                 }
