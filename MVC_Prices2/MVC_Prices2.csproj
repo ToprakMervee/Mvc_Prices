@@ -186,6 +186,14 @@
     <Compile Include="Migrations2\202007160908213_profil.Designer.cs">
       <DependentUpon>202007160908213_profil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations2\202007210803030_Role.cs" />
+    <Compile Include="Migrations2\202007210803030_Role.Designer.cs">
+      <DependentUpon>202007210803030_Role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations2\202007210810014_Role2.cs" />
+    <Compile Include="Migrations2\202007210810014_Role2.Designer.cs">
+      <DependentUpon>202007210810014_Role2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations2\Configuration.cs" />
     <Compile Include="Migrations\202003051343243_sdwqs.cs" />
     <Compile Include="Migrations\202003051343243_sdwqs.Designer.cs">
@@ -194,6 +202,10 @@
     <Compile Include="Migrations\202007160921427_profil.cs" />
     <Compile Include="Migrations\202007160921427_profil.Designer.cs">
       <DependentUpon>202007160921427_profil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007210802373_Role.cs" />
+    <Compile Include="Migrations\202007210802373_Role.Designer.cs">
+      <DependentUpon>202007210802373_Role.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
@@ -1798,11 +1810,20 @@
     <EmbeddedResource Include="Migrations2\202007160908213_profil.resx">
       <DependentUpon>202007160908213_profil.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations2\202007210803030_Role.resx">
+      <DependentUpon>202007210803030_Role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations2\202007210810014_Role2.resx">
+      <DependentUpon>202007210810014_Role2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003051343243_sdwqs.resx">
       <DependentUpon>202003051343243_sdwqs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007160921427_profil.resx">
       <DependentUpon>202007160921427_profil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007210802373_Role.resx">
+      <DependentUpon>202007210802373_Role.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

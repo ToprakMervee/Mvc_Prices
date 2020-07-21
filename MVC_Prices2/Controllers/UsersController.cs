@@ -11,6 +11,8 @@ using MVC_Prices2.Models;
 
 namespace MVC_Prices2.Controllers
 {
+    [Authorize]
+    [Authorize(Roles = "ProlineAdmin")]
 
     public class UsersController : Controller
     {
@@ -51,6 +53,7 @@ public object WebSecurity { get; private set; }
             user.UserName = user_1.UserName;
             user.IsActive = true;
             user.FullName = user_1.FullName;
+            
           
 
             try
@@ -58,6 +61,7 @@ public object WebSecurity { get; private set; }
                 var result = userManager.Create(user, user_1.Password);
                 result = userManager.AddToRole(user.Id, user_1.Role);
                
+
             }
             catch (Exception ex)
             {
@@ -109,7 +113,8 @@ public object WebSecurity { get; private set; }
                 var role = roleManager.FindById(user.Id);
                 if (role!=null)
                 {
-                    var result3=roleManager.Delete(role);
+                    var roles =  userManager.GetRoles(user.Id);
+                    userManager.RemoveFromRoles(user.Id, roles.ToArray());
                 }
                 var result2 = userManager.AddToRole(user.Id, user_1.Role);
             }

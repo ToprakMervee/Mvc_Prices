@@ -50,28 +50,29 @@
                         {
 
 
-                            <tr>
-                                <td class="w50 text-center" id="@Html.Raw("store_"+index)"><a href="#">@el.StoreId</a></td>
-                                <td id="@Html.Raw("name_"+index)">@el.UserName <input type="hidden" value="@el.Id" id="@Html.Raw("id_"+index)" /></td>
-                                <td id="@Html.Raw("fullname_"+index)">@el.FullName</td>
-                                <td class="text-center" id="@Html.Raw("email_"+index)">@el.Email</td>
-                                <td class="text-center w100">
-                                    <input data-url="@Url.Action("ActiveSetter","Users")"
-                                           class="isActive"
-                                           type="checkbox"
-                                           data-switchery
-                                           data-color="#10c469"
-                                           @(el.IsActive ? "checked" : "") />
-                                </td>
-                                @*<td id="@Html.Raw("role_"+index)">@el.Role</td>*@
-                                <td class="text-center w400">
-                                    <button onclick="Delete(@el.Id)" class="btn btn-sm btn-danger btn-outline remove-btn">
-                                        <i class="fa fa-trash"></i> Delete
-                                    </button>
-                                    <a href="#" onclick="EditModal(@index)" id="editclick" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                        <tr>
+                            <td class="w50 text-center" id="@Html.Raw("store_"+index)"><a href="#">@el.StoreId</a></td>
+                            <td id="@Html.Raw("name_"+index)">@el.UserName <input type="hidden" value="@el.Id" id="@Html.Raw("id_"+index)" /></td>
+                            <td id="@Html.Raw("fullname_"+index)">@el.FullName</td>
+                            <td class="text-center" id="@Html.Raw("email_"+index)">@el.Email</td>
+                            @*<td id="@Html.Raw("role_"+index)">@el.Role</td>*@
+                            <td class="text-center w100">
+                                <input data-url="@Url.Action("ActiveSetter","Users")"
+                                       class="isActive"
+                                       type="checkbox"
+                                       data-switchery
+                                       data-color="#10c469"
+                                       @(el.IsActive ? "checked" : "") />
+                            </td>
 
-                                </td>
-                            </tr>
+                            <td class="text-center w400">
+                                <button onclick="Delete(@el.Id)" class="btn btn-sm btn-danger btn-outline remove-btn">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                                <a href="#" onclick="EditModal(@index)" id="editclick" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Edit</a>
+
+                            </td>
+                        </tr>
                             @(index++)
                         }
 

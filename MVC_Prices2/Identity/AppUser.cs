@@ -17,6 +17,7 @@ namespace MVC_Prices2.Identity
    
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+       
      
 
         
