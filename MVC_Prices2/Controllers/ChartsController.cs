@@ -10,6 +10,9 @@ namespace MVC_Prices2.Controllers
 {
     public class ChartsController : Controller
     {
+        [Authorize]
+        [Authorize(Roles="ProlineAdmin,CompanyAdmin")]
+
         // GET: Charts
         public ActionResult Index()
         {

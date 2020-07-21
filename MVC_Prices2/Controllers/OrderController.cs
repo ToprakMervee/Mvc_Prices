@@ -12,6 +12,8 @@ using MVC_Prices2.ViewModels;
 
 namespace MVC_Prices2.Controllers
 {
+    [Authorize]
+
     public class OrderController : Controller
     {
         private UserManager<AppUser> userManager;

@@ -10,8 +10,10 @@ using MVC_Prices2.Models;
 
 namespace MVC_Prices2.Controllers
 {
-   
-    public class RoleAdminController : Controller
+        [Authorize]
+        [Authorize(Roles = "ProlineAdmin")]
+
+        public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
         private UserManager<AppUser> userManager;

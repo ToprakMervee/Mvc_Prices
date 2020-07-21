@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 
 function zmiana(id) {
-    var quantity = $("#quantity_" + id).val()
+    var quantity = $("#quantity_" + id).val();
     var price = $("#price_" + id).text();
     var amount = parseFloat(price) * parseFloat(quantity);
     $("#amount_" + id).text(amount);
@@ -65,7 +65,7 @@ $('#addtobasket').on("click", function () {
             'Nessuna quantità?',
             'si prega di selezionare la quantità',
             'question'
-        )
+        );
     } else {
         var url = window.location.pathname;
         var productid = url.substring(url.lastIndexOf('/') + 1);
@@ -114,8 +114,8 @@ $('#addtobasket').on("click", function () {
             url: "/Product/Index",
             data: product,
             success: function (data) {
-                var x = parseInt($("#badgecount").text()) + 1;
-                document.getElementById('bagdecount').text(x);
+                var x = parseInt($('.badge').text()) + 1;
+                document.getElementById('.badge').text(x);
                 document.form1.ilosc.value = 0;
                 document.form1.dodatki.value = 0;
                 document.getElementById('cenaokna').innerHTML = "0";

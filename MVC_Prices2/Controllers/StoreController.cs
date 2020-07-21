@@ -10,6 +10,8 @@ using MVC_Prices2.Models;
 
 namespace MVC_Prices2.Controllers
 {
+    [Authorize]
+
     public class StoreController : Controller
     {
         private UserManager<AppUser> userManager;
