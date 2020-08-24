@@ -190,14 +190,14 @@
                     <li class="has-submenu">
                         <a class="submenu-toggle" href="javascript:void(0)">
                             <i class="menu-icon zmdi zmdi-album zmdi-hc-lg"></i>
-                            <span class="menu-text">Record</span>
+                            <span class="menu-text">Ordini</span>
                             <span class="label label-warning menu-label"></span>
                             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
                         </a>
                         <ul class="submenu">
 
-                            <li> <a href="@Url.Action("Offers", "Order")">Offerte</a></li>
-                            <li> <a href="@Url.Action("Orders", "Order")">Ordini</a></li>
+                            <li> <a href="@Url.Action("Offers", "Order")">Preventivi</a></li>
+                            <li> <a href="@Url.Action("Orders", "Order")">Confermati</a></li>
                         </ul>
                     </li>
                     @if (User.Identity.IsAuthenticated)

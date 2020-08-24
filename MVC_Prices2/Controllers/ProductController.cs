@@ -43,12 +43,13 @@ namespace MVC_Prices.Controllers
                 if (basketMas == null)
                 {
                     var userCard = userManager.Users.FirstOrDefault(a => a.Id == user);
-                    var lastindex = db.Reference.FirstOrDefault(c => c.StoreId == userCard.StoreId);
+                    var lastindex = db.Reference.FirstOrDefault(c => c.StoreId == userCard.StoreId && c.Type=="Offer");
                     if (lastindex==null)
                     {
                         
                         Reference lastindex1 = new Reference();
                         lastindex1.StoreId = userCard.StoreId;
+                        lastindex1.Type = "Offer";
                         lastindex1.LastReference = 1;
                         lastindex = lastindex1;
                         lastindex.LastReference += 1;

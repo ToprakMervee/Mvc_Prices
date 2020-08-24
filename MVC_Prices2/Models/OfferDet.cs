@@ -33,5 +33,6 @@ namespace MVC_Prices2.Models
         public Colors Colors { get; set; }
         [MaxLength(50)]
         public string ArmType { get; set; }
+        public string DoorHandle { get; set; }
     }
 }

@@ -137,6 +137,27 @@ namespace MVC_Prices2.Controllers
                 var offerMas = db.OfferMas.FirstOrDefault(a => a.ID == id && a.Store.Id == userCard.StoreId);
                 if (offerMas != null)
                 {
+                    var lastindex = db.Reference.FirstOrDefault(c => c.StoreId == userCard.StoreId && c.Type=="Order")  ;
+                    if (lastindex == null)
+                    {
+
+                        Reference lastindex1 = new Reference();
+                        lastindex1.StoreId = userCard.StoreId;
+                        lastindex1.LastReference = 1;
+                        lastindex1.Type = "Order";
+                        lastindex = lastindex1;
+                        lastindex.LastReference += 1;
+                        db.Reference.Add(lastindex1);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        lastindex.LastReference += 1;
+                        db.SaveChanges();
+                    }
+                    var store = db.Stores.FirstOrDefault(a => a.Id == userCard.StoreId);
+                    string lastindex2 = "000000" + lastindex.LastReference;
+                    offerMas.ReferenceNo = "OLM" + store.StoreCode + lastindex2.Substring(lastindex2.Length - 5, 5);
                     offerMas.Status = 2;
                     offerMas.OrderDate=DateTime.Now;
                     db.SaveChanges();

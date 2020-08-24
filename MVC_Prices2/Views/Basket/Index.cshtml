@@ -91,10 +91,10 @@
                             <td bgcolor="orange" width="30" align="center"><font size="2" color="black" face="verdana">Pos.</font></td>
                             <td bgcolor="orange" align="center" width="150"><font size="2" color="black" face="Verdana" style="">Tipologia</font></td>
                             <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Descrizione</font></td>
-                            <td bgcolor="orange" align="center" width="75"><font size="2" color="black" face="Verdana">Colore</font></td>
-                            <td bgcolor="silver" align="center" width="75"><font size="2" color="black" face="Verdana">Prezzo</font></td>
-                            <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>
-                            <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Numero</font></td>
+                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Colore</font></td>
+                            <td bgcolor="silver" align="center" width="200"><font size="2" color="black" face="Verdana">Prezzo</font></td>
+                            @*<td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>*@
+                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Numero</font></td>
                             <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Importo</font></td>
                             <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Azione </font><i class="btn btn-primary btn-xs zmdi zmdi-close" onclick="delproduct(-1)"></i></td>
                         </tr>
@@ -121,7 +121,10 @@
                                                             <br />
                                                         }
                                                         valore k : 1.1 <br />
-                                                        canalina a bordo caldo
+                                                        canalina a bordo caldo<br/>
+                                                        Braccio: @el.ArmType<br />
+                                                        Maniglia Colore: @el.DoorHandle
+
                                                     </font>
                                                 </font>
                                             </font>
@@ -133,11 +136,11 @@
                                     <img src="~/Content/img/@Html.Raw(el.ColorUrl)" width="80" height="70" style="border: 1px solid silver">
                                 </td>
                                 <td align="center"><font size="2" id="@Html.Raw("price_"+el.ID)" color="black" face="tahoma">@((int)el.Price)</font> € </td>
-                                <td align="center">
+                                @*<td align="center">
                                     <font size="2" color="black" face="tahoma">
                                         @el.ArmType
                                     </font>
-                                </td>
+                                </td>*@
                                 <td align="center">
                                     <font size="2" color="black" face="tahoma">
 

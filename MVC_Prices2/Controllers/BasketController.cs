@@ -49,7 +49,8 @@ namespace MVC_Prices2.Controllers
                         Date = x.OfferMas.Date,
                         Glass = x.Product.Glass,
                         ArmType = x.ArmType,
-                        MasId = x.BasketMas_ID
+                        MasId = x.BasketMas_ID,
+                        DoorHandle = x.DoorHandle
 
                     }).ToList();
 

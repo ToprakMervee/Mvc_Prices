@@ -30,6 +30,7 @@ namespace MVC_Prices2.ViewModels
         public string ArmType { get; set; }
         public string Exp1 { get; set; }
         public string Exp2 { get; set; }
+        public string DoorHandle { get; set; }
         public DateTime Date { get; set; }
         public DateTime? OrderDate { get; set; }
         public bool IsFixed { get; set; }

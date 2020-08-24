@@ -60,6 +60,7 @@ function strona() {
 }
 
 $('#addtobasket').on("click", function () {
+
     if (document.form1.ilosc.value == 0) {
         Swal.fire(
             'Nessuna quantità?',
@@ -67,6 +68,7 @@ $('#addtobasket').on("click", function () {
             'question'
         );
     } else {
+        var doorhandle;
         var url = window.location.pathname;
         var productid = url.substring(url.lastIndexOf('/') + 1);
         var quantity = document.form1.ilosc.value;
@@ -86,12 +88,14 @@ $('#addtobasket').on("click", function () {
         var armcm = "";
         if (isarmdfixed) {
             armtype = "Standard";
-
+            doorhandle = "Standard";
         } else {
             armdirection = $('input[name=armoptions]:checked').val();
             armcm = $("#armcm").val() + " CM";
-            armtype = "speciale - " + armdirection+ " " + armcm;
+            armtype = "speciale - " + armdirection + " " + armcm;
+            doorhandle = $("select[name='door'] option:selected").text();
         }
+        
         //document.form1.ilosc.value = 0
         var product = {
             ProductId: productid,
@@ -107,15 +111,16 @@ $('#addtobasket').on("click", function () {
             GlassQnt: glassqnt,
             Width: width,
             Height: height,
-            ArmType:armtype
+            ArmType: armtype,
+            DoorHandle: doorhandle
         };
         $.ajax({
             type: "POST",
             url: "/Product/Index",
             data: product,
             success: function (data) {
-                var x = parseInt($('.badge').text()) + 1;
-                document.getElementById('.badge').text(x);
+                var x = parseInt($("#badgecount").text()) + 1;
+                document.getElementById('badgecount').innerText=x;
                 document.form1.ilosc.value = 0;
                 document.form1.dodatki.value = 0;
                 document.getElementById('cenaokna').innerHTML = "0";

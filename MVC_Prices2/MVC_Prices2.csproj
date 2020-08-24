@@ -207,6 +207,22 @@
     <Compile Include="Migrations\202007210802373_Role.Designer.cs">
       <DependentUpon>202007210802373_Role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008191230013_type.cs" />
+    <Compile Include="Migrations\202008191230013_type.Designer.cs">
+      <DependentUpon>202008191230013_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008210947567_door.cs" />
+    <Compile Include="Migrations\202008210947567_door.Designer.cs">
+      <DependentUpon>202008210947567_door.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008211024127_door3.cs" />
+    <Compile Include="Migrations\202008211024127_door3.Designer.cs">
+      <DependentUpon>202008211024127_door3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008211026563_door4.cs" />
+    <Compile Include="Migrations\202008211026563_door4.Designer.cs">
+      <DependentUpon>202008211026563_door4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -414,6 +430,7 @@
     <Content Include="Content\img\6.gif" />
     <Content Include="Content\img\7.gif" />
     <Content Include="Content\img\8.gif" />
+    <Content Include="Content\img\antrasit.jpg" />
     <Content Include="Content\img\fixed.gif" />
     <Content Include="Content\img\leroymerllogo.png" />
     <Content Include="Content\img\PRO7006-2_1.png" />
@@ -1824,6 +1841,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007210802373_Role.resx">
       <DependentUpon>202007210802373_Role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008191230013_type.resx">
+      <DependentUpon>202008191230013_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008210947567_door.resx">
+      <DependentUpon>202008210947567_door.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008211024127_door3.resx">
+      <DependentUpon>202008211024127_door3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008211026563_door4.resx">
+      <DependentUpon>202008211026563_door4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

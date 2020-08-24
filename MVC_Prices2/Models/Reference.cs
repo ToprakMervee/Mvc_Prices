@@ -10,5 +10,6 @@ namespace MVC_Prices2.Models
         public int Id { get; set; }
         public int LastReference { get; set; }
         public int StoreId { get; set; }
+        public string Type  { get; set; }
     }
 }
