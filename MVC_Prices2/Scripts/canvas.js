@@ -86,6 +86,7 @@ $('#addtobasket').on("click", function () {
         var armdirection="";
         var armtype = "";
         var armcm = "";
+        var armlatch = "";
         if (isarmdfixed) {
             armtype = "Standard";
             doorhandle = "Standard";
@@ -94,6 +95,16 @@ $('#addtobasket').on("click", function () {
             armcm = $("#armcm").val() + " CM";
             armtype = "speciale - " + armdirection + " " + armcm;
             doorhandle = $("select[name='door'] option:selected").text();
+        }
+        if (productLimits.ModelId === 11) {
+            var islatch = $("#productVasistas").is(":checked");
+            if (islatch) {
+                armlatch = "crichetto";
+            } else {
+                armlatch = "Maniglia";
+            }
+        } else {
+            armlatch = "Maniglia";
         }
         
         //document.form1.ilosc.value = 0
@@ -112,7 +123,8 @@ $('#addtobasket').on("click", function () {
             Width: width,
             Height: height,
             ArmType: armtype,
-            DoorHandle: doorhandle
+            DoorHandle: doorhandle,
+            LatchArm: armlatch
         };
         $.ajax({
             type: "POST",

@@ -1,4 +1,5 @@
-﻿@using MVC_Prices2.Models
+﻿@using System.Data.SqlTypes
+@using MVC_Prices2.Models
 @using Newtonsoft.Json
 @model MVC_Prices2.Models.Product
 @{
@@ -93,7 +94,7 @@ else
                                         <div>
                                             <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
                                         </div>
-                                        <font face="Verdana" >
+                                        <font face="Verdana">
                                             <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
                                                 <b style="margin-left: 55px">Altezza</b>
                                                 <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
@@ -111,77 +112,99 @@ else
 
                                     </td>
                                 </tr>
-                            <tr>
+                                <tr>
 
-                                <td class="pull-right">
-
-
+                                    <td class="pull-right">
 
 
 
-                                    <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
 
-                                        <b>Colore:</b>
-                                        <select name="kolorprofili" onchange="Hesap();">
-                                            <option value="0" selected="">bianco</option>
-                                            <option value="0">laminate bianco</option>
-                                            <option value="1">golden oak</option>
-                                            <option value="2">noce</option>
-                                            <option value="3">mogano</option>
-                                            <option value="4">winchester</option>
-                                            <option value="8">verde muschio</option>
-                                            <option value="9">antracite</option>
-                                        </select>
-                                    </font>
-                                </td>
 
-                                <td align="center" valign="middle">
-                                    <div style="margin-left: 25px;" class="col-sm-7 col-md-7">
-                                        <b>Larghezza</b>
-                                        <input id="en" name="szer" placeholder="Larghezza" type="text" value="@Model.DefWidth" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Larghezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
-                                    </div>
-                                    <br />
-                                    <br />
+                                        <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
 
-                                </td>
-                                    
-                            </tr>
-                           
-                           
-                            <tr>
-                                <td class="" valign="bottom">
+                                            <b>Colore:</b>
+                                            <select name="kolorprofili" onchange="Hesap();">
+                                                <option value="0" selected="">bianco</option>
+                                                <option value="0">laminate bianco</option>
+                                                <option value="1">golden oak</option>
+                                                <option value="2">noce</option>
+                                                <option value="3">mogano</option>
+                                                <option value="4">winchester</option>
+                                                <option value="8">verde muschio</option>
+                                                <option value="9">antracite</option>
+                                            </select>
+                                        </font>
+                                    </td>
 
-                                    <font face="Verdana" style="padding-left: 142px; font-size: 12px;">
-                                        <table id="hover" style="transition: width 2s;">
-                                            <tr>
-                                                <td style="width: 100px"></td>
-                                                <td style="width: 109px">  <b>Maniglia:</b></td>
-                                                <td width="25">
-                                                    <input id="armfixed" type="checkbox"
-                                                           @if (Model.IsArmFixed) { @Html.Raw("disabled") }
-                                                           checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
-                                                </td>
-                                               
-                                            </tr>
-                                            <tr style="height: 15px"></tr>
-                                            <tr>
-                                                <td></td>
-                                                <td><b style="display: none;" id="doorHandlerColor">Maniglia Colore:</b></td>
-                                                <td > <select style=" width: 100px;" class="door2" name="door" onchange="">
-                                                    <option value="0" selected="">Standardo</option>
-                                                    <option value="1">bianco</option>
-                                                    <option value="2">Marrone</option>
-                                                    <option value="3">Nero</option>
-                                                    <option value="4">Cromo-Satinato non lucido</option>
-                                                    <option value="5">Ottone</option>
-                                                </select></td>
-                                            </tr>
-                                        </table>
-                                      
-                                    </font>
+                                    <td align="center" valign="middle">
+                                        <div style="margin-left: 25px;" class="col-sm-7 col-md-7">
+                                            <b>Larghezza</b>
+                                            <input id="en" name="szer" placeholder="Larghezza" type="text" value="@Model.DefWidth" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Larghezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                        </div>
+                                        <br />
+                                        <br />
 
-                                </td>
-                            </tr>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td class="" valign="bottom">
+
+                                        <font face="Verdana" style="padding-left: 142px; font-size: 12px;">
+                                            <table id="hover" style="transition: width 2s;">
+
+                                                <tr>
+                                                    <td style="width: 100px"></td>
+                                                  
+                                                        <td style="width: 109px">
+                                                        @if (Model.Id == 11)
+                                                        {
+                                                            <input id="productVasistas" type="checkbox" checked data-toggle="toggle" data-size="mini" data-on="Crichetto" data-off="Maniglia" data-onstyle="primary" data-offstyle="info" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <b>
+                                                                Maniglia:
+                                                            </b>
+                                                        }
+
+
+                                                        </td>
+
+                                                        <td width="25">
+                                                            <input id="armfixed" type="checkbox"
+                                                                   @*@if (Model.IsArmFixed) { @Html.Raw("disabled") }*@
+                                                                  
+                                                                   checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
+                                                        </td>
+                                                    
+
+
+                                                </tr>
+
+                                                <tr style="height: 15px"></tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><b style="display: none;" id="doorHandlerColor">Maniglia Colore:</b></td>
+                                                    <td>
+                                                        <select style="width: 100px;" class="door2" name="door" onchange="">
+                                                            <option value="0" selected="">Standardo</option>
+                                                            <option value="1">bianco</option>
+                                                            <option value="2">Marrone</option>
+                                                            <option value="3">Nero</option>
+                                                            <option value="4">Cromo-Satinato non lucido</option>
+                                                            <option value="5">Ottone</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </font>
+
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td colspan="2" valign="bottom">
 
@@ -245,14 +268,14 @@ else
 
                                     <td align="right">
                                         <font face="Verdana" style="font-size: 12px;">
-                                            <b> Tipo: </b>
-                                            <select  name="kolorszkla" onchange="imptotale();">
+                                             Tipo: 
+                                            <select name="kolorszkla" onchange="imptotale();">
                                                 <option value="0" selected="">doppio, trasparente</option>
                                                 <option value="1">doppio, satinato</option>
                                                 @*<option value="2">doppio, stampato C</option>
-                                                <option value="3">triplo, trasparente</option>
-                                                <option value="4">triplo, satinato</option>
-                                                <option value="5">triplo, stampato C</option>*@
+                                                    <option value="3">triplo, trasparente</option>
+                                                    <option value="4">triplo, satinato</option>
+                                                    <option value="5">triplo, stampato C</option>*@
                                             </select>
 
                                         </font>
@@ -356,7 +379,7 @@ else
     </div>
 
     <script type="text/javascript">
-        var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight}));
+        var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight,ModelId=Model.Id}));
         var fiyatlar;
 
 
@@ -392,7 +415,7 @@ else
 
         }
 
-       
+
         function Hesap2() {
             var miktar = $("select[name='ilosc'] option:selected").text();
             var renk = $("select[name='kolorprofili'] option:selected").text();
@@ -445,10 +468,22 @@ else
             $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
         });
         $(document).ready(function () {
+            if (productLimits.ModelId==11) {
+                $('#armfixed').bootstrapToggle('disable');
+            }
             GetDatas();
             $(".door2").css('display', 'none');
             $("#doorHandlerColor").css('display', 'none');
-
+            $('#productVasistas').on('change', function () {
+                var armvasistas = $('#productVasistas').is(':checked');
+                if (!armvasistas) {
+                    $('#armfixed').bootstrapToggle('enable');
+                } else {
+                    $('#armfixed').bootstrapToggle('disable');
+                }
+                 
+                
+            });
             $('#armfixed').on('change', function() {
                 var armdirection = $('#armfixed').is(':checked');
 
@@ -462,7 +497,7 @@ else
                     $("#doorHandlerColor").css('display', 'block');
                 }
             });
-            
+
 
         });
 

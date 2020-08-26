@@ -50,7 +50,8 @@ namespace MVC_Prices2.Controllers
                         Glass = x.Product.Glass,
                         ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
-                        DoorHandle = x.DoorHandle
+                        DoorHandle = x.DoorHandle,
+                        LatchArm = x.LatchArm
 
                     }).ToList();
 
