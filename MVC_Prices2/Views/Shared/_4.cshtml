@@ -25,9 +25,9 @@ changes ();
 
 
 
-var szerokosc = (document.form1.szer.value)/6.5;
-var wysokosc = ((document.form1.wys.value)/6.5);
-var pole = szerokosc * wysokosc;
+var genislik = (document.form1.szer.value)/6.5;
+var uzunluk = ((document.form1.wys.value)/6.5);
+var alan = genislik * uzunluk;
 
 var canvas = document.getElementById("mojCanvas");
 var mojObiekt = canvas.getContext('2d');
@@ -39,8 +39,8 @@ var mojObiekt = canvas.getContext('2d');
 
 
 
-var startx = (canvas.width - szerokosc)/2;
-var starty = (canvas.height - wysokosc)/2;
+var startx = (canvas.width - genislik)/2;
+var starty = (canvas.height - uzunluk)/2;
 
 
 
@@ -48,31 +48,31 @@ var starty = (canvas.height - wysokosc)/2;
 
 
 
-var polowax = (canvas.width)/2;
+var canvas_en_yari = (canvas.width)/2;
 
-var poloway = (canvas.height)/2;
+var canvas_boy_yari = (canvas.height)/2;
 
 
 
-var srodek = polowax + poloway;
+var srodek = canvas_en_yari + canvas_boy_yari;
 
-var gornylx = polowax - (szerokosc/2);
-var gornyly = poloway - (wysokosc/2);
+var gornylx = canvas_en_yari - (genislik/2);
+var gornyly = canvas_boy_yari - (uzunluk/2);
 
-var prawysrx = polowax + (szerokosc/2);
+var prawysrx = canvas_en_yari + (genislik/2);
 
-var prawysry = poloway;
+var prawysry = canvas_boy_yari;
 
 
 var dolnylx = gornylx;
-var dolnyly = poloway + (wysokosc/2);
+var dolnyly = canvas_boy_yari + (uzunluk/2);
 
 
 
-var srodekgx = polowax;
+var srodekgx = canvas_en_yari;
 var srodekgy = gornyly;
 
-var dolnypx = polowax + (szerokosc/2);
+var dolnypx = canvas_en_yari + (genislik/2);
 var dolnypy = dolnyly;
 
 
@@ -86,15 +86,15 @@ canvas.width = canvas.width;
 mojObiekt.fillStyle = gradient;
 mojObiekt.strokeStyle = "gray";
 
-mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+mojObiekt.fillRect((startx),(starty),(genislik),(uzunluk));
 
-mojObiekt.clearRect((startx+8),(starty+8),(szerokosc-16),(wysokosc-16));
+mojObiekt.clearRect((startx+8),(starty+8),(genislik-16),(uzunluk-16));
 
     //rysujemy obramowanie drugiego kwadratu
-mojObiekt.strokeRect((startx+20),(starty+20),(szerokosc-40),(wysokosc-40));
+mojObiekt.strokeRect((startx+20),(starty+20),(genislik-40),(uzunluk-40));
 
 //rysujemy obramowanie drugiego kwadratu
-mojObiekt.strokeRect((startx+23),(starty+23),(szerokosc-46),(wysokosc-46));
+mojObiekt.strokeRect((startx+23),(starty+23),(genislik-46),(uzunluk-46));
 
 mojObiekt.beginPath();
 mojObiekt.moveTo((gornylx+23),(gornyly+23)); //rysowanie zaczynamy od punktów 35,10 - tam więc przesuwamy nasze piórko
@@ -131,11 +131,11 @@ changes ();
 
 
 
-var szerokosc;
-var wysokosc;
+var genislik;
+var uzunluk;
 
-var szerokosc0;
-var wysokosc0;
+var genislik0;
+var uzunluk0;
 
     
 var lmin = productLimits.MinWidth;
@@ -146,14 +146,14 @@ var hmax =  productLimits.MaxHeight;
 var skala;
 
 
-var szerokosc0 = (document.form1.szer.value);
-var wysokosc0 = (document.form1.wys.value);
-var pole0 = szerokosc0 * wysokosc0;
+var genislik0 = (document.form1.szer.value);
+var uzunluk0 = (document.form1.wys.value);
+var alan0 = genislik0 * uzunluk0;
 
 
 
 
-skala = (Math.round(wysokosc0 / 190)) * 1.1;
+skala = (Math.round(uzunluk0 / 190)) * 1.1;
 
 
 var r1 = 25 / skala;
@@ -184,22 +184,22 @@ var mo002 = mo02/skala;
 
 
 
-var szerokosc1 = (szerokosc0)/skala;
-var wysokosc1 = ((wysokosc0)/skala);
-var pole1 = szerokosc1 * wysokosc1;
+var genislik1 = (genislik0)/skala;
+var uzunluk1 = ((uzunluk0)/skala);
+var alan1 = genislik1 * uzunluk1;
 
 
-if ((szerokosc0 >= lmin && szerokosc0 <= lmax ) && (wysokosc0 >= hmin && wysokosc0 <= hmax ))
+if ((genislik0 >= lmin && genislik0 <= lmax ) && (uzunluk0 >= hmin && uzunluk0 <= hmax ))
 
 
 {
 
 
-var szerokosc = szerokosc1;
-var wysokosc = wysokosc1;
-var pole = szerokosc * wysokosc;
+var genislik = genislik1;
+var uzunluk = uzunluk1;
+var alan = genislik * uzunluk;
 
-var largsk = (szerokosc - (2*t001) - mo001)/2;
+var largsk = (genislik - (2*t001) - mo001)/2;
 
 
     var wypelnienie = new Array("rgb(255,255,255)", "rgb(178,95,33)", "rgb(110,73,18)", "rgb(113,47,37)", "rgb(199,141,77)", "rgb(253,237,214)", "rgb(233,219,190)", "rgb(255,255,255)", "rgb(0,62,35)", "rgb(74, 80, 84)", "rgb(125,19,23)");
@@ -217,8 +217,8 @@ var mojObiekt = canvas.getContext('2d');
         gradient.addColorStop(1, kolorokna);
 
 
-var startx = (canvas.width - szerokosc)/2;
-var starty = (canvas.height - wysokosc)/2;
+var startx = (canvas.width - genislik)/2;
+var starty = (canvas.height - uzunluk)/2;
 
 
 
@@ -226,44 +226,46 @@ var starty = (canvas.height - wysokosc)/2;
 
 
 
-var polowax = (canvas.width)/2;
-
-var poloway = (canvas.height)/2;
-
+    var canvas_en_yari = (canvas.width) / 2;
+    
 
 
-var srodek = polowax + poloway;
-
-var gornylx = polowax - (szerokosc/2);
-var gornyly = poloway - (wysokosc/2);
+var canvas_boy_yari = (canvas.height)/2;
 
 
-var gpx = polowax + (szerokosc/2) - t001 - an001 - fv001;
-var gpy = poloway - (wysokosc/2) + t001 + an001 + fv001;
+
+var srodek = canvas_en_yari + canvas_boy_yari;
+
+var gornylx = canvas_en_yari - (genislik/2);
+var gornyly = canvas_boy_yari - (uzunluk/2);
 
 
-var lsrx = polowax - (szerokosc/2) + 21;
-var lsry = poloway;
+var gpx = canvas_en_yari + (genislik/2) - t001 - an001 - fv001;
+var gpy = canvas_boy_yari - (uzunluk/2) + t001 + an001 + fv001;
+    var gpxr = (genislik / 2) - t001 - an001 - fv001;
+
+var lsrx = canvas_en_yari - (genislik/2) + 21;
+var lsry = canvas_boy_yari;
 
 
-var prawysrx = polowax + (szerokosc/2);
+var prawysrx = canvas_en_yari + (genislik/2);
 
-var prawysry = poloway;
+var prawysry = canvas_boy_yari;
 
 
 var dpx = gpx;
-var dpy = poloway + (wysokosc/2) - t001 - an001 - fv001;
+var dpy = canvas_boy_yari + (uzunluk/2) - t001 - an001 - fv001;
 
 
 var dolnylx = gornylx;
-var dolnyly = poloway + (wysokosc/2);
+var dolnyly = canvas_boy_yari + (uzunluk/2);
 
 
 
-var gsrx = polowax;
+var gsrx = canvas_en_yari;
 var gsry = gornyly + t001 + an001 + fv001;
 
-var dolnypx = polowax + (szerokosc/2);
+var dolnypx = canvas_en_yari + (genislik/2);
 var dolnypy = dolnyly;
 
 var dlx = lsrx;
@@ -273,7 +275,7 @@ var dly = dpy;
 var glx = startx + t001 + an001 + fv001;
 var gly = starty + t001 + an001 + fv001;
 
-var pskgsrx = polowax + ((szerokosc/2 - 8)/2);
+var pskgsrx = canvas_en_yari + ((genislik/2 - 8)/2);
 
 
 canvas.width = canvas.width;
@@ -297,18 +299,18 @@ if ((document.form1.system.value == 1) || (document.form1.system.value == 4))
 
 {
 
-mojObiekt.fillRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc + (2 * r1)));
+mojObiekt.fillRect((startx - r1),(starty - r1),(genislik + (2 * r1)),(uzunluk + (2 * r1)));
 
-mojObiekt.strokeRect((startx - r1),(starty - r1),(szerokosc + (2 * r1)),(wysokosc+ (2 * r1)));
+mojObiekt.strokeRect((startx - r1),(starty - r1),(genislik + (2 * r1)),(uzunluk+ (2 * r1)));
 }
 
 if ((document.form1.system.value == 2) || (document.form1.system.value == 5) || (document.form1.system.value == 7))
 
 {
 
-mojObiekt.fillRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc + (2 * r2)));
+mojObiekt.fillRect((startx - r2),(starty - r2),(genislik + (2 * r2)),(uzunluk + (2 * r2)));
 
-mojObiekt.strokeRect((startx - r2),(starty - r2),(szerokosc + (2 * r2)),(wysokosc+ (2 * r2)));
+mojObiekt.strokeRect((startx - r2),(starty - r2),(genislik + (2 * r2)),(uzunluk+ (2 * r2)));
 }
 
 
@@ -321,20 +323,20 @@ if ((document.form1.system.value == 0) || (document.form1.system.value == 3) || 
 
 {
 
-mojObiekt.fillRect((startx),(starty),(szerokosc),(wysokosc));
+mojObiekt.fillRect((startx),(starty),(genislik),(uzunluk));
 
-mojObiekt.strokeRect((startx),(starty),(szerokosc),(wysokosc));
+mojObiekt.strokeRect((startx),(starty),(genislik),(uzunluk));
 }
 
 
 
-mojObiekt.fillRect((startx + t001),(starty + t001),(largsk),(wysokosc - 2*t001));
+mojObiekt.fillRect((startx + t001),(starty + t001),(largsk),(uzunluk - 2*t001));
 
-mojObiekt.strokeRect((startx + t001),(starty + t001),(largsk),(wysokosc - 2*t001));
+mojObiekt.strokeRect((startx + t001),(starty + t001),(largsk),(uzunluk - 2*t001));
 
-mojObiekt.fillRect((startx + t001 + largsk + mo001),(starty+t001),(largsk),(wysokosc - 2*t001));
+mojObiekt.fillRect((startx + t001 + largsk + mo001),(starty+t001),(largsk),(uzunluk - 2*t001));
 
-mojObiekt.strokeRect((startx + t001 + largsk + mo001),(starty+t001),(largsk),(wysokosc - 2*t001));
+mojObiekt.strokeRect((startx + t001 + largsk + mo001),(starty+t001),(largsk),(uzunluk - 2*t001));
 
 
 
@@ -349,35 +351,35 @@ else
 
 
     //rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo wewn krawędź
-mojObiekt.strokeRect((startx+t001+an001),(starty+t001+an001),(largsk-2*an001),(wysokosc-2*t001-2*an001));
+mojObiekt.strokeRect((startx+t001+an001),(starty+t001+an001),(largsk-2*an001),(uzunluk-2*t001-2*an001));
 
 //rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo
-//mojObiekt.clearRect((startx+t001+an001),(starty+t001+an001),(largsk-2*an001),(wysokosc-2*t001-2*an001));
+//mojObiekt.clearRect((startx+t001+an001),(starty+t001+an001),(largsk-2*an001),(uzunluk-2*t001-2*an001));
 
 //rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo pierwsza szyba
-mojObiekt.fillRect((startx+t001+an001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(wysokosc-2*t001-2*an001-2*fv001));
+mojObiekt.fillRect((startx+t001+an001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(uzunluk-2*t001-2*an001-2*fv001));
 
 //rysujemy obramowanie drugiego kwadratu - pierwsze skrzydlo listwa przyszybowa
-mojObiekt.strokeRect((startx+t001+an001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(wysokosc-2*t001-2*an001-2*fv001));
+mojObiekt.strokeRect((startx+t001+an001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(uzunluk-2*t001-2*an001-2*fv001));
 
 
 
 
 
     //drugie skrzydlo wewn krawedz
-mojObiekt.strokeRect((startx+largsk+t001+an001+mo001),(starty+t001+an001),(largsk-2*an001),(wysokosc-2*t001-2*an001));
+mojObiekt.strokeRect((startx+largsk+t001+an001+mo001),(starty+t001+an001),(largsk-2*an001),(uzunluk-2*t001-2*an001));
 
 
 
 
 //rysujemy obramowanie drugiego kwadratu - drugie skrzydlo szyba
-mojObiekt.fillRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(wysokosc-2*t001-2*an001-2*fv001));
+mojObiekt.fillRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(uzunluk-2*t001-2*an001-2*fv001));
 
 
 
 
 //rysujemy obramowanie drugiego kwadratu - drugie skrzydlo listwa przyszybowa
- mojObiekt.strokeRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(wysokosc-2*t001-2*an001-2*fv001));
+ mojObiekt.strokeRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(uzunluk-2*t001-2*an001-2*fv001));
 
 
 
@@ -385,17 +387,19 @@ mojObiekt.fillRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv0
 
  mojObiekt.beginPath();
 mojObiekt.moveTo((gpx),(gpy));
-mojObiekt.lineTo((polowax + an001 + fv001 + (mo001/2)),(lsry));
+    mojObiekt.lineTo((canvas_en_yari + an001 + fv001 + (mo001 / 2)), (lsry));//sağ kanat sağ açılım
+    console.log(gpx,gpy,dpx,dpy,pskgsrx,gsry);
 mojObiekt.lineTo((dpx),(dpy));
 mojObiekt.lineTo(pskgsrx , gsry);
-mojObiekt.lineTo((polowax + an001 + fv001 + (mo001/2)),dly);
-mojObiekt.stroke();
-
+mojObiekt.lineTo((canvas_en_yari + an001 + fv001 + (mo001/2)),dly); //üst açılım sol çizgi
+    mojObiekt.stroke();
 mojObiekt.beginPath();
 mojObiekt.moveTo((glx),(gly)); //rysowanie zaczynamy od punktów 35,10
-mojObiekt.lineTo((polowax - mo001 - an001 - fv001),(lsry));
+mojObiekt.lineTo((canvas_en_yari - mo001 - an001 - fv001),(lsry));//sol kanat sol açılım
 
-mojObiekt.lineTo(glx,dly);
+    mojObiekt.lineTo(glx, dly);
+    mojObiekt.lineTo(((canvas_en_yari - mo001 - an001 - fv001) - glx) / 2 + glx, gly);
+    mojObiekt.lineTo((canvas_en_yari - mo001 - an001 - fv001), dly);
 mojObiekt.stroke();
 
 
@@ -442,8 +446,8 @@ var alt1;
 var alt2;
 var larg11;
 var alt11;
-var indexszerokosci;
-var indexwysokosci;
+var indexgenisliki;
+var indexuzunluki;
 var cenaokna;
 var cena999;
 var doplatazakolor = new Array (1.03 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.38 , 1.4 , 1.4 , 1.4);
@@ -619,7 +623,7 @@ for (var n = 1 ; n < 20 ; n++)
 if (cennik1sk[0][n]==larg2) {
 
 
-indexszerokosci = n;
+indexgenisliki = n;
 break;
 }
 
@@ -636,7 +640,7 @@ if (cennik1sk[m][0]==alt2) {
 
 
 
-indexwysokosci = m;
+indexuzunluki = m;
 break;
 }
 
@@ -656,9 +660,9 @@ if ((document.form1.konfiguracja.value == 1))
 
 
 
- cenaokna = (1.00 * ((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 10;
+ cenaokna = (1.00 * ((cennik1sk[indexuzunluki][indexgenisliki]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 10;
 
-cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+cena999 = (cennik1sk[indexuzunluki][indexgenisliki]);
 
 }
 
@@ -666,10 +670,10 @@ else
 
 {
 
- cenaokna = (1.00 * ((cennik1sk[indexwysokosci][indexszerokosci]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 10;
+ cenaokna = (1.00 * ((cennik1sk[indexuzunluki][indexgenisliki]) * doplatazakolor[document.form1.kolorprofili.value] * systemprofili[document.form1.system.value]) + (supervetro * doplatazawklad[document.form1.konfiguracja.value]) + (supervetro * doplatazakolorszkla[document.form1.kolorszkla.value]))/4.1 + 10;
 
 
-cena999 = (cennik1sk[indexwysokosci][indexszerokosci]);
+cena999 = (cennik1sk[indexuzunluki][indexgenisliki]);
 
 
 }
