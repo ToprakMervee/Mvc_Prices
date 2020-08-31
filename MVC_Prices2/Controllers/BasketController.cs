@@ -51,7 +51,8 @@ namespace MVC_Prices2.Controllers
                         ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
-                        LatchArm = x.LatchArm
+                        LatchArm = x.LatchArm,
+                        UpOpenning = x.UpOpenning
 
                     }).ToList();
 
@@ -92,7 +93,8 @@ namespace MVC_Prices2.Controllers
                         ColorUrl = x.Colors.ColorUrl,
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
-                        IsFixed = x.Product.IsWingFixed
+                        IsFixed = x.Product.IsWingFixed,
+                        
                     }).ToList();
                 var proddet = proddets.FirstOrDefault();
 

@@ -35,5 +35,7 @@ namespace MVC_Prices2.Models
         public string ArmType { get; set; }
         public string DoorHandle { get; set; }
         public string LatchArm { get; set; }
+        public string UpOpenning { get; set; }
+
     }
 }

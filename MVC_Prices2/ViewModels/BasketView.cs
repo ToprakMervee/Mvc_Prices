@@ -37,5 +37,6 @@ namespace MVC_Prices2.ViewModels
         public bool IsFixed { get; set; }
         public List<Glass> Glass { get; set; }
         public List<OfferDet> OfferDet { get; set; }
+        public string UpOpenning { get; set; }
     }
 }

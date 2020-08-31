@@ -87,6 +87,7 @@ $('#addtobasket').on("click", function () {
         var armtype = "";
         var armcm = "";
         var armlatch = "";
+        
         if (isarmdfixed) {
             armtype = "Standard";
             doorhandle = "Standard";
@@ -106,15 +107,12 @@ $('#addtobasket').on("click", function () {
         } else {
             armlatch = "Maniglia";
         }
-        
+       
         //document.form1.ilosc.value = 0
         var product = {
             ProductId: productid,
             Quantity: quantity,
-            //////////////////////////////
             Price: price,
-            
-            /////////////////////////////////////////////////
             ColorName: color,
             System: system,
             GlassLam: glasslam,
@@ -124,7 +122,8 @@ $('#addtobasket').on("click", function () {
             Height: height,
             ArmType: armtype,
             DoorHandle: doorhandle,
-            LatchArm: armlatch
+            LatchArm: armlatch,
+            UpOpenning: radioLeftRight
         };
         $.ajax({
             type: "POST",

@@ -89,29 +89,31 @@ else
                                     </td>
                                     <td></td>
                                 </tr>
-                                <tr>
-                                    <td valign="bottom">
-                                        <div>
-                                            <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                            <tr>
+                                <td valign="bottom">
+                                    <div>
+                                        <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                    </div>
+                                    <font face="Verdana">
+                                        <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
+                                            <b style="margin-left: 55px">Altezza</b>
+                                            <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
                                         </div>
-                                        <font face="Verdana">
-                                            <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
-                                                <b style="margin-left: 55px">Altezza</b>
-                                                <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
-                                            </div>
-                                            <br /><br /><br />
-                                            <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
-                                                Pellicola simil-legno/colore in massa<br>
-                                                <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
-                                            </p>
-                                        </font>
-                                    </td>
+                                        <br /><br /><br />
+                                        <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
+                                            Pellicola simil-legno/colore in massa<br>
+                                            <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
+                                        </p>
+                                    </font>
+                                </td>
 
-                                    <td>
-                                        <canvas id="mojCanvas" width="250" height="290"></canvas>
+                                <td>
+                                    <canvas id="mojCanvas" width="250" height="290"></canvas>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
+                            
+                          
                                 <tr>
 
                                     <td class="pull-right">
@@ -147,7 +149,23 @@ else
                                     </td>
 
                                 </tr>
+                            @if (Model.Id==4)
+                            {
+                                <tr>  
+                                    <td>
+                                        <div style="padding-left: 166px" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-primary active" id="leftside" >
+                                                <input  type="radio" name="openoption" value="Left" id="left1" autocomplete="off"><i class="zmdi zmdi-arrow-left"></i> Sinistra
+                                            </label>
+                                            <label class="btn btn-primary" id="rightside" >
+                                                <input type="radio" name="openoption" value="Right" id="right1" autocomplete="off"  ><i class="zmdi zmdi-arrow-right"></i> Diritto
+                                            </label>
 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 15px;"></tr>
+                            }
 
                                 <tr>
                                     <td class="" valign="bottom">
@@ -176,7 +194,6 @@ else
                                                         <td width="25">
                                                             <input id="armfixed" type="checkbox"
                                                                    @*@if (Model.IsArmFixed) { @Html.Raw("disabled") }*@
-                                                                  
                                                                    checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
                                                         </td>
                                                     
@@ -337,7 +354,6 @@ else
                                             <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
 
 
-
                                         </font>
 
 
@@ -381,8 +397,8 @@ else
     <script type="text/javascript">
         var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight,ModelId=Model.Id}));
         var fiyatlar;
-
-
+        var radioLeftRight = productLimits.ModelId == 4?"right":"yok";
+       
         function GetDatas()
         {
             var profil = document.getElementById("system").value;
@@ -471,6 +487,7 @@ else
             if (productLimits.ModelId==11) {
                 $('#armfixed').bootstrapToggle('disable');
             }
+           
             GetDatas();
             $(".door2").css('display', 'none');
             $("#doorHandlerColor").css('display', 'none');
@@ -500,14 +517,28 @@ else
 
 
         });
-
-
+        
+        
         function ArmUpDown() {
 
 
             var armdirect = $('input[name=armoptions]:checked').val();
             var armdistance = 2;
         }
+        $("input[name='openoption']").change(function()
+        {
+            var x = document.getElementById("left1").checked;
+            var y = document.getElementById("right1").checked;
+            if (x === true) {
+                radioLeftRight = "left";
+                imptotale();
+            } if (y === true) {
+               
+                radioLeftRight = "right";
+                imptotale();
+            }
+        });
+       
 
         $("#system").on("click",changeProfile);
         function changeProfile() {

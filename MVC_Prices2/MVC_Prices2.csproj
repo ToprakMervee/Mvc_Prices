@@ -227,6 +227,10 @@
     <Compile Include="Migrations\202008261119044_latcharm.Designer.cs">
       <DependentUpon>202008261119044_latcharm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008311242178_UpOpenning.cs" />
+    <Compile Include="Migrations\202008311242178_UpOpenning.Designer.cs">
+      <DependentUpon>202008311242178_UpOpenning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -1860,6 +1864,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008261119044_latcharm.resx">
       <DependentUpon>202008261119044_latcharm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008311242178_UpOpenning.resx">
+      <DependentUpon>202008311242178_UpOpenning.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

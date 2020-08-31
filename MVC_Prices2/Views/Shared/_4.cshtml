@@ -381,16 +381,16 @@ mojObiekt.fillRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv0
 //rysujemy obramowanie drugiego kwadratu - drugie skrzydlo listwa przyszybowa
  mojObiekt.strokeRect((startx+largsk+t001+an001+mo001+fv001),(starty+t001+an001+fv001),(largsk-2*an001-2*fv001),(uzunluk-2*t001-2*an001-2*fv001));
 
-
-
-
+ 
 
  mojObiekt.beginPath();
 mojObiekt.moveTo((gpx),(gpy));
     mojObiekt.lineTo((canvas_en_yari + an001 + fv001 + (mo001 / 2)), (lsry));//sağ kanat sağ açılım
-    console.log(gpx,gpy,dpx,dpy,pskgsrx,gsry);
-mojObiekt.lineTo((dpx),(dpy));
-mojObiekt.lineTo(pskgsrx , gsry);
+   
+    mojObiekt.lineTo((dpx), (dpy));
+    if (radioLeftRight === "right") {
+        mojObiekt.lineTo(pskgsrx, gsry);
+        }
 mojObiekt.lineTo((canvas_en_yari + an001 + fv001 + (mo001/2)),dly); //üst açılım sol çizgi
     mojObiekt.stroke();
 mojObiekt.beginPath();
@@ -398,8 +398,11 @@ mojObiekt.moveTo((glx),(gly)); //rysowanie zaczynamy od punktów 35,10
 mojObiekt.lineTo((canvas_en_yari - mo001 - an001 - fv001),(lsry));//sol kanat sol açılım
 
     mojObiekt.lineTo(glx, dly);
+if (radioLeftRight==="left") {
+
     mojObiekt.lineTo(((canvas_en_yari - mo001 - an001 - fv001) - glx) / 2 + glx, gly);
     mojObiekt.lineTo((canvas_en_yari - mo001 - an001 - fv001), dly);
+}
 mojObiekt.stroke();
 
 

@@ -1,4 +1,5 @@
-﻿@model List<MVC_Prices2.ViewModels.BasketView>
+﻿@using Newtonsoft.Json
+@model List<MVC_Prices2.ViewModels.BasketView>
 @{
     ViewBag.Title = "Index";
 }
@@ -123,8 +124,11 @@
                                                         valore k : 1.1 <br />
                                                         canalina a bordo caldo<br/>
                                                         Braccio: @el.ArmType<br />
-                                                        @el.LatchArm<br/>
-                                                        Maniglia Colore: @el.DoorHandle
+                                                        @el.LatchArm<br />
+                                                        Maniglia Colore: @el.DoorHandle<br />
+                                                        @if (el.ProductId==4) {
+                                                         <font size="1"> Up Openning: @el.UpOpenning</font>
+                                                        }
                                                         
                                                     </font>
                                                 </font>
@@ -198,6 +202,7 @@ else
         </div>
     </div>
 }
+
 <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -351,7 +356,7 @@ else
 
 <!--Offers explanation modal-->
 <script type="text/javascript">
-
+    
     //modaldan sepetteki veriyi güncelleme
     function basketSaveChanges() {
         var height = $("#modalheight").val();
@@ -379,6 +384,8 @@ else
         });
     }
 
+    
+
     function ResetAll() {
         $('#direction').bootstrapToggle('off');
     }
@@ -402,6 +409,7 @@ else
             }
         });
     }
+
 
 
     //edit product modal data
