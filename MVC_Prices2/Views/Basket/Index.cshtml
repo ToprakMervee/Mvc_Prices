@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
 @model List<MVC_Prices2.ViewModels.BasketView>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Offer";
 }
 @{
     int i = 0;
@@ -48,13 +48,12 @@
                                 window.location.reload();
                             }
                         });
-                        window.location.href='/Order/Offers';
                     } else {
                         Swal.fire(
                             'Offerta fallita!',
-                            'Riprova più tardi.',
+                            ' Riprova più tardi.',
                             'error'
-                        );
+                        )
 
                     }
                 }
@@ -63,7 +62,7 @@
     </script>
     <center>
         <form name="tabela">
-            <table class="table"><tbody><tr><td align="left"><font size="3" color="gray" face="verdana"> Preventivo per serramenti in PVC <br><font size="1" color="maroon"> PREZZI DI LISTINO ver. @firstone.Date </font></font></td></tr></tbody></table>
+            <table class="table"><tbody><tr><td align="left"><font size="3" color="gray" face="verdana"> Offerta per porte e finestre in PVC <br><font size="1" color="maroon"> PREZZI DI LISTINO ver. @firstone.Date </font></font></td></tr></tbody></table>
             <table class="table">
                 <tbody>
                     <tr>
@@ -73,7 +72,7 @@
                                 <strong>
                                     @if (Model.Any())
                                     {
-                                        @firstone.Reference
+                                        @Html.Raw(firstone.Reference + "-" + (firstone.RevisionId + 1).ToString())
                                     }
                                 </strong>
                             </font>
@@ -87,103 +86,38 @@
                 </tbody>
             </table><center>
                 <table border=1 frame=void rules=rows width="100%">
-                    <tbody>
+                    <thead>
                         <tr>
                             <td bgcolor="orange" width="30" align="center"><font size="2" color="black" face="verdana">Pos.</font></td>
                             <td bgcolor="orange" align="center" width="150"><font size="2" color="black" face="Verdana" style="">Tipologia</font></td>
                             <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Descrizione</font></td>
-                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Colore</font></td>
-                            <td bgcolor="silver" align="center" width="200"><font size="2" color="black" face="Verdana">Prezzo</font></td>
-                            @*<td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>*@
-                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Numero</font></td>
+                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Nota</font></td>
+                            <td bgcolor="orange" align="center" width="75"><font size="2" color="black" face="Verdana">Colore</font></td>
+                            <td bgcolor="silver" align="center" width="75"><font size="2" color="black" face="Verdana">Prezzo</font></td>
+                            <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>
+                            <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Numero</font></td>
                             <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Importo</font></td>
-                            <td bgcolor="orange" align="center" width="80"><font size="2" color="black" face="Verdana">Azione </font><i class="btn btn-primary btn-xs zmdi zmdi-close" onclick="delproduct(-1)"></i></td>
+                            <td bgcolor="orange" class="noprint" align="center" width="80"><font size="2" color="black" face="Verdana">Azione </font><i id="delOfferButton" class="btn btn-danger btn-xs zmdi zmdi-delete" onclick="delOffer('-1')"></i></td>
                         </tr>
-                        @foreach (var el in Model.OrderBy(a => a.ID))
-                        {
-
-
-                            <tr>
-                                <td align="center"><font size="2" color="black" face="tahoma">@(++i).</font></td>
-                                <td align="center"><font size="2" color="black" face="tahoma"><img id="@Html.Raw("img_"+el.ID)" src="~/Content/img/@el.PicUrl" &bnsp=""></font></td>
-                                <td>
-                                    <font size="3" color="maroon" face="verdana">@el.Width x @el.Height mm </font><br>
-                                    <font size="1">
-                                        (telaio pieno a "L" senz'aletta)<br />
-                                        <font size="2" color="black" face="tahoma">
-                                            <b><font color="black">@el.ProductName</font></b><font color="black"><br>Soglia bassa in alluminio</font><br><font color="navy"> apertura a @el.Direction (DX)</font><br><font size="2">
-                                                @el.System<br><font size="1">
-                                                    @el.Color in massa<br>guarnizione grigia
-                                                    <font size="1">
-                                                        <br />
-                                                        @foreach (var el2 in el.Glass)
-                                                        {
-                                                            @el2.Description
-                                                            <br />
-                                                        }
-                                                        valore k : 1.1 <br />
-                                                        canalina a bordo caldo<br/>
-                                                        Braccio: @el.ArmType<br />
-                                                        @el.LatchArm<br />
-                                                        Maniglia Colore: @el.DoorHandle<br />
-                                                        @if (el.ProductId==4) {
-                                                         <font size="1"> Up Openning: @el.UpOpenning</font>
-                                                        }
-                                                        
-                                                    </font>
-                                                </font>
-                                            </font>
-                                        </font>
-                                    </font>
-                                </td>
-                                <td align="center">
-
-                                    <img src="~/Content/img/@Html.Raw(el.ColorUrl)" width="80" height="70" style="border: 1px solid silver">
-                                </td>
-                                <td align="center"><font size="2" id="@Html.Raw("price_"+el.ID)" color="black" face="tahoma">@((int)el.Price)</font> € </td>
-                                @*<td align="center">
-                                    <font size="2" color="black" face="tahoma">
-                                        @el.ArmType
-                                    </font>
-                                </td>*@
-                                <td align="center">
-                                    <font size="2" color="black" face="tahoma">
-
-                                        @*<select class="quantity" id="@Html.Raw("quantity_"+el.ID)" onchange="zmiana(@Html.Raw(el.ID))">
-                                                @for (int ei = 1; ei <= 10; ei++)
-                                                {
-                                                    <option @if (ei == (int)el.Quantity) { @Html.Raw(selected) ; }
-                                                            value="@ei">
-                                                        @ei
-                                                    </option>
-                                                }
-                                            </select>*@ @Html.Raw(el.Quantity) pz.&nbsp;
-                                        </font>
-                                    </td>
-                                    <td align="center"><font size="2" class="amount" id="@Html.Raw("amount_"+el.ID)" color="black" face="tahoma"> @((int)el.Price * (int)el.Quantity) </font> €</td>
-                                    <td align="center">
-                                        <i class="btn btn-danger btn-xs zmdi zmdi-close" onclick="delproduct(@el.ID)"></i>
-                                        <i class="btn btn-info btn-xs zmdi zmdi-edit" type="button" onclick="edproduct(@el.ID)"></i>
-                                    </td>
-                                </tr>
-                            }
-                        <tr>
-                            <td bgcolor="orange" align="right" colspan="7"><font size="2" color="black" face="Verdana">In totale: &nbsp;</font></td>
-                            <td align="center" bgcolor="orange"><font size="2" color="black" face="verdana"><input type="text" size="1" value="@((int)Model.Sum(z=> z.Quantity))" id="topquantity" disabled>&nbsp;  pz.</font></td>
-                            <td bgcolor="orange" align="center"><input type="text" size="5" id="topamount" disabled="" value="@((int)Model.Sum(x=> x.Price*x.Quantity))"> <font size="2" color="black" face="tahoma"> € </font></td>
-                        </tr>
+                    </thead>
+                    <tbody id="offerDetails">
                     </tbody>
+
+                    <tr>
+                        <td bgcolor="orange" align="right" colspan="8"><font size="2" color="black" face="Verdana">In totale: &nbsp;</font></td>
+                        <td align="center" bgcolor="orange"><font size="2" color="black" face="verdana"><input type="text" size="1" value="@((int)Model.Sum(z=> z.Quantity))" id="topquantity" disabled>&nbsp;  pz.</font></td>
+                        <td bgcolor="orange" align="center"><input type="text" size="5" id="topamount" disabled="" value="@((int)Model.Sum(x=> x.Price*x.Quantity))"> <font size="2" color="black" face="tahoma"> € </font></td>
+                    </tr>
+
+
                 </table>
                 <br>
-                <center>
+                <center class="noprint">
                     <font size="2" color="#5F9F9F" face="verdana"> <b>Per lo sconto contattare un rivenditore autorizzato </b></font><br>
                     <small id="isChangedWarning" style="color: red;"></small><br>
                     <input class="btn btn-outline btn-primary btn-sm" type="Button" value="Stampa la offerta" onclick="javascript:window.print();">
                     <input class="btn btn-outline btn-success btn-sm" type="button" id="toOffer" value="   Offrire  " onclick="ToOffer(@Html.Raw("'"+firstone.Reference+"'"))">
                 </center>
-
-
-
             </center>
         </form>
     </center>
@@ -197,12 +131,10 @@
 else
 {
     <div class="col-md-12 ">
-        <div class="alert alert-danger text-center  bg-danger" style="margin-top: 25%;">
-            <strong>Nessun prodotto aggiunto!</strong>
-        </div>
+        <div class="alert alert-danger text-center  bg-danger" style="margin-top: 25%;"><strong> Nessun prodotto selezionato !</strong></div>
+
     </div>
 }
-
 <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -268,10 +200,12 @@ else
                     </tr>
                     <tr>
                         <td>
-                            <label for="modalquantity">   Numero Pezzi</label>
+                            <label for="modalquantity">Numero Pezzi</label>
                         </td>
                         <td>
+
                             <select class="form-control" id="modalquantity">
+
                                 <option selected="" value="1">
                                     1
                                 </option>
@@ -309,7 +243,7 @@ else
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-xs" onclick="basketAddNew()">Aggiungi</button>
-                <button type="button" class="btn btn-primary  btn-xs" onclick="basketSaveChanges()">Salvare le modifiche</button>
+                <button type="button" class="btn btn-primary  btn-xs" onclick="basketSaveChanges()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -331,16 +265,16 @@ else
                     <tr>
                         <td>
                             <input type="hidden" id="modalReference" value="" />
-                            <label for="modalExp1">Spiegazione 1</label>
-                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 1" />
+                            <label for="modalExp1">Spiegazioni 1</label>
+                            <input id="modalExp1" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazioni 1" />
 
                         </td>
                     </tr>
                     <tr>
                         <td>
 
-                            <label for="modalExp1">Spiegazione 2</label>
-                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazione 2" />
+                            <label for="modalExp1">Spiegazioni 2</label>
+                            <input id="modalExp2" type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Spiegazioni 2" />
 
                         </td>
                     </tr>
@@ -354,67 +288,194 @@ else
     </div>
 </div>
 
+<script id="handlebar" type="text/x-handlebars-template">
+
+    {{#each this}}
+    <tr class="detailRows">
+        <td align="center"><font size="2" color="black" face="tahoma">  {{rownumber @@index}}.</font></td>
+        <td align="center"><font size="2" color="black" face="tahoma"><img id="img_{{@@index}}" src="/Content/img/{{PicUrl}}" &bnsp=""></font></td>
+        <td>
+            <font size="3" color="maroon" face="verdana">{{Width}} x {{Height}} mm </font><br>
+            <font size="1">
+                (telaio pieno a "L" senz'aletta)<br />
+                <font size="2" color="black" face="tahoma">
+                    <b><font color="black">{{ProductName}}</font></b>
+                    <font color="black">
+                        {{#if Extra.sogliaBassa}}
+                        <br>
+                        Soglia ribassata
+                        {{/if}}
+                    </font>
+                    <br><font color="navy"> apertura a {{Direction}} (DX)</font><br>
+                    <font size="2">
+                        {{System}}<br><font size="1">
+                            {{Color}} in massa<br>guarnizione grigia
+                            <font size="1">
+                                <br />
+                                {{GlassType}}
+                                <br />
+                                {{#each Glass}}
+                                {{Description}}
+                                <br />
+                                {{/each}}
+                                {{#if Extra.pervIslem}}
+                                {{Extra.pervIslem}}
+                                ({{#each Extra.perTaraf}}
+                                {{this}}
+                                {{/each}})
+                                {{/if}}
+                                Roto invece di Maco
+                            </font>
+                        </font>
+                    </font>
+                </font>
+            </font>
+        </td>
+        <td> <font style="padding-left: 15px;" size="1"> <b>{{Note}}</b> </font></td>
+        <td align="center">
+
+            <img src="/Content/img/{{ColorUrl}}" width="80" height="70" style="border: 1px solid silver">
+        </td>
+        <td align="center"><font class="price" size="2" id="price_{{@@index}}" )" color="black" face="tahoma">{{Price}}</font> € </td>
+        <td align="center">
+            <font size="2" color="black" face="tahoma">
+                {{ArmType}}
+            </font>
+        </td>
+        <td align="center">
+            <font size="2" color="black" face="tahoma">
+                {{Quantity}} pz.
+
+            </font>
+        </td>
+        <td align="center"><font size="2" class="amount" id="amount_{{@@index}}" color="black" face="tahoma">  {{{multiplicate Quantity Price}}} </font> €</td>
+        <td align="center" class="noprint">
+            <i class="btn btn-danger btn-xs zmdi zmdi-delete" onclick="delproduct({{@@index}})"></i>
+            <i class="btn btn-info btn-xs zmdi zmdi-edit" type="button" onclick="edproduct({{ID}})"></i>
+        </td>
+    </tr>
+
+
+    {{/each}}
+
+
+</script>
 <!--Offers explanation modal-->
 <script type="text/javascript">
-    
-    //modaldan sepetteki veriyi güncelleme
-    function basketSaveChanges() {
-        var height = $("#modalheight").val();
-        var width = $("#modalwidth").val();
-        var id = $("#modalbasketid").val();
-        var system = $("#modalsystem").val();
-        var quantity = $("#modalquantity").val();
-        var color = $("#modalprofilecolor").val();
+    var tempData;
+    var isChanged = false;
+    function CreateDetails(data) {
+        var rawTemplate = document.getElementById("handlebar").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
 
-        var basketData = {
-            ID: id,
-            Height: height,
-            Width: width,
-            System: system,
-            Quantity: quantity,
-            ColorName: color
-        };
-        $.ajax({
-            type: "POST",
-            url: "/Basket/UpdateBasket/",
-            data: basketData,
-            success: function (data) {
-                window.location.reload();
-            }
-        });
+        var offerDetails = $("#offerDetails");
+        $(".detailRows").remove();
+        offerDetails.prepend(ourGeneratedHtml);
     }
 
-    
 
     function ResetAll() {
         $('#direction').bootstrapToggle('off');
     }
     //delete product
     function delproduct(id) {
+        if (tempData.length === 1) {
+            var basketData = tempData[id];
+            delOffer(basketData.Reference);
+        }
 
-        $.ajax({
-            type: "POST",
-            url: "/Basket/DelProduct/" + id,
-            data: { id: id },
-            success: function (data) {
-                Swal.fire(
-                    'Successo',
-                    'Annullato con successo.',
-                    'success'
-                ).then((result) => {
-                    if (result.value) {
-                        window.location.reload();
+        tempData.splice(id, 1);
+        setButton();
+
+        CreateDetails(tempData);
+    }
+    function delOffer(id) {
+        Swal.fire(
+            {
+                title: 'Sei sicuro?',
+                text: "Non sarai in grado di ripristinare questo! Tutta l'offerta verrà cancellata!",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }
+        ).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Basket/DelProduct/" + id,
+                    data: { id: id },
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'top-end',
+                            type: 'success',
+                            title: 'L\'offerta è stata eliminata.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
                     }
                 });
+            } else {
+                window.location.reload();
             }
         });
+
+    }
+    function PrintTo() {
+        var printto = $('#printto').is(':checked');
+
+        if (printto) {
+            Discount(1.20);
+        } else {
+
+            Discount(1 / 1.20);
+        }
+
+    }
+
+    function Discount(disc) {
+        $('.price').each(function () {
+            var price = ($(this).text() * disc).toFixed(2);
+
+            $(this).text(price);
+        });
+
+        var sumamount = 0;
+
+        $('.amount').each(function () {
+            var amount = parseFloat(($(this).text() * disc));
+            $(this).text(amount.toFixed(2));
+
+            sumamount = +sumamount + amount;
+        });
+
+        $("#topamount").val(sumamount.toFixed(0));
     }
 
 
-
-    //edit product modal data
+    //edit product modal seed data and show
     function edproduct(id) {
-        $.ajax({
+        //var data = tempData[id];
+        //$("#modtitle").text(data.ProductName);
+        //$("#modalheight").val(data.Height);
+        //$("#modalwidth").val(data.Width);
+        //var src = $("#img_" + id).attr("src");
+        //$("#modalimg").attr("src", src);
+        //$("#modaldirection").prop("disabled", data.IsFixed);
+        //$("#modalprofilecolor").val(data.Color);
+        //$("#modalquantity").val(data.Quantity);
+        //$("#modalsystem").val(data.System);
+        //var imgsrc = "/Content/img/" + data.ColorUrl;
+        //$("#modalcolorimg").attr("src", imgsrc);
+        //$("#modalbasketid").val(id);
+
+        //$('#exampleModalCenter').modal('show');
+         $.ajax({
             type: "POST",
             url: "/Basket/GetProduct/" + id,
             data: id,
@@ -431,12 +492,10 @@ else
                 var imgsrc = "/Content/img/" + data.ColorUrl;
                 $("#modalcolorimg").attr("src", imgsrc);
                 $("#modalbasketid").val(data.ID);
-
             }
         });
         $('#exampleModalCenter').modal('show');
     }
-
     //modaldan yeni satır ekleme yapar
     function basketAddNew() {
         var height = $("#modalheight").val();
@@ -446,6 +505,19 @@ else
         var quantity = $("#modalquantity").val();
         var color = $("#modalprofilecolor").val();
 
+        //var basketData = jQuery.extend(true, {}, tempData[id]);
+
+
+        //basketData.Height = height;
+        //basketData.Width = width;
+        //basketData.System = system;
+        //basketData.Quantity = quantity;
+        //basketData.Color = color;
+        //basketData.ColorUrl = colorsearch(color);
+
+        tempData.push(basketData);
+        CreateDetails(tempData);
+        setButton();
         var basketData = {
             ID: id,
             Height: height,
@@ -462,5 +534,136 @@ else
                 window.location.reload();
             }
         });
+
+        $("#exampleModalCenter").modal("hide");
     }
+    function setButton() {
+
+        var orderButton = $('#toOrder');
+        $("#isChangedWarning").text("Ci sono cambiamenti non salvati. Se aggiorni la pagina, le modifiche verranno annullate!");
+        isChanged = true;
+        orderButton.prop('value', 'Save Changes');
+    }
+    //modaldan sepetteki veriyi güncelleme
+    function basketSaveChanges() {
+        var height = $("#modalheight").val();
+        var width = $("#modalwidth").val();
+        var id = $("#modalbasketid").val();
+        var system = $("#modalsystem").val();
+        var quantity = $("#modalquantity").val();
+        var color = $("#modalprofilecolor").val();
+
+        //var basketData = tempData[id];
+        //basketData.Height = height;
+        //basketData.Width = width;
+        //basketData.System = system;
+        //basketData.Quantity = quantity;
+        //basketData.Color = color;
+        //basketData.ColorUrl = colorsearch(color);
+        var basketData = {
+            ID: id,
+            Height: height,
+            Width: width,
+            System: system,
+            Quantity: quantity,
+            ColorName: color
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Basket/UpdateBasket/",
+            data: basketData,
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+
+        setButton();
+        CreateDetails(tempData);
+        $("#exampleModalCenter").modal("hide");
+    }
+
+    function sendData() {//update the offer and keep the revision track
+        $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: "POST",
+            url: "/Order/SaveTempOffer/",
+            data: JSON.stringify(tempData),
+            success: function (data) {
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'I cambiamenti sono stati salvati.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function () {
+                    window.location.replace("/Order/Offers");
+                }, 1000);
+
+
+
+
+            }
+        });
+    }
+
+
+    function convertToOrder() {
+
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+
+        $.ajax({
+            type: "POST",
+            url: "/Order/ToOrder/",
+            data: { id: id },
+            success: function (data) {
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'L\'offerta è stata convertita in ordine.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function () {
+                    window.location.replace("/Order/Orders");
+                }, 1000);
+
+
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        tempData =  @Html.Raw(JsonConvert.SerializeObject(Model));
+
+        for (var i = 0; i < tempData.length; i++) {
+            tempData[i].Extra = JSON.parse(tempData[i].Extra);
+        }
+        CreateDetails(tempData);
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Order/GetTempOffer/" + id,
+        //    data: id,
+        //    success: function (data) {
+        //        tempData = data;
+        //        CreateDetails(data);
+        //    }
+        //});
+        $("#toOrder").on("click",
+            function () {
+
+                if (isChanged) {
+                    sendData();
+                } else {
+                    convertToOrder();
+                }
+            });
+
+    });
 </script>

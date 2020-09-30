@@ -16,6 +16,20 @@
     white-space: normal;
 }
 
+@media only screen and (min-width: 650px) {
+    .kesit {
+        margin-left: 30%;
+    }
+    .sogliaBassa {
+        padding-left: 100px;
+    }
+    .maniglia {
+        padding-left: 142px;
+    }
+    .wmaniglia {
+        width: 100px;
+    }
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -25,13 +39,24 @@ textarea {
 #container {
     height: 500px;
 }
-
+.kesimmi {
+    display: none;
+    float: left;
+}
+.tirnakmi {
+    display: block;
+    float: left;
+}
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px;
     max-width: 700px;
     margin: 1em auto;
 }
-
+@media print {
+    .noprint, .noprint * {
+        display: none !important;
+    }
+}
 .highcharts-data-table table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;

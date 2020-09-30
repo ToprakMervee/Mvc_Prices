@@ -32,8 +32,6 @@ namespace MVC_Prices2.Models
         public string PicUrl { get; set; }
         public bool IsWingFixed { get; set; }
         public bool IsArmFixed { get; set; }
-        public List<Glass> Glass { get; set; }
         public List<Price> Prices { get; set; }
-
     }
 }

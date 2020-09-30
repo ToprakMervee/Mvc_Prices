@@ -58,7 +58,19 @@ function strona() {
 
     }
 }
-
+function getCheckedBoxes(chkboxName) {
+    var checkboxes = document.getElementsByName(chkboxName);
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i = 0; i < checkboxes.length; i++) {
+        // And stick the checked ones onto an array...
+        if (checkboxes[i].checked) {
+            checkboxesChecked.push(checkboxes[i].value);
+        }
+    }
+    // Return the array if it is non-empty, or null
+    return checkboxesChecked.length > 0 ? checkboxesChecked : [];
+}
 $('#addtobasket').on("click", function () {
 
     if (document.form1.ilosc.value == 0) {
@@ -68,6 +80,7 @@ $('#addtobasket').on("click", function () {
             'question'
         );
     } else {
+        Hesap2();
         var doorhandle;
         var url = window.location.pathname;
         var productid = url.substring(url.lastIndexOf('/') + 1);
@@ -87,14 +100,21 @@ $('#addtobasket').on("click", function () {
         var armtype = "";
         var armcm = "";
         var armlatch = "";
+        var latoD = document.form1.latoD.value;
+        var pervazTaraf = getCheckedBoxes("pervazTaraf");
+        var sogliabassa=false;
+        if (document.form1.sogliaBassa)
+            sogliabassa=document.form1.sogliaBassa.checked;
+        var notes = document.form1.notes.value;
+        var pervazIsl = document.form1.kesimmi.checked && pervazTaraf.length > 0 ? document.form1.kesimmi.value : document.form1.tirnakmi.checked && pervazTaraf.length > 0 ?  document.form1.tirnakmi.value:"";
         
-        if (isarmdfixed) {
+        if (isarmdfixed || $("#armcm").val() == "0") {
             armtype = "Standard";
             doorhandle = "Standard";
         } else {
             armdirection = $('input[name=armoptions]:checked').val();
             armcm = $("#armcm").val() + " CM";
-            armtype = "speciale - " + armdirection + " " + armcm;
+            armtype =  "speciale - " + armdirection + " " + armcm;
             doorhandle = $("select[name='door'] option:selected").text();
         }
         if (productLimits.ModelId === 11) {
@@ -107,7 +127,8 @@ $('#addtobasket').on("click", function () {
         } else {
             armlatch = "Maniglia";
         }
-       
+        var extra = { sogliaBassa: sogliabassa, pervIslem: pervazIsl, perTaraf: pervazTaraf };
+        var extraStr = JSON.stringify(extra);
         //document.form1.ilosc.value = 0
         var product = {
             ProductId: productid,
@@ -123,7 +144,10 @@ $('#addtobasket').on("click", function () {
             ArmType: armtype,
             DoorHandle: doorhandle,
             LatchArm: armlatch,
-            UpOpenning: radioLeftRight
+            UpOpenning: radioLeftRight,
+            LatoD: latoD,
+            Note: notes,
+            Extra: extraStr
         };
         $.ajax({
             type: "POST",

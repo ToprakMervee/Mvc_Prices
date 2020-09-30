@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/MVC_Prices2/Content/img/photothumb.db
+/MVC_Prices2/Content/img/12 - Kopya.jpg
+/MVC_Prices2/Content/img/Originals

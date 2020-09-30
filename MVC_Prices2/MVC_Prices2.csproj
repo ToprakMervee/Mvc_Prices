@@ -231,6 +231,26 @@
     <Compile Include="Migrations\202008311242178_UpOpenning.Designer.cs">
       <DependentUpon>202008311242178_UpOpenning.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009170858572_offerDetExtra.cs" />
+    <Compile Include="Migrations\202009170858572_offerDetExtra.Designer.cs">
+      <DependentUpon>202009170858572_offerDetExtra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009171424478_glassType.cs" />
+    <Compile Include="Migrations\202009171424478_glassType.Designer.cs">
+      <DependentUpon>202009171424478_glassType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009171434472_glassType2.cs" />
+    <Compile Include="Migrations\202009171434472_glassType2.Designer.cs">
+      <DependentUpon>202009171434472_glassType2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009171438467_latoD.cs" />
+    <Compile Include="Migrations\202009171438467_latoD.Designer.cs">
+      <DependentUpon>202009171438467_latoD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009171510349_glassType3.cs" />
+    <Compile Include="Migrations\202009171510349_glassType3.Designer.cs">
+      <DependentUpon>202009171510349_glassType3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -431,8 +451,10 @@
     <Content Include="Content\img\1.gif" />
     <Content Include="Content\img\10.gif" />
     <Content Include="Content\img\11.gif" />
+    <Content Include="Content\img\13.gif" />
     <Content Include="Content\img\2.gif" />
     <Content Include="Content\img\3.gif" />
+    <Content Include="Content\img\12.gif" />
     <Content Include="Content\img\4.gif" />
     <Content Include="Content\img\5.gif" />
     <Content Include="Content\img\6.gif" />
@@ -440,6 +462,13 @@
     <Content Include="Content\img\8.gif" />
     <Content Include="Content\img\antrasit.jpg" />
     <Content Include="Content\img\fixed.gif" />
+    <Content Include="Content\img\kolbeyaz.png" />
+    <Content Include="Content\img\kolbronz.png" />
+    <Content Include="Content\img\kolgumus.png" />
+    <Content Include="Content\img\kolsampanya.png" />
+    <Content Include="Content\img\kolsarı.png" />
+    <Content Include="Content\img\kolsiyah.png" />
+    <Content Include="Content\img\koltitan.png" />
     <Content Include="Content\img\leroymerllogo.png" />
     <Content Include="Content\img\PRO7006-2_1.png" />
     <Content Include="Content\img\PRO7006.png" />
@@ -1807,6 +1836,8 @@
     <Content Include="Views\UserInfoUpdate\Index.cshtml" />
     <Content Include="Views\Charts\Index.cshtml" />
     <Content Include="Views\Charts\StoreChart.cshtml" />
+    <Content Include="Views\Shared\_12.cshtml" />
+    <Content Include="Views\Shared\_13.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1868,6 +1899,21 @@
     <EmbeddedResource Include="Migrations\202008311242178_UpOpenning.resx">
       <DependentUpon>202008311242178_UpOpenning.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009170858572_offerDetExtra.resx">
+      <DependentUpon>202009170858572_offerDetExtra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009171424478_glassType.resx">
+      <DependentUpon>202009171424478_glassType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009171434472_glassType2.resx">
+      <DependentUpon>202009171434472_glassType2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009171438467_latoD.resx">
+      <DependentUpon>202009171438467_latoD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009171510349_glassType3.resx">
+      <DependentUpon>202009171510349_glassType3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1916,6 +1962,13 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
   <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
     <ItemGroup>
       <RoslynFiles Include="$(CscToolPath)\*" />

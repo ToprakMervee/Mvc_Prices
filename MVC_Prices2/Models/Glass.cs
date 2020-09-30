@@ -10,7 +10,8 @@ namespace MVC_Prices2.Models
     public class Glass
     {
         public int Id { get; set; }
-        public Product Product { get; set; }
+        [MaxLength(100)]
+        public string GlassType { get; set; }
         [MaxLength(100)]
         public string Description { get; set; }
     }

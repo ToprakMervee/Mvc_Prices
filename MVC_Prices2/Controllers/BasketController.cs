@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using MVC_Prices2.Identity;
 using MVC_Prices2.Models;
 using MVC_Prices2.ViewModels;
+using Newtonsoft.Json;
 
 namespace MVC_Prices2.Controllers
 {
@@ -47,15 +48,21 @@ namespace MVC_Prices2.Controllers
                         Width = x.Width,
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
-                        Glass = x.Product.Glass,
+                        Glass = db.Glass.Where(a=> a.GlassType==x.GlassQnt).ToList(),
                         ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
                         LatchArm = x.LatchArm,
-                        UpOpenning = x.UpOpenning
+                        UpOpenning = x.UpOpenning,
+                        GlassType = x.GlassQnt=="0"?"doppio, trasparente":x.GlassQnt=="1"?"doppio, satinato":"triplo, trasparente",
+                        GlassQnt = x.GlassQnt,
+                        Note = x.Note,
+                        LatoD = x.LatoD,
+                        Extra = x.Extra
 
-                    }).ToList();
-
+                    }).OrderBy(a=> a.ID).ToList();
+                var json = JsonConvert.SerializeObject(list);
+                ViewBag.json = json;
                 return View(list);
             }
         }

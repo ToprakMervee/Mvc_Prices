@@ -28,7 +28,7 @@ namespace MVC_Prices2.ViewModels
         public int RevisionId { get; set; }
         public double RemainSeconds { get; set; }
         public string ArmType { get; set; }
-        public string Exp1 { get; set; }
+        public string Note { get; set; }
         public string Exp2 { get; set; }
         public string DoorHandle { get; set; }
         public string LatchArm { get; set; }
@@ -38,5 +38,9 @@ namespace MVC_Prices2.ViewModels
         public List<Glass> Glass { get; set; }
         public List<OfferDet> OfferDet { get; set; }
         public string UpOpenning { get; set; }
+        public string GlassType { get; set; }
+        public string GlassQnt { get; set; }
+        public string LatoD { get; set; }
+        public string Extra { get; set; }
     }
 }

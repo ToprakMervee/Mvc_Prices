@@ -62,70 +62,82 @@ namespace MVC_Prices2.Controllers
             using (PriceDataModel2 db = new PriceDataModel2())
             {
                 List<BasketView> list = db.OfferDet
-                    .Where(a => a.OfferMas.User == user && a.OfferMas.ID == id && !a.OfferMas.IsDeleted &&
-                                a.OfferMas.Status == 1 && a.OfferMas.IsActive).Select(x => new BasketView()
-                                {
-                                    ID = x.ID,
-                                    ProductName = x.Product.ProductName,
-                                    PicUrl = x.Product.PicUrl,
-                                    ProductDetail = x.Product.ProductDetail,
-                                    System = x.System,
-                                    ProductId = x.ProductId,
-                                    Color = x.ColorName,
-                                    Direction = x.Direction,
-                                    Height = x.Height,
-                                    Price = x.Price,
-                                    Quantity = x.Quantity,
-                                    ColorUrl = x.Colors.ColorUrl,
-                                    Width = x.Width,
-                                    Reference = x.OfferMas.ReferenceNo,
-                                    Date = x.OfferMas.Date,
-                                    Glass = x.Product.Glass,
-                                    ArmType = x.ArmType,
-                                    Store = x.OfferMas.Store.Id,
-                                    RevisionId = x.OfferMas.RevisionId
+                    .Where(a => a.OfferMas.User == user && a.OfferMas.Status == 1 && a.OfferMas.ID == id && a.OfferMas.IsActive && !a.OfferMas.IsDeleted).Select(x => new BasketView()
+                    {
+                        ID = x.ID,
+                        ProductName = x.Product.ProductName,
+                        PicUrl = x.Product.PicUrl,
+                        ProductDetail = x.Product.ProductDetail,
+                        System = x.System,
+                        ProductId = x.ProductId,
+                        Color = x.ColorName,
+                        Direction = x.Direction,
+                        Height = x.Height,
+                        Price = x.Price,
+                        Quantity = x.Quantity,
+                        ColorUrl = x.Colors.ColorUrl,
+                        Width = x.Width,
+                        Reference = x.OfferMas.ReferenceNo,
+                        Date = x.OfferMas.Date,
+                        Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
+                        ArmType = x.ArmType,
+                        MasId = x.BasketMas_ID,
+                        DoorHandle = x.DoorHandle,
+                        LatchArm = x.LatchArm,
+                        UpOpenning = x.UpOpenning,
+                        GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
+                        GlassQnt = x.GlassQnt,
+                        Note = x.Note,
+                        LatoD = x.LatoD,
+                        Extra = x.Extra
 
-                                }).OrderBy(a => a.ID).ToList();
+                    }).OrderBy(a=> a.ID).ToList();
 
                 return View(list);
             }
         }
 
-        [HttpPost]
-        public JsonResult GetTempOffer(int id = 0)
-        {
-            var user = User.Identity.GetUserId();
-            using (PriceDataModel2 db = new PriceDataModel2())
-            {
-                List<BasketView> list = db.OfferDet
-                    .Where(a => a.OfferMas.User == user && a.OfferMas.ID == id && !a.OfferMas.IsDeleted).Select(x =>
-                        new BasketView()
-                        {
-                            ID = x.ID,
-                            ProductName = x.Product.ProductName,
-                            PicUrl = x.Product.PicUrl,
-                            ProductDetail = x.Product.ProductDetail,
-                            System = x.System,
-                            ProductId = x.ProductId,
-                            Color = x.ColorName,
-                            Direction = x.Direction,
-                            Height = x.Height,
-                            Price = x.Price,
-                            Quantity = x.Quantity,
-                            ColorUrl = x.Colors.ColorUrl,
-                            Width = x.Width,
-                            Reference = x.OfferMas.ReferenceNo,
-                            Date = x.OfferMas.Date,
-                            Glass = x.Product.Glass,
-                            ArmType = x.ArmType,
-                            MasId = x.BasketMas_ID,
-                            Store = x.OfferMas.Store.Id
+        //[HttpPost]
+        //public JsonResult GetTempOffer(int id = 0)
+        //{
+        //    var user = User.Identity.GetUserId();
+        //    using (PriceDataModel2 db = new PriceDataModel2())
+        //    {
+        //        List<BasketView> list = db.OfferDet
+        //            .Where(a => a.OfferMas.User == user && a.OfferMas.Status == 1).Select(x => new BasketView()
+        //            {
+        //                ID = x.ID,
+        //                ProductName = x.Product.ProductName,
+        //                PicUrl = x.Product.PicUrl,
+        //                ProductDetail = x.Product.ProductDetail,
+        //                System = x.System,
+        //                ProductId = x.ProductId,
+        //                Color = x.ColorName,
+        //                Direction = x.Direction,
+        //                Height = x.Height,
+        //                Price = x.Price,
+        //                Quantity = x.Quantity,
+        //                ColorUrl = x.Colors.ColorUrl,
+        //                Width = x.Width,
+        //                Reference = x.OfferMas.ReferenceNo,
+        //                Date = x.OfferMas.Date,
+        //                Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
+        //                ArmType = x.ArmType,
+        //                MasId = x.BasketMas_ID,
+        //                DoorHandle = x.DoorHandle,
+        //                LatchArm = x.LatchArm,
+        //                UpOpenning = x.UpOpenning,
+        //                GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
+        //                GlassQnt = x.GlassQnt,
+        //                Note = x.Note,
+        //                LatoD = x.LatoD,
+        //                Extra = x.Extra
 
-                        }).OrderBy(a => a.ID).ToList();
+        //            }).OrderBy(a => a.ID).ToList();
 
-                return Json(list, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //        return Json(list, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         [HttpPost]
         public JsonResult ToOrder(int id = 0)
@@ -225,7 +237,7 @@ namespace MVC_Prices2.Controllers
                     if (Id.Contains("LM"))
                     {
                         var offerMas = db.OfferMas.FirstOrDefault(b =>
-                            b.User == user && b.Status == 1 && b.ReferenceNo == Id && !b.IsDeleted);
+                            b.User == user && b.ReferenceNo == Id && !b.IsDeleted);
                         if (offerMas != null)
                         {
                             offerMas.IsDeleted = true;
@@ -293,10 +305,17 @@ namespace MVC_Prices2.Controllers
                         Width = x.Width,
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
-                        Glass = x.Product.Glass,
+                        Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
                         ArmType = x.ArmType,
-                        Store = x.OfferMas.Store.Id,
-                        MasId = x.BasketMas_ID
+                        MasId = x.BasketMas_ID,
+                        DoorHandle = x.DoorHandle,
+                        LatchArm = x.LatchArm,
+                        UpOpenning = x.UpOpenning,
+                        GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
+                        GlassQnt = x.GlassQnt,
+                        Note = x.Note,
+                        LatoD = x.LatoD,
+                        Extra = x.Extra
 
                     }).OrderBy(a => a.ID).ToList();
                 return Json(offerDetList, JsonRequestBehavior.AllowGet);

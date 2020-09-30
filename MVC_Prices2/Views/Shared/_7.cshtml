@@ -23,6 +23,7 @@ if(document.form1.kolorprofili.value=="6") { document.form1.system.value = 0 ; }
 
 
 function wprowadzaniesx () {
+    console.log("the first one works");
 
 
 changes ();
@@ -352,8 +353,11 @@ mojObiekt.strokeRect((startx + 4.5),(starty + 4.5),(szerokosc/2 - 5.5),(wysokosc
  mojObiekt.strokeRect((startx+13),(starty+5+wysokosc-(1000/skala)),(szerokosc/2-23),((1000/skala)-17));
 
 
+    if (document.form1.vetroListelli.value == 0) 
+        mojObiekt.fillStyle = "cornflowerblue";
+        else
+        mojObiekt.fillStyle = "white";
 
-mojObiekt.fillStyle = "cornflowerblue";
 
 
 
@@ -416,7 +420,10 @@ else
 
 
 
-mojObiekt.fillStyle = "cornflowerblue";
+if (document.form1.vetroListelli.value == 0) 
+    mojObiekt.fillStyle = "cornflowerblue";
+else
+    mojObiekt.fillStyle = "white";
 
 mojObiekt.fillRect((polowax + 12.2),(starty+7.5+wysokosc-(1000/skala)),(szerokosc/2-29),((1000/skala)-22.5));
 
@@ -484,6 +491,7 @@ else {mojObiekt.strokeRect((startx + 4.5),(starty+wysokosc-1),(szerokosc - 9),(1
 
 function wprowadzaniedx2 () {
 
+    console.log("the second one works");
 
 changes ();
 

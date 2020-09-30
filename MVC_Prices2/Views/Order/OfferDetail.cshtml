@@ -1,4 +1,5 @@
-﻿@model List<MVC_Prices2.ViewModels.BasketView>
+﻿@using Newtonsoft.Json
+@model List<MVC_Prices2.ViewModels.BasketView>
 @{
     ViewBag.Title = "Offer";
 }
@@ -90,6 +91,7 @@
                             <td bgcolor="orange" width="30" align="center"><font size="2" color="black" face="verdana">Pos.</font></td>
                             <td bgcolor="orange" align="center" width="150"><font size="2" color="black" face="Verdana" style="">Tipologia</font></td>
                             <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Descrizione</font></td>
+                            <td bgcolor="orange" align="center" width="200"><font size="2" color="black" face="Verdana">Nota</font></td>
                             <td bgcolor="orange" align="center" width="75"><font size="2" color="black" face="Verdana">Colore</font></td>
                             <td bgcolor="silver" align="center" width="75"><font size="2" color="black" face="Verdana">Prezzo</font></td>
                             <td bgcolor="orange" align="center" width="70"><font size="2" color="black" face="Verdana">Braccio</font></td>
@@ -102,7 +104,7 @@
                     </tbody>
 
                     <tr>
-                        <td bgcolor="orange" align="right" colspan="7"><font size="2" color="black" face="Verdana">In totale: &nbsp;</font></td>
+                        <td bgcolor="orange" align="right" colspan="8"><font size="2" color="black" face="Verdana">In totale: &nbsp;</font></td>
                         <td align="center" bgcolor="orange"><font size="2" color="black" face="verdana"><input type="text" size="1" value="@((int)Model.Sum(z=> z.Quantity))" id="topquantity" disabled>&nbsp;  pz.</font></td>
                         <td bgcolor="orange" align="center"><input type="text" size="5" id="topamount" disabled="" value="@((int)Model.Sum(x=> x.Price*x.Quantity))"> <font size="2" color="black" face="tahoma"> € </font></td>
                     </tr>
@@ -204,9 +206,9 @@ else
                             <label for="modalquantity">Numero Pezzi</label>
                         </td>
                         <td>
-                            
+
                             <select class="form-control" id="modalquantity">
-                                
+
                                 <option selected="" value="1">
                                     1
                                 </option>
@@ -300,23 +302,39 @@ else
             <font size="1">
                 (telaio pieno a "L" senz'aletta)<br />
                 <font size="2" color="black" face="tahoma">
-                    <b><font color="black">{{ProductName}}</font></b><font color="black"><br>Soglia bassa in alluminio</font><br><font color="navy"> apertura a {{Direction}} (DX)</font><br><font size="2">
+                    <b><font color="black">{{ProductName}}</font></b>
+                    <font color="black">
+                        {{#if Extra.sogliaBassa}}
+                        <br>
+                        Soglia ribassata
+                        {{/if}}
+                    </font>
+                    <br><font color="navy"> apertura a {{Direction}} (DX)</font><br>
+                    <font size="2">
                         {{System}}<br><font size="1">
                             {{Color}} in massa<br>guarnizione grigia
                             <font size="1">
                                 <br />
+                                {{GlassType}}
+                                <br />
                                 {{#each Glass}}
-                                <b>{{Description}}</b>
+                                {{Description}}
                                 <br />
                                 {{/each}}
-                                valore k : 1.1 <br />
-                                canalina a bordo caldo
+                                {{#if Extra.pervIslem}}
+                                {{Extra.pervIslem}}
+                                ({{#each Extra.perTaraf}}
+                                {{this}}
+                                {{/each}})
+                                {{/if}}
+
                             </font>
                         </font>
                     </font>
                 </font>
             </font>
         </td>
+        <td> <font style="padding-left: 15px;" size="1"> <b>{{Note}}</b> </font></td>
         <td align="center">
 
             <img src="/Content/img/{{ColorUrl}}" width="80" height="70" style="border: 1px solid silver">
@@ -614,8 +632,8 @@ else
                 setTimeout(function () {
                     window.location.replace("/Order/Orders");
                 }, 1000);
-                       
-                  
+
+
             }
         });
     }
@@ -625,17 +643,21 @@ else
 
         var url = window.location.pathname;
         var id = url.substring(url.lastIndexOf('/') + 1);
+        tempData =  @Html.Raw(JsonConvert.SerializeObject(Model));
 
-
-        $.ajax({
-            type: "POST",
-            url: "/Order/GetTempOffer/" + id,
-            data: id,
-            success: function (data) {
-                tempData = data;
-                CreateDetails(data);
-            }
-        });
+        for (var i = 0; i < tempData.length; i++) {
+            tempData[i].Extra = JSON.parse(tempData[i].Extra);
+        }
+        CreateDetails(tempData);
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Order/GetTempOffer/" + id,
+        //    data: id,
+        //    success: function (data) {
+        //        tempData = data;
+        //        CreateDetails(data);
+        //    }
+        //});
         $("#toOrder").on("click",
             function () {
 

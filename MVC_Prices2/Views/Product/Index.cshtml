@@ -54,23 +54,7 @@ else
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td width="50"></td>
 
-                                <td align="center">
-                                    <br />
-
-                                    <b>Sistema:</b>
-
-                                    <select name="system" id="system" onchange="Hesap(1);">
-                                        <option value="0" selected="">Pro 7006 ®</option>
-                                        <option value="2">Pro 7006 ® 2</option>
-                                        <option value="1">Pro 8106 ® 1</option>
-
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr></tr>
                             <tr>
                                 <td align="right">
                                     <font face="Verdana" style="font-size: 13px; color: blue;">
@@ -89,31 +73,64 @@ else
                                     </td>
                                     <td></td>
                                 </tr>
-                            <tr>
-                                <td valign="bottom">
-                                    <div>
-                                        <img style="margin-left:150px;" id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
-                                    </div>
-                                    <font face="Verdana">
-                                        <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
-                                            <b style="margin-left: 55px">Altezza</b>
-                                            <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
-                                        </div>
-                                        <br /><br /><br />
-                                        <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
-                                            Pellicola simil-legno/colore in massa<br>
-                                            <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
-                                        </p>
-                                    </font>
-                                </td>
+                                <tr>
+                                    <td valign="bottom">
 
-                                <td>
-                                    <canvas id="mojCanvas" width="250" height="290"></canvas>
+                                        <font face="Verdana">
+                                            <br />
 
-                                </td>
-                            </tr>
-                            
-                          
+                                            <b class="kesit">Sistema:</b>
+
+                                            <select class="kesit" name="system" id="system" onchange="Hesap(1);">
+                                                <option value="0" selected="">Pro 7006 ®</option>
+                                                <option value="2">Pro 7006 ® 2</option>
+                                                <option value="1">Pro 8106 ® 1</option>
+
+                                            </select>
+                                            <div>
+                                                <img id="kesit" width="170" class="kesit" src="~/Content/img/PRO7006.png" />
+                                            </div>
+                                            <br />
+                                            <div class="sogliaBassa" id="pervazKesim">
+                                                <input class="kesimmi" name="kesimmi" type="checkbox" id="kesimmi" value="tagliare il davanzale" onchange="Hesap()">
+                                                <span class="kesimmi"> Tagliare il davanzale (2€ per lato)</span>
+                                                <input class="tirnakmi" name="tirnakmi" type="checkbox" id="tirnakmi" value="aletta in casso" onchange="Hesap()">
+                                                <span class="tirnakmi"> Aletta in casso (1.8€ per mt)</span>
+                                                <br />
+                                                <br />
+                                                <div id="directions" style="display: none">
+                                                    <input class="form-check-input" name="pervazTaraf" type="checkbox" id="inlineCheckbox1" value="Sinistra" onchange="Hesap()">
+                                                    <label class="form-check-label" for="inlineCheckbox1">Sinistra</label>
+
+                                                    <input class="form-check-input" name="pervazTaraf" type="checkbox" id="inlineCheckbox2" value="Destra" onchange="Hesap()">
+                                                    <label class="form-check-label" for="inlineCheckbox2">Destra</label>
+
+                                                    <input class="form-check-input" name="pervazTaraf" type="checkbox" id="inlineCheckbox3" value="Su" onchange="Hesap()">
+                                                    <label class="form-check-label" for="inlineCheckbox3">Su</label>
+
+                                                    <input class="form-check-input" name="pervazTaraf" type="checkbox" id="inlineCheckbox4" value="Giu" onchange="Hesap()">
+                                                    <label class="form-check-label" for="inlineCheckbox4">Giu</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7 col-md-7 pull-right" style="margin-right: 25px;">
+                                                <b style="margin-left: 55px">Altezza</b>
+                                                <input id="boy" name="wys" placeholder="Altezza" type="text" value="@Model.DefHeight" onchange="Hesap()" data-toggle="tooltip" data-placement="top" title="Altezza" onch data-plugin="TouchSpin" data-options="{ initval: 75,max:3500,min:0, postfix_extraclass: 'btn btn-default', buttondown_class: 'btn btn-info', buttonup_class: 'btn btn-info' }">
+                                            </div>
+                                            <br /><br /><br />
+                                            <p style="margin-left: 30px;" class="pull-right" style="font-size: 9px; font-family: Verdana;">
+                                                Pellicola simil-legno/colore in massa<br>
+                                                <img src="/Content/img/probkabianco.jpg" id="probka" style="border: silver 1px solid; width: 190px; height: 80px;">
+                                            </p>
+                                        </font>
+                                    </td>
+
+                                    <td>
+                                        <canvas id="mojCanvas" width="250" height="290"></canvas>
+
+                                    </td>
+                                </tr>
+
+
                                 <tr>
 
                                     <td class="pull-right">
@@ -122,19 +139,30 @@ else
 
 
 
-                                        <font face="Verdana" style="font-size: 12px; margin-right: 35px;">
+                                        <font face="Verdana" style="font-size: 12px; margin-right: 23px;">
 
                                             <b>Colore:</b>
                                             <select name="kolorprofili" onchange="Hesap();">
                                                 <option value="0" selected="">bianco</option>
-                                                <option value="0">laminate bianco</option>
                                                 <option value="1">golden oak</option>
                                                 <option value="2">noce</option>
-                                                <option value="3">mogano</option>
-                                                <option value="4">winchester</option>
-                                                <option value="8">verde muschio</option>
-                                                <option value="9">antracite</option>
+                                                <option value="3">mogano(premio)</option>
+                                                <option value="4">winchester(premio)</option>
+                                                <option value="8">verde muschio(premio)</option>
+                                                <option value="9">antracite(premio)</option>
+                                                <option value="0">laminate bianco(premio)</option>
                                             </select>
+                                            <div id="latoD" style="display: none;">
+                                                <input type="radio" name="latoD" id="latoDIn" onchange="Hesap();" value="Interno" />
+                                                <label class="form-check-label" for="latoDIn">Interno</label>
+
+                                                <input type="radio" name="latoD" id="latoDEs" onchange="Hesap();" value="Esterno" />
+                                                <label class="form-check-label" for="latoDEs">Esterno</label>
+
+                                                <input type="radio" name="latoD" id="latoDDp" onchange="Hesap();" value="Doppio" checked="checked" />
+                                                <label class="form-check-label" for="latoDDp">Doppio</label>
+
+                                            </div>
                                         </font>
                                     </td>
 
@@ -149,34 +177,82 @@ else
                                     </td>
 
                                 </tr>
-                            @if (Model.Id==4)
-                            {
-                                <tr>  
+                                <tr>
                                     <td>
-                                        <div style="padding-left: 166px" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            <label class="btn btn-primary active" id="leftside" >
-                                                <input  type="radio" name="openoption" value="Left" id="left1" autocomplete="off"><i class="zmdi zmdi-arrow-left"></i> Sinistra
-                                            </label>
-                                            <label class="btn btn-primary" id="rightside" >
-                                                <input type="radio" name="openoption" value="Right" id="right1" autocomplete="off"  ><i class="zmdi zmdi-arrow-right"></i> Diritto
-                                            </label>
-
-                                        </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15px;"></tr>
-                            }
+                                @if (Model.Id == 9 || Model.Id == 3 || Model.Id == 7 || Model.Id == 10 || Model.Id == 5)
+                                {
+                                    <tr>
+                                        <td class="sogliaBassa">
+
+
+                                            <font face="Verdana">
+                                                <label for="sogliaBassa" style="font-size: 12px;"><b>Soglia ribassata(8€ per mt):</b></label>
+                                            </font>
+                                            <input onchange="Hesap()" type="checkbox" name="sogliaBassa" id="sogliaBassa" class="checkbox-danger" />
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Id == 7 || Model.Id == 10)
+                                {
+                                    <tr>
+                                        <td class="sogliaBassa">
+                                            <div style="border: 0.5px silver solid;">
+                                                <div>
+                                                    <input type="radio" name="vetroListelli" id="inlineRadio1" checked="" value="0" onchange="Hesap()">
+                                                    <font face="Verdana">
+                                                        <label for="inlineRadio1" style="font-size: 12px;"><b>Vetro + Vetro  </b></label>
+                                                    </font>
+                                                </div>
+                                                <div>
+                                                    <input type="radio" name="vetroListelli" id="inlineRadio2" value="1" onchange="Hesap()">
+                                                    <font face="Verdana">
+                                                        <label for="inlineRadio2" style="font-size: 12px;"><b> Vetro + Listelli  </b></label>
+                                                    </font>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                                @if (Model.Id == 4 || Model.Id == 12)
+                                {
+                                    <tr>
+                                        <td>
+
+
+                                            <div class="sogliaBassa" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                @if (Model.Id == 4)
+                                                {
+                                                    <b>Apertura Superiore</b><br />
+                                                }
+                                                else
+                                                {
+                                                    <b>Posto del Ante</b><br />
+                                                }
+                                                <label class="btn btn-primary " id="leftside">
+                                                    <input type="radio" name="openoption" value="Left" id="left1" autocomplete="off"><i class="zmdi zmdi-arrow-left"></i> Sinistra
+                                                </label>
+                                                <label class="btn btn-primary active" id="rightside">
+                                                    <input type="radio" name="openoption" value="Right" id="right1" autocomplete="off"><i class="zmdi zmdi-arrow-right"></i> Destra
+                                                </label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 15px;"></tr>
+                                }
 
                                 <tr>
                                     <td class="" valign="bottom">
 
-                                        <font face="Verdana" style="padding-left: 142px; font-size: 12px;">
+                                        <font face="Verdana" class="maniglia" style="font-size: 12px;">
                                             <table id="hover" style="transition: width 2s;">
 
                                                 <tr>
-                                                    <td style="width: 100px"></td>
-                                                  
-                                                        <td style="width: 109px">
+                                                    <td class="wmaniglia"></td>
+
+                                                    <td style="width: 135px">
                                                         @if (Model.Id == 11)
                                                         {
                                                             <input id="productVasistas" type="checkbox" checked data-toggle="toggle" data-size="mini" data-on="Crichetto" data-off="Maniglia" data-onstyle="primary" data-offstyle="info" />
@@ -189,14 +265,14 @@ else
                                                         }
 
 
-                                                        </td>
+                                                    </td>
 
-                                                        <td width="25">
-                                                            <input id="armfixed" type="checkbox"
-                                                                   @*@if (Model.IsArmFixed) { @Html.Raw("disabled") }*@
-                                                                   checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
-                                                        </td>
-                                                    
+                                                    <td width="25">
+                                                        <input id="armfixed" type="checkbox" onchange="Hesap()"
+                                                               @*@if (Model.IsArmFixed) { @Html.Raw("disabled") }*@
+                                                               checked data-toggle="toggle" data-size="mini" data-on="Standard" data-off="Speciale" data-onstyle="primary" data-offstyle="info">
+                                                    </td>
+
 
 
                                                 </tr>
@@ -206,8 +282,8 @@ else
                                                     <td></td>
                                                     <td><b style="display: none;" id="doorHandlerColor">Maniglia Colore:</b></td>
                                                     <td>
-                                                        <select style="width: 100px;" class="door2" name="door" onchange="">
-                                                            <option value="0" selected="">Standardo</option>
+                                                        <select style="width: 100px;" class="door2" name="door" onchange="Hesap()">
+                                                            <option value="0" selected="">Standard</option>
                                                             <option value="1">bianco</option>
                                                             <option value="2">Marrone</option>
                                                             <option value="3">Nero</option>
@@ -227,7 +303,9 @@ else
 
                                         <font face="Verdana" style="padding-left: 122px; font-size: 12px; display: none;" id="armbuttons">
                                             <br />
-                                            <div style="padding-left: 160px; " class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <b class="sogliaBassa">Posto Del Maniglia:</b>
+
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-primary active" id="up">
                                                     <input type="radio" name="armoptions" value="Up" id="up" autocomplete="off"><i class="zmdi zmdi-upload"></i> Su
                                                 </label>
@@ -251,24 +329,43 @@ else
                                 </tr>
 
                                 <tr>
-                                    <td class="pull-right" valign="bottom">
+                                    <td align="right" valign="bottom">
 
                                         <font face="Verdana" style="font-size: 12px;">
                                             <br />
-                                            <b>Vetro;</b> <table>
-                                                @foreach (var el in (List<Glass>)ViewData["Glass"])
-                                                {
+
+                                            <table>
+                                                <tbody>
                                                     <tr>
                                                         <td>
-                                                            @el.Description
+                                                            lato esterno  : 3.3.1/stratificato
                                                         </td>
                                                     </tr>
-                                                }
-                                                <tr>
-                                                    <td>
-                                                        valore k: 1.1
-                                                    </td>
-                                                </tr>
+                                                    <tr id="vetroTriplo" style="display: none;">
+
+                                                        <td>
+                                                            lato intermedio : 5/basso emissivo
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span id="vetroInt4"> lato interno : 4/basso emissivo</span>
+                                                            <span id="vetroInt331" style="display: none;"> lato interno : 3.3.1/stratificato</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span id="vetroCamera14">spessore di vetrocamera : 14 </span>
+                                                            <span id="vetroCamera6" style="display: none;">spessore di vetrocamera : 6 </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span id="vetroCamera14">  valore k: 1.1</span>
+                                                            <span id="vetroCamera6" style="display: none;">  valore k: 1.5</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
 
                                             <select style="display: none;" name="konfiguracja" onchange="imptotale();">
@@ -280,17 +377,21 @@ else
                                         </font>
 
                                     </td>
+                                    <td valign="middle" style="padding-left: 50px;">
+                                        <label for="notes" style="font-size: 12px;"><b>Nota: </b></label>
+                                        <textarea type="text" name="notes" id="notes" rows="4" cols="40"></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
 
                                     <td align="right">
-                                        <font face="Verdana" style="font-size: 12px;">
-                                             Tipo: 
-                                            <select name="kolorszkla" onchange="imptotale();">
+                                        <font face="Verdana" style="padding-right: 5px;font-size: 12px;">
+                                            vetro:
+                                            <select name="kolorszkla" id="kolorszkla" onchange="Hesap();">
                                                 <option value="0" selected="">doppio, trasparente</option>
                                                 <option value="1">doppio, satinato</option>
+                                                <option value="3">triplo, trasparente</option>
                                                 @*<option value="2">doppio, stampato C</option>
-                                                    <option value="3">triplo, trasparente</option>
                                                     <option value="4">triplo, satinato</option>
                                                     <option value="5">triplo, stampato C</option>*@
                                             </select>
@@ -307,39 +408,13 @@ else
                                             <b>Numero pezzi:</b>
 
                                             <select name="ilosc" onchange="Hesap();">
-                                                <option value="0" selected="">
-                                                    0
-                                                </option>
-                                                <option value="1">
-                                                    1
-                                                </option>
-                                                <option value="2">
-                                                    2
-                                                </option>
-                                                <option value="3">
-                                                    3
-                                                </option>
-                                                <option value="4">
-                                                    4
-                                                </option>
-                                                <option value="5">
-                                                    5
-                                                </option>
-                                                <option value="6">
-                                                    6
-                                                </option>
-                                                <option value="7">
-                                                    7
-                                                </option>
-                                                <option value="8">
-                                                    8
-                                                </option>
-                                                <option value="9">
-                                                    9
-                                                </option>
-                                                <option value="10">
-                                                    10
-                                                </option>
+                                                @for (int i = 0; i < 21; i++)
+                                                {
+                                                    <option value="@i" (@i= =0?@Html.Raw("selected"):@Html.Raw(""))>
+                                                        @i
+                                                    </option>
+                                                }
+
                                             </select>
 
 
@@ -351,9 +426,7 @@ else
 
                                         <font face="Verdana" style="font-size: 12px;">
                                             Importo:
-                                            <input type="hidden" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
-
-
+                                            <input type="hidden" onchange="Hesap()" name="dodatki"> <span id="cenaokna" style="color: red; font-size: 16pt">0</span> €
                                         </font>
 
 
@@ -397,8 +470,8 @@ else
     <script type="text/javascript">
         var productLimits = @Html.Raw(Json.Encode(new{MaxWidth=Model.MaxWidth,MinWidth=Model.MinWidth,MaxHeight=Model.MaxHeight,MinHeight=Model.MinHeight,ModelId=Model.Id}));
         var fiyatlar;
-        var radioLeftRight = productLimits.ModelId == 4?"right":"yok";
-       
+        var radioLeftRight = productLimits.ModelId == 4 || productLimits.ModelId == 12 ?"right":"yok";
+
         function GetDatas()
         {
             var profil = document.getElementById("system").value;
@@ -418,8 +491,8 @@ else
 
 
         }
-        function Hesap(refresh=0)
-        {
+        function Hesap(refresh=0) {
+            changeProfile();
             imptotale();
             if (refresh == 1) {
                 GetDatas();
@@ -431,79 +504,150 @@ else
 
         }
 
-
         function Hesap2() {
             var miktar = $("select[name='ilosc'] option:selected").text();
             var renk = $("select[name='kolorprofili'] option:selected").text();
             var fiyat = 0;
             var tutar = 0;
-            var matrixHeight = 0;
-            var matrixWidth = 0;
             var factorPrice = 0;
             var en = document.getElementById("en").value;
             var boy = document.getElementById("boy").value;
             var profil = document.getElementById("system").value;
+            var kolrengi = document.form1.door.value === "0" ? 0 : 5;
+            var camfiyat = 0;
+            var camtipi = document.form1.kolorszkla.value;
+            if (camtipi === "1") {
+                camfiyat = 7;
+                }
+            else if (camtipi === "3") {
+                if (boy < 1701)
+                    camfiyat = 51;
+                else
+                    camfiyat = 27;
+            }
+            setVetroDets();
+            var m2 = en * boy / 1000000 * camfiyat;
+            var armvasistas = $('#productVasistas').is(':checked');
+            var almesik;
+            if (document.form1.sogliaBassa)
+                almesik = document.form1.sogliaBassa.checked;
+            else
+                almesik = false;
+            if (armvasistas && (en>800 && boy>600)) crichettoErr();
+            var armDiff = armvasistas ? 1 : 0;
+            var sogBasDiff = almesik ? en / 1000 * 8 : 0;
+            var cutDiff = 0;
+            var kesimmi = document.form1.kesimmi.checked;
+            var tirnakmi = document.form1.tirnakmi.checked;
+            var latoD = document.form1.latoD.value;
+            if (kesimmi && profil === "2") {
+                cutDiff = getCheckedBoxes("pervazTaraf").length*2;
+            }
+            if (tirnakmi && profil === "0") {
+                var checkedBoxes = getCheckedBoxes("pervazTaraf");
+                for (var ij = 0; ij < checkedBoxes.length; ij++) {
+                    if (checkedBoxes[ij] === "Sinistra" || checkedBoxes[ij] === "Destra") {
+                        cutDiff = Math.ceil(cutDiff + (en*1.8/1000));
+                    } else {
+                        cutDiff = Math.ceil(cutDiff + (boy*1.8/1000));
+                    }
 
+                }
+            }
             for (var i = 0; i < fiyatlar["length"]; i++) {
-                if (renk === "bianco") {
+                if (renk !== "bianco")
+                    $("#latoD").css("display","block");
+                 else
+                    $("#latoD").css("display", "none");
+
+                    if (renk === "bianco" || renk ==="beyaz" || 1===1) {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
                         fiyat = fiyatlar[i].Prices;
                         factorPrice = Number(fiyat);
+                        if (renk === "noce" || renk === "golden oak") {
+                            if(latoD ==="Doppio")
+                                factorPrice = Math.ceil(factorPrice * 1.15);
+                            else
+                                factorPrice = Math.ceil(factorPrice * 1.08);
+
+                        } else if (renk !== "bianco" && renk !== "noce" && renk !== "golden oak") {
+                            if (latoD === "Doppio") {
+                                factorPrice = Math.ceil(factorPrice * 1.15);
+                                factorPrice = Math.ceil(factorPrice * 1.05);
+                                }
+                            else
+                            {
+                                factorPrice = Math.ceil(factorPrice * 1.08);
+                                factorPrice = Math.ceil(factorPrice * 1.05);
+                                }
+                        }
                         break;
                     }
-
-
                 }
                 else {
                     if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == true) {
                         fiyat = fiyatlar[i].Prices;
-                        console.log(fiyatlar[i].Id);
-
                     }
-
                 }
                 factorPrice = Number(fiyat);
+            }
 
-        }
-
-            factorPrice = Math.ceil(factorPrice);
+            factorPrice = Math.ceil(factorPrice+m2-armDiff+kolrengi+sogBasDiff+cutDiff);
             tutar = factorPrice * miktar;
             document.form1.dodatki.value = factorPrice;
             document.getElementById('cenaokna').innerHTML = tutar;
-
+            document.cookie = factorPrice;
 
         }
         function controlLimits() {
             alert("works fine");
         }
 
+        function crichettoErr() {
+            Swal.fire(
+                'Error',
+                'Non è possibile utilizzare cricchetto di queste misure.',
+                'error'
+            ).then((result) => {
+                location.reload();
+            });
+            }
+
         $("#kesit").on("click", function() {
             $('#imagepreview').attr('src', $('#kesit').attr('src')); // here asign the image to the modal when the user click the enlarge link
             var system = $("select[name='system'] option:selected").text();
             $('#sezProfile').text(" - "+system);
             $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+
+
         });
         $(document).ready(function () {
             if (productLimits.ModelId==11) {
                 $('#armfixed').bootstrapToggle('disable');
             }
-           
+
             GetDatas();
             $(".door2").css('display', 'none');
             $("#doorHandlerColor").css('display', 'none');
             $('#productVasistas').on('change', function () {
                 var armvasistas = $('#productVasistas').is(':checked');
+                $('#armfixed').bootstrapToggle('on');
                 if (!armvasistas) {
                     $('#armfixed').bootstrapToggle('enable');
                 } else {
+                    var en = document.getElementById("en").value;
+                    var boy = document.getElementById("boy").value;
+                    if (en * boy > 480000) {
+                        crichettoErr();
+                        return;
+                    }
                     $('#armfixed').bootstrapToggle('disable');
                 }
-                 
-                
+                Hesap();
             });
             $('#armfixed').on('change', function() {
                 var armdirection = $('#armfixed').is(':checked');
-
+                document.form1.door.value = "0";
                 if (armdirection) {
                     $('#armbuttons').hide();
                     $(".door2").css('display', 'none');
@@ -517,8 +661,8 @@ else
 
 
         });
-        
-        
+
+
         function ArmUpDown() {
 
 
@@ -533,13 +677,51 @@ else
                 radioLeftRight = "left";
                 imptotale();
             } if (y === true) {
-               
+
                 radioLeftRight = "right";
                 imptotale();
             }
         });
-       
 
+        function setVetroDets() {
+            var vetro331 = $("#vetroInt331");
+            var vetro4 = $("#vetroInt4");
+            var vetroCam14 = $("#vetroCamera14");
+            var vetroCam6 = $("#vetroCamera6");
+            var vetroMiddio = $("#vetroTriplo");
+            var vetro = document.form1.kolorszkla.value;
+            var altezza = document.form1.wys.value;
+
+            if (vetro === "0" || vetro === "1") {
+                vetroCam14.css("display","block");
+                vetroCam6.css("display","none");
+                vetroMiddio.css("display","none");
+                if (altezza > 1700) {
+                    vetro4.css("display", "none");
+                    vetro331.css("display", "block");
+                } else {
+                    vetro4.css("display", "block");
+                    vetro331.css("display", "none");
+                }
+            } else {
+                vetroMiddio.css("display", "block");
+                vetroCam14.css("display", "none");
+                vetroCam6.css("display", "block");
+                vetro4.css("display", "none");
+                vetro331.css("display", "block");
+                }
+        }
+
+        $("#kesimmi, #tirnakmi").on("click", toggleDirections);
+        function toggleDirections() {
+            var isChecked1 = $("#kesimmi").prop("checked");
+            var isChecked2 = $("#tirnakmi").prop("checked");
+            if (isChecked1 || isChecked2)
+                $("#directions").css("display", "block");
+            else
+                $("#directions").css("display", "none");
+
+        }
         $("#system").on("click",changeProfile);
         function changeProfile() {
 
@@ -547,16 +729,32 @@ else
 
             var profiles = new Array('/Content/img/PRO7006.png', "/Content/img/PRO8106_1.png", "/Content/img/PRO7006-2_1.png");
 
-
+            var systemVal = document.form1.system.value;
             document.getElementById('kesit').src = profiles[document.form1.system.value];
+            $("#kesimmi").prop("checked",false);
+            $("#tirnakmi").prop("checked", false);
+            $("#directions").css("display", "none");
+            $("input[name='pervazTaraf']:checkbox").prop("checked", false);
 
-
+    
+            $('#pervazKesim').css('display', 'block');
+            if (systemVal === "0" || systemVal === "1" ){
+                $('.tirnakmi').css('display', 'block');
+                $('.kesimmi').css('display', 'none');
+                }else {
+                $('.tirnakmi').css('display', 'none');
+                $('.kesimmi').css('display', 'block');
+            }
 
         }
     </script>
     if (Model.Id == 1)
     {
         @Html.Partial("_1");
+    }
+    else if (Model.Id == 2)
+    {
+        @Html.Partial("_2");
     }
     else if (Model.Id == 3)
     {
@@ -590,8 +788,16 @@ else
     {
         @Html.Partial("_11");
     }
+    else if (Model.Id == 12)
+    {
+        @Html.Partial("_12");
+    }
+    else if (Model.Id == 13)
+    {
+        @Html.Partial("_13");
+    }
     else
     {
-        @Html.Partial("_2");
+        @Html.Partial("Error");
     }
 }

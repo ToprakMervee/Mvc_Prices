@@ -28,7 +28,7 @@ namespace MVC_Prices.Controllers
             {
                 
                 var product = db.Products.FirstOrDefault(a => a.Id == id);
-                ViewData["Glass"] = db.Glass.Where(a => a.Product.Id == id).ToList();
+              
                 
                 return View(product);
             }
@@ -46,7 +46,6 @@ namespace MVC_Prices.Controllers
                     var lastindex = db.Reference.FirstOrDefault(c => c.StoreId == userCard.StoreId && c.Type=="Offer");
                     if (lastindex==null)
                     {
-                        
                         Reference lastindex1 = new Reference();
                         lastindex1.StoreId = userCard.StoreId;
                         lastindex1.Type = "Offer";

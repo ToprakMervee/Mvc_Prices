@@ -231,15 +231,14 @@
 
             //sZyby
 
-            if ((document.form1.konfiguracja.value == 3) || (document.form1.konfiguracja.value == 0)) { mojObiekt.fillStyle = "lightblue"; }
+            if ((document.form1.kolorszkla.value == 3) || (document.form1.kolorszkla.value == 0)) { mojObiekt.fillStyle = "lightblue"; }
 
             else { mojObiekt.fillStyle = "cornflowerblue"; }
-
             //mojObiekt.fillRect((startx+16),(starty+16),(szerokosc-32),(wysokosc-30));
 
             mojObiekt.fillRect((startx + 16), (starty + 16), (szerokosc - 32), (wysokosc - 19 - (1000 / skala)));
 
-            if ((document.form1.konfiguracja.value == 0) || (document.form1.konfiguracja.value == 0)) { mojObiekt.fillStyle = "lightblue"; }
+            if ((document.form1.kolorszkla.value == 0) || (document.form1.kolorszkla.value == 0)) { mojObiekt.fillStyle = "lightblue"; }
 
             else { mojObiekt.fillStyle = "cornflowerblue"; }
 
@@ -312,7 +311,6 @@
     function wprowadzaniedx() {
 
         korekta();
-
 
         changes();
 
@@ -534,7 +532,7 @@
 
             mojObiekt.fillRect((startx + 16), (starty + 16), (szerokosc - 32), (wysokosc - 19 - (1000 / skala)));
 
-            if ((document.form1.konfiguracja.value == 0) || (document.form1.konfiguracja.value == 0)) { mojObiekt.fillStyle = "lightblue"; }
+            if ((document.form1.vetroListelli.value == 1) || (document.form1.vetroListelli.value == 1)) { mojObiekt.fillStyle = "white"; }
 
             else { mojObiekt.fillStyle = "cornflowerblue"; }
 
