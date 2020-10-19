@@ -1,0 +1,342 @@
+﻿$bootstrap-sm: 576px;
+$bootstrap-md: 768px;
+$bootstrap-lg: 992px;
+$bootstrap-xl: 1200px;
+
+// Crop thumbnail images.
+#gallery {
+    img
+
+{
+    height: 75vw;
+    object-fit: cover;
+
+    @media (min-width: $bootstrap-sm) {
+        height: 35vw;
+    }
+
+    @media (min-width: $bootstrap-lg) {
+        height: 18vw;
+    }
+}
+
+}
+
+
+// Crop images in lightbox.
+.carousel-item {
+    img
+
+{
+    height: 60vw;
+    object-fit: cover;
+
+    @media (min-width: $bootstrap-sm) {
+        height: 350px;
+    }
+}
+
+}
+
+// --- END: crop images --- //
+
+
+// --- BEGIN: custom styling demo --- //
+// An example of custom styling for gallery and lightbox, to show what's possible in terms of aesthetic customization.
+
+* {
+    transition: 0.3s;
+}
+
+#gallery.custom {
+    padding: 0 15px;
+    img
+
+{
+    display: block;
+    margin: 15px 0;
+    border-radius: 300px 30px 300px 300px;
+    &:hover
+
+{
+    border-radius: 30px 90px 30px 30px;
+}
+
+}
+}
+
+#exampleModal.custom {
+    .modal-content
+
+{
+    background: none;
+    border: none;
+}
+
+.modal-header {
+    border: none;
+    button
+
+{
+    background: none;
+    border-radius: 100px 100px 0 0;
+    padding: 5px 10px;
+    opacity: 1;
+    position: relative;
+    top: 3px;
+    border: solid 2px white;
+
+    @media (min-width: $bootstrap-lg) {
+        top: 15px;
+    }
+
+    &:hover
+
+{
+    top: 3px;
+}
+
+}
+
+span {
+    color: white;
+}
+
+}
+
+.modal-body {
+    padding: 0;
+    border: none;
+    position: relative;
+    &::before, &::after
+
+{
+    content: '';
+    height: 50px;
+    width: 50px;
+    display: block;
+    position: absolute;
+    background: white;
+    border-radius: 3px 10px;
+
+    @media (min-width: $bootstrap-md) {
+        border-radius: 3px 30px;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+&::before {
+    top: -5px;
+    left: -5px;
+
+    @media (min-width: $bootstrap-md) {
+        top: -15px;
+        left: -15px;
+    }
+}
+
+&::after {
+    bottom: -5px;
+    right: -5px;
+    z-index: -1;
+
+    @media (min-width: $bootstrap-md) {
+        bottom: -15px;
+        right: -15px;
+    }
+}
+
+}
+
+.modal-footer {
+    border: none;
+    margin-top: 60px;
+
+    @media (min-width: $bootstrap-lg) {
+        margin-top: 40px;
+    }
+
+    .btn
+
+{
+    margin: auto;
+    border: solid 2px white;
+    background: none;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    padding: 0.2em 0.7em;
+    &:hover
+
+{
+    background: white;
+    color: black;
+}
+
+}
+}
+
+.carousel-control-prev, .carousel-control-next {
+    font-size: 2em;
+    top: auto;
+    opacity: 1;
+    bottom: -52px;
+
+    @media (min-width: $bootstrap-md) {
+        top: 0;
+        opacity: 0.5;
+        bottom: 0;
+    }
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.carousel-control-prev {
+    @media (min-width: $bootstrap-md) {
+        left: -90px;
+    }
+}
+
+.carousel-control-next {
+    @media (min-width: $bootstrap-md) {
+        right: -90px;
+    }
+}
+
+.carousel-indicators {
+    bottom: -60px;
+
+    @media (min-width: $bootstrap-lg) {
+        bottom: -30px;
+    }
+
+    li
+
+{
+    height: 30px;
+    border-radius: 100px;
+    background: none;
+    border: solid 2px white;
+
+    @media (min-width: $bootstrap-lg) {
+        height: 10px;
+    }
+
+    &:hover
+
+{
+    background: white;
+}
+
+&.active {
+    background: white;
+}
+
+}
+}
+}
+
+// --- END: custom styling demo --- //
+
+
+// --- BEGIN: style switch --- //
+// This is just styling for the style toggle switch. Mostly copied from https://www.w3schools.com/howto/howto_css_switch.asp
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+
+    @media (min-width: $bootstrap-sm) {
+        margin: 0;
+    }
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.switch-wrap {
+    text-align: center;
+    background-color: #b1fbc1;
+    padding: 30px;
+    border-radius: 3px;
+    margin: 30px 0 0;
+
+    @media (min-width: $bootstrap-sm) {
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+    }
+}
+
+.switch-text {
+    display: block;
+    margin: 0.5em;
+
+    @media (min-width: $bootstrap-sm) {
+        margin: 0 1em 0 0;
+    }
+}

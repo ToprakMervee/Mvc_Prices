@@ -18,7 +18,7 @@ $(".products")
 $(document).ready(function () {
     var aa = $('.productdet');
     aa.height = window.innerHeight;
-    wprowadzaniedx();
+    //wprowadzaniedx();
     $('#direction').on('change', strona);
 
     $(function () {
@@ -96,25 +96,25 @@ $('#addtobasket').on("click", function () {
         var width = document.form1.szer.value;
         var height = document.form1.wys.value;
         var isarmdfixed = $("#armfixed").is(":checked");
-        var armdirection="";
+        var armdirection = "";
         var armtype = "";
         var armcm = "";
         var armlatch = "";
         var latoD = document.form1.latoD.value;
         var pervazTaraf = getCheckedBoxes("pervazTaraf");
-        var sogliabassa=false;
+        var sogliabassa = false;
         if (document.form1.sogliaBassa)
-            sogliabassa=document.form1.sogliaBassa.checked;
+            sogliabassa = document.form1.sogliaBassa.checked;
         var notes = document.form1.notes.value;
-        var pervazIsl = document.form1.kesimmi.checked && pervazTaraf.length > 0 ? document.form1.kesimmi.value : document.form1.tirnakmi.checked && pervazTaraf.length > 0 ?  document.form1.tirnakmi.value:"";
-        
+        var pervazIsl = document.form1.kesimmi.checked && pervazTaraf.length > 0 ? document.form1.kesimmi.value : document.form1.tirnakmi.checked && pervazTaraf.length > 0 ? document.form1.tirnakmi.value : "";
+
         if (isarmdfixed || $("#armcm").val() == "0") {
             armtype = "Standard";
             doorhandle = "Standard";
         } else {
             armdirection = $('input[name=armoptions]:checked').val();
             armcm = $("#armcm").val() + " CM";
-            armtype =  "speciale - " + armdirection + " " + armcm;
+            armtype = "speciale - " + armdirection + " " + armcm;
             doorhandle = $("select[name='door'] option:selected").text();
         }
         if (productLimits.ModelId === 11) {
@@ -155,7 +155,7 @@ $('#addtobasket').on("click", function () {
             data: product,
             success: function (data) {
                 var x = parseInt($("#badgecount").text()) + 1;
-                document.getElementById('badgecount').innerText=x;
+                document.getElementById('badgecount').innerText = x;
                 document.form1.ilosc.value = 0;
                 document.form1.dodatki.value = 0;
                 document.getElementById('cenaokna').innerHTML = "0";
@@ -238,7 +238,12 @@ Handlebars.registerHelper('selected', function (value) {
     return html;
 });
 
-Handlebars.registerHelper('multiplicate', function (quantity,price) {
+Handlebars.registerHelper('isActive', function (value) {
+    var activeClass = value=="0"?"active customer-click": "";
+    return activeClass;
+});
+
+Handlebars.registerHelper('multiplicate', function (quantity, price) {
     var amount = (quantity * price);
     return amount.toFixed(2);
 });
@@ -253,3 +258,4 @@ Handlebars.registerHelper('convDate', function (date) {
     date = new Date(parseInt(date.substr(6)));
     return date.toLocaleDateString() + " - " + date.toLocaleTimeString();
 });
+

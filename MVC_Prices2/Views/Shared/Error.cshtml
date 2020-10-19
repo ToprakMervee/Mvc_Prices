@@ -1,10 +1,51 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
+    Layout = null;
     ViewBag.Title = "Error";
 }
 
-<hgroup>
-    <h1 class="text-error">Error.</h1>
-    <h2 class="text-error">An error occurred while processing your request.</h2>
-</hgroup>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error - 404</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Admin, Dashboard, Bootstrap" />
+    <link rel="shortcut icon" sizes="196x196" href="/Resources/assets/images/logo.png">
+	
+    <link rel="stylesheet" href="/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/Resources/libs/bower/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/Resources/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/Resources/assets/css/core.css">
+    <link rel="stylesheet" href="/Resources/assets/css/misc-pages.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+</head>
+<body class="simple-page">
+<div id="back-to-home">
+    <a href="/" class="btn btn-outline btn-default"><i class="fa fa-home animated zoomIn"></i></a>
+</div>
+<div class="simple-page-wrap">
+    <div class="simple-page-logo animated swing">
+        <a href="index.html">
+            <span><i class="fa fa-gg"></i></span>
+            <span>Serramenti</span>
+        </a>
+    </div><!-- logo -->
+    <h1 id="_404_title" class="animated shake">404</h1>
+    <h5 id="_404_msg" class="animated slideInUp">Ops, si è verificato un errore. La pagina non può essere trovata</h5>
+    <div id="_404_form" class="animated slideInUp">
+        <form action="#">
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="search">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+        </form>
+    </div>
+
+
+</div><!-- .simple-page-wrap -->
+</body>
+</html>

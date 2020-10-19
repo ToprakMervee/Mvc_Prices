@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
@@ -251,6 +252,10 @@
     <Compile Include="Migrations\202009171510349_glassType3.Designer.cs">
       <DependentUpon>202009171510349_glassType3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010120800213_rownumber.cs" />
+    <Compile Include="Migrations\202010120800213_rownumber.Designer.cs">
+      <DependentUpon>202010120800213_rownumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -290,6 +295,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <None Include="Content\carousel.scss" />
+    <Content Include="Content\configurator.css" />
     <Content Include="Content\Datatable.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
@@ -448,13 +455,22 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\1.gif" />
     <Content Include="Content\img\10.gif" />
     <Content Include="Content\img\11.gif" />
     <Content Include="Content\img\13.gif" />
+    <Content Include="Content\img\14.gif" />
+    <Content Include="Content\img\1_f.png" />
+    <Content Include="Content\img\1_grundmodell.png" />
     <Content Include="Content\img\2.gif" />
+    <Content Include="Content\img\2_f_f.png" />
+    <Content Include="Content\img\2_grundmodell.png" />
     <Content Include="Content\img\3.gif" />
     <Content Include="Content\img\12.gif" />
+    <Content Include="Content\img\3_f_f_f.png" />
+    <Content Include="Content\img\3_grundmodell.png" />
     <Content Include="Content\img\4.gif" />
     <Content Include="Content\img\5.gif" />
     <Content Include="Content\img\6.gif" />
@@ -482,6 +498,8 @@
     <Content Include="Content\img\prolineico.png" />
     <Content Include="Content\img\Prolinetrk.png" />
     <Content Include="Content\img\slide.gif" />
+    <Content Include="Content\img\sondertypen-selection.png" />
+    <Content Include="Content\img\s_2_segmentb_f_f.png" />
     <Content Include="Content\img\user.jpg" />
     <Content Include="Content\img\vasistas.gif" />
     <Content Include="Content\img\verde1.jpg" />
@@ -491,6 +509,7 @@
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1677,6 +1696,11 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\canvas.js" />
@@ -1766,8 +1790,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\sweetalert2.all.min.js" />
+    <Content Include="Scripts\t.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1783,7 +1809,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Index_1.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\_2.cshtml" />
@@ -1838,6 +1864,10 @@
     <Content Include="Views\Charts\StoreChart.cshtml" />
     <Content Include="Views\Shared\_12.cshtml" />
     <Content Include="Views\Shared\_13.cshtml" />
+    <Content Include="Views\Shared\_14.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Shared\_InsectExtColor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1913,6 +1943,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009171510349_glassType3.resx">
       <DependentUpon>202009171510349_glassType3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120800213_rownumber.resx">
+      <DependentUpon>202010120800213_rownumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

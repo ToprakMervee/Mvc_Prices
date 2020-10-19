@@ -11,7 +11,7 @@
     <title>@ViewBag.Title - Price App</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link al="stylesheet" href="~/Resources/libs/bower/font-awesome/css/font-awesome.min.css">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Resources/libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
     <!-- build:css ../assets/css/app.min.css -->
     <link rel="stylesheet" href="~/Resources/libs/bower/animate.css/animate.min.css">
@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="~/Resources/assets/css/app.css">
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link href="~/Content/Datatable.css" rel="stylesheet" />
-    <link href="~/Content/Site.css?v=1.35" rel="stylesheet" />
+    <link href="~/Content/Site.css?v=1.37" rel="stylesheet" />
+    <link href="~/Content/configurator.css" rel="stylesheet" />
     <!-- endbuild -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
     <script src="~/Resources/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
@@ -158,7 +159,7 @@
             <div class="media">
                 <div class="media-left">
 
-                    
+
                     <ul class="app-menu">
 
                         <li>
@@ -204,54 +205,55 @@
                     {
                         //if (!User.IsInRole("User"))
                         //{
-                            <li class="has-submenu">
-                                <a class="submenu-toggle" href="javascript:void(0)">
-                                    <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
-                                    <span class="menu-text">Amministrazione</span>
-                                    <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                                </a>
-                                <ul class="submenu">
-                                    @if(User.IsInRole("ProlineAdmin"))
-                                    {
+                        <li class="has-submenu">
+                            <a class="submenu-toggle" href="javascript:void(0)">
+                                <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
+                                <span class="menu-text">Amministrazione</span>
+                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                            </a>
+                            <ul class="submenu">
+                                @if (User.IsInRole("ProlineAdmin"))
+                                {
                                     <li> <a href="@Url.Action("Index", "Store")">Negozi</a></li>
-                                    <li> <a href="@Url.Action("Index", "Users")">Utenti</a></li>}
-                                    <li class="has-submenu">
-                                        <a class="submenu-toggle" href="javascript:void(0)">
-                                            <i class="menu-icon zmdi zmdi-chart zmdi-hc-lg"></i>
-                                            <span class="menu-text">Charts</span>
-                                            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                                        </a>
-                                        <ul class="submenu">
-                                            <li><a href="@Url.Action("Index", "Charts")">Pie Chart</a></li>
-                                            <li> <a href="@Url.Action("StoreChart", "Charts")">Store Charts</a></li>
-                                            <li> <a href="@Url.Action("Index", "Users")">Utenti</a></li>
+                                    <li> <a href="@Url.Action("Index", "Users")">Utenti</a></li>
+}
+                                <li class="has-submenu">
+                                    <a class="submenu-toggle" href="javascript:void(0)">
+                                        <i class="menu-icon zmdi zmdi-chart zmdi-hc-lg"></i>
+                                        <span class="menu-text">Charts</span>
+                                        <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li><a href="@Url.Action("Index", "Charts")">Pie Chart</a></li>
+                                        <li> <a href="@Url.Action("StoreChart", "Charts")">Store Charts</a></li>
+                                        <li> <a href="@Url.Action("Index", "Users")">Utenti</a></li>
 
 
 
 
-                                        </ul>
-                                    </li>
+                                    </ul>
+                                </li>
 
 
 
-                                </ul>
-                            </li>
+                            </ul>
+                        </li>
                         //}
-                        
+
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
                         //if (User.IsInRole("ProlineAdmin") && !User.IsInRole("User"))
                         //{
-                            @*<li>
-                    <a href="/Price/Index/">
-                        <i class="menu-icon zmdi zmdi-money zmdi-hc-lg"></i>
-                        <span class="menu-text">Prezzi</span>
+                        @*<li>
+                                <a href="/Price/Index/">
+                                    <i class="menu-icon zmdi zmdi-money zmdi-hc-lg"></i>
+                                    <span class="menu-text">Prezzi</span>
 
-                    </a>
+                                </a>
 
-                </li>*@
-                        if(User.IsInRole("ProlineAdmin"))
+                            </li>*@
+                        if (User.IsInRole("ProlineAdmin"))
                         {
                             <li class="has-submenu">
                                 <a class="submenu-toggle" href="javascript:void(0)">
@@ -261,11 +263,11 @@
                                 </a>
                                 <ul class="submenu">
                                     <li> <a href="@Url.Action("Index", "Price")">Matrisler</a></li>
-                           
+
                                 </ul>
                             </li>
                         }
-                       // }
+                        // }
                     }
 
 
@@ -359,18 +361,18 @@
     <script src="~/Resources/libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="~/Resources/assets/js/fullcalendar.js"></script>
     <script src="~/Scripts/handlebars.min.js"></script>
-<script src="~/Scripts/canvas.js?v=1.14"></script>
+<script src="~/Scripts/canvas.js?v=1.15"></script>
 <script type="text/javascript">
-    $.ajax({
-        type: "GET",
-        url: "/Basket/CountBasket/",
-        datatype: "Json",
-        contentType: "application/json; charset=utf-8",
-        success: function (t) {
-            
-            $("#badgecount").text(t);
-        }
-    });
-</script>
+        $.ajax({
+            type: "GET",
+            url: "/Basket/CountBasket/",
+            datatype: "Json",
+            contentType: "application/json; charset=utf-8",
+            success: function (t) {
+
+                $("#badgecount").text(t);
+            }
+        });
+    </script>
 </body>
 </html>

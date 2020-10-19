@@ -8,14 +8,24 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.zoom {
+    transition: transform .6s;
+}
 
+.zoom:hover {
+    -ms-transform: scale(1.3); /* IE 9 */
+    -webkit-transform: scale(1.3); /* Safari 3-8 */
+    transform: scale(1.3);
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
     white-space: normal;
 }
-
+.pointer {
+    cursor: pointer;
+}
 @media only screen and (min-width: 650px) {
     .kesit {
         margin-left: 30%;
@@ -89,4 +99,3 @@ textarea {
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
-
