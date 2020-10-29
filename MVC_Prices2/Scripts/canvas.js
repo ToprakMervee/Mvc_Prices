@@ -46,6 +46,14 @@ function zmiana(id) {
     $("#topquantity").val(sumquant);
 
 }
+
+const seal = [
+    { exp:'interno nero, esterno nero'},
+    { exp:'interno grigio, esterno nero'},
+    { exp:'interno nero, esterno grigio'},
+    { exp:'interno grigio, esterno grigio'}
+    ];
+
 function strona() {
     var direction = $('#direction').is(':checked');
 
@@ -71,111 +79,127 @@ function getCheckedBoxes(chkboxName) {
     // Return the array if it is non-empty, or null
     return checkboxesChecked.length > 0 ? checkboxesChecked : [];
 }
-$('#addtobasket').on("click", function () {
-
-    if (document.form1.ilosc.value == 0) {
+$('#btnAddtoCart').on("click", function() {
+    var selectedOne = getSelectedOne();
+    var checkForm = checkNextPage();
+    if (!checkForm) {
         Swal.fire(
-            'Nessuna quantità?',
-            'si prega di selezionare la quantità',
-            'question'
-        );
-    } else {
-        Hesap2();
-        var doorhandle;
-        var url = window.location.pathname;
-        var productid = url.substring(url.lastIndexOf('/') + 1);
-        var quantity = document.form1.ilosc.value;
-        ///////////////////////////////////////////////////////////////////
-        var price = document.form1.dodatki.value;
-        ///////////////////////////////////////////////////////////////////
-        var color = $("select[name='kolorprofili'] option:selected").text();
-        var system = $("select[name='system'] option:selected").text();
-        var glasslam = document.form1.konfiguracja.value;
-        var direction = document.form1.strona.value == 2 ? "destra" : "sinistra";
-        var glassqnt = document.form1.kolorszkla.value;
-        var width = document.form1.szer.value;
-        var height = document.form1.wys.value;
-        var isarmdfixed = $("#armfixed").is(":checked");
-        var armdirection = "";
-        var armtype = "";
-        var armcm = "";
-        var armlatch = "";
-        var latoD = document.form1.latoD.value;
-        var pervazTaraf = getCheckedBoxes("pervazTaraf");
-        var sogliabassa = false;
-        if (document.form1.sogliaBassa)
-            sogliabassa = document.form1.sogliaBassa.checked;
-        var notes = document.form1.notes.value;
-        var pervazIsl = document.form1.kesimmi.checked && pervazTaraf.length > 0 ? document.form1.kesimmi.value : document.form1.tirnakmi.checked && pervazTaraf.length > 0 ? document.form1.tirnakmi.value : "";
-
-        if (isarmdfixed || $("#armcm").val() == "0") {
-            armtype = "Standard";
-            doorhandle = "Standard";
-        } else {
-            armdirection = $('input[name=armoptions]:checked').val();
-            armcm = $("#armcm").val() + " CM";
-            armtype = "speciale - " + armdirection + " " + armcm;
-            doorhandle = $("select[name='door'] option:selected").text();
-        }
-        if (productLimits.ModelId === 11) {
-            var islatch = $("#productVasistas").is(":checked");
-            if (islatch) {
-                armlatch = "crichetto";
-            } else {
-                armlatch = "Maniglia";
-            }
-        } else {
-            armlatch = "Maniglia";
-        }
-        var extra = { sogliaBassa: sogliabassa, pervIslem: pervazIsl, perTaraf: pervazTaraf };
-        var extraStr = JSON.stringify(extra);
-        //document.form1.ilosc.value = 0
-        var product = {
-            ProductId: productid,
-            Quantity: quantity,
-            Price: price,
-            ColorName: color,
-            System: system,
-            GlassLam: glasslam,
-            Direction: direction,
-            GlassQnt: glassqnt,
-            Width: width,
-            Height: height,
-            ArmType: armtype,
-            DoorHandle: doorhandle,
-            LatchArm: armlatch,
-            UpOpenning: radioLeftRight,
-            LatoD: latoD,
-            Note: notes,
-            Extra: extraStr
-        };
-        $.ajax({
-            type: "POST",
-            url: "/Product/Index",
-            data: product,
-            success: function (data) {
-                var x = parseInt($("#badgecount").text()) + 1;
-                document.getElementById('badgecount').innerText = x;
-                document.form1.ilosc.value = 0;
-                document.form1.dodatki.value = 0;
-                document.getElementById('cenaokna').innerHTML = "0";
-                Swal.fire(
-                    'Success',
-                    'Aggiunto.',
-                    'success'
-                ).then((result) => {
-                    if (result.value) {
-
-                    }
-                });
-
+            'Errore',
+            'Aggiunto.',
+            'error'
+        ).then((result) => {
+            if (result.value) {
 
             }
         });
-
+        return;
     }
+    Hesap();
+    var renkler = wobject.colors;
+    var profiller = wobject.profiles;
+    var system = document.configuratorForm.profil.value;
+    var productid = selectedOne.id;
+    var quantity = 1;
+    ///////////////////////////////////////////////////////////////////
+    var price = document.configuratorForm.finalPrice.value;
+    ///////////////////////////////////////////////////////////////////
+    var color = document.configuratorForm.a_renk.value;
+    var colorInd = document.configuratorForm.a_185.value;
+    
+    var colorSide = color === "0" ? "" : wobject.decors[colorInd].name;
+    var width = document.configuratorForm.a_width.value;
+    var height = document.configuratorForm.a_height.value;
+    var width2 = [];
+    var downInps = $('input[name^="layoutDown"');
+    for (let i = 0; i < downInps.length; i++) {
+        width2.push(downInps[i].value);
+    }
+    var height2 = [];
+    var rightInps = $('input[name^="layoutRight"');
+    for (let i = 0; i < rightInps.length; i++) {
+        height2.push(rightInps[i].value);
+    }
+    var camSayi = document.configuratorForm.a_186.value;
+    var lamineTaraf = document.configuratorForm.a_191.value;
+    var profilEk = document.configuratorForm.a_187.value =="1";
+    var pervazTaraf = profilEk ? getCheckedBoxes("pervazTaraf") : [];
+    var satinemi = document.configuratorForm.a_193.value == "1";
+    var kol = document.configuratorForm.a_kol.value;
+    var kolyeri = document.configuratorForm.armcm.value +"-CM";
+    var kolyonu = document.configuratorForm.armoptions.value;
+    if (kolyeri=="0") {
+        kolyeri = "";
+        kolyonu = "";
+    }
+    var bagprofilivarmi = document.configuratorForm.a_297.value == "1";
+    var bagprofiltipi = document.configuratorForm.a_495.value;
+    var bagprofilyon = getCheckedBoxes('cpSide');
+    if (!bagprofilivarmi) {
+        bagprofiltipi = "0";
+        bagprofilyon = [];
+    }
+  
+    var islem = "";
+    if (profilEk) {
+        islem = system == "1" ? "Tagliare Il Davanzale" : "Aletta In Casso";
+    }
+    var sogliabassa = false;
 
+
+    var extra = {
+        width2: width2, height2: height2, profIslem: islem, pITaraf: pervazTaraf, satinemi: satinemi,
+        selected: selectedOne, profil: wobject.profiles[system].name, colorname: wobject.colors[color].name,
+        colorSide: colorSide, handle: wobject.handles[kol].name, bagprofil: wobject.connection[bagprofiltipi].name,
+        bagprofilvarmi: bagprofilivarmi, bagprofilyon: bagprofilyon, type: wobject.type, colorimg: wobject.colors[color].img, process: profilEk, kolyeri: kolyeri,
+        kolyonu:kolyonu
+    };
+    var extraStr = JSON.stringify(extra);
+    //document.form1.ilosc.value = 0
+    var product = {
+        ProductId: productid,
+        Quantity: quantity,
+        Price: price,
+        ColorName: color,
+        System: system,
+        GlassLam: lamineTaraf,
+        GlassQnt: camSayi,
+        Width: width,
+        Height: height,
+        UpOpenning: selectedOne.name,
+        DoorHandle: kol,
+        LatoD: colorInd,
+        Extra: extraStr
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Product/Index",
+        data: product,
+        success: function (data) {
+            nextPage(1);
+            updateBasketIcon();
+            Swal.fire(
+                'Success',
+                'Aggiunto.',
+                'success'
+            ).then((result) => {
+                if (result.value) {
+
+                }
+            });
+
+
+        }
+    });
 });
+
+let updateBasketIcon = () => {
+    let badge = $('span[id="badgecount"]');
+    let number = ++badge[0].innerText;
+    badge.text(number);
+    badge.css('background-color', 'red');
+    setTimeout(() => badge.css('background-color', 'lightblue'),3000 );
+}
+
 function deneme() {
     $.ajax({
         type: "GET",
@@ -228,31 +252,64 @@ function colorsearch(nameKey) {
 }
 Handlebars.registerHelper('selected', function (value) {
     var html = "";
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 1; i <= 50; i++) {
         var selected = "";
-        if (i == value) {
+        if (i === value) {
             selected = "selected";
         }
         html += '<option value="' + i + '" ' + selected + ' >' + i + '</option>';
     }
-    return html;
+    return new Handlebars.SafeString(html);
 });
 
-Handlebars.registerHelper('isActive', function (value) {
-    var activeClass = value=="0"?"active customer-click": "";
+Handlebars.registerHelper('isActive', (value) => {
+    var activeClass = value == "0" ? "active customer-click" : "";
     return activeClass;
 });
 
-Handlebars.registerHelper('multiplicate', function (quantity, price) {
-    var amount = (quantity * price);
-    return amount.toFixed(2);
+Handlebars.registerHelper('isDisabled', (value) => {
+    var activeClass = value === 2 ? "disabled" : "";
+    return activeClass;
 });
 
+Handlebars.registerHelper('whichPart', (index, type = 0) => {
+    var partname = Array('Superiore', 'Inferiore');
+    var partDetail = Array('misurare dal bordo superiore al centro', 'misurare dal centro al bordo inferiore');
+    return type === 0 ? partname[index] : partDetail[index];
+});
+
+
+Handlebars.registerHelper('isChecked', (value) => {
+    var checked = value == "0" ? "checked" : "";
+    return checked;
+});
+
+Handlebars.registerHelper('multiplicate', (quantity, price) => {
+    var amount = (quantity * price);
+    return amount.toFixed(0);
+});
+Handlebars.registerHelper('divide', (quantity, price) => {
+    var amount = (quantity / price);
+    return amount.toFixed(2);
+});
+Handlebars.registerHelper('average', (minval, maxval) => {
+    var average = Math.ceil((minval + (maxval - minval) / 2) / 10) * 10;
+    return average.toFixed(0);
+});
 Handlebars.registerHelper('rownumber', function (index) {
 
     return index + 1;
 });
+Handlebars.registerHelper('isBigger', function (value) {
 
+    return value > 0;
+});
+Handlebars.registerHelper('times', function (n, block) {
+    var accum = '';
+    for (var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    return accum;
+});
 
 Handlebars.registerHelper('convDate', function (date) {
     date = new Date(parseInt(date.substr(6)));

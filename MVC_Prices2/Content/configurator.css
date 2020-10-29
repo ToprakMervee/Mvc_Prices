@@ -5644,7 +5644,6 @@ a.label:focus, a.label:hover {
 
         .modal-body label {
             display: block;
-            text-align: right;
             font-weight: 300;
             font-size: 1.23em;
             padding: 12px 0;
@@ -19685,11 +19684,12 @@ a.label:focus, a.label:hover {
     input.valid {
         background: #fff;
         border-color: #0A0 !important;
-        box-shadow: none !important
+        box-shadow: none !important;
+        color: green;
     }
 
     input.error {
-        border-color: #c00;
+        border-color: #c00!important;
         color: #c00;
         box-shadow: none !important
     }
@@ -20040,9 +20040,11 @@ span.info-icon-grey:hover {
         top: 4px;
         border-radius: 10px;
         margin-bottom: 10px;
-        flex-shrink: 0
+        flex-shrink: 0;
     }
-
+span.info-icon-grey {
+    float: right;
+}
     #configurator .force-h4 h5 span.info-icon-grey {
         background-color: #fff
     }
@@ -22712,6 +22714,23 @@ span.info-icon-grey:hover {
         z-index: 5
     }
 
+
+.color-finish.disabled:before, .configurator-color-finish > label.disabled:before, .configurator-tile.disabled:before, .yes-no-selection.disabled:before {
+    content: '\f00d';
+    font-family: FontAwesome;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background: #bc261b;
+    border: 2px #bc261b solid;
+    padding: 7px;
+    z-index: 5
+}
+
     .color-finish.active, .configurator-color-finish > label.active, .configurator-tile.active, .yes-no-selection.active, label.active > .configurator-block-price, label.active > .configurator-right-block-price {
         box-shadow: inset 0 3px 5px rgba(0,0,0,.125)
     }
@@ -24453,9 +24472,7 @@ span.info-icon-grey:hover {
         max-width: 130px !important
     }
 
-    .einteilungBoxHeight, .einteilungBoxWidth {
-        background: none !important
-    }
+  
 
     .configurator-preview {
         background-color: #E8E8E8;
@@ -25748,7 +25765,7 @@ span.info-icon-grey:hover {
         animate: .2s;
         background: #F4F4F4;
         border-radius: 3px;
-        border: 1px solid #c8c8c8
+        border: 1px solid #c8c8c8;
     }
 
     .sprout-slider input[type=range]::-webkit-slider-thumb {
@@ -28043,4 +28060,3 @@ span.info-icon-grey:hover {
     h4.configTitle.details {
         cursor: help
     }
-

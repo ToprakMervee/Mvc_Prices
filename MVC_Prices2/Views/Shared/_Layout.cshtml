@@ -24,12 +24,12 @@
     <link href="~/Content/Datatable.css" rel="stylesheet" />
     <link href="~/Content/Site.css?v=1.37" rel="stylesheet" />
     <link href="~/Content/configurator.css" rel="stylesheet" />
+    <link href="~/Content/shoppingcart.css" rel="stylesheet" />
     <!-- endbuild -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
     <script src="~/Resources/libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>
     <script>Breakpoints();</script>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
+    <link href="~/Content/bootstrap-toggle.min.css" rel="stylesheet" />
     <link href="~/Resources/libs/bower/switchery/dist/switchery.min.css" rel="stylesheet" />
     <link href="~/Resources/libs/bower/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
     <script src="~/Resources/libs/bower/switchery/dist/switchery.min.js"></script>
@@ -39,8 +39,8 @@
     <script src="~/Resources/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
     <script src="~/Resources/libs/bower/jquery-slimscroll/jquery.slimscroll.js"></script>
     <script src="~/Resources/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap-toggle.min.js"></script>
     <script src="~/Scripts/sweetalert2.all.min.js"></script>
 </head>
 
@@ -164,7 +164,7 @@
 
                         <li>
                             <a href="@Url.Action("Index", "Basket")">
-                                <i class="menu-icon zmdi zmdi-shopping-basket zmdi-hc-lg"><span id="badgecount" class="badge" style="background-color: lightblue; border-color: blue"></span></i>
+                                <i class="menu-icon zmdi zmdi-shopping-basket zmdi-hc-lg" id="basketIcon"><span id="badgecount" class="badge" style="background-color: lightblue; border-color: blue"></span></i>
                                 <span class="menu-text">Carello</span>
                             </a>
                         </li>
@@ -181,7 +181,7 @@
                     <li>
                         <a href="/Home/">
                             <i class="menu-icon zmdi zmdi-home zmdi-hc-lg"></i>
-                            <span class="menu-text">La scella della finestra</span>
+                            <span class="menu-text">Prodottos</span>
 
                         </a>
 

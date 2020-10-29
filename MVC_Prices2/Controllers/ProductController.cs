@@ -33,6 +33,17 @@ namespace MVC_Prices.Controllers
                 return View(product);
             }
         }
+        public ActionResult PFinestra(int? id = 0)
+        {
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+
+                var product = db.Products.FirstOrDefault(a => a.Id == id);
+
+
+                return View(product);
+            }
+        }
         [HttpPost]
         public ActionResult Index(OfferDet basket)
         {
@@ -142,7 +153,7 @@ namespace MVC_Prices.Controllers
 
             PriceDataModel2 db = new PriceDataModel2();
 
-            var prices = db.Prices.Where(p => p.ProductId == id && p.Activity == true && p.Profil==system).ToList();
+            var prices = db.Prices.Where(p => p.ProductId == id && p.Activity == true && p.Profil==system && !p.Color).ToList();
             
             return Json(prices, JsonRequestBehavior.AllowGet);
 

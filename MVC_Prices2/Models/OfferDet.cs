@@ -37,9 +37,9 @@ namespace MVC_Prices2.Models
         public string DoorHandle { get; set; }
         [MaxLength(150)]
         public string LatchArm { get; set; }
-        [MaxLength(150)]
+        [MaxLength(500)]
         public string UpOpenning { get; set; }
-        [MaxLength(350)]
+        [MaxLength(1000)]
         public string Extra { get; set; }
 
         public string Note { get; set; }

@@ -48,19 +48,19 @@ namespace MVC_Prices2.Controllers
                         Width = x.Width,
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
-                        Glass = db.Glass.Where(a=> a.GlassType==x.GlassQnt).ToList(),
+                        Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
                         ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
                         LatchArm = x.LatchArm,
                         UpOpenning = x.UpOpenning,
-                        GlassType = x.GlassQnt=="0"?"doppio, trasparente":x.GlassQnt=="1"?"doppio, satinato":"triplo, trasparente",
+                        GlassType = x.GlassQnt == "0" ? "doppio Ug 1.1" : "triplo Ug 0.7",
                         GlassQnt = x.GlassQnt,
                         Note = x.Note,
                         LatoD = x.LatoD,
                         Extra = x.Extra
 
-                    }).OrderBy(a=> a.ID).ToList();
+                    }).OrderBy(a => a.ID).ToList();
                 var json = JsonConvert.SerializeObject(list);
                 ViewBag.json = json;
                 return View(list);
@@ -73,7 +73,7 @@ namespace MVC_Prices2.Controllers
             using (PriceDataModel2 db = new PriceDataModel2())
             {
                 int list = db.OfferDet.Where(a => a.OfferMas.User == user && a.OfferMas.Status == 0).ToList().Count();
-                return Json(list,JsonRequestBehavior.AllowGet);
+                return Json(list, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -101,11 +101,44 @@ namespace MVC_Prices2.Controllers
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
                         IsFixed = x.Product.IsWingFixed,
-                        
+
                     }).ToList();
                 var proddet = proddets.FirstOrDefault();
 
                 return Json(proddet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SaveNote(OfferExp expData)
+        {
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+                var theNote = db.OfferDet.FirstOrDefault(a => a.ID == expData.Id);
+                theNote.Note = expData.Exp1;
+                db.SaveChanges();
+            }
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateQuantity(OfferDet oDet)
+        {
+            var user = User.Identity.GetUserId();
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+                try
+                {
+                    var offerDet = db.OfferDet.FirstOrDefault(a => a.ID == oDet.ID && a.OfferMas.User == user);
+                    offerDet.Quantity = oDet.Quantity;
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -154,7 +187,7 @@ namespace MVC_Prices2.Controllers
                     }
                     else
                     {
-                        var offerDet = db.OfferDet.FirstOrDefault(a => a.ID == id);
+                        var offerDet = db.OfferDet.FirstOrDefault(a => a.ID == id && a.OfferMas.User == user);
                         int masId = offerDet.BasketMas_ID;
                         db.OfferDet.Remove(offerDet);
                         db.SaveChanges();
@@ -212,6 +245,48 @@ namespace MVC_Prices2.Controllers
                 db.SaveChanges();
             }
             return Json(new { success = true });
+        }
+
+        public ActionResult PdfPage(int id)
+        {
+            var user = User.Identity.GetUserId();
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+                List<BasketView> list = db.OfferDet
+                    .Where(a => a.OfferMas.User == user && a.OfferMas.ID == id).Select(x => new BasketView()
+                    {
+                        ID = x.ID,
+                        ProductName = x.Product.ProductName,
+                        PicUrl = x.Product.PicUrl,
+                        ProductDetail = x.Product.ProductDetail,
+                        System = x.System,
+                        ProductId = x.ProductId,
+                        Color = x.ColorName,
+                        Direction = x.Direction,
+                        Height = x.Height,
+                        Price = x.Price,
+                        Quantity = x.Quantity,
+                        ColorUrl = x.Colors.ColorUrl,
+                        Width = x.Width,
+                        Reference = x.OfferMas.ReferenceNo,
+                        Date = x.OfferMas.Date,
+                        Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
+                        ArmType = x.ArmType,
+                        MasId = x.BasketMas_ID,
+                        DoorHandle = x.DoorHandle,
+                        LatchArm = x.LatchArm,
+                        UpOpenning = x.UpOpenning,
+                        GlassType = x.GlassQnt == "0" ? "doppio Ug 1.1" : "triplo Ug 0.7",
+                        GlassQnt = x.GlassQnt,
+                        Note = x.Note,
+                        LatoD = x.LatoD,
+                        Extra = x.Extra
+
+                    }).OrderBy(a => a.ID).ToList();
+                var json = JsonConvert.SerializeObject(list);
+                ViewBag.json = json;
+                return View(list);
+            }
         }
 
         [HttpPost]
