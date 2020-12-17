@@ -11,6 +11,7 @@ namespace MVC_Prices2.ViewModels
     {
         public int ID { get; set; }
         public int ProductId { get; set; }
+        public int Status { get; set; }
         public int MasId { get; set; }
         public decimal Quantity { get; set; }
         public decimal Price { get; set; }
@@ -30,6 +31,7 @@ namespace MVC_Prices2.ViewModels
         public string ArmType { get; set; }
         public string Note { get; set; }
         public string Exp2 { get; set; }
+        public string Exp1 { get; set; }
         public string DoorHandle { get; set; }
         public string LatchArm { get; set; }
         public DateTime Date { get; set; }

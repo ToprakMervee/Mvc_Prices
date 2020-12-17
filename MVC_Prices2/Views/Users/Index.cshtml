@@ -66,7 +66,7 @@
                             </td>
 
                             <td class="text-center w400">
-                                <button onclick="Delete(@el.Id)" class="btn btn-sm btn-danger btn-outline remove-btn">
+                                <button onclick="Delete('@el.Id')" class="btn btn-sm btn-danger btn-outline remove-btn">
                                     <i class="fa fa-trash"></i> Delete
                                 </button>
                                 <a href="#" onclick="EditModal(@index)" id="editclick" class="btn btn-sm btn-info btn-outline"><i class="fa fa-pencil-square-o"></i> Edit</a>
@@ -188,7 +188,7 @@
         $("#user_name").val("");
         $("#email").val("");
         $("#storeid").val("");
-        $("#role").val("");
+       // $("#role").val("");
         $("#password_").show();
         $("#re_password_").show();
         $("#modtitle").text("Add New User");
@@ -228,9 +228,9 @@
         var username = $("#user_name").val();
         var full_name = $("#full_name").val();
         var email = $("#email").val();
-        var password = $("#password").val();
+        var password = "123456";// $("#password").val();
         var st = $("#storeid").val();
-        var role = $("#role").val();
+        var role = "User";// $("#role").val();
        
         var data = {
             UserName: username,
@@ -305,6 +305,14 @@
     }
 
     function Delete(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Users/Delete/",
+            data: {Id: id},
+            success: function (data) {
 
+                window.page.reload();
+            }
+        });
     }
 </script>

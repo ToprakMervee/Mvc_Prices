@@ -49,14 +49,7 @@ textarea {
 #container {
     height: 500px;
 }
-.kesimmi {
-    display: none;
-    float: left;
-}
-.tirnakmi {
-    display: block;
-    float: left;
-}
+
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px;
     max-width: 700px;
@@ -65,7 +58,19 @@ textarea {
 @media print {
     .noprint, .noprint * {
         display: none !important;
+
     }
+    .printDet {
+        display: block !important;
+    }
+    #navbar-search {
+        display: none;
+    }
+   #cart {
+       font-size: 11px;
+   }
+
+
 }
 .highcharts-data-table table {
     font-family: Verdana, sans-serif;

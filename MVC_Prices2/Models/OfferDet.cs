@@ -31,17 +31,15 @@ namespace MVC_Prices2.Models
         [ForeignKey("Colors")]
         public string ColorName { get; set; }
         public Colors Colors { get; set; }
-        [MaxLength(50)]
-        public string ArmType { get; set; }
         [MaxLength(150)]
         public string DoorHandle { get; set; }
-        [MaxLength(150)]
-        public string LatchArm { get; set; }
+        [MaxLength(550)]
+        public string FormData { get; set; }
         [MaxLength(500)]
-        public string UpOpenning { get; set; }
-        [MaxLength(1000)]
+        public string Description { get; set; }
+        [MaxLength(1200)]
         public string Extra { get; set; }
-
+        [MaxLength(150)]
         public string Note { get; set; }
         [MaxLength(50)]
         public string LatoD { get; set; }

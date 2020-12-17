@@ -91,6 +91,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -260,10 +261,15 @@
     <Compile Include="Migrations\202010280846358_extraleng.Designer.cs">
       <DependentUpon>202010280846358_extraleng.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011071906495_formData.cs" />
+    <Compile Include="Migrations\202011071906495_formData.Designer.cs">
+      <DependentUpon>202011071906495_formData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
     <Compile Include="Models\Colors.cs" />
+    <Compile Include="Models\Extra.cs" />
     <Compile Include="Models\ForgotModel.cs" />
     <Compile Include="Models\Glass.cs" />
     <Compile Include="Models\InfoUpdateModel.cs" />
@@ -841,20 +847,28 @@
     <Content Include="Content\img\Originals\8.gif" />
     <Content Include="Content\img\Originals\earlplatin.jpg" />
     <Content Include="Content\img\Originals\prbag.jpg" />
+    <Content Include="Content\img\Originals\prboru.png" />
     <Content Include="Content\img\Originals\prboruadaptor.png" />
+    <Content Include="Content\img\Originals\prcoprifili.png" />
     <Content Include="Content\img\Originals\Proline.png" />
     <Content Include="Content\img\ornament-187.jpg" />
     <Content Include="Content\img\ornament-504.jpg" />
     <Content Include="Content\img\ornament-597.jpg" />
     <Content Include="Content\img\Oversized_glazing.jpg" />
+    <Content Include="Content\img\pfinestra\0" />
+    <Content Include="Content\img\pfinestra\13454_1.js.indir" />
     <Content Include="Content\img\pfinestra\2_dkl_dkr.png" />
     <Content Include="Content\img\pfinestra\2_dkl_dr.png" />
+    <Content Include="Content\img\pfinestra\5241_1.v54.js.indir" />
+    <Content Include="Content\img\pfinestra\5241_8636.js.indir" />
+    <Content Include="Content\img\pfinestra\aaaaaaaaa.png" />
     <Content Include="Content\img\pfinestra\abschliessbarer-griff-silber.jpg" />
     <Content Include="Content\img\pfinestra\abschliessbarer-griff-weiss.jpg" />
     <Content Include="Content\img\pfinestra\aeromat-funktionsprinzip.jpg" />
     <Content Include="Content\img\pfinestra\aeromat.jpg" />
     <Content Include="Content\img\pfinestra\alpha-metallic-matt.jpg" />
     <Content Include="Content\img\pfinestra\alu-fensterbank-aussen.jpg" />
+    <Content Include="Content\img\pfinestra\analytics.js.indir" />
     <Content Include="Content\img\pfinestra\anschlussprofil-25mm-altbau-en.png" />
     <Content Include="Content\img\pfinestra\anschlussprofil-altbau-30mm-holz-en.png" />
     <Content Include="Content\img\pfinestra\anschlussprofil-altbau-30mm-holzalu-en.png" />
@@ -879,6 +893,7 @@
     <Content Include="Content\img\pfinestra\aussenfensterbank-verbindnungsstueck.jpg" />
     <Content Include="Content\img\pfinestra\b1_w0_s0.png" />
     <Content Include="Content\img\pfinestra\balcony-door-configurator.jpg" />
+    <Content Include="Content\img\pfinestra\bat.js.indir" />
     <Content Include="Content\img\pfinestra\befestigungsloecher.jpg" />
     <Content Include="Content\img\pfinestra\beige.jpg" />
     <Content Include="Content\img\pfinestra\beschlag-basissicherheit.jpg" />
@@ -887,6 +902,7 @@
     <Content Include="Content\img\pfinestra\beta-metallic-matt.jpg" />
     <Content Include="Content\img\pfinestra\braun.jpg" />
     <Content Include="Content\img\pfinestra\bronze-c33.jpg" />
+    <Content Include="Content\img\pfinestra\b_1_ct_grundmodell.png" />
     <Content Include="Content\img\pfinestra\b_1_dkl.png" />
     <Content Include="Content\img\pfinestra\b_1_dkr.png" />
     <Content Include="Content\img\pfinestra\b_1_dl.png" />
@@ -975,11 +991,18 @@
     <Content Include="Content\img\pfinestra\b_4_f_dl_dkr_f.png" />
     <Content Include="Content\img\pfinestra\b_4_grundmodell%281%29.png" />
     <Content Include="Content\img\pfinestra\b_4_grundmodell.png" />
+    <Content Include="Content\img\pfinestra\b_tr_1_dkl.png" />
+    <Content Include="Content\img\pfinestra\b_tr_1_dkr.png" />
+    <Content Include="Content\img\pfinestra\b_tr_2_dkl_dr.png" />
+    <Content Include="Content\img\pfinestra\b_tr_2_dkr_dl.png" />
+    <Content Include="Content\img\pfinestra\b_tr_2_grundmodell.png" />
     <Content Include="Content\img\pfinestra\chinchilla.jpg" />
     <Content Include="Content\img\pfinestra\classic-iv68.jpg" />
     <Content Include="Content\img\pfinestra\classic-iv78.jpg" />
     <Content Include="Content\img\pfinestra\cmp.min.css" />
     <Content Include="Content\img\pfinestra\cmp.php" />
+    <Content Include="Content\img\pfinestra\cmp_en.min.js.indir" />
+    <Content Include="Content\img\pfinestra\configurator-7.37.0.min.js.indir" />
     <Content Include="Content\img\pfinestra\credit-card-mm.svg" />
     <Content Include="Content\img\pfinestra\csm_ddbadc2804_e4d1a6da6a.jpg" />
     <Content Include="Content\img\pfinestra\db-703-metallic-matt.jpg" />
@@ -998,6 +1021,7 @@
     <Content Include="Content\img\pfinestra\dunkelbronze.jpg" />
     <Content Include="Content\img\pfinestra\durchwurfhemmende-verglasung-a1.jpg" />
     <Content Include="Content\img\pfinestra\durchwurfhemmende-verglasung-a3.jpg" />
+    <Content Include="Content\img\pfinestra\ec.js.indir" />
     <Content Include="Content\img\pfinestra\eco-idealu-fv.jpg" />
     <Content Include="Content\img\pfinestra\eco-idealu.jpg" />
     <Content Include="Content\img\pfinestra\eco-plano.jpg" />
@@ -1049,6 +1073,7 @@
     <Content Include="Content\img\pfinestra\groesse-gesamtmass-aufbaurollladen-en.png" />
     <Content Include="Content\img\pfinestra\groesse-gesamtmass-vorbaurollladen-en.png" />
     <Content Include="Content\img\pfinestra\groesse-gesamtmass_01.png" />
+    <Content Include="Content\img\pfinestra\gtm.js.indir" />
     <Content Include="Content\img\pfinestra\gurtbedienung.jpg" />
     <Content Include="Content\img\pfinestra\hellelfenbein.jpg" />
     <Content Include="Content\img\pfinestra\ideal-4000.png" />
@@ -1059,6 +1084,9 @@
     <Content Include="Content\img\pfinestra\idealu-fv-iv78.jpg" />
     <Content Include="Content\img\pfinestra\idealu-hfv-iv68.jpg" />
     <Content Include="Content\img\pfinestra\idealu-hfv-iv78.jpg" />
+    <Content Include="Content\img\pfinestra\image002.png" />
+    <Content Include="Content\img\pfinestra\indir.png" />
+    <Content Include="Content\img\pfinestra\int.defer-7.37.0.min.js.indir" />
     <Content Include="Content\img\pfinestra\isolierverglasung.jpg" />
     <Content Include="Content\img\pfinestra\kasten-nrs.jpg" />
     <Content Include="Content\img\pfinestra\kasten-nvpt.jpg" />
@@ -1085,6 +1113,7 @@
     <Content Include="Content\img\pfinestra\laerche-rotbraun-211.jpg" />
     <Content Include="Content\img\pfinestra\loader.gif" />
     <Content Include="Content\img\pfinestra\loading.gif" />
+    <Content Include="Content\img\pfinestra\main-7.37.0.min.js.indir" />
     <Content Include="Content\img\pfinestra\mastercarre.jpg" />
     <Content Include="Content\img\pfinestra\material-holz-alu.jpg" />
     <Content Include="Content\img\pfinestra\material-holz.jpg" />
@@ -1152,6 +1181,10 @@
     <Content Include="Content\img\pfinestra\silber.jpg" />
     <Content Include="Content\img\pfinestra\silvit%281%29.jpg" />
     <Content Include="Content\img\pfinestra\silvit.jpg" />
+    <Content Include="Content\img\pfinestra\sogliaribassata.jpg" />
+    <Content Include="Content\img\pfinestra\sogliaribassata70.JPG" />
+    <Content Include="Content\img\pfinestra\sogliaribassata81.png" />
+    <Content Include="Content\img\pfinestra\soglia_termica_therm_plus_finestrenurith.jpg" />
     <Content Include="Content\img\pfinestra\sonderdekor-braun-dekor.jpg" />
     <Content Include="Content\img\pfinestra\sonderdekor-dunkelgruen.jpg" />
     <Content Include="Content\img\pfinestra\sonderdekor-moosgruen.jpg" />
@@ -1173,6 +1206,7 @@
     <Content Include="Content\img\pfinestra\strukturglas-satinato.jpg" />
     <Content Include="Content\img\pfinestra\style-int-7.37.0.css" />
     <Content Include="Content\img\pfinestra\swisspacer.jpg" />
+    <Content Include="Content\img\pfinestra\t.js.indir" />
     <Content Include="Content\img\pfinestra\telefon.png" />
     <Content Include="Content\img\pfinestra\tooltip-bodeneinstandsprofil-1.jpg" />
     <Content Include="Content\img\pfinestra\tooltip-info-10_en_EN.png" />
@@ -1202,13 +1236,18 @@
     <Content Include="Content\img\pr90donus.png" />
     <Content Include="Content\img\prangocoppage.png" />
     <Content Include="Content\img\prangolari.png" />
+    <Content Include="Content\img\prangolaritech.png" />
     <Content Include="Content\img\prbag.jpg" />
     <Content Include="Content\img\prbag70.png" />
     <Content Include="Content\img\prboru.png" />
+    <Content Include="Content\img\prboru70.png" />
     <Content Include="Content\img\prboruadaptor.png" />
     <Content Include="Content\img\prborusade.jpg" />
     <Content Include="Content\img\prcoprifili.png" />
+    <Content Include="Content\img\prcoprifili60.jpg" />
     <Content Include="Content\img\prcoprifilioptions.png" />
+    <Content Include="Content\img\prcoprifilotech.png" />
+    <Content Include="Content\img\prcoprifilotech2.png" />
     <Content Include="Content\img\prkosedonus.png" />
     <Content Include="Content\img\prkosedonusadaptor.png" />
     <Content Include="Content\img\prkutu.png" />
@@ -2604,19 +2643,11 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\img\pfinestra\0" />
-    <Content Include="Content\img\pfinestra\13454_1.js.indir" />
-    <Content Include="Content\img\pfinestra\5241_1.v54.js.indir" />
-    <Content Include="Content\img\pfinestra\5241_8636.js.indir" />
-    <Content Include="Content\img\pfinestra\analytics.js.indir" />
-    <Content Include="Content\img\pfinestra\bat.js.indir" />
-    <Content Include="Content\img\pfinestra\cmp_en.min.js.indir" />
-    <Content Include="Content\img\pfinestra\configurator-7.37.0.min.js.indir" />
-    <Content Include="Content\img\pfinestra\ec.js.indir" />
-    <Content Include="Content\img\pfinestra\gtm.js.indir" />
-    <Content Include="Content\img\pfinestra\int.defer-7.37.0.min.js.indir" />
-    <Content Include="Content\img\pfinestra\main-7.37.0.min.js.indir" />
-    <Content Include="Content\img\pfinestra\t.js.indir" />
+    <Content Include="Content\Files\result door heat.pdf" />
+    <Content Include="Content\Files\result door.pdf" />
+    <Content Include="Content\Files\result window heat.pdf" />
+    <Content Include="Content\Files\result window.pdf" />
+    <Content Include="Content\img\prcoprifilotech.psd" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\canvas.js" />
@@ -2867,6 +2898,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010280846358_extraleng.resx">
       <DependentUpon>202010280846358_extraleng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011071906495_formData.resx">
+      <DependentUpon>202011071906495_formData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

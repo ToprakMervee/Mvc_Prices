@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="~/Resources/assets/css/app.css">
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link href="~/Content/Datatable.css" rel="stylesheet" />
-    <link href="~/Content/Site.css?v=1.37" rel="stylesheet" />
-    <link href="~/Content/configurator.css" rel="stylesheet" />
+    <link href="~/Content/Site.css?v=1.39" rel="stylesheet" />
+    <link href="~/Content/configurator.css?v=1.02" rel="stylesheet" />
     <link href="~/Content/shoppingcart.css" rel="stylesheet" />
     <!-- endbuild -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
@@ -203,8 +203,8 @@
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        //if (!User.IsInRole("User"))
-                        //{
+                        if (!User.IsInRole("ProlineAdmin"))
+                        {
                         <li class="has-submenu">
                             <a class="submenu-toggle" href="javascript:void(0)">
                                 <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
@@ -238,7 +238,7 @@
 
                             </ul>
                         </li>
-                        //}
+                        }
 
                     }
                     @if (User.Identity.IsAuthenticated)
@@ -361,7 +361,7 @@
     <script src="~/Resources/libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="~/Resources/assets/js/fullcalendar.js"></script>
     <script src="~/Scripts/handlebars.min.js"></script>
-<script src="~/Scripts/canvas.js?v=1.15"></script>
+<script src="~/Scripts/canvas.js?v=1.20"></script>
 <script type="text/javascript">
         $.ajax({
             type: "GET",

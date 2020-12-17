@@ -12,7 +12,7 @@ using MVC_Prices2.Models;
 namespace MVC_Prices2.Controllers
 {
     [Authorize]
-    [Authorize(Roles = "ProlineAdmin")]
+    //[Authorize(Roles = "ProlineAdmin")]
 
     public class UsersController : Controller
     {
@@ -39,7 +39,7 @@ public object WebSecurity { get; private set; }
                 ViewData["Roles"] = roleManager.Roles.ToList();
 
 
-                return View(userManager.Users);
+                return View(userManager.Users.Where(a=> !a.IsDeleted).ToList());
             }
         }
       

@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MVC_Prices2.Identity;
 using MVC_Prices2.Models;
+using MVC_Prices2.ViewModels;
 
 namespace MVC_Prices.Controllers
 {
@@ -24,24 +25,26 @@ namespace MVC_Prices.Controllers
         }
         public ActionResult Index(int? id = 0)
         {
+            var user = User.Identity.GetUserId();
             using (PriceDataModel2 db = new PriceDataModel2())
             {
-                
-                var product = db.Products.FirstOrDefault(a => a.Id == id);
-              
-                
-                return View(product);
+                var data =
+                    db.OfferDet.FirstOrDefault(a => a.OfferMas.User == user && a.ID == id);
+                data = data != null ? data : new OfferDet();
+                return View(data);
             }
         }
+
+       
         public ActionResult PFinestra(int? id = 0)
         {
+            var user = User.Identity.GetUserId();
             using (PriceDataModel2 db = new PriceDataModel2())
             {
-
-                var product = db.Products.FirstOrDefault(a => a.Id == id);
-
-
-                return View(product);
+                var data =
+                    db.OfferDet.FirstOrDefault(a => a.OfferMas.User == user && a.ID == id);
+                data = data != null ? data : new OfferDet();
+                return View(data);
             }
         }
         [HttpPost]
@@ -164,6 +167,19 @@ namespace MVC_Prices.Controllers
             PriceDataModel2 db = new PriceDataModel2();
             var ledges = db.Ledges.Where(p => p.Activity == true).ToList();
             return Json(ledges, JsonRequestBehavior.AllowGet);
+        }
+        public FileResult CertificateFile(int id = 0)
+        {
+            string[] files = new[] { @"C:\Program Files (x86)\PriceApp\Content\Files\result door heat.pdf",
+                @"C:\Program Files (x86)\PriceApp\Content\Files\result door.pdf",
+                @"C:\Program Files (x86)\PriceApp\Content\Files\result window.pdf",
+                @"C:\Program Files (x86)\PriceApp\Content\Files\result window heat.pdf"
+            };
+            string[] fileNames = new[]
+                {"result door heat.pdf", "result door.pdf", "result window heat.pdf", "result window.pdf"};
+            byte[] fileBytes = System.IO.File.ReadAllBytes(files[id]);
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Pdf, fileNames[id]);
         }
     }
 }

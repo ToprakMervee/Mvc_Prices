@@ -12,6 +12,9 @@
     vertical-align: baseline;
     border-radius: .25em
 }
+.price,#totalQuantity,#totalAmount,.amount {
+    font-size: 16px;
+}
 
 a.label:focus, a.label:hover {
     color: #fff;
@@ -3767,13 +3770,6 @@ a.label:focus, a.label:hover {
         margin: 0 -3px 0 0
     }
 
-    .euro, .price {
-        font-weight: 700;
-        color: #000;
-        font-size: 32px;
-        margin: 0 -3px 0 0;
-        letter-spacing: -1px
-    }
 
     p.priceline {
         font-size: 30px;
@@ -6798,9 +6794,6 @@ a.label:focus, a.label:hover {
             font-size: 26px
         }
 
-        .euro, .price {
-            font-size: 27px
-        }
 
         #vorteil35, .preisvorteil {
             display: none

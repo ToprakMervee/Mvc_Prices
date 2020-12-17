@@ -48,11 +48,11 @@ function zmiana(id) {
 }
 
 const seal = [
-    { exp:'interno nero, esterno nero'},
-    { exp:'interno grigio, esterno nero'},
-    { exp:'interno nero, esterno grigio'},
-    { exp:'interno grigio, esterno grigio'}
-    ];
+    { exp: 'interno nero, esterno nero' },
+    { exp: 'interno grigio, esterno nero' },
+    { exp: 'interno nero, esterno grigio' },
+    { exp: 'interno grigio, esterno grigio' }
+];
 
 function strona() {
     var direction = $('#direction').is(':checked');
@@ -79,7 +79,7 @@ function getCheckedBoxes(chkboxName) {
     // Return the array if it is non-empty, or null
     return checkboxesChecked.length > 0 ? checkboxesChecked : [];
 }
-$('#btnAddtoCart').on("click", function() {
+$('#btnAddtoCart').on("click", function () {
     var selectedOne = getSelectedOne();
     var checkForm = checkNextPage();
     if (!checkForm) {
@@ -105,7 +105,7 @@ $('#btnAddtoCart').on("click", function() {
     ///////////////////////////////////////////////////////////////////
     var color = document.configuratorForm.a_renk.value;
     var colorInd = document.configuratorForm.a_185.value;
-    
+
     var colorSide = color === "0" ? "" : wobject.decors[colorInd].name;
     var width = document.configuratorForm.a_width.value;
     var height = document.configuratorForm.a_height.value;
@@ -121,13 +121,31 @@ $('#btnAddtoCart').on("click", function() {
     }
     var camSayi = document.configuratorForm.a_186.value;
     var lamineTaraf = document.configuratorForm.a_191.value;
-    var profilEk = document.configuratorForm.a_187.value =="1";
-    var pervazTaraf = profilEk ? getCheckedBoxes("pervazTaraf") : [];
+    var pervazTaraf = getCheckedBoxes("pervazTaraf");
+    var profilEk = document.configuratorForm.a_187.value === "1" && pervazTaraf.length > 0;
     var satinemi = document.configuratorForm.a_193.value == "1";
     var kol = document.configuratorForm.a_kol.value;
-    var kolyeri = document.configuratorForm.armcm.value +"-CM";
+    var kolyeri = document.configuratorForm.armcm.value + "-CM";
     var kolyonu = document.configuratorForm.armoptions.value;
-    if (kolyeri=="0") {
+    var camDetay = "";
+    var isolDB = "";
+    let angCb = getCheckedBoxes('angTaraf');
+    var kornisVarmi = document.configuratorForm.a_188.value == "1" && angCb.length>0;
+    let kornisSecimi = document.configuratorForm.a_angcop.value;
+    let satine = satinemi ? "satinato" : "";
+    if (camSayi === "0") {
+        camDetay = height > 1700
+            ? "33.1 Stratificato " + satine + "-+ 14 gas argon canalina calda + 33.1 Stratificato Löwe"
+            : "33.1 Stratificato " + satine + "+ 14 gas argon canalina calda + 4 Löwe";
+        isolDB = height > 1700 ? "Rw (C; Ctr) dB : 37 (-2; -4)" : "Rw (C; Ctr) dB : 35 (-1; -4)";
+    } else {
+        camDetay = height > 1700
+            ? "33.1 Stratificato " + satine + "+ 8 gas argon canalina calda + 4 trasparente + 8 gas argon canalina calda + 33.1 Stratificato Löwe"
+            : "33.1 Stratificato " + satine + "+ 9 gas argon canalina calda + 4 trasparente + 9 gas argon canalina calda + 4 Löwe";
+        isolDB = height > 1700 ? "Rw (C; Ctr) dB : 39 (-1; -4)" : "Rw (C; Ctr) dB : 38 (-1; -4)";
+
+    }
+    if (kolyeri == "0") {
         kolyeri = "";
         kolyonu = "";
     }
@@ -138,20 +156,31 @@ $('#btnAddtoCart').on("click", function() {
         bagprofiltipi = "0";
         bagprofilyon = [];
     }
-  
-    var islem = "";
+    let islem = "Nessuna Rifilatura";
+    let aletta = false;
+    let rifilatura = false;
     if (profilEk) {
-        islem = system == "1" ? "Tagliare Il Davanzale" : "Aletta In Casso";
+        if (system === "1") {
+            islem = "Rifilatura";
+            rifilatura = true;
+        } else {
+            islem = "Nessuna Rifilatura";
+            aletta = true;
+        }
     }
-    var sogliabassa = false;
+    let sogliabassa = false;
 
+    if (document.configuratorForm.a_soglia != undefined) {
 
+        sogliabassa = document.configuratorForm.a_soglia.value === "1";
+    }
+    let formData = $('#configuratorForm').serialize();
     var extra = {
         width2: width2, height2: height2, profIslem: islem, pITaraf: pervazTaraf, satinemi: satinemi,
-        selected: selectedOne, profil: wobject.profiles[system].name, colorname: wobject.colors[color].name,
-        colorSide: colorSide, handle: wobject.handles[kol].name, bagprofil: wobject.connection[bagprofiltipi].name,
-        bagprofilvarmi: bagprofilivarmi, bagprofilyon: bagprofilyon, type: wobject.type, colorimg: wobject.colors[color].img, process: profilEk, kolyeri: kolyeri,
-        kolyonu:kolyonu
+        selected: selectedOne, profil: wobject.profiles[system].name, colorname: wobject.colors[color].name, cover: wobject.colors[color].cover,
+        colorSide: colorSide, handle: kol, bagprofil: wobject.connection[bagprofiltipi].name,
+        bagprofilvarmi: bagprofilivarmi, bagprofilyon: bagprofilyon, type: wobject.type, colorimg: wobject.colors[color].img, aletta: aletta, rifilatura: rifilatura, kolyeri: kolyeri,
+        kolyonu: kolyonu, camDetay: camDetay, isolDB: isolDB, kornis: wobject.cornice[kornisSecimi].name, kornisyon: angCb, kornisvarmi: kornisVarmi, sogliabassa: sogliabassa
     };
     var extraStr = JSON.stringify(extra);
     //document.form1.ilosc.value = 0
@@ -168,7 +197,8 @@ $('#btnAddtoCart').on("click", function() {
         UpOpenning: selectedOne.name,
         DoorHandle: kol,
         LatoD: colorInd,
-        Extra: extraStr
+        Extra: extraStr,
+        FormData: formData
     };
     $.ajax({
         type: "POST",
@@ -197,7 +227,7 @@ let updateBasketIcon = () => {
     let number = ++badge[0].innerText;
     badge.text(number);
     badge.css('background-color', 'red');
-    setTimeout(() => badge.css('background-color', 'lightblue'),3000 );
+    setTimeout(() => badge.css('background-color', 'lightblue'), 3000);
 }
 
 function deneme() {
@@ -266,7 +296,14 @@ Handlebars.registerHelper('isActive', (value) => {
     var activeClass = value == "0" ? "active customer-click" : "";
     return activeClass;
 });
-
+Handlebars.registerHelper('yesNo', (value) => {
+    var activeClass = value ? "Si" : "No";
+    return activeClass;
+});
+Handlebars.registerHelper('getUrl', (value) => {
+    var activeClass = value === "Finestra" ? "/Product/Index/" : "/Product/PFinestra/";
+    return activeClass;
+});
 Handlebars.registerHelper('isDisabled', (value) => {
     var activeClass = value === 2 ? "disabled" : "";
     return activeClass;
@@ -285,8 +322,9 @@ Handlebars.registerHelper('isChecked', (value) => {
 });
 
 Handlebars.registerHelper('multiplicate', (quantity, price) => {
-    var amount = (quantity * price);
-    return amount.toFixed(0);
+    var amount = (quantity * price).toFixed(0);
+    var amountText = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return amountText;
 });
 Handlebars.registerHelper('divide', (quantity, price) => {
     var amount = (quantity / price);
@@ -316,3 +354,11 @@ Handlebars.registerHelper('convDate', function (date) {
     return date.toLocaleDateString() + " - " + date.toLocaleTimeString();
 });
 
+let configuratorScroll = (id) => {
+    let el = document.getElementById(id);
+    let aside = document.getElementById('menubar');
+    let elRect = el.getBoundingClientRect();
+    let asideRect = aside.getBoundingClientRect();
+    let currentY = window.pageYOffset;
+    window.scrollTo(elRect.x, currentY + elRect.y - asideRect.y - asideRect.height - 23);
+}

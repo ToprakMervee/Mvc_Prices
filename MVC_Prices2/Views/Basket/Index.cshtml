@@ -1,7 +1,7 @@
 ﻿@using Newtonsoft.Json
 @model List<MVC_Prices2.ViewModels.BasketView>
 @{
-    ViewBag.Title = "Offer";
+    ViewBag.Title = "Carello";
 }
 @{
     int i = 0;
@@ -16,36 +16,39 @@
     <script type="text/javascript">
         //sepeti teklife çevirir
         function ToOffer(reference) {
-            $("#modalReference").val(reference);
-            $("#offerExpsModal").modal("show");
+            ToOffer2(reference);
 
         }
 
-        let updatePositionDescription = (id, item) => {
-            let value = document.getElementById('n_' + id).value;
+        let updatePositionDescription = (id, item, master = false) => {
+            let data = {};
+            if (!master) {
+                let value = document.getElementById('n_' + id).value;
+                data = { Id: id, Exp1: value, IsMaster: master };
+            } else {
+                let value1 = document.getElementById('n_spe1').value;
+                let value2 = document.getElementById('n_spe2').value;
+                data = { Id: id, Exp1: value1, Exp2: value2, IsMaster: master };
+
+            }
             $.ajax({
                 type: "POST",
                 url: "/Basket/SaveNote/",
-                data: { Id: id, Exp1: value},
+                data: data,
                 success: function (data) {
                     if (data.success) {
                         item.style.display = 'none';
-                    } 
+                    }
                 }
             });
         }
 
-        let showSaveButton = (id) => $('#'+id).show();
+        let showSaveButton = (id) => $('#' + id).show();
 
-        function ToOffer2() {
+        let ToOffer2 = (reference) => {
 
-            var reference = $("#modalReference").val();
-            var exp1 = $("#modalExp1").val();
-            var exp2 = $("#modalExp2").val();
             var expData = {
-                Reference: reference,
-                Exp1: exp1,
-                Exp2: exp2
+                Reference: reference
             };
             $.ajax({
                 type: "POST",
@@ -55,7 +58,7 @@
                     if (data.success) {
                         Swal.fire(
                             'Successo',
-                            'Offerto con successo.',
+                            'Preventivo con successo.',
                             'success'
                         ).then((result) => {
                             if (result.value) {
@@ -64,11 +67,7 @@
                             }
                         });
                     } else {
-                        Swal.fire(
-                            'Offerta fallita!',
-                            ' Riprova più tardi.',
-                            'error'
-                        )
+
 
                     }
                 }
@@ -113,246 +112,133 @@
                     <div style="font-size:10px;width:70px;text-align: center;">Submit Order</div>
                 </div>
             </div>*@
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered">
-                    <tr>
-                        <td><b>Reference No:</b> @firstone.Reference</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+
         <form id="shoppingcart_form" action="">
-            <div id="whole-cart" data-selenoid="form-cart">
+            <div id="whole-cart widget" data-selenoid="form-cart">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td width="150"><b>Reference No:</b></td>
+                                <td width="250"> @firstone.Reference</td>
+                                <td rowspan="4">
+                                    <img src="/Content/img/Proline.png" width="200" class="pull-right">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Spe.1:</b></td>
+                                <td>
+                                    <input type="text" style="float: left; max-width: 150px;" class="form-control" maxlength="85" style="margin-bottom: 15px" id="n_spe1" onchange="showSaveButton('nb_spe1')" data-item-id=" @firstone.MasId" placeholder="Speigizione 1" value=" @firstone.Exp1">
+                                    <div style="padding-left: 10px; text-align: right; float: right; display: none;" id="nb_spe1">
+                                        <button type="button" class="btn-link cart-link" data-selenoid="cart-item-btn-save-description" onclick="updatePositionDescription('@firstone.MasId', this, true)">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i> Salvare
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Spe.2:</b></td>
+                                <td>
+                                    <input type="text" style="float: left; max-width: 150px;" class="form-control" maxlength="85" style="margin-bottom: 15px" id="n_spe2" onchange="showSaveButton('nb_spe2')" data-item-id=" @firstone.MasId" placeholder="Speigizione 2" value="@firstone.Exp2">
+                                    <div style="padding-left: 10px; text-align: right; float: right; display: none;" id="nb_spe2">
+                                        <button type="button" class="btn-link cart-link" data-selenoid="cart-item-btn-save-description" onclick="updatePositionDescription('@firstone.MasId', this, true)">
+                                            <i class="glyphicon glyphicon-floppy-disk"></i> Salvare
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td><b>Date:</b></td>
+                                <td> @firstone.Date</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        
-                        <button type="button" id="continueShoppingButton" data-selenoid="cart-btn-continue-top" class="btn-checkout btn-continue hidden-xs" onclick="window.location='/';">Fare shopping</button>
+                        @if (firstone.Status == 0)
+                        {
+                            <button type="button" id="continueShoppingButton" data-selenoid="cart-btn-continue-top" class="btn-checkout btn-continue hidden-xs" onclick="window.location = '/';">Fare shopping</button>
+                        }
                         <button type="button" id="deleteAllOffer" data-selenoid="cart-btn-continue-top" class="btn-checkout btn-danger hidden-xs pull-right" onclick="delOffer(-1)">Cancellata</button>
                     </div>
 
                     <div class="col-xs-12">
                         <table class="table cart" border="0">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" style="width: 50px">Pos.</th>
-                                    <th class="text-center" style="width: 110px">Quantita</th>
-                                    <th class="text-left" style="width: 150px">Prodotto</th>
-                                    <th class="text-left" style="min-width: 200px">Descrizione</th>
-                                    <th class="text-right" style="width: 120px">Prezzo</th>
-                                    <th class="text-right" style="width: 135px">Prezzo totale</th>
-                                </tr>
-                            </thead>
+
+                            <tr>
+                                <th class="text-center" style="width: 50px">Pos.</th>
+                                <th class="text-center" style="width: 100px">Quantita</th>
+                                <th class="text-left" style="width: 150px">Prodotto</th>
+                                <th class="text-left" style="min-width: 250px">Descrizione</th>
+                                <th class="text-right" style="width: 100px">Prezzo</th>
+                                <th class="text-right" style="width: 115px">Prezzo totale</th>
+                            </tr>
+
                             <tbody id="cart">
                             </tbody>
-                            <tfoot style="height: 100%;">
-                                <tr class="hidden-xs cart-overview">
-                                    <td colspan="4" style="vertical-align: top;padding: 0; height: 100%;border-left: 1px solid #bdbdbd;border-bottom: 1px solid #bdbdbd;">
-                                        <div id="cart-overview-footer" style="display: flex; align-items: stretch;">
-                                            <div class="info-box col-md-3 col-sm-4 col-xs-6">
-                                                <div>
-                                                    <b>consegna prevista</b>
-                                                </div>
-                                                <div class="highlighted-div" id="cart-delivery-tipp">
-                                                    Il tuo ordine dovrebbe essere spedito tra
-                                                    <span class="highlight-order-info">
-                                                        <b>23.11.2020</b> and <b>27.11.2020</b>
-                                                    </span>.
-                                                </div>
+                            <tr class="cart-overview">
+                                <td colspan="5" style="vertical-align: top; padding: 0; height: 100%; border-left: 1px solid #bdbdbd; border-bottom: 1px solid #bdbdbd;">
+                                    <div id="cart-overview-footer" style="display: flex; align-items: stretch;">
+                                        <div class="info-box col-md-3">
+                                            <div>
+                                                <b>consegna prevista</b>
                                             </div>
-
-
-                                            <div class="bordered-info-box col-md-9 hidden-sm hidden-xs">
-                                                <div>
-                                                    <b>Technical data</b>
-                                                </div>
-                                                <div id="cart-info" class="cart-info">
-                                                    <div class="clear" style="display:none">
-                                                        <div class="pull-left">
-                                                            <b>Total area:</b>
-                                                        </div>
-                                                        <div class="pull-right">2,72 m²</div>
-                                                    </div>
-                                                    <div class="clear" style="display:none">
-                                                        <div class="pull-left">
-                                                            <b>Running metres:</b>
-                                                        </div>
-                                                        <div class="pull-right">9,52 m</div>
-                                                    </div>
-                                                    <div class="clear">
-                                                        <div class="pull-left">
-                                                            <b>Total quantita:</b>
-                                                        </div>
-                                                        <div class="pull-right" id="totalQuantity">2</div>
-                                                    </div>
-
-                                                </div>
+                                            <div class="highlighted-div" id="cart-delivery-tipp">
+                                                Il tuo ordine dovrebbe essere spedito in
+                                                <span class="highlight-order-info">
+                                                    <b> 21-26</b>
+                                                </span>
+                                                giorni
                                             </div>
                                         </div>
-                                    </td>
-                                    <td colspan="2" class="cart-total" style="vertical-align: top !important;">
-                                        <table class="total-table table">
-                                            <tbody>
-                                                <tr class="total-sum total-bold">
-                                                    <td>Totale</td>
-                                                    <td align="right">€<b id="totalAmount"></b></td>
-                                                </tr>
 
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr class="visible-xs cart-overview">
-                                    <td colspan="6" class="cart-total">
-                                    </td>
-                                </tr>
-                                <tr class="hidden-xs btn-tr-checkout ">
-                                    <td colspan="6">
-                                        <button type="button" id="toPreventivi" data-selenoid="cart-btn-continue-bottom" class="btn-checkout btn-continue pull-left" onclick="ToOffer('@firstone.Reference')">Preventivi</button>
-                                        <button type="button" style="margin-left: 10px" class="btn-checkout btn-white-bordered pull-left" data-gtm="button-print-cart" onclick="ToPDF('@firstone.Reference')">Stampa</button>
-                                    </td>
-                                </tr>
-                            </tfoot>
+
+                                    </div>
+                                </td>
+                                <td class="cart-total" style="vertical-align: top !important;">
+                                    <table class="total-table table printDet ">
+                                        <tbody>
+                                            <tr class="total-sum total-bold ">
+                                                <td width="120">Totale quantita</td>
+                                                <td align="right"><b id="totalQuantity"></b></td>
+                                            </tr>
+                                            <tr class="total-sum total-bold ">
+                                                <td>Importo Totale</td>
+                                                <td align="right">€<b id="totalAmount"></b></td>
+                                            </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr class="visible-xs cart-overview">
+                                <td colspan="6" class="cart-total">
+                                </td>
+                            </tr>
+                            <tr class="hidden-xs btn-tr-checkout ">
+                                <td colspan="6">
+                                    @if (firstone.Status == 0)
+                                    {
+                                        <button type="button" id="toPreventivi" data-selenoid="cart-btn-continue-bottom" class="btn-checkout btn-continue pull-left noprint" onclick="ToOffer('@firstone.Reference')">Preventivi</button>
+
+                                    }
+                                    <button type="button" style="margin-left: 10px" class="btn-checkout btn-white-bordered pull-left noprint" onclick="PrintTo()">Stampa</button>
+                                </td>
+                            </tr>
+
                         </table>
                     </div>
                     <br style="clear: both;">
                 </div>
-                <div id="rabatt-info-table" style="display: none;">
-                    <div style="width: 100%;float:left;">
-                        <div class="footer-row" id="discount-row-4">
-                            <div class="col-sm-5 col-xs-5">4%</div>
-                            <div class="col-sm-7 col-xs-7">€10,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-5">
-                            <div class="col-sm-5 col-xs-5">5%</div>
-                            <div class="col-sm-7 col-xs-7">€15,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-6">
-                            <div class="col-sm-5 col-xs-5">6%</div>
-                            <div class="col-sm-7 col-xs-7">€20,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-7">
-                            <div class="col-sm-5 col-xs-5">7%</div>
-                            <div class="col-sm-7 col-xs-7">€25,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-8">
-                            <div class="col-sm-5 col-xs-5">8%</div>
-                            <div class="col-sm-7 col-xs-7">€30,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-10">
-                            <div class="col-sm-5 col-xs-5">10%</div>
-                            <div class="col-sm-7 col-xs-7">€40,000</div>
-                        </div>
-                        <div class="footer-row" id="discount-row-12">
-                            <div class="col-sm-5 col-xs-5">12%</div>
-                            <div class="col-sm-7 col-xs-7">€50,000</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="visible-xs col-xs-12">
 
-                    </div>
-                    <div class="visible-xs col-xs-12 double-btn-container">
-                        <button type="button" class="btn-checkout btn-white-bordered pull-left" data-gtm="button-print-cart" onclick="window.open('/cart/pdf/type/6', '_blank')">Print</button>
-                    </div>
-                </div>
-                <div class="mobile-info-box visible-xs">
-                    <div class="col-xs-12">
-                        <div class="mobile-header">
-                            <b>Consegna prevista</b>
-                        </div>
-                        <div class="highlighted-div" id="cart-delivery-tipp">
-                            Il tuo ordine dovrebbe essere spedito tra <span class="highlight-order-info">
-                                <b>23.11.2020</b> e <b>27.11.2020</b>
-                            </span>.
-                        </div>
-                    </div>
-                    <div class="col-xs-12 split" style="display:none">
-                        <div>
-                            <div class="mobile-header">Delivery Costs</div>
-                            <div class="highlighted-div">
-                                International shipping for windows and doors is <b>€6,990</b> (incl. 19% German VAT). International shipping for window sills and accessories is <b>EUR 199</b> including tax.
-                            </div>
-                        </div>
-                        <div>
-                            <div class="mobile-header">
-                                <b>Volume discount</b>
-                            </div>
-                            <div class="cart-mengenrabatt" style="display: block">
-                                <p style="margin-bottom: 5px !important;">Discount with minimum purchase</p>
-                                <div style="width: 100%;float:left;">
-                                    <div class="footer-row" id="discount-row-4">
-                                        <div class="col-sm-5 col-xs-5">4%</div>
-                                        <div class="col-sm-7 col-xs-7">€10,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-5">
-                                        <div class="col-sm-5 col-xs-5">5%</div>
-                                        <div class="col-sm-7 col-xs-7">€15,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-6">
-                                        <div class="col-sm-5 col-xs-5">6%</div>
-                                        <div class="col-sm-7 col-xs-7">€20,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-7">
-                                        <div class="col-sm-5 col-xs-5">7%</div>
-                                        <div class="col-sm-7 col-xs-7">€25,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-8">
-                                        <div class="col-sm-5 col-xs-5">8%</div>
-                                        <div class="col-sm-7 col-xs-7">€30,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-10">
-                                        <div class="col-sm-5 col-xs-5">10%</div>
-                                        <div class="col-sm-7 col-xs-7">€40,000</div>
-                                    </div>
-                                    <div class="footer-row" id="discount-row-12">
-                                        <div class="col-sm-5 col-xs-5">12%</div>
-                                        <div class="col-sm-7 col-xs-7">€50,000</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12" style="display:none">
-                        <div class="mobile-header">
-                            <b>Technical data</b>
-                        </div>
-                        <div id="cart-info" class="cart-info">
-                            <p>Important facts about your order:</p>
-                            <div class="clear">
-                                <div class="pull-left">
-                                    <b>Total area:</b>
-                                </div>
-                                <div class="pull-right">2,72 m²</div>
-                            </div>
-                            <div class="clear">
-                                <div class="pull-left">
-                                    <b>Running metres:</b>
-                                </div>
-                                <div class="pull-right">9,52 m</div>
-                            </div>
-                            <div class="clear">
-                                <div class="pull-left">
-                                    <b>Total number of windows:</b>
-                                </div>
-                                <div class="pull-right">2</div>
-                            </div>
-                            <div class="clear">
-                                <div class="pull-left">
-                                    <b>Total number of doors:</b>
-                                </div>
-                                <div class="pull-right">0</div>
-                            </div>
-                            <div class="clear">
-                                <div class="pull-left">
-                                    <b>Discount:</b>
-                                </div>
-                                <div class="pull-right">0%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
 
@@ -434,7 +320,7 @@ else
             {
                 title: 'Sei sicuro?',
                 text: 'Non sarai in grado di ripristinare questo! '+exp,
-                type: 'question',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -461,40 +347,52 @@ else
                     }
                 });
             } else {
-                window.location.reload();
+
             }
         });
 
     }
     function PrintTo() {
-        var printto = $('#printto').is(':checked');
 
-        if (printto) {
-            Discount(1.20);
-        } else {
+        Swal.fire({
+            title:'A chi?',
+            text:'negozio o cliente?',
+            type: 'question',
+            showCancelButton:true,
+            confirmButtonText: 'Cliente',
+            cancelButtonText: 'Negozzio'
+        }).then((result) => {
+            if (result.value) {
+                Discount(1.80);
+                setTimeout(() => window.print(), 600);
+            } else {
+                setTimeout(() => window.print(), 600);
+            }
 
-            Discount(1 / 1.20);
-        }
+
+        });
 
     }
 
-    function Discount(disc) {
+    let Discount = (disc) => {
         $('.price').each(function () {
             var price = ($(this).text() * disc).toFixed(2);
 
-            $(this).text(price);
+            $(this).text(price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         });
 
-        var sumamount = 0;
+        let sumAmount = 0;
+        $('b.amount').each(function () {
+            let text = $(this).text().replace(/\D/g, '');
+            let amount = parseFloat((text * disc).toFixed(2));
+            let amountText = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        $('.amount').each(function () {
-            var amount = parseFloat(($(this).text() * disc));
-            $(this).text(amount.toFixed(2));
-
-            sumamount = +sumamount + amount;
+            $(this).text(amountText);
+            sumAmount = +sumAmount + +amount;
         });
+        let sumAmountText = sumAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        $("#topamount").val(sumamount.toFixed(0));
+        $("#totalAmount").text(sumAmountText);
     }
 
 
@@ -629,9 +527,9 @@ else
             { id: 849, name: 'Crystal white', img: 'weiss.jpg', isSurcharged: true, surcharge: 5 }
         ],
         profiles: [
-            { id: '70061', name: 'Pro 7006 ®', img: 'pro7006.png', surcharge: 0, isSurcharged: false, details: ['Profondità 70 mm', 'Sistema a 6 camere', '2 guarnizioni'] },
-            { id: '70062', name: 'Pro 7006 ® 2', img: 'pro7006_2.png', surcharge: 5, isSurcharged: true, details: ['Profondità 70 mm', 'Sistema a 6 camere', '2 guarnizioni'] },
-            { id: '81061', name: 'Pro 8106 ®', img: 'pro8106.png', surcharge: 10, isSurcharged: true, details: ['Profondità 81 mm', 'Sistema a 6 camere', '3 guarnizioni'] }
+            { id: '70061', name: 'Pro 7006 ® L', img: 'pro7006.png', sill: 0, surcharge: 0, isSurcharged: false, details: ['Profondità 70 mm', 'Sistema a 6 camere', '2 guarnizioni'] },
+            { id: '70062', name: 'Pro 7006 ® Z', img: 'pro7006_2.png', sill: 35, surcharge: 5, isSurcharged: false, details: ['Profondità 70 mm', 'Sistema a 6 camere', '2 guarnizioni'] },
+            { id: '81061', name: 'Pro 8106 ® L', img: 'pro8106.png', sill: 0, surcharge: 10, isSurcharged: false, details: ['Profondità 81 mm', 'Sistema a 6 camere', '3 guarnizioni'] }
         ],
         decors: [
             { name: 'Colore del Decorativo esterno e interno' },
@@ -639,14 +537,14 @@ else
             { name: 'Colore del Decorativo interno solo esterno bianco' }
         ],
         handles: [
-            { id: '1295', name: 'Standard - Eva Plast', img: 'kolyerli.jpg', isSurcharged: false, surcharge: 0, isStandard: true },
-            { id: '1296', name: 'Bianco - Roto', img: 'kolbeyaz.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1297', name: 'Argento - Roto', img: 'kolgumus.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1298', name: 'D\'oro - Roto', img: 'kolsari.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1299', name: 'Bronzo - Roto', img: 'kolbronz.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1300', name: 'Champagne - Roto', img: 'kolsampanya.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1301', name: 'Nero - Roto', img: 'kolsiyah.png', isSurcharged: true, surcharge: 5, isStandard: true },
-            { id: '1302', name: 'Crichetto - Eva Plast', img: 'crichetto.png', isSurcharged: false, surcharge: -5, isStandard: false }
+            { id: '1295', name: 'Standard', marka: 'Eva Plast', img: 'kolyerli.jpg', isSurcharged: false, surcharge: 0, isStandard: true },
+            { id: '1296', name: 'Bianco', marka: 'Roto', img: 'kolbeyaz.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1297', name: 'Argento', marka: 'Roto', img: 'kolgumus.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1298', name: 'D\'oro', marka: 'Roto', img: 'kolsari.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1299', name: 'Bronzo', marka: 'Roto', img: 'kolbronz.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1300', name: 'Champagne', marka: 'Roto', img: 'kolsampanya.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1301', name: 'Nero', marka: 'Roto', img: 'kolsiyah.png', isSurcharged: true, surcharge: 5, isStandard: true },
+            { id: '1302', name: 'Crichetto', marka: 'Eva Plast', img: 'crichetto.png', isSurcharged: false, surcharge: -5, isStandard: false }
         ],
         connection: [
             { name: 'Box', price: 4.97 },
@@ -673,20 +571,23 @@ else
 
         var offerDetails = $("#cart");
         $(".detailRows").remove();
-        offerDetails.prepend(ourGeneratedHtml);
+        offerDetails.html(ourGeneratedHtml);
         var sum = 0;
         var qnt = 0;
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             sum+= data[i].Price * data[i].Quantity;
         }
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             qnt+= data[i].Quantity;
         }
-        $('#totalAmount').text(sum);
+        var sumText = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('#totalAmount').text(sumText);
         $('#totalQuantity').text(qnt);
     }
     $(document).ready(function () {
-
+        window.onafterprint = () => {
+            CreateDetails(tempData);
+        }
         var url = window.location.pathname;
         var id = url.substring(url.lastIndexOf('/') + 1);
         tempData = @Html.Raw(JsonConvert.SerializeObject(Model));
@@ -696,13 +597,12 @@ else
             tempData[i].colorImg = wobject.colors[tempData[i].Color].img;
             let sealIndex = tempData[i].Color === "0" ? "3" : tempData[i].LatoD;
             tempData[i].seal = seal[sealIndex].exp;
-
+            tempData[i].Extra.handleObj = wobject.handles[tempData[i].Extra.handle];
         }
         CreateDetails(tempData);
 
         $("#toOrder").on("click",
             function() {
-
                 if (isChanged) {
                     sendData();
                 } else {
@@ -725,7 +625,7 @@ else
             url: "/Basket/UpdateQuantity/",
             data: { ID: c, Quantity: b },
             success: function (data) {
-           
+
             }
         });
     }
@@ -766,13 +666,14 @@ else
         </td>
         <td class="text-left cart-col-description">
             <div class="input-wrapper" data-selenoid="cart-item-description">
-                <input type="text" class="form-control" maxlength="65" style="margin-bottom: 15px" id="n_{{ID}}" onchange="showSaveButton('nb_{{ID}}')" data-item-id="{{ID}}" placeholder="Descrizione" value="{{Note}}">
+                <input type="text" class="form-control" maxlength="85" style="margin-bottom: 15px" id="n_{{ID}}" onchange="showSaveButton('nb_{{ID}}')" data-item-id="{{ID}}" placeholder="Descrizione" value="{{Note}}">
                 <div class="input-message">
                 </div>
                 <div style="padding-left: 10px; text-align:right" id="{{ID}}">
                     <div style="padding-left: 10px; text-align: right; display: none;" id="nb_{{ID}}">
-                        <button type="button" class="btn-link cart-link" data-selenoid="cart-item-btn-save-description" onclick="updatePositionDescription('{{ID}}', this)"> 	
-                        <i class="glyphicon glyphicon-floppy-disk"></i> Salvare</button>
+                        <button type="button" class="btn-link cart-link" data-selenoid="cart-item-btn-save-description" onclick="updatePositionDescription('{{ID}}', this)">
+                            <i class="glyphicon glyphicon-floppy-disk"></i> Salvare
+                        </button>
                     </div>
                 </div>
             </div>
@@ -805,7 +706,7 @@ else
                     <li>
                         <b>Total altezza:</b>  {{Height}} mm
                     </li>
-                    <div id="hiddenAttributes_{{@@index}}" style="display: none;">
+                    <div id="hiddenAttributes_{{@@index}}" class="printDet" style="display: none;">
                         {{#each Extra.width2}}
                         <li>
                             <b>Larghezza {{rownumber @@index}}:</b> {{this}} mm
@@ -816,30 +717,53 @@ else
                             <b>Altezza {{rownumber @@index}}:</b> {{this}} mm
                         </li>
                         {{/each}}
-                        {{#if Extra.process}}
+
                         <li>
-                            <b>Processi:</b> {{Extra.profIslem}} {{#each Extra.pITaraf}}({{this}}) {{/each}}
+                            <b>Rifilatura aletta:</b> {{Extra.profIslem}} {{#if Extra.rifilatura}} {{#each Extra.pITaraf}}({{this}}) {{/each}} {{/if}}
                         </li>
-                      
+
+                        {{#if Extra.aletta}}
+                        <li>
+                            <b>Aletta in casso:</b> {{#each Extra.pITaraf}}({{this}}) {{/each}}
+                        </li>
+                        {{/if}}
+                        {{#if Extra.kornisvarmi}}
+                        <li>
+                            <b>Cornice:</b>{{Extra.kornis}} {{#each Extra.kornisyon}}({{this}}) {{/each}}
+                        </li>
                         {{/if}}
                         <li>
-                            <b>Ferramenti:</b> Maco
+                            <b>Soglia ribassata:</b> {{yesNo Extra.sogliabassa}}
                         </li>
                         <li>
-                            <b>Maniglia:</b> {{Extra.handle}} {{Extra.kolyeri}} {{Extra.kolyonu}}  <div class="label label-warning"></div>
+                            <b>Ferramenti:</b> Kale
+                        </li>
+                        <li>
+                            <b>Coperchietti Cerniere:</b> Copertino {{Extra.colorname}}
+                        </li>
+                        <li>
+                            <b>Chiusure:</b> Maniglia passante
+                        </li>
+                        <li>
+                            <b>Maniglia:</b> {{Extra.handleObj.name}} - {{Extra.handleObj.marka}} Altezza: {{Extra.kolyeri}} (quota riferita all'anta)  <div class="label label-warning"></div>
                         </li>
                         <li class="group-header" style="margin-top:10px;list-style-type:none;font-size:14px;"><b>Vetro</b></li>
+
                         <li>
-                            <b>Vetro:</b> {{GlassType}} {{#if Extra.satinemi}}Satinato {{/if}} <div class="label label-warning"></div>
+                            {{GlassType}} <br />{{Extra.camDetay}} <div class="label label-warning"></div>
+                        </li>
+                        <li>
+                            <b>Isol.Acust.Vetro</b><br />{{Extra.isolDB}}
                         </li>
                         {{#if Extra.bagprofilvarmi}}
+                        <li class="group-header" style="margin-top:10px;list-style-type:none;font-size:14px;"><b>Profilo Connezione:</b></li>
                         <li>
-                            <b>Profilo Connezione:</b><span>{{Extra.bagprofil}} {{#each Extra.bagprofilyon}}({{this}}) {{/each}}</span>
+                            <span>{{Extra.bagprofil}} {{#each Extra.bagprofilyon}}({{this}}) {{/each}}</span>
                         </li>
                         {{/if}}
 
                     </div>
-                    <div style="padding: 5px 0 10px;">
+                    <div class="noprint" style="padding: 5px 0 10px;">
                         <a class="cart-link" id="hiddenAttributesLink_{{@@index}}" onclick="showAttributesControl(this, document.getElementById('hiddenAttributes_{{@@index}}'), document.getElementById('hiddenAttributesLink_{{@@index}}'), {{@@index}})">
                             <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
                                 <path d="m8 27.3333333c-4.05008817 0-7.33333333-3.2832451-7.33333333-7.3333333s3.28324516-7.3333333 7.33333333-7.3333333c4.0500882 0 7.3333333 3.2832451 7.3333333 7.3333333s-3.2832451 7.3333333-7.3333333 7.3333333zm0-1.3333333c3.3137085 0 6-2.6862915 6-6s-2.6862915-6-6-6-6 2.6862915-6 6 2.6862915 6 6 6zm.66666667-6.6666667h2.66666663v1.3333334h-2.66666663v2.6666666h-1.33333334v-2.6666666h-2.66666666v-1.3333334h2.66666666v-2.6666666h1.33333334z" fill="#06c" transform="translate(0 -12)"></path>
@@ -847,20 +771,20 @@ else
                         </a>
                     </div>
                 </ul>
-                <div class="position-toolbar">
+                <div class="position-toolbar noprint">
                     <a id="del_{{ID}}" class="deleteItemFromBasket cart-link" data-selenoid="cart-item-btn-delete" data-gtm="button-remove-from-cart" onclick="delOffer({{ID}})" rel-id="{{ID}}" rel-pos="{{rownumber @@index}}">Elimina</a>
-                    <a id="dup_{{ID}}" class="cart-link" data-selenoid="cart-item-btn-copy" href="/">Duplicare</a>
-                    <a id="ed_{{ID}}" class="cart-link" data-selenoid="cart-item-btn-edit" data-gtm="button-edit-item" href="/">Modificare</a>
+                    <a id="dup_{{ID}}" class="cart-link" data-selenoid="cart-item-btn-copy" href="{{getUrl Extra.type}}{{ID}}">Duplicare</a>
+                    <a id="ed_{{ID}}" class="cart-link" data-selenoid="cart-item-btn-edit" data-gtm="button-edit-item" href="{{getUrl Extra.type}}{{ID}}">Modificare</a>
                 </div>
             </div>
         </td>
         <td class="text-right cart-col-sum">
-            <span class="cart-col-sum-title">Price per piece</span>
-            <data data-gtm="cart-item-price">€{{Price}}</data>
+            <span class="cart-col-sum-title">Prezzo per pz.</span>
+            <data data-gtm="cart-item-price">€<b class="price">{{Price}}</b></data>
         </td>
         <td class="text-right cart-col-total">
-            <span class="cart-col-total-title">{{multiplicate Price Quantity}}</span>
-            €<b id="rowAmount{{@@index}}">{{multiplicate Price Quantity}}</b>
+            <span class="cart-col-total-title amount">{{multiplicate Price Quantity}}</span>
+            €<b class="amount" id="rowAmount{{@@index}}">{{multiplicate Price Quantity}}</b>
         </td>
     </tr>
     {{/each}}

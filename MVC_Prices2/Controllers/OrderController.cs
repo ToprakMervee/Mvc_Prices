@@ -80,16 +80,17 @@ namespace MVC_Prices2.Controllers
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
                         Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
-                        ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
-                        LatchArm = x.LatchArm,
-                        UpOpenning = x.UpOpenning,
+                        UpOpenning = x.Description,
                         GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
                         GlassQnt = x.GlassQnt,
                         Note = x.Note,
                         LatoD = x.LatoD,
-                        Extra = x.Extra
+                        Extra = x.Extra,
+                        Exp2 = x.OfferMas.Exp2,
+                        Exp1 = x.OfferMas.Exp1,
+                        Status = x.OfferMas.Status
 
                     }).OrderBy(a=> a.ID).ToList();
 
@@ -126,7 +127,7 @@ namespace MVC_Prices2.Controllers
         //                MasId = x.BasketMas_ID,
         //                DoorHandle = x.DoorHandle,
         //                LatchArm = x.LatchArm,
-        //                UpOpenning = x.UpOpenning,
+        //                Description = x.Description,
         //                GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
         //                GlassQnt = x.GlassQnt,
         //                Note = x.Note,
@@ -204,7 +205,7 @@ namespace MVC_Prices2.Controllers
                 {
                     OfferDet offerDet = new OfferDet()
                     {
-                        ArmType = el.ArmType,
+                        
                         ColorName = el.Color,
                         Direction = el.Direction,
                         Height = el.Height,
@@ -306,11 +307,9 @@ namespace MVC_Prices2.Controllers
                         Reference = x.OfferMas.ReferenceNo,
                         Date = x.OfferMas.Date,
                         Glass = db.Glass.Where(a => a.GlassType == x.GlassQnt).ToList(),
-                        ArmType = x.ArmType,
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
-                        LatchArm = x.LatchArm,
-                        UpOpenning = x.UpOpenning,
+                        UpOpenning = x.Description,
                         GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
                         GlassQnt = x.GlassQnt,
                         Note = x.Note,
@@ -375,7 +374,6 @@ namespace MVC_Prices2.Controllers
                         OrderDate = x.OrderDate.Value,
                         OrderDet = x.OfferDet.Select(y=> new OrderDetViewModel()
                         {
-                            ArmType = y.ArmType,
                             Color = y.ColorName,
                             Direction = y.Direction,
                             Height = y.Height,
