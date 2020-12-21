@@ -150,7 +150,6 @@
                     </div>
                 </div>
                 <!--profil seçimi-->
-              
                 <!--renk seçimi-->
                 <div id="attributePanel_renk" class="row  image-without-padding intermediate-step" rel-name="Colour and Decor" rel-id="renk" rel-page="0" style="">
                     <h4 class="collapsed accordion-h4 configTitle" rel-name="Window Configurator_Colour and Decor" rel-id="renk">
@@ -438,12 +437,12 @@
                                         <p class="col-sm-10 col-xs-9">Apertura ad anta e ribalta (Destra ) : L’anta si puo’ aprire ad ribalta e ruota, si apre da sinistra a destra. <br /><b>Consentita</b>: <u>Larghezza</u>(500-1350)-<u>Altezza</u>(500-1900)</p>
                                     </div>
                                     @*<br class="clear">
-                                        <div>
-                                            <div class="col-sm-2 col-xs-3 no-pad-left-right">
-                                                <img class="img-responsive auto-margin" src="/Content/img/schwing.png">
-                                            </div>
-                                            <p class="col-sm-10 col-xs-9">Finestre a battente: ruota verso l'interno in orizzontale su un asse centrale.</p>
-                                        </div>*@
+                            <div>
+                                <div class="col-sm-2 col-xs-3 no-pad-left-right">
+                                    <img class="img-responsive auto-margin" src="/Content/img/schwing.png">
+                                </div>
+                                <p class="col-sm-10 col-xs-9">Finestre a battente: ruota verso l'interno in orizzontale su un asse centrale.</p>
+                            </div>*@
 
                                 </div>
 
@@ -588,6 +587,102 @@
                 <div id="layoutRow" class="row" rel-name="Layout" rel-id="329" rel-page="0" style="">
 
                 </div>
+                <div id="attributePanel_160sop" class="row no-price-display force-h4 intermediate-step" rel-name="Upper / lower fanlight" rel-id="155" rel-page="0" style="">
+                    <h4 class="configTitle" rel-id="160sop">
+                        <span>CON SOPRALUCE</span>
+                    </h4>
+                    <div class="">
+                        <div class="panel-body">
+                            <div class="configurator-warning configuration-invalid" id="errorMessage_160sop" rel-id="160sop" style="display: none;">
+                                <table style="margin: 10px;">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src="/Content/img/telefon.png" width="50">
+                                            </td>
+                                            <td class="messageBox">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="configurator-2-selection-possibilities">
+                                <div class="col-sm-5 col-xs-12 vc_flNo">
+                                    <label id="al_flNo" for="av_flNo" class="yes-no-selection active customer-click" rel-value="a_fLYesNo">
+                                        <div class="blue-radio-container">
+                                            <input type="radio" value="0" id="av_flNo" name="a_fLYesNo" onclick="updateHelper2(this, 'flNo', event);" rel-no="1" rel-orig="fLYesNo" data-ispreview="true" checked="">
+                                            <div class="blue-radio">
+                                            </div>
+                                            <span id="avt_flNo" class="" style="">No</span>
+                                        </div>
+                                        <div class="link-price-container">
+                                            <span id="pl_flNo" class="configurator-right-block-price  " style="display:none;">
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-sm-5 col-xs-12 vc_flYes">
+                                    <label id="al_flYes" for="av_flYes" class="yes-no-selection " rel-value="a_fLYesNo">
+                                        <div class="blue-radio-container">
+                                            <input type="radio" value="1" id="av_flYes" name="a_fLYesNo" onclick="updateHelper2(this, 'flYes', event);" rel-no="0" rel-orig="fLYesNo" data-ispreview="true">
+                                            <div class="blue-radio">
+                                            </div>
+                                            <span id="avt_flYes" class="" style="">Si</span>
+                                        </div>
+                                        <div class="link-price-container">
+                                            <span id="pl_flYes" class="configurator-right-block-price  " style="display:none;">
+                                            </span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="buttonArea_160sop" class="buttonArea">
+                            </div>
+                            <div id="options_fLYesNo" style="display: none">
+                                <div class="configurator-2-selection-possibilities">
+                                    <div class="col-sm-5 col-xs-12 vc_flUp">
+                                        <label id="al_flUp" for="av_flUp" class="yes-no-selection active customer-click" rel-value="a_flUpDown">
+                                            <div class="blue-radio-container">
+                                                <input type="radio" value="Superiore" id="av_flUp" name="a_flUpDown" onclick="updateHelper2(this, 'flUp', event);" rel-no="1" rel-orig="flUpDown" data-ispreview="true" checked="">
+                                                <div class="blue-radio">
+                                                </div>
+                                                <span id="avt_flUp" class="" style="">Superiore</span>
+                                            </div>
+                                            <div class="link-price-container">
+                                                <span id="pl_flUp" class="configurator-right-block-price  " style="display: none;">
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-12 vc_flDown">
+                                        <label id="al_flDown" for="av_flDown" class="yes-no-selection " rel-value="a_flUpDown">
+                                            <div class="blue-radio-container">
+                                                <input type="radio" value="Inferiore" id="av_flDown" name="a_flUpDown" onclick="updateHelper2(this, 'flDown', event);" rel-no="0" rel-orig="flUpDown" data-ispreview="true">
+                                                <div class="blue-radio">
+                                                </div>
+                                                <span id="avt_flDown" class="" style="">Inferiore</span>
+                                            </div>
+                                            <div class="link-price-container">
+                                                <span id="pl_flDown" class="configurator-right-block-price  " style="display: none;">
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <h4 class="configTitle" style="background-color: gray">TIPO DI SOPRALUCE +<span id="spanSopraluce"></span>€</h4>
+                                <hr />
+                                <div class="configurator-tile-list" id="uLFLList2">
+
+                                </div>
+                                <div class="text-center" id="heightSopraluce">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--upper lower fanlight seçimi-->
                 <div class="configurator-notice">
                     <i class="info-icon">
                     </i>
@@ -596,15 +691,15 @@
                         <div class="configurator-notice-container">
 
                             @*<div class="col-sm-3 configurator-notice-btn" style="margin-left: 5px;">
-                                    <i class="pdf-file-icon">
-                                    </i>
-                                    <a target="_blank" style="" href="/Product/CertificateFile/0" data-title="PDF: Measuring assistant"></a>
-                                </div>
-                                <div class="col-sm-3 configurator-notice-btn" style="margin-left: 5px;">
-                                    <i class="pdf-file-icon">
-                                    </i>
-                                    <a target="_blank" style="" href="/Product/CertificateFile/1" data-title="PDF: Measuring assistant">PDF: Measuring assistant</a>
-                                </div>*@
+                        <i class="pdf-file-icon">
+                        </i>
+                        <a target="_blank" style="" href="/Product/CertificateFile/0" data-title="PDF: Measuring assistant"></a>
+                    </div>
+                    <div class="col-sm-3 configurator-notice-btn" style="margin-left: 5px;">
+                        <i class="pdf-file-icon">
+                        </i>
+                        <a target="_blank" style="" href="/Product/CertificateFile/1" data-title="PDF: Measuring assistant">PDF: Measuring assistant</a>
+                    </div>*@
                             <div class="col-sm-6 configurator-notice-btn" style="margin-left: 5px;">
                                 <i class="pdf-file-icon">
                                 </i>
@@ -776,7 +871,7 @@
                         </span>
                     </h4>
                     <div class="collapse accordion-tooltip-container" id="collapse_188">
-                      
+
                     </div>
                     <div class="panel-default">
                         <div class="panel-body">
@@ -1585,7 +1680,87 @@
                         </div>
                     </div>
                 </div>
+                <!--ferramenti-->
+                <div id="attributePanel_ferr" class="row" rel-name="Ferramenti" rel-id="ferr" rel-page="1">
+                    <h4 class="collapsed accordion-h4 tooltip-visible configTitle details" rel-name="Window Configurator_Glazing" rel-id="ferr" data-toggle="collapse" href="#collapse_ferr" aria-expanded="False" aria-controls="collapse_ferr">
+                        <span>Ferramenti</span>
 
+                    </h4>
+                    <div class="">
+
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <div class="configurator-warning configuration-invalid" id="errorMessage_ferr" rel-id="ferr" style="display: none;">
+                                <table style="margin: 10px;">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src="/Content/img/telefon.png" width="50">
+                                            </td>
+                                            <td class="messageBox">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="configurator-tile-list">
+                                <div class="col-sm-4 col-xs-6 vc_kale">
+                                    <label id="al_kale" for="av_kale" class="col-xs-12 configurator-tile active" data-url="/configurator/info/id/kale/type/2" data-id="#help-value_kale" data-original-title="" title="" rel-value="a_ferr">
+                                        <input type="radio" value="0" id="av_kale" name="a_ferr" onclick="updateHelper2(this, 'kale', event);" rel-no="0" rel-orig="ferr" data-ispreview="true" checked>
+                                        <div class="configurator-image-container">
+                                            <span class="description-pill">Kale</span>
+                                            <img id="avi_kale" class="img-responsive" alt="doppio vetro Ug 1.1 per DIN EN 673" src="/Content/img/kale.png" rel-src="waermeschutzisolierverglasung-2fach.jpg" style="max-width: 100%;">
+                                        </div>
+                                        <span id="avt_kale" class="" style="">
+
+                                            <span class="sub-description" style="font-weight: normal;">Kale</span>
+                                        </span>
+                                        <span id="pl_kale" class="configurator-block-price  " style="display: none;">
+
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-4 col-xs-6 vc_maco">
+                                    <label id="al_maco" for="av_maco" class="col-xs-12 configurator-tile" data-url="/configurator/info/id/maco/type/2" data-id="#help-value_maco" data-original-title="" title="" rel-value="a_ferr">
+                                        <input type="radio" value="1" id="av_maco" name="a_ferr" onclick="updateHelper2(this, 'maco', event);" rel-no="0" rel-orig="ferr" data-ispreview="true">
+                                        <div class="configurator-image-container">
+                                            <span class="description-pill">Maco</span>
+                                            <img id="avi_maco" class="img-responsive" alt="Triple vetro Ug 0.7 per DIN EN 673" src="/Content/img/maco.png" rel-src="waermeschutzisolierverglasung-3fach.jpg" style="max-width: 100%;">
+                                        </div>
+                                        <span id="avt_maco" class="" style="">
+
+                                            <span class="sub-description" style="font-weight: normal;">Maco</span>
+                                        </span>
+                                        <div class="configurator-block-price-spacer">
+                                        </div>
+                                        <span id="pd_Maco" class="configurator-block-price  " style="display: inline;"></span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-4 col-xs-6 vc_roto">
+                                    <label id="al_roto" for="av_roto" class="col-xs-12 configurator-tile" data-url="/configurator/info/id/roto/type/2" data-id="#help-value_roto" data-original-title="" title="" rel-value="a_ferr">
+                                        <input type="radio" value="2" id="av_roto" name="a_ferr" onclick="updateHelper2(this, 'roto', event);" rel-no="0" rel-orig="ferr" data-ispreview="true">
+                                        <div class="configurator-image-container">
+                                            <span class="description-pill">Roto</span>
+                                            <img id="avi_roto" class="img-responsive" alt="Triple vetro Ug 0.7 per DIN EN 673" src="/Content/img/roto.png" rel-src="waermeschutzisolierverglasung-3fach.jpg" style="max-width: 100%;">
+                                        </div>
+                                        <span id="avt_roto" class="" style="">
+
+                                            <span class="sub-description" style="font-weight: normal;">Roto</span>
+                                        </span>
+                                        <div class="configurator-block-price-spacer">
+                                        </div>
+                                        <span id="pd_Roto" class="configurator-block-price " style="display: inline;"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="buttonArea_ferr" class="buttonArea">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--ferramenti-->
                 <!--kol-->
                 <div id="attributePanel_494" class="row" rel-name="Handle" rel-id="494" rel-page="1" style="">
                     <h4 class="collapsed accordion-h4 tooltip-visible configTitle" rel-name="Window Configurator_Handle" rel-id="494" href="#collapse_494" aria-controls="collapse_494" aria-expanded="False">
@@ -2045,8 +2220,11 @@
         CreateTOWList(wobject.products);
         CreateHandleList(wobject.handles);
         CreateULFLList(wobject.products[0].subTypes);
+        CreateULFLList2(wobject.products[0].subTypes[0].fanlight);
         CreateOTList(wobject.products[0].subTypes[0].opTypes);
         CreateMSizes(wobject.products[0].subTypes[0].opTypes[0]);
+        CreateULSize(wobject.products[0].subTypes[0].fanlight[0]);
+
         CreateLayout(wobject.products[0].subTypes[0]);
         document.getElementById('configuratorForm').addEventListener('change',
             function () {
@@ -2081,7 +2259,6 @@
                 if (nType==="radio" || nType==="checkbox") {
                     if (nValue==objValue) {
                         nElements[j].checked = true;
-                        console.log();
                         if (nElements[j].onclick != null)
                             nElements[j].onclick.call(nElements[j], nId, event);
                         if (nElements[j].onchange != null)
@@ -2136,7 +2313,11 @@
             applyULType(a);
             break;
         case "a_161":
-            applyOpType(a);
+                applyOpType(a);
+                break;
+
+        case "a_flType":
+            applyULSize(a);
             break;
         case "a_190":
             showAttrPanel(a);
@@ -2153,6 +2334,9 @@
         case "armoptions":
                 break;
         case "a_188":
+            showAttrPanel(a);
+                break;
+        case "a_fLYesNo":
             showAttrPanel(a);
             break;
         default:
@@ -2212,7 +2396,14 @@
         $('#selectedImage').attr('src', '/Content/img/' + data[index].img);
         $('#layoutImage').attr('src', '/Content/img/' + data[index].img);
     }
+    function applyULSize(a) {
+        var tow = document.configuratorForm.a_155.value;
+        var ulf = 0;//document.configuratorForm.a_160.value;
+        var ot = a.value;
+        var data = wobject.products[tow].subTypes[ulf].fanlight;
+        CreateULSize(data[ot]);
 
+    }
     function applyOpType(a) {
         var tow = document.configuratorForm.a_155.value;
         var ulf = document.configuratorForm.a_160.value;
@@ -2236,6 +2427,7 @@
     function applyMainType(a) {
         var data = wobject.products[a.value];
         CreateULFLList(data.subTypes);
+        CreateULFLList2(data.subTypes[0].fanlight);
         CreateLayout(data.subTypes[0]);
         CreateOTList(data.subTypes[0].opTypes);
         $('#selectedType').text(data.name);
@@ -2314,7 +2506,12 @@
                             { id: 1, name: 'Una anta fissa glazing', img: 'b_1_f.png', minWidth: 500, minHeight: 500, maxWidth: 2400, maxHeight: 2400, isActive: false, right: [] },
                             { id: 11, name: 'Vasistas', img: '1_kipp.png', minWidth: 400, minHeight: 400, maxWidth: 1700, maxHeight: 1900, isActive: false, right: [] },
                             { id: 0, name: 'Una anta pivoted sash', img: 's_schwingfluegel.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false, right: [] }
+                        ],
+                        fanlight: [
+                            { id: 18, name: 'Vetro Fisso', img: '2_ol_1_f.png', minWidth: 500, minHeight: 500, maxWidth: 2400, maxHeight: 2400, isActive: true, right: [] },
+                            { id: 19, name: 'Vasistas', img: '2_ol_1_k.png', minWidth: 400, minHeight: 500, maxWidth: 1700, maxHeight: 2400, isActive: true, right: [] }
                         ]
+
                     },
                     {
                         name: 'con traverso',
@@ -2367,6 +2564,14 @@
                             { id: 4, name: 'a due ante DK sinistra DX tirare destra', img: '2_dl_dkr.png', minWidth: 900, minHeight: 500, maxWidth: 2400, maxHeight: 1900, isActive: false, down: [2, 1] },
                             { id: 4, name: 'doppia anta DX tirare sinistra DK destra ', img: '2_dkl_dr.png', minWidth: 900, minHeight: 500, maxWidth: 2400, maxHeight: 1900, isActive: false, down: [1, 2] },
                             { id: 0, name: 'doppia anta DX tirare sinistra DX tirare destra with mullion ', img: '2_dkl_dkr.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false }
+                        ],
+                        fanlight: [
+                            { id: 18, name: 'Vetro Fisso', img: '2_ol_1_f.png', minWidth: 400, minHeight: 500, maxWidth: 1700, maxHeight: 2400, isActive: true, right: [] },
+                            { id: 19, name: 'Vasistas', img: '2_ol_1_k.png', minWidth: 400, minHeight: 500, maxWidth: 1700, maxHeight: 2400, isActive: true, right: [] },
+                            { id: 21, name: 'Due Fisso', img: '2_ol_2_ff.png', minWidth: 400, minHeight: 500, maxWidth: 1700, maxHeight: 2400, isActive: true, right: [] },
+                            { id: 22, name: 'Vetro Fisso e Vasistas', img: '2_ol_2_fk.png', minWidth: 500, minHeight: 400, maxWidth: 2400, maxHeight: 1900, isActive: true, right: [] },
+                            { id: 22, name: 'Vasistas e Vetro Fisso', img: '2_ol_2_kf.png', minWidth: 500, minHeight: 400, maxWidth: 2400, maxHeight: 1900, isActive: true, right: [] },
+                            { id: 23, name: 'Due Vasistas', img: '2_ol_2_kk.png', minWidth: 400, minHeight: 500, maxWidth: 1700, maxHeight: 2400, isActive: true, right: [] }
                         ]
                     },
                     {
@@ -2813,6 +3018,8 @@
     };
     Object.freeze(wobject);
     var fiyatlar = [];
+    var fiyatlar2 = [];
+    var fiyatlar3 = [];
 
     //handle bars creators
     function CreateProfileList(data) {
@@ -2838,12 +3045,27 @@
         var tOWList = $("#tOWList");
         tOWList.html(ourGeneratedHtml);
     }
-
+    function CreateULSize(data) {
+        var rawTemplate = document.getElementById("hbSopraHeight").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+        var oTList = $("#heightSopraluce");
+        oTList.html(ourGeneratedHtml);
+        GetDatas(getSelectedOne().id);
+        checkNextPage();
+    }
     function CreateULFLList(data) {
         var rawTemplate = document.getElementById("hbULFLList").innerHTML;
         var compiledTemplate = Handlebars.compile(rawTemplate);
         var ourGeneratedHtml = compiledTemplate(data);
         var uLFLList = $("#uLFLList");
+        uLFLList.html(ourGeneratedHtml);
+    }
+    function CreateULFLList2(data) {
+        var rawTemplate = document.getElementById("hbULFLList2").innerHTML;
+        var compiledTemplate = Handlebars.compile(rawTemplate);
+        var ourGeneratedHtml = compiledTemplate(data);
+        var uLFLList = $("#uLFLList2");
         uLFLList.html(ourGeneratedHtml);
     }
 
@@ -2940,6 +3162,11 @@
             esikFark = 0;
         }
         var yProfilFark = 0;
+        var sopraluce = document.configuratorForm.a_fLYesNo.value == "1";
+        var sopraluceFark = 0;
+        var sopraluceBoy = document.configuratorForm.a_sopheight.value;
+        var marka = document.configuratorForm.a_ferr.value;
+        var markaFark = 0;
         if (yProfilVarmi) {
             var yProfilSecimi = document.configuratorForm.a_495.value;
             var cb = getCheckedBoxes('cpSide');
@@ -2992,11 +3219,52 @@
                 }
             }
         }
+        if (sopraluce) {
+            for (var i = 0; i < fiyatlar2["length"]; i++) {
+                if (en > fiyatlar2[i].Width - 100 && en <= fiyatlar2[i].Width && sopraluceBoy > fiyatlar2[i].Height - 100 && sopraluceBoy <= fiyatlar2[i].Height && fiyatlar2[i].Color == false) {
+                    sopraluceFark = Math.ceil(Number(fiyatlar2[i].Prices));
+                    break;
+                }
+            }
+        }
+
+        let differW = 250;
+        let differH = 250;
+        let id = marka == "1" ? 25 : marka == "2" ? 24:0;
+        for (var i = 0; i < fiyatlar3["length"]; i++) {
+
+            if (i > 0) {
+                if (fiyatlar3[i].Width > fiyatlar3[i - 1].Width) {
+                    differW = fiyatlar3[i].Width - fiyatlar3[i - 1].Width;
+                }
+                if (fiyatlar3[i].Height > fiyatlar3[i - 1].Height) {
+                    differH = fiyatlar3[i].Height - fiyatlar3[i - 1].Height;
+                }
+            } else {
+                differW = 250;
+                differH = 250;
+            }
+            if (en > fiyatlar3[i].Width - differW && en <= fiyatlar3[i].Width && boy > fiyatlar3[i].Height - differH && boy <= fiyatlar3[i].Height) {
+
+                if (id == fiyatlar3[i].ProductId) {
+                    markaFark = Math.ceil(Number(fiyatlar3[i].Prices));
+                }
+                if (fiyatlar3[i].ProductId == 24) {
+                    $('#pd_Roto').text('+'+Math.ceil(Number(fiyatlar3[i].Prices))+'€');
+                } else {
+                    $('#pd_Maco').text('+' +Math.ceil(Number(fiyatlar3[i].Prices)) +'€');
+
+                }
+                console.log(fiyatlar3[i].ProductId, fiyatlar3[i].Prices);
+            }
+        }
+
         for (var i = 0; i < fiyatlar["length"]; i++) {
             if (renk === "0" || 1 === 1) {
                 if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
                     fiyat = fiyatlar[i].Prices;
-                    factorPrice = Number(fiyat);
+                    factorPrice = Number(fiyat) + sopraluceFark;
+                    $('#spanSopraluce').text(sopraluceFark);
                     if (renk !== "0") {
                         if (!wobject.colors[renk].isSurcharged) {
                             if (latoD === "0")
@@ -3019,7 +3287,7 @@
             factorPrice = Number(fiyat);
         }
 
-        factorPrice = Math.ceil(factorPrice + (m2 * camfiyat) + kolfark + sogBasDiff + cutDiff + yProfilFark+ esikFark);
+        factorPrice = Math.ceil(factorPrice + (m2 * camfiyat) + kolfark + sogBasDiff + cutDiff + yProfilFark+ esikFark + markaFark);
         setPrice(factorPrice);
     }
 
@@ -3033,6 +3301,8 @@
         setPrice(0);
         var fiyatLabel = $('.finalPriceLabel');
         var loadingGif = $('#viewDuringAjaxRequest');
+        var sop = document.configuratorForm.a_flType.value;
+        sop = wobject.products[document.configuratorForm.a_155.value].subTypes[0].fanlight[sop].id;
         fiyatLabel.css('display', 'none');
         loadingGif.css('display', 'inline');
         var profil = document.configuratorForm.profil.value;
@@ -3040,10 +3310,12 @@
             type: 'GET',
             url: '/Product/Datas',
             dataType: "JSON",
-            data: { id: id, system: profil },
+            data: { id: id, system: profil, sop: sop},
             success: function (data) {
 
-                fiyatlar = data;
+                fiyatlar = data.prices;
+                fiyatlar2 = data.prices2;
+                fiyatlar3 = data.prices3;
                 document.configuratorForm.pricedProfile.value = profil;
                 Hesap();
                 fiyatLabel.css('display', 'inline');
@@ -3370,12 +3642,12 @@
 
 </script>
 
-<script id="hbULFLList" type="text/x-handlebars-template">
+<script id="hbULFLList2" type="text/x-handlebars-template">
     {{#each this}}
     {{#if isActive}}
-    <div class="col-sm-3 col-xs-6 vc_st{{@@index}}">
-        <label id="al_st{{@@index}}" for="av_st{{@@index}}" class="col-xs-12 configurator-tile {{isActive @@index}}" data-url="/configurator/info/id/st{{@@index}}/type/2" data-id="#help-value_st{{@@index}}" data-original-title="" title="" rel-value="a_160">
-            <input type="radio" value="{{@@index}}" id="av_st{{@@index}}" name="a_160" onclick="updateHelper2(this, 'st{{@@index}}', event);" rel-no="0" rel-orig="160" data-ispreview="true" {{isChecked @@index}}>
+    <div class="col-sm-4 col-xs-6 vc_st{{@@index}}">
+        <label id="al_st{{@@index}}sop" for="av_st{{@@index}}sop" class="col-xs-12 configurator-tile {{isActive @@index}}" data-url="/configurator/info/id/st{{@@index}}/type/2" data-id="#help-value_st{{@@index}}" data-original-title="" title="" rel-value="a_flType">
+            <input type="radio" value="{{@@index}}" id="av_st{{@@index}}sop" name="a_flType" onclick="updateHelper2(this, 'st{{@@index}}sop', event);" rel-no="0" rel-orig="flType" data-ispreview="true" {{isChecked @@index}}>
             <div class="configurator-image-container">
                 <img id="avi_st{{@@index}}" class="img-responsive" alt="{{name}}" src="/Content/img/{{img}}" rel-src="{{img}}" style="max-width: 100%;">
             </div>
@@ -3388,7 +3660,24 @@
     {{/each}}
 
 </script>
+<script id="hbULFLList" type="text/x-handlebars-template">
+    {{#each this}}
+    {{#if isActive}}
+    <div class="col-sm-3 col-xs-6 vc_st{{@@index}}">
+        <label id="al_st{{@@index}}" for="av_st{{@@index}}" class="col-xs-12 configurator-tile {{isActive @@index}}" data-url="/configurator/info/id/st{{@@index}}/type/2" data-id="#help-value_st{{@@index}}" data-original-title="" title="" rel-value="a_160">
+            <input type="radio" value="{{@@index}}" id="av_st{{@@index}}" name="a_160" onclick="updateHelper2(this, 'st{{@@index}}', event);" rel-no="0" rel-orig="a_160" data-ispreview="true" {{isChecked @@index}}>
+            <div class="configurator-image-container">
+                <img id="avi_st{{@@index}}" class="img-responsive" alt="{{name}}" src="/Content/img/{{img}}" rel-src="{{img}}" style="max-width: 100%;">
+            </div>
+            <span id="avt_st{{@@index}}" class="" style="">{{name}}</span>
+            <span id="pl_st{{@@index}}" class="configurator-block-price  " style="display: none;">
+            </span>
+        </label>
+    </div>
+    {{/if}}
+    {{/each}}
 
+</script>
 <script id="hbOTList" type="text/x-handlebars-template">
     {{#each this}}
     {{#if isActive}}
@@ -3472,7 +3761,25 @@
     </div>
     {{/each}}
 </script>
+<script id="hbSopraHeight" type="text/x-handlebars-template">
 
+    <div id="attributeSopra_height" class="col-sm-12 col-xs-12 text-center" rel-name="SopraHeight">
+        <div class="col-xs-12" style="padding: 0;">
+            <div class="description" style="padding-bottom: 5px">
+                <b>Altezza Di Sopraluce</b> (mm)
+            </div>
+            <input id="a_sopheight" name="a_sopheight" value="{{average minHeight maxHeight}}" class="form-control configurator-size-input full-dimension-input text-center valid" rel-axis="y" rel-axis-type="y" rel-id="height" type="tel" pattern="[0-9]" onkeyup="validateNumericInput(this)" onchange="setAttributeValue(this);" autocomplete="off" aria-required="true" aria-invalid="false" maxlength="4" placeholder="{{average minHeight maxHeight}}">
+            <div id="a_sopheight_customErrorPlacement" class="configurator-error" rel-id="height">
+            </div>
+            <div class="configurator-min-max-size">
+                <span>
+                    Total altezza consentita: <span id="allowedRangeInfo_height" data-max="The Total height may not exceed :max {{maxHeight}} mm." data-min="The Total height must not be less than :min {{minHeight}}  mm." data-required="Please enter required Total height.">{{minHeight}}  mm - {{maxHeight}} mm</span>
+                </span>
+            </div>
+            <input type="hidden" id="anusop_height" name="anu_height" value="mm">
+        </div>
+    </div>
+</script>
 <script id="hbLayout" type="text/x-handlebars-template">
     {{#if layout}}
     <h4 class="collapsed accordion-h4 tooltip-visible configTitle details" rel-name="Window Configurator_Layout" rel-id="329" aria-controls="collapse_329">

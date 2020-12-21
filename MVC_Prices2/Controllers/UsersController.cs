@@ -12,7 +12,7 @@ using MVC_Prices2.Models;
 namespace MVC_Prices2.Controllers
 {
     [Authorize]
-    //[Authorize(Roles = "ProlineAdmin")]
+    [Authorize(Roles = "ProlineAdmin")]
 
     public class UsersController : Controller
     {
@@ -20,8 +20,8 @@ namespace MVC_Prices2.Controllers
         private object _isAuthenticated;
         private object _userRoleNames;
         private readonly RoleManager<IdentityRole> roleManager;
-          
-public object WebSecurity { get; private set; }
+
+        public object WebSecurity { get; private set; }
 
         public UsersController()
         {
@@ -29,7 +29,7 @@ public object WebSecurity { get; private set; }
             userManager = new UserManager<AppUser>(userStore);
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new IdentityDataContext()));
         }
-      
+
 
         public ActionResult Index()
         {
@@ -39,37 +39,43 @@ public object WebSecurity { get; private set; }
                 ViewData["Roles"] = roleManager.Roles.ToList();
 
 
-                return View(userManager.Users.Where(a=> !a.IsDeleted).ToList());
+                return View(userManager.Users.Where(a => !a.IsDeleted).ToList());
             }
         }
-      
+
 
         [HttpPost]
         public ActionResult Add(User user_1)
         {
-            var user = new AppUser();
-            user.StoreId = user_1.StoreId;
-            user.Email = user_1.Email;
-            user.UserName = user_1.UserName;
-            user.IsActive = true;
-            user.FullName = user_1.FullName;
-            
-          
-
-            try
+            using (PriceDataModel2 db = new PriceDataModel2())
             {
-                var result = userManager.Create(user, user_1.Password);
-                result = userManager.AddToRole(user.Id, user_1.Role);
-               
+                var store = db.Stores.FirstOrDefault(a => a.Id == user_1.StoreId);
+                var user = new AppUser();
+                user.StoreId = user_1.StoreId;
+                user.Email = user_1.Email;
+                user.UserName = store.StoreCode+".1";
+                user.IsActive = true;
+                user.FullName = store.StoreName;
+
+
+
+
+
+                try
+                {
+                    var result = userManager.Create(user, user_1.Password);
+                    result = userManager.AddToRole(user.Id, user_1.Role);
+
+
+                }
+                catch (Exception ex)
+                {
+                    return View(ex.Message);
+                }
+
+
 
             }
-            catch (Exception ex)
-            {
-                return View(ex.Message);
-            }
-
-          
-           
             return Json(new { success = true });
         }
 
@@ -86,7 +92,7 @@ public object WebSecurity { get; private set; }
                 user.IsDeleted = true;
                 sucess = true;
                 userManager.Update(user);
-                
+
             }
             return Json(new { success = sucess });
         }
@@ -105,22 +111,22 @@ public object WebSecurity { get; private set; }
                 //    user.UserName = user_1.UserName;
                 //}
                 user.FullName = user_1.FullName;
-              
+
             }
             try
             {
                 var result = userManager.Update(user);
                 var role = roleManager.FindById(user.Id);
-                if (role!=null)
+                if (role != null)
                 {
-                    var roles =  userManager.GetRoles(user.Id);
+                    var roles = userManager.GetRoles(user.Id);
                     userManager.RemoveFromRoles(user.Id, roles.ToArray());
                 }
                 var result2 = userManager.AddToRole(user.Id, user_1.Role);
             }
             catch (Exception e)
             {
-               
+
             }
 
             return Json(new { success = true });

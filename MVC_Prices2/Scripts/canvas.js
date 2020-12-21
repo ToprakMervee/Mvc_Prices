@@ -132,6 +132,8 @@ $('#btnAddtoCart').on("click", function () {
     let angCb = getCheckedBoxes('angTaraf');
     var kornisVarmi = document.configuratorForm.a_188.value == "1" && angCb.length>0;
     let kornisSecimi = document.configuratorForm.a_angcop.value;
+    let ferramenti = document.configuratorForm.a_ferr.value;
+    let ferramenti2 = ferramenti == "0" ? "Kale" : ferramenti == "1" ? "Maco" : "Roto";
     let satine = satinemi ? "satinato" : "";
     if (camSayi === "0") {
         camDetay = height > 1700
@@ -149,6 +151,11 @@ $('#btnAddtoCart').on("click", function () {
         kolyeri = "";
         kolyonu = "";
     }
+    let sopraluce = document.configuratorForm.a_fLYesNo.value == "1";
+    let soptype = document.configuratorForm.a_flType.value;
+    soptype = wobject.products[document.configuratorForm.a_155.value].subTypes[0].fanlight[soptype];
+    let sopdirection = document.configuratorForm.a_flUpDown.value;
+    let sopheight = document.configuratorForm.a_sopheight.value;
     var bagprofilivarmi = document.configuratorForm.a_297.value == "1";
     var bagprofiltipi = document.configuratorForm.a_495.value;
     var bagprofilyon = getCheckedBoxes('cpSide');
@@ -180,7 +187,8 @@ $('#btnAddtoCart').on("click", function () {
         selected: selectedOne, profil: wobject.profiles[system].name, colorname: wobject.colors[color].name, cover: wobject.colors[color].cover,
         colorSide: colorSide, handle: kol, bagprofil: wobject.connection[bagprofiltipi].name,
         bagprofilvarmi: bagprofilivarmi, bagprofilyon: bagprofilyon, type: wobject.type, colorimg: wobject.colors[color].img, aletta: aletta, rifilatura: rifilatura, kolyeri: kolyeri,
-        kolyonu: kolyonu, camDetay: camDetay, isolDB: isolDB, kornis: wobject.cornice[kornisSecimi].name, kornisyon: angCb, kornisvarmi: kornisVarmi, sogliabassa: sogliabassa
+        kolyonu: kolyonu, camDetay: camDetay, isolDB: isolDB, kornis: wobject.cornice[kornisSecimi].name, kornisyon: angCb, kornisvarmi: kornisVarmi, sogliabassa: sogliabassa, sopraluce: sopraluce,
+        soptype: soptype, sopD: sopdirection, sopheight: sopheight, ferramenti: ferramenti2
     };
     var extraStr = JSON.stringify(extra);
     //document.form1.ilosc.value = 0

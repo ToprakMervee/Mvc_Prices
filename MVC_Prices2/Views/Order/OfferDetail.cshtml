@@ -603,7 +603,6 @@ else
 
         $("#toOrder").on("click",
             function() {
-
                 if (isChanged) {
                     sendData();
                 } else {
@@ -737,7 +736,7 @@ else
                             <b>Soglia ribassata:</b> {{yesNo Extra.sogliabassa}}
                         </li>
                         <li>
-                            <b>Ferramenti:</b> Kale
+                            <b>Ferramenti:</b> {{Extra.ferramenti}}
                         </li>
                         <li>
                             <b>Coperchietti Cerniere:</b> Copertino {{Extra.colorname}}
@@ -745,16 +744,25 @@ else
                         <li>
                             <b>Chiusure:</b> Maniglia passante
                         </li>
+                        {{#if Extra.sopraluce}}
+                        <li>
+                            <b>Sopraluce:</b> {{Extra.soptype.name}} {{Extra.sopD}} - <b>Larg.:</b> {{Width}} mm - <b>Alt.:</b>{{Extra.sopheight}}
+                        </li>
+                        {{/if}}
+
                         <li>
                             <b>Maniglia:</b> {{Extra.handleObj.name}} - {{Extra.handleObj.marka}} Altezza: {{Extra.kolyeri}} (quota riferita all'anta)  <div class="label label-warning"></div>
                         </li>
-                        <li class="group-header" style="margin-top:10px;list-style-type:none;font-size:14px;"><b>Vetro</b></li>
+                        <li class="group-header" style="margin-top:10px;list-style-type:none;font-size:14px;"></li>
 
                         <li>
-                            {{GlassType}} <br />{{Extra.camDetay}} <div class="label label-warning"></div>
+                            <b>Vetro:</b> {{GlassType}} <br />{{Extra.camDetay}} <div class="label label-warning"></div>
                         </li>
                         <li>
                             <b>Isol.Acust.Vetro</b><br />{{Extra.isolDB}}
+                        </li>
+                        <li>
+                            <b>Ug.Prodotto:</b>1.3
                         </li>
                         {{#if Extra.bagprofilvarmi}}
                         <li class="group-header" style="margin-top:10px;list-style-type:none;font-size:14px;"><b>Profilo Connezione:</b></li>
