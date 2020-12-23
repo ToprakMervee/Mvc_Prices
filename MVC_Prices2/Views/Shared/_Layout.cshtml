@@ -70,7 +70,7 @@
             <a href="/Home/" class="navbar-brand">
 
                 <i class="zmdi zmdi-home zmdi-hc-lg"> </i>
-                <span class="brand-name">  Leroy Merlin & Proline</span>
+                <span class="brand-name">@if(User.Identity.GetUserName()!="guest"){  @Html.Raw("Leroy Merlin &") } Proline</span>
             </a>
         </div><!-- .navbar-header -->
 
