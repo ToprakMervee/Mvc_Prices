@@ -265,6 +265,10 @@
     <Compile Include="Migrations\202011071906495_formData.Designer.cs">
       <DependentUpon>202011071906495_formData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012241903573_prodtype.cs" />
+    <Compile Include="Migrations\202012241903573_prodtype.Designer.cs">
+      <DependentUpon>202012241903573_prodtype.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -660,8 +664,6 @@
     <Content Include="Content\img\3_ul_3_k_f_f_f.png" />
     <Content Include="Content\img\4.gif" />
     <Content Include="Content\img\5.gif" />
-    <Content Include="Content\img\5241_1.v54.js.indir" />
-    <Content Include="Content\img\5241_8636.js.indir" />
     <Content Include="Content\img\6.gif" />
     <Content Include="Content\img\7.gif" />
     <Content Include="Content\img\8.gif" />
@@ -671,7 +673,6 @@
     <Content Include="Content\img\aeromat.jpg" />
     <Content Include="Content\img\alpha-metallic-matt.jpg" />
     <Content Include="Content\img\alu-fensterbank-aussen.jpg" />
-    <Content Include="Content\img\analytics.js.indir" />
     <Content Include="Content\img\anschlussprofil-25mm-altbau-en.png" />
     <Content Include="Content\img\anschlussprofil-altbau-30mm-holz-en.png" />
     <Content Include="Content\img\anschlussprofil-altbau-30mm-holzalu-en.png" />
@@ -707,7 +708,6 @@
     <Content Include="Content\img\chinchilla.jpg" />
     <Content Include="Content\img\classic-iv68.jpg" />
     <Content Include="Content\img\classic-iv78.jpg" />
-    <Content Include="Content\img\cmp.min.css" />
     <Content Include="Content\img\crichetto.png" />
     <Content Include="Content\img\csm_ddbadc2804_e4d1a6da6a.jpg" />
     <Content Include="Content\img\db-703-metallic-matt.jpg" />
@@ -727,7 +727,6 @@
     <Content Include="Content\img\durchwurfhemmende-verglasung-a1.jpg" />
     <Content Include="Content\img\durchwurfhemmende-verglasung-a3.jpg" />
     <Content Include="Content\img\earlplatin.jpg" />
-    <Content Include="Content\img\ec.js.indir" />
     <Content Include="Content\img\eco-idealu-fv.jpg" />
     <Content Include="Content\img\eco-idealu.jpg" />
     <Content Include="Content\img\eco-plano.jpg" />
@@ -783,6 +782,7 @@
     <Content Include="Content\img\groesse-gesamtmass-aufbaurollladen-en.png" />
     <Content Include="Content\img\groesse-gesamtmass-vorbaurollladen-en.png" />
     <Content Include="Content\img\groesse-gesamtmass_01.png" />
+    <Content Include="Content\img\gu.png" />
     <Content Include="Content\img\gurtbedienung.jpg" />
     <Content Include="Content\img\haustiergewebe-schwarz.jpg" />
     <Content Include="Content\img\haustueren_13.jpg" />
@@ -798,6 +798,7 @@
     <Content Include="Content\img\insektenschutz-dekor-golden-oak.jpg" />
     <Content Include="Content\img\insektenschutz-dekor-mahagoni.jpg" />
     <Content Include="Content\img\isolierverglasung.jpg" />
+    <Content Include="Content\img\kale.png" />
     <Content Include="Content\img\kasten-nrs.jpg" />
     <Content Include="Content\img\kasten-nvpt.jpg" />
     <Content Include="Content\img\kasten-nvs.jpg" />
@@ -834,6 +835,7 @@
     <Content Include="Content\img\leroymerllogo.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\maco.png" />
     <Content Include="Content\img\mastercarre.jpg" />
     <Content Include="Content\img\material-holz-alu.jpg" />
     <Content Include="Content\img\material-holz.jpg" />
@@ -845,7 +847,6 @@
     <Content Include="Content\img\meranti-nussbaum-222.jpg" />
     <Content Include="Content\img\meranti-teak-277.jpg" />
     <Content Include="Content\img\mooreiche.jpg" />
-    <Content Include="Content\img\ns.html" />
     <Content Include="Content\img\Originals\1.gif" />
     <Content Include="Content\img\Originals\10.gif" />
     <Content Include="Content\img\Originals\11.gif" />
@@ -908,7 +909,6 @@
     <Content Include="Content\img\pfinestra\aussenfensterbank-verbindnungsstueck.jpg" />
     <Content Include="Content\img\pfinestra\b1_w0_s0.png" />
     <Content Include="Content\img\pfinestra\balcony-door-configurator.jpg" />
-    <Content Include="Content\img\pfinestra\bat.js.indir" />
     <Content Include="Content\img\pfinestra\befestigungsloecher.jpg" />
     <Content Include="Content\img\pfinestra\beige.jpg" />
     <Content Include="Content\img\pfinestra\beschlag-basissicherheit.jpg" />
@@ -1014,11 +1014,6 @@
     <Content Include="Content\img\pfinestra\chinchilla.jpg" />
     <Content Include="Content\img\pfinestra\classic-iv68.jpg" />
     <Content Include="Content\img\pfinestra\classic-iv78.jpg" />
-    <Content Include="Content\img\pfinestra\cmp.min.css" />
-    <Content Include="Content\img\pfinestra\cmp.php" />
-    <Content Include="Content\img\pfinestra\cmp_en.min.js.indir" />
-    <Content Include="Content\img\pfinestra\configurator-7.37.0.min.js.indir" />
-    <Content Include="Content\img\pfinestra\credit-card-mm.svg" />
     <Content Include="Content\img\pfinestra\csm_ddbadc2804_e4d1a6da6a.jpg" />
     <Content Include="Content\img\pfinestra\db-703-metallic-matt.jpg" />
     <Content Include="Content\img\pfinestra\db-703.jpg" />
@@ -1036,7 +1031,6 @@
     <Content Include="Content\img\pfinestra\dunkelbronze.jpg" />
     <Content Include="Content\img\pfinestra\durchwurfhemmende-verglasung-a1.jpg" />
     <Content Include="Content\img\pfinestra\durchwurfhemmende-verglasung-a3.jpg" />
-    <Content Include="Content\img\pfinestra\ec.js.indir" />
     <Content Include="Content\img\pfinestra\eco-idealu-fv.jpg" />
     <Content Include="Content\img\pfinestra\eco-idealu.jpg" />
     <Content Include="Content\img\pfinestra\eco-plano.jpg" />
@@ -1060,8 +1054,6 @@
     <Content Include="Content\img\pfinestra\exit-modal-x.png" />
     <Content Include="Content\img\pfinestra\exitModal_mail.png" />
     <Content Include="Content\img\pfinestra\exitModal_phone.png" />
-    <Content Include="Content\img\pfinestra\f%281%29.txt" />
-    <Content Include="Content\img\pfinestra\f.txt" />
     <Content Include="Content\img\pfinestra\fenster-verbundsicherheitsglas-en.jpg" />
     <Content Include="Content\img\pfinestra\fensterbankhalter.jpg" />
     <Content Include="Content\img\pfinestra\fensterbankschrauben.jpg" />
@@ -1088,7 +1080,6 @@
     <Content Include="Content\img\pfinestra\groesse-gesamtmass-aufbaurollladen-en.png" />
     <Content Include="Content\img\pfinestra\groesse-gesamtmass-vorbaurollladen-en.png" />
     <Content Include="Content\img\pfinestra\groesse-gesamtmass_01.png" />
-    <Content Include="Content\img\pfinestra\gtm.js.indir" />
     <Content Include="Content\img\pfinestra\gurtbedienung.jpg" />
     <Content Include="Content\img\pfinestra\hellelfenbein.jpg" />
     <Content Include="Content\img\pfinestra\ideal-4000.png" />
@@ -1101,7 +1092,6 @@
     <Content Include="Content\img\pfinestra\idealu-hfv-iv78.jpg" />
     <Content Include="Content\img\pfinestra\image002.png" />
     <Content Include="Content\img\pfinestra\indir.png" />
-    <Content Include="Content\img\pfinestra\int.defer-7.37.0.min.js.indir" />
     <Content Include="Content\img\pfinestra\isolierverglasung.jpg" />
     <Content Include="Content\img\pfinestra\kasten-nrs.jpg" />
     <Content Include="Content\img\pfinestra\kasten-nvpt.jpg" />
@@ -1128,7 +1118,6 @@
     <Content Include="Content\img\pfinestra\laerche-rotbraun-211.jpg" />
     <Content Include="Content\img\pfinestra\loader.gif" />
     <Content Include="Content\img\pfinestra\loading.gif" />
-    <Content Include="Content\img\pfinestra\main-7.37.0.min.js.indir" />
     <Content Include="Content\img\pfinestra\mastercarre.jpg" />
     <Content Include="Content\img\pfinestra\material-holz-alu.jpg" />
     <Content Include="Content\img\pfinestra\material-holz.jpg" />
@@ -1177,9 +1166,6 @@
     <Content Include="Content\img\pfinestra\roundline-iv68.jpg" />
     <Content Include="Content\img\pfinestra\roundline-iv78.jpg" />
     <Content Include="Content\img\pfinestra\satinato.jpg" />
-    <Content Include="Content\img\pfinestra\saved_resource%281%29.html" />
-    <Content Include="Content\img\pfinestra\saved_resource%282%29.html" />
-    <Content Include="Content\img\pfinestra\saved_resource.html" />
     <Content Include="Content\img\pfinestra\schallschutzverglasung-32db.jpg" />
     <Content Include="Content\img\pfinestra\schallschutzverglasung-36db.jpg" />
     <Content Include="Content\img\pfinestra\schallschutzverglasung-38db.jpg" />
@@ -1219,9 +1205,7 @@
     <Content Include="Content\img\pfinestra\standardgriff-silber.jpg" />
     <Content Include="Content\img\pfinestra\standardgriff-weiss.jpg" />
     <Content Include="Content\img\pfinestra\strukturglas-satinato.jpg" />
-    <Content Include="Content\img\pfinestra\style-int-7.37.0.css" />
     <Content Include="Content\img\pfinestra\swisspacer.jpg" />
-    <Content Include="Content\img\pfinestra\t.js.indir" />
     <Content Include="Content\img\pfinestra\telefon.png" />
     <Content Include="Content\img\pfinestra\tooltip-bodeneinstandsprofil-1.jpg" />
     <Content Include="Content\img\pfinestra\tooltip-info-10_en_EN.png" />
@@ -1245,7 +1229,6 @@
     <Content Include="Content\img\pfinestra\warme-kante.jpg" />
     <Content Include="Content\img\pfinestra\weiss.jpg" />
     <Content Include="Content\img\pfinestra\windows24.png" />
-    <Content Include="Content\img\pfinestra\windows24.svg" />
     <Content Include="Content\img\pfinestra\without-value.png" />
     <Content Include="Content\img\plano.jpg" />
     <Content Include="Content\img\pr90donus.png" />
@@ -1262,7 +1245,6 @@
     <Content Include="Content\img\prcoprifili60.jpg" />
     <Content Include="Content\img\prcoprifilioptions.png" />
     <Content Include="Content\img\prcoprifilotech.png" />
-    <Content Include="Content\img\prcoprifilotech.psd" />
     <Content Include="Content\img\prcoprifilotech2.png" />
     <Content Include="Content\img\prkosedonus.png" />
     <Content Include="Content\img\prkosedonusadaptor.png" />
@@ -1280,6 +1262,8 @@
     <Content Include="Content\img\Proline.png" />
     <Content Include="Content\img\prolineico.png" />
     <Content Include="Content\img\Prolinetrk.png" />
+    <Content Include="Content\img\prosurduz.png" />
+    <Content Include="Content\img\prosurpervaz.png" />
     <Content Include="Content\img\prtirnakpervaz.png" />
     <Content Include="Content\img\ral-1002-matt.jpg" />
     <Content Include="Content\img\ral-1013-matt.jpg" />
@@ -1311,12 +1295,10 @@
     <Content Include="Content\img\rfs-holzalu-2.jpg" />
     <Content Include="Content\img\rollladen-antriebsseite-en.jpg" />
     <Content Include="Content\img\rostiges-eisen-feinstruktur-matt.jpg" />
+    <Content Include="Content\img\roto.png" />
     <Content Include="Content\img\roundline-iv68.jpg" />
     <Content Include="Content\img\roundline-iv78.jpg" />
     <Content Include="Content\img\satinato.jpg" />
-    <Content Include="Content\img\saved_resource%281%29.html" />
-    <Content Include="Content\img\saved_resource%282%29.html" />
-    <Content Include="Content\img\saved_resource.html" />
     <Content Include="Content\img\schallschutzverglasung-32db.jpg" />
     <Content Include="Content\img\schallschutzverglasung-36db.jpg" />
     <Content Include="Content\img\schallschutzverglasung-38db.jpg" />
@@ -1355,7 +1337,6 @@
     <Content Include="Content\img\standardgriff-silber.jpg" />
     <Content Include="Content\img\standardgriff-weiss.jpg" />
     <Content Include="Content\img\strukturglas-satinato.jpg" />
-    <Content Include="Content\img\style-int-7.37.0.css" />
     <Content Include="Content\img\swisspacer.jpg" />
     <Content Include="Content\img\s_1_rundb_dkl.png" />
     <Content Include="Content\img\s_1_rundb_dkr.png" />
@@ -2792,7 +2773,6 @@
     <Content Include="Views\RoleAdmin\Create.cshtml" />
     <Content Include="Views\RoleAdmin\Edit.cshtml" />
     <Content Include="Views\RoleAdmin\Index.cshtml" />
-    <Content Include="Views\Basket\OfferDetail.cshtml" />
     <Content Include="Views\Product\GetProduct.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\OfferDetail.cshtml" />
@@ -2832,6 +2812,7 @@
     <Content Include="Views\Shared\_InsectExtColor.cshtml" />
     <Content Include="Views\Product\PFinestra.cshtml" />
     <Content Include="Views\Basket\PdfPage.cshtml" />
+    <Content Include="Views\Product\Scorrevole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2916,6 +2897,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011071906495_formData.resx">
       <DependentUpon>202011071906495_formData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012241903573_prodtype.resx">
+      <DependentUpon>202012241903573_prodtype.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

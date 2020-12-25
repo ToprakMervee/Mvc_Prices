@@ -47,6 +47,17 @@ namespace MVC_Prices.Controllers
                 return View(data);
             }
         }
+        public ActionResult Scorrevole(int? id = 0)
+        {
+            var user = User.Identity.GetUserId();
+            using (PriceDataModel2 db = new PriceDataModel2())
+            {
+                var data =
+                    db.OfferDet.FirstOrDefault(a => a.OfferMas.User == user && a.ID == id);
+                data = data != null ? data : new OfferDet();
+                return View(data);
+            }
+        }
         [HttpPost]
         public ActionResult Index(OfferDet basket)
         {
@@ -151,14 +162,14 @@ namespace MVC_Prices.Controllers
                 return View(prices);
             }
         }
-        public JsonResult Datas(int? id = 0,int system=0, int sop=0)
+        public JsonResult Datas(int? id = 0,int system=0, int sop=0, int ferr=0)
         {
 
             PriceDataModel2 db = new PriceDataModel2();
 
             var prices = db.Prices.Where(p => p.ProductId == id && p.Activity == true && p.Profil==system && !p.Color).ToList();
             var prices2 = db.Prices.Where(p => p.ProductId == sop && p.Activity == true && p.Profil==system && !p.Color).ToList();
-            var prices3 = db.Prices.Where(p => (p.ProductId == 24 || p.ProductId==25) && p.Activity == true).ToList();
+            var prices3 = db.Prices.Where(p => (p.Product.PType=="F" && p.Product.RowNumber==ferr) && p.Activity == true).ToList();
             
             return Json(new {prices = prices, prices2 = prices2, prices3 = prices3}, JsonRequestBehavior.AllowGet);
 

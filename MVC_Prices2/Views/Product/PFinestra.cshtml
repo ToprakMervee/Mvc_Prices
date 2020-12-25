@@ -644,7 +644,7 @@
                                     <div class="col-sm-5 col-xs-12 vc_flUp">
                                         <label id="al_flUp" for="av_flUp" class="yes-no-selection active customer-click" rel-value="a_flUpDown">
                                             <div class="blue-radio-container">
-                                                <input type="radio" value="Superiore" id="av_flUp" name="a_flUpDown" onclick="updateHelper2(this, 'flUp', event);" rel-no="1" rel-orig="flUpDown" data-ispreview="true" checked="">
+                                                <input type="radio" value="Superiore" id="av_flUp" name="a_flUpDown" onclick="updateHelper2(this, 'flUp', event);" rel-no="1" rel-orig="flUpDown" data-ispreview="true" checked="checked">
                                                 <div class="blue-radio">
                                                 </div>
                                                 <span id="avt_flUp" class="" style="">Superiore</span>
@@ -655,10 +655,10 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="col-sm-5 col-xs-12 vc_flDown">
+                                    <div class="disabled col-sm-5 col-xs-12 vc_flDown">
                                         <label id="al_flDown" for="av_flDown" class="yes-no-selection " rel-value="a_flUpDown">
                                             <div class="blue-radio-container">
-                                                <input type="radio" value="Inferiore" id="av_flDown" name="a_flUpDown" onclick="updateHelper2(this, 'flDown', event);" rel-no="0" rel-orig="flUpDown" data-ispreview="true">
+                                                <input disabled type="radio" value="Inferiore" id="av_flDown" name="a_flUpDown" onclick="updateHelper2(this, 'flDown', event);" rel-no="0" rel-orig="flUpDown" data-ispreview="true">
                                                 <div class="blue-radio">
                                                 </div>
                                                 <span id="avt_flDown" class="" style="">Inferiore</span>
@@ -1622,11 +1622,14 @@
                     </h4>
                     <div class="collapse accordion-tooltip-container" id="collapse_soglia">
                         <div class="row">
-                            <div class="col-sm-9">
+                            <div class="col-sm-12">
                                 <p>Gradevole da un punto di vista estetico grazie al fissaggio nascosto e invisibile, la soglia per porta senza barriere offre un termo-isolamento supplementare e una temperatura superficiale ottimale.</p>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <img src="/Content/img/pfinestra/sogliaribassata70.JPG" alt="soglia ribassata" class="img-responsive" style="">
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/Content/img/pfinestra/sogliaribassata81.png" alt="soglia ribassata" class="img-responsive" style="">
                             </div>
                         </div>
                     </div>
@@ -1721,20 +1724,20 @@
                                         </span>
                                     </label>
                                 </div>
-                                <div class="col-sm-4 col-xs-6 vc_maco">
-                                    <label id="al_maco" for="av_maco" class="col-xs-12 configurator-tile" data-url="/configurator/info/id/maco/type/2" data-id="#help-value_maco" data-original-title="" title="" rel-value="a_ferr">
-                                        <input type="radio" value="1" id="av_maco" name="a_ferr" onclick="updateHelper2(this, 'maco', event);" rel-no="0" rel-orig="ferr" data-ispreview="true">
+                                <div class="col-sm-4 col-xs-6 vc_GU">
+                                    <label id="al_GU" for="av_GU" class="col-xs-12 configurator-tile" data-url="/configurator/info/id/GU/type/2" data-id="#help-value_GU" data-original-title="" title="" rel-value="a_ferr">
+                                        <input type="radio" value="1" id="av_GU" name="a_ferr" onclick="updateHelper2(this, 'GU', event);" rel-no="0" rel-orig="ferr" data-ispreview="true">
                                         <div class="configurator-image-container">
-                                            <span class="description-pill">Maco</span>
-                                            <img id="avi_maco" class="img-responsive" alt="Triple vetro Ug 0.7 per DIN EN 673" src="/Content/img/maco.png" rel-src="waermeschutzisolierverglasung-3fach.jpg" style="max-width: 100%;">
+                                            <span class="description-pill">GU</span>
+                                            <img id="avi_GU" class="img-responsive" alt="Triple vetro Ug 0.7 per DIN EN 673" src="/Content/img/GU.png" rel-src="waermeschutzisolierverglasung-3fach.jpg" style="max-width: 100%;">
                                         </div>
-                                        <span id="avt_maco" class="" style="">
+                                        <span id="avt_GU" class="" style="">
 
-                                            <span class="sub-description" style="font-weight: normal;">Maco</span>
+                                            <span class="sub-description" style="font-weight: normal;">GU</span>
                                         </span>
                                         <div class="configurator-block-price-spacer">
                                         </div>
-                                        <span id="pd_Maco" class="configurator-block-price  " style="display: inline;"></span>
+                                        <span id="pd_GU" class="configurator-block-price  " style="display: inline;"></span>
                                     </label>
                                 </div>
                                 <div class="col-sm-4 col-xs-6 vc_roto">
@@ -2501,8 +2504,8 @@
                         layout: false,
                         layoutInput: { right: 0, down: 0, up: 0 },
                         opTypes: [
-                            { id: 3, name: 'Una anta DX tirare sinistra', img: 'pfinestra/b_1_dkl.png', minWidth: 700, minHeight: 2000, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [] },
-                            { id: 3, name: 'Una anta DX tirare destra', img: 'pfinestra/b_1_dkr.png', minWidth: 700, minHeight: 2000, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [] },
+                            { id: 3, name: 'Una anta DX tirare sinistra', img: 'pfinestra/b_1_dkl.png', minWidth: 700, minHeight: 2000, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [], ferramenti:1},
+                            { id: 3, name: 'Una anta DX tirare destra', img: 'pfinestra/b_1_dkr.png', minWidth: 700, minHeight: 2000, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [], ferramenti: 1 },
                             { id: 1, name: 'Una anta fissa glazing', img: 'b_1_f.png', minWidth: 500, minHeight: 500, maxWidth: 2400, maxHeight: 2400, isActive: false, right: [] },
                             { id: 11, name: 'Vasistas', img: '1_kipp.png', minWidth: 400, minHeight: 400, maxWidth: 1700, maxHeight: 1900, isActive: false, right: [] },
                             { id: 0, name: 'Una anta pivoted sash', img: 's_schwingfluegel.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false, right: [] }
@@ -2520,8 +2523,8 @@
                         layout: true,
                         layoutInput: { right: 2, down: 0, up: 0 },
                         opTypes: [
-                            { id: 10, name: 'ad anta e ribalta sinistra con traverso', img: 'pfinestra/b_tr_1_dkl.png', minWidth: 700, minHeight: 1800, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [0, 0] },
-                            { id: 10, name: 'ad anta e ribalta destra con traverso', img: 'pfinestra/b_tr_1_dkr.png', minWidth: 700, minHeight: 1800, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [0, 0] },
+                            { id: 10, name: 'ad anta e ribalta sinistra con traverso', img: 'pfinestra/b_tr_1_dkl.png', minWidth: 700, minHeight: 1800, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [0, 0], ferramenti: 1 },
+                            { id: 10, name: 'ad anta e ribalta destra con traverso', img: 'pfinestra/b_tr_1_dkr.png', minWidth: 700, minHeight: 1800, maxWidth: 1100, maxHeight: 2400, isActive: true, right: [0, 0], ferramenti: 1},
                             { id: 0, name: 'Una anta fissa glazing sopraluce superiore', img: '1_ol_1_f_f.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false, right: [] },
                             { id: 0, name: 'Una anta fissa glazing sopraluce superiore tilt', img: '1_ol_1_k_f.png', minWidth: 500, minHeight: 800, maxWidth: 1200, maxHeight: 2400, isActive: false, right: [] },
                             { id: 0, name: 'Una anta DX tirare sinistra sopraluce superiore tilt', img: '1_ol_1_k_dkl.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false, right: [] },
@@ -2543,8 +2546,8 @@
                         layout: true,
                         layoutInput: { right: 0, down: 2, up: 0 },
                         opTypes: [
-                            { id: 9, name: 'a due ante e ribalta - Destra - senza traverso', img: 'pfinestra/b_2_dl_dkr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2000, maxHeight: 2400, isActive: true, down: [2, 1] },
-                            { id: 9, name: 'a due ante e ribalta - Sinistra - senza traverso', img: 'pfinestra/b_2_dkl_dr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2000, maxHeight: 2400, isActive: true, down: [1, 2] },
+                            { id: 9, name: 'a due ante e ribalta - Destra - senza traverso', img: 'pfinestra/b_2_dl_dkr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2000, maxHeight: 2400, isActive: true, down: [2, 1], ferramenti: 2 },
+                            { id: 9, name: 'a due ante e ribalta - Sinistra - senza traverso', img: 'pfinestra/b_2_dkl_dr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2000, maxHeight: 2400, isActive: true, down: [1, 2], ferramenti: 2 },
                             { id: 0, name: 'doppia anta fissa fissa', img: '2_f_f.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false },
                             { id: 4, name: 'a due ante DK sinistra DX tirare destra', img: '2_dl_dkr.png', minWidth: 900, minHeight: 500, maxWidth: 2400, maxHeight: 1900, isActive: false, down: [2, 1] },
                             { id: 4, name: 'doppia anta DX tirare sinistra DK destra ', img: '2_dkl_dr.png', minWidth: 900, minHeight: 500, maxWidth: 2400, maxHeight: 1900, isActive: false, down: [1, 2] },
@@ -2566,8 +2569,8 @@
                         layout: true,
                         layoutInput: { right: 2, down: 2, up: 0 },
                         opTypes: [
-                            { id: 7, name: 'a due ante e ribalta - sinistra - con traverso', img: 'pfinestra/b_tr_2_dkl_dr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2200, maxHeight: 2400, isActive: true, down: [1, 2], right: [0, 0] },
-                            { id: 7, name: 'a due ante e ribalta - destra - con traverso', img: 'pfinestra/b_tr_2_dkr_dl.png', minWidth: 1000, minHeight: 1800, maxWidth: 2200, maxHeight: 2400, isActive: true, down: [2, 1], right: [0, 0] },
+                            { id: 7, name: 'a due ante e ribalta - sinistra - con traverso', img: 'pfinestra/b_tr_2_dkl_dr.png', minWidth: 1000, minHeight: 1800, maxWidth: 2200, maxHeight: 2400, isActive: true, down: [1, 2], right: [0, 0], ferramenti: 2 },
+                            { id: 7, name: 'a due ante e ribalta - destra - con traverso', img: 'pfinestra/b_tr_2_dkr_dl.png', minWidth: 1000, minHeight: 1800, maxWidth: 2200, maxHeight: 2400, isActive: true, down: [2, 1], right: [0, 0], ferramenti: 2 },
                             { id: 0, name: 'doppia anta 1 sopraluce superiore fissa fissa fissa', img: '2_ol_1_f_f_f.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false },
                             { id: 0, name: 'doppia anta 1 sopraluce superiore fissa DX tirare destra', img: '2_ol_1_f_f_dkr.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false },
                             { id: 0, name: 'doppia anta 1 sopraluce superiore fissa DX tirare sinistra fissa', img: '2_ol_1_f_dkl_f.png', minWidth: 500, minHeight: 1500, maxWidth: 1500, maxHeight: 2400, isActive: false },
@@ -2841,9 +2844,9 @@
 
         } else if (camtipi === "1" && satineCam) { //3lü satine ise
             if (boy < 1701)
-                camfiyat = 58;
+                camfiyat = 19;
             else
-                camfiyat = 34;
+                camfiyat = 19;
 
         }
         ucCamEk = (m2 * (boy < 1701 ? 12 : 12)).toFixed(0);
@@ -2879,7 +2882,9 @@
 
         let differW = 250;
         let differH = 250;
-        let id = marka == "1" ? 25 : marka == "2" ? 24:0;
+        let guId = [25, 30, 32, 35, 37];
+        let rotoId = [24, 29, 31, 36, 38];
+        let id = marka == "1" ? guId : marka == "2" ? rotoId : [0];
         for (var i = 0; i < fiyatlar3["length"]; i++) {
 
             if (i > 0) {
@@ -2890,21 +2895,20 @@
                     differH = fiyatlar3[i].Height - fiyatlar3[i - 1].Height;
                 }
             } else {
-                differW = 250;
-                differH = 250;
+                differW = fiyatlar3[0].Width;
+                differH = fiyatlar3[0].Height;
             }
             if (en > fiyatlar3[i].Width - differW && en <= fiyatlar3[i].Width && boy > fiyatlar3[i].Height - differH && boy <= fiyatlar3[i].Height) {
 
-                if (id == fiyatlar3[i].ProductId) {
+                if (id.includes(fiyatlar3[i].ProductId)) {
                     markaFark = Math.ceil(Number(fiyatlar3[i].Prices));
                 }
-                if (fiyatlar3[i].ProductId == 24) {
+              
+                if (rotoId.includes(fiyatlar3[i].ProductId)) {
                     $('#pd_Roto').text('+'+Math.ceil(Number(fiyatlar3[i].Prices))+'€');
                 } else {
-                    $('#pd_Maco').text('+' +Math.ceil(Number(fiyatlar3[i].Prices)) +'€');
-
+                    $('#pd_GU').text('+' +Math.ceil(Number(fiyatlar3[i].Prices)) +'€');
                 }
-                console.log(fiyatlar3[i].ProductId, fiyatlar3[i].Prices);
             }
         }
 
@@ -2950,6 +2954,8 @@
         setPrice(0);
         var fiyatLabel = $('.finalPriceLabel');
         var loadingGif = $('#viewDuringAjaxRequest');
+        var ferr = getSelectedOne().ferramenti;
+
         var sop = document.configuratorForm.a_flType.value;
         sop = wobject.products[document.configuratorForm.a_155.value].subTypes[0].fanlight[sop].id;
         fiyatLabel.css('display', 'none');
@@ -2959,7 +2965,7 @@
             type: 'GET',
             url: '/Product/Datas',
             dataType: "JSON",
-            data: { id: id, system: profil, sop: sop},
+            data: { id: id, system: profil, sop: sop, ferr: ferr},
             success: function (data) {
 
                 fiyatlar = data.prices;
@@ -3132,7 +3138,6 @@
                                     for (let j = 0; j < wings.length; j++) {
                                         if (j === +id || j === i) continue;
                                         wings[j].value = +wings[j].value + maxDiff;
-                                        console.log(wings[j].value);
                                     }
                                 }
                                 sumOfLeft -= wings[i].value;

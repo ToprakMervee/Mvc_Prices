@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Web;
 
 namespace MVC_Prices2.Models
@@ -34,6 +35,8 @@ namespace MVC_Prices2.Models
         public bool IsArmFixed { get; set; }
         [Required]
         public int RowNumber { get; set; }
+        [MaxLength(70)] 
+        public string PType { get; set; }
         public List<Price> Prices { get; set; }
     }
 }

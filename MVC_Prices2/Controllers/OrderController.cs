@@ -83,17 +83,27 @@ namespace MVC_Prices2.Controllers
                         MasId = x.BasketMas_ID,
                         DoorHandle = x.DoorHandle,
                         UpOpenning = x.Description,
-                        GlassType = x.GlassQnt == "0" ? "doppio, trasparente" : x.GlassQnt == "1" ? "doppio, satinato" : "triplo, trasparente",
+                        GlassType = x.GlassQnt == "0" ? "doppio Ug 1.1" : "triplo Ug 1.5",
                         GlassQnt = x.GlassQnt,
                         Note = x.Note,
                         LatoD = x.LatoD,
                         Extra = x.Extra,
-                        Exp2 = x.OfferMas.Exp2,
+                        Status = x.OfferMas.Status,
                         Exp1 = x.OfferMas.Exp1,
-                        Status = x.OfferMas.Status
+                        Exp2 = x.OfferMas.Exp2
 
                     }).OrderBy(a=> a.ID).ToList();
+                foreach (var el in list)
+                {
+                    int[] ids = new[] { 1, 2, 3, 10, 11 };
+                    string prof = el.System == "2" ? "81" : "70";
+                    string wing = ids.Contains(el.ProductId) ? "1w" : "2w";
+                    string glass = el.GlassQnt == "0" ? "2g" : "3g";
+                    string prodName = prof + wing + glass;
 
+                    var ugValue = db.Prices.FirstOrDefault(a => a.Product.PType == "UG" && a.Product.ProductName == prodName && el.Width > a.Width - 100 && el.Width <= a.Width && el.Height > a.Height - 100 && el.Height <= a.Height);
+                    el.RemainSeconds = Convert.ToDouble(ugValue.Prices);
+                }
                 return View(list);
             }
         }

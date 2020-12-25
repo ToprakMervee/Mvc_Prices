@@ -63,6 +63,17 @@ namespace MVC_Prices2.Controllers
                         Exp2 = x.OfferMas.Exp2
 
                     }).OrderBy(a => a.ID).ToList();
+                foreach (var el in list)
+                {
+                    int[] id = new[] {1, 2, 3, 10, 11};
+                    string prof = el.System == "2" ? "81" : "70";
+                    string wing = id.Contains(el.ProductId) ? "1w" : "2w";
+                    string glass = el.GlassQnt == "0" ? "2g" : "3g";
+                    string prodName = prof+wing+glass;
+
+                    var ugValue = db.Prices.FirstOrDefault(a => a.Product.PType == "UG" && a.Product.ProductName == prodName && el.Width > a.Width - 100 && el.Width <= a.Width && el.Height > a.Height - 100 && el.Height <= a.Height);
+                    el.RemainSeconds = Convert.ToDouble(ugValue.Prices);
+                }
                 return View(list);
             }
         }
