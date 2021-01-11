@@ -269,6 +269,10 @@
     <Compile Include="Migrations\202012241903573_prodtype.Designer.cs">
       <DependentUpon>202012241903573_prodtype.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012281757247_ptype21.cs" />
+    <Compile Include="Migrations\202012281757247_ptype21.Designer.cs">
+      <DependentUpon>202012281757247_ptype21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartDataModel.cs" />
     <Compile Include="Models\ChartModel.cs" />
@@ -2900,6 +2904,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012241903573_prodtype.resx">
       <DependentUpon>202012241903573_prodtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012281757247_ptype21.resx">
+      <DependentUpon>202012281757247_ptype21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

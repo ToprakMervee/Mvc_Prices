@@ -101,7 +101,7 @@ namespace MVC_Prices2.Controllers
                     string glass = el.GlassQnt == "0" ? "2g" : "3g";
                     string prodName = prof + wing + glass;
 
-                    var ugValue = db.Prices.FirstOrDefault(a => a.Product.PType == "UG" && a.Product.ProductName == prodName && el.Width > a.Width - 100 && el.Width <= a.Width && el.Height > a.Height - 100 && el.Height <= a.Height);
+                    var ugValue = db.Prices.FirstOrDefault(a => a.Product.PType == "UG" && a.Product.ProductName == prodName && el.Width > a.Width - 100 && el.Width <= a.Width && el.Height > a.Height - 100 && el.Height <= a.Height && a.Activity);
                     el.RemainSeconds = Convert.ToDouble(ugValue.Prices);
                 }
                 return View(list);

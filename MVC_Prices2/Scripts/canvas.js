@@ -125,8 +125,15 @@ $('#btnAddtoCart').on("click", function () {
     var profilEk = document.configuratorForm.a_187.value === "1" && pervazTaraf.length > 0;
     var satinemi = document.configuratorForm.a_193.value == "1";
     var kol = document.configuratorForm.a_kol.value;
-    var kolyeri = document.configuratorForm.armcm.value + "-CM";
+    var kolyeri = document.configuratorForm.armcm.value + "-mm";
     var kolyonu = document.configuratorForm.armoptions.value;
+    if (selectedOne.id=="1") {
+        kol = 8;
+        kolyeri = "-";
+        kolyonu = "-";
+
+
+    }
     var camDetay = "";
     var isolDB = "";
     let angCb = getCheckedBoxes('angTaraf');
@@ -136,14 +143,17 @@ $('#btnAddtoCart').on("click", function () {
     let ferramenti2 = ferramenti == "0" ? "Kale" : ferramenti == "1" ? "Maco" : "Roto";
     let satine = satinemi ? "satinato" : "";
     if (camSayi === "0") {
-        camDetay = height > 1700
-            ? "33.1 Stratificato " + satine + "-+ 14 gas argon canalina calda + 33.1 Stratificato Löwe"
-            : "33.1 Stratificato " + satine + "+ 14 gas argon canalina calda + 4 Löwe";
+        if( height > 1700 && wobject.type ==="Porta Finestra")
+            camDetay ="33.1 Stratificato " + satine + "-+ 14 gas argon canalina calda + 33.1 Stratificato Löwe"
+        else
+            camDetay = "33.1 Stratificato " + satine + "+ 14 gas argon canalina calda + 4 Löwe";
+
         isolDB = height > 1700 ? "Rw (C; Ctr) dB : 37 (-2; -4)" : "Rw (C; Ctr) dB : 35 (-1; -4)";
     } else {
-        camDetay = height > 1700
-            ? "33.1 Stratificato " + satine + "+ 8 gas argon canalina calda + 4 trasparente + 8 gas argon canalina calda + 33.1 Stratificato Löwe"
-            : "33.1 Stratificato " + satine + "+ 9 gas argon canalina calda + 4 trasparente + 9 gas argon canalina calda + 4 Löwe";
+         if(height > 1700 && wobject.type === "Porta Finestra")
+             camDetay = "33.1 Stratificato " + satine + "+ 16 gas argon canalina calda + 4 trasparente + 16 gas argon canalina calda + 33.1 Stratificato Löwe"
+         else
+             camDetay = "33.1 Stratificato " + satine + "+ 16 gas argon canalina calda + 4 trasparente + 18 gas argon canalina calda + 4 Löwe";
         isolDB = height > 1700 ? "Rw (C; Ctr) dB : 39 (-1; -4)" : "Rw (C; Ctr) dB : 38 (-1; -4)";
 
     }

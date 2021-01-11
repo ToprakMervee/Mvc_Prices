@@ -2,6 +2,7 @@
 @model  MVC_Prices2.Models.OfferDet
 @{
     ViewBag.Title = "Della Finestra";
+    string[] posDMan = new string[] { "200", "300", "450" };
 }
 <div class="row">
     <div class="configurator-header">
@@ -1109,7 +1110,7 @@
                                             <img id="avi_1240" class="img-responsive" alt="Triple vetro Ug 0.7 per DIN EN 673" src="/Content/img/waermeschutzisolierverglasung-3fach.jpg" rel-src="waermeschutzisolierverglasung-3fach.jpg" style="max-width: 100%;">
                                         </div>
                                         <span id="avt_1240" class="" style="">
-                                            Ug 1.5<br>
+                                            Ug 0.8<br>
                                             <span class="sub-description" style="font-weight: normal;">Triplo vetro</span>
                                         </span>
                                         <div class="configurator-block-price-spacer">
@@ -1595,7 +1596,7 @@
                 </div>
                 <!--cam tipi-->
                 <!--ferramenti-->
-                <div id="attributePanel_ferr" class="row" rel-name="Ferramenti" rel-id="ferr" rel-page="1">
+                <div id="attributePanel_ferr" class="row handleOps" rel-name="Ferramenti" rel-id="ferr" rel-page="1">
                     <h4 class="collapsed accordion-h4 tooltip-visible configTitle details" rel-name="Window Configurator_Glazing" rel-id="ferr" data-toggle="collapse" href="#collapse_ferr" aria-expanded="False" aria-controls="collapse_ferr">
                         <span>Ferramenti</span>
 
@@ -1676,7 +1677,7 @@
                 </div>
                 <!--ferramenti-->
                 <!--kol-->
-                <div id="attributePanel_494" class="row" rel-name="Handle" rel-id="494" rel-page="1" style="">
+                <div id="attributePanel_494" class="row handleOps" rel-name="Handle" rel-id="494" rel-page="1" style="">
                     <h4 class="collapsed accordion-h4 tooltip-visible configTitle" rel-name="Window Configurator_Handle" rel-id="494" href="#collapse_494" aria-controls="collapse_494" aria-expanded="False">
                         <span>Maniglia</span>
                         <span class="info-icon-grey">
@@ -1761,35 +1762,33 @@
                         </div>
                     </div>
                 </div>
-                <div id="options_handleHeight" class="row sub-point" rel-name="Handle Height" rel-id="handleHeight" rel-page="1" style="">
+                <div id="options_handleHeight" class="row sub-point handleOps" rel-name="Handle Height" rel-id="handleHeight" rel-page="1" style="">
                     <h4 class="configTitle" style="background-color: gray" rel-id="handleHeight">
                         <span>Posto del Maniglia</span>
                     </h4>
                     <div class="">
                         <div class="">
                             <div class="text-center">
-
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary " id="up" style="width: 150px; display: none">
-                                        <input type="radio" name="armoptions" value="Standard" id="standardHP" autocomplete="off" /><i class="zmdi zmdi-stop"></i> Standard
+                                <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                                    <label class="btn btn-secondary active" id="Standard" style="width: 150px;">
+                                        <input type="radio" name="armoptions" value="Standard" id="standardHP" onchange="updateHelper2(this, '', event)" autocomplete="off" checked /><i class="zmdi zmdi-check-circle"></i> Standard
                                     </label>
-                                    <label class="btn btn-secondary active" id="up" style="width: 150px;">
-                                        <input type="radio" name="armoptions" value="Su" id="upHP" autocomplete="off" checked><i class="zmdi zmdi-upload"></i> Su
+                                    <label class="btn btn-secondary " id="up" style="width: 150px;">
+                                        <input type="radio" name="armoptions" value="Su" id="upHP" onchange="updateHelper2(this, '', event)" autocomplete="off"><i class="zmdi zmdi-upload"></i> Su
                                     </label>
-
-                                    <label class="btn btn-secondary" id="down" style="width: 150px;">
-                                        <input type="radio" name="armoptions" value="Giu" id="downHP" autocomplete="off" checked><i class="zmdi zmdi-download"></i> Giu
-                                    </label>
+                                    @*<label class="btn btn-secondary" id="down" style="width: 150px;">
+                                            <input type="radio" name="armoptions" value="Giu" id="downHP" autocomplete="off" checked><i class="zmdi zmdi-download"></i> Giu
+                                        </label>*@
 
                                 </div>
                                 <select type="select" id="armcm" name="armcm" style="height: 40px;">
-                                    @for (int i = 0; i <= 10; i++)
+                                    @foreach (var el in posDMan)
                                     {
-                                        <option value="@i">
-                                            <b> @i</b>
+                                        <option value="@el">
+                                            <b> @el</b>
                                         </option>
                                     }
-                                </select> - CM
+                                </select> - MM
                             </div>
                             <div id="buttonArea_handleHeight" class="buttonArea">
                             </div>
@@ -2488,6 +2487,9 @@
         CreateMSizes(wobject.products[0].subTypes[0].opTypes[0]);
         CreateLayout(wobject.products[0].subTypes[0]);
         CreateULSize(wobject.products[0].subTypes[0].fanlight[0]);
+
+        
+
         document.getElementById('configuratorForm').addEventListener('change',
             function () {
                 Hesap();
@@ -2523,7 +2525,7 @@
                 if (nType==="radio" || nType==="checkbox") {
                     if (nValue==objValue) {
                         nElements[j].checked = true;
-                       
+
                         if (nElements[j].onclick != null)
                             nElements[j].onclick.call(nElements[j], nId, event);
                         if (nElements[j].onchange != null)
@@ -2674,7 +2676,11 @@
         var data = wobject.products[tow].subTypes[ulf].opTypes;
         applySelectedHtml(data, ot);
         CreateMSizes(data[ot]);
-
+        if (data[ot].id=="1") {
+            $('.handleOps').css('display','none');
+        } else {
+            $('.handleOps').css('display','block');
+        }
     }
 
     function applyULType(a) {
@@ -2801,6 +2807,8 @@
         oTList.html(ourGeneratedHtml);
         GetDatas(data.id);
         checkNextPage();
+        if (data.id == "1")
+            $('.handleOps').css('display', 'none');
     }
     function CreateULSize(data) {
         var rawTemplate = document.getElementById("hbSopraHeight").innerHTML;
@@ -2974,7 +2982,10 @@
                     }
                 }
                 }
-
+        if (selectedOne.id == "1") {
+            kolfark = 0;
+            markaFark = 0;
+        }
         for (var i = 0; i < fiyatlar["length"]; i++) {
             if (renk === "0" || 1 === 1) {
                 if (en > fiyatlar[i].Width - 100 && en <= fiyatlar[i].Width && boy > fiyatlar[i].Height - 100 && boy <= fiyatlar[i].Height && fiyatlar[i].Color == false) {
@@ -2984,16 +2995,16 @@
                     if (renk !== "0") {
                         if (!wobject.colors[renk].isSurcharged) {
                             if (latoD === "0")
-                                factorPrice = Math.ceil(factorPrice * 1.15);
+                                factorPrice = Math.ceil(factorPrice / 0.85);
                             else
-                                factorPrice = Math.ceil(factorPrice * 1.08);
+                                factorPrice = Math.ceil(factorPrice / 0.92);
                         } else {
                             if (latoD === "0") {
-                                factorPrice = Math.ceil(factorPrice * 1.15);
-                                factorPrice = Math.ceil(factorPrice * 1.05);
+                                factorPrice = Math.ceil(factorPrice / 0.85);
+                                factorPrice = Math.ceil(factorPrice / 0.95);
                             } else {
-                                factorPrice = Math.ceil(factorPrice * 1.08);
-                                factorPrice = Math.ceil(factorPrice * 1.05);
+                                factorPrice = Math.ceil(factorPrice / 0.92);
+                                factorPrice = Math.ceil(factorPrice / 0.95);
                             }
                         }
                     }
